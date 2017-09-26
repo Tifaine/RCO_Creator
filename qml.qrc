@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Composant/Bloc_Action.qml</file>
+        <file>Composant/BandeauCote.qml</file>
+        <file>Composant/VerticalTabBar.qml</file>
+        <file>gestionSequence/ZoneEdition.qml</file>
+        <file>gestionSequence/MainPage.qml</file>
+        <file>Composant/PanelItem.qml</file>
+    </qresource>
+</RCC>
