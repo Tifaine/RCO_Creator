@@ -8,11 +8,13 @@ Item {
     Component.onCompleted:
     {
         listServo.clear()
-        listServo.append({_nom:"Servomoteur",        _color:"grey", _index:0})
-        listServo.append({_nom:"Dynamixel",          _color:"grey", _index:1})
-        listServo.append({_nom:"Capteur",            _color:"grey", _index:2})
-        listServo.append({_nom:"Moteur",             _color:"grey", _index:3})
-        listServo.append({_nom:"Autre",              _color:"grey", _index:4})
+        listServo.append({_nom:"Position",           _color:"grey", _index:0})
+        listServo.append({_nom:"Orientation",          _color:"grey", _index:1})
+        listServo.append({_nom:"Servomoteur",        _color:"grey", _index:2})
+        listServo.append({_nom:"Dynamixel",          _color:"grey", _index:3})
+        listServo.append({_nom:"Capteur",            _color:"grey", _index:4})
+        listServo.append({_nom:"Moteur",             _color:"grey", _index:5})
+        listServo.append({_nom:"Autre",              _color:"grey", _index:6})
     }
 
     ListModel
@@ -23,7 +25,7 @@ Item {
 
     Rectangle {
         id: rectangle
-        x: 320
+        x: 160
         width: 1
         color: "black"
 
@@ -80,7 +82,7 @@ Item {
         property var currentItem: null
         PanelItem {
             current: true
-            title: "Servo"
+            title: ""
             Rectangle {
                 color: "dimgrey"
                 anchors.fill: parent
@@ -150,52 +152,7 @@ Item {
                 }
             }
         }
-        PanelItem {
-            title: "Dynamixel"
-            Rectangle {
-                color: "dimgrey"
-                anchors.fill: parent
-            }
-        }
-        PanelItem {
-            title: "Attente"
-            Rectangle {
-                color: "dimgrey"
-                anchors.fill: parent
 
-                Text{
-                    anchors.fill: parent
-                    text:"Hello"
-                }
-            }
-
-        }
-        PanelItem {
-            title: "Positionnement / Déplacement"
-            Rectangle {
-                color: "dimgrey"
-                anchors.fill: parent
-
-                Text{
-                    anchors.fill: parent
-                    text:"Hello"
-                }
-            }
-
-        }
-        PanelItem {
-            title: "Réglages"
-            Rectangle {
-                color: "dimgrey"
-                anchors.fill: parent
-
-                Text{
-                    anchors.fill: parent
-                    text:"Hello"
-                }
-            }
-
-        }
         Item {
             height:1
             Layout.fillWidth: true

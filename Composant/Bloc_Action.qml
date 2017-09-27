@@ -8,7 +8,7 @@ Item {
     id: item1
     objectName: "Action"
     width: 200
-    height: 282
+    height: 220
     signal mustBeDeleted();
     property var itemArrive : []
     property string title: "bonsoir"
@@ -174,7 +174,7 @@ Item {
         height: 10
         color: "grey"
         radius: 5
-        anchors.topMargin: item1.height/2 - height/2
+        anchors.topMargin: 40
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.rightMargin: 0
@@ -202,7 +202,7 @@ Item {
         z:0
         color: colorEntry
         radius: 5
-        anchors.topMargin: item1.height/2 - height/2
+        anchors.topMargin: 40
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.leftMargin: 0
@@ -365,6 +365,6 @@ Item {
 
     function setColor(couleur)
     {
-        rectangle.color = couleur
+        rectangle._couleur = couleur
     }
 }

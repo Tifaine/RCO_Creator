@@ -34,7 +34,7 @@ Item {
             id: tabButton1
             height: 100
 
-            text: qsTr("Actionneurs")
+            text: qsTr("Config. Action")
             rotation: -90
             onClicked:
             {

@@ -3,11 +3,17 @@ import QtQuick.Controls 2.2
 
 Item {
     property var _model : null
+    signal customCurrentIndexChanged(int indice)
     ComboBox {
         id: customCombo
         height: 30
         anchors.fill: parent
         model: _model
+
+        onCurrentIndexChanged:
+        {
+            customCurrentIndexChanged(currentIndex)
+        }
 
         indicator: Image {
             x: (parent.mirrored ? parent.padding : parent.width - width - parent.padding)

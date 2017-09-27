@@ -82,7 +82,7 @@ Item {
                 {
                     if( __currentIndex >= 0)
                     {
-                        toRightClic.parent.parent.getPere(__currentIndex).parent.setColor("green")
+                        toRightClic.parent.parent.getPere(__currentIndex).parent.setColor("#8FFF44")
                         if(contextMenu.previousSelected !== -1)
                         {
                             toRightClic.parent.parent.getPere(contextMenu.previousSelected).parent.setColor("#655e5e");

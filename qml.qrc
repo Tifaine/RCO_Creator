@@ -12,5 +12,7 @@
         <file>Image/enterArrow.png</file>
         <file>Image/exitArrow.png</file>
         <file>Image/arrowExit.png</file>
+        <file>configAction/MainConfigAction.qml</file>
+        <file>configAction/BlocDyna.qml</file>
     </qresource>
 </RCC>
