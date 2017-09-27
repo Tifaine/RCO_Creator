@@ -7,7 +7,6 @@ bloc_Action::bloc_Action(QQuickItem *parent) : QQuickItem(parent)
     listFils = new QList<bloc_Action*>;
 }
 
-
 int bloc_Action::getX()
 {
     return posX;
@@ -116,5 +115,37 @@ QString bloc_Action::nom_Bloc()
 void bloc_Action::setNom_Bloc(QString m_nomBloc)
 {
    nomBloc = m_nomBloc;
+}
+
+void bloc_Action::otherHaraKiri(bloc_Action* other)
+{
+
+    while(listPere->contains(other))
+    {
+        listPere->removeAt(listPere->indexOf(other));
+    }
+
+    while(listFils->contains(other))
+    {
+        removeFils(listFils->indexOf(other));
+        listFils->removeAt(listFils->indexOf(other));
+
+        listFilsChanged();
+    }
+}
+
+void bloc_Action::haraKiri()
+{
+    for(int i=0;i<listPere->size();i++)
+    {
+        listPere->at(i)->otherHaraKiri(this);
+    }
+    for(int i=0;i<listFils->size();i++)
+    {
+        listFils->at(i)->otherHaraKiri(this);
+    }
+
+    listFils->clear();
+    listFilsChanged();
 }
 

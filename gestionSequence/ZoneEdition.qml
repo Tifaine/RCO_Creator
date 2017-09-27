@@ -14,11 +14,8 @@ Item {
     property var sortieCourante : null
     property var toRightClic:null
     property string nomActionToAdd : "Coucou"
-    ListModel
-    {
-        id:listAction
-        ListElement{ _x:0 ; _y:10000; _title:"Action 0"; _indice:0}
-    }
+    property int typeToAdd:-1
+
     Rectangle
     {
         color:"#323232"
@@ -100,12 +97,7 @@ Item {
 
 
                 }
-
-
             }
-
-
-
 
             Rectangle
             {
@@ -190,22 +182,14 @@ Item {
                                     contextMenu.popup()
                                 }
                             }
-
-
                         }
-
-
-
                     }
                     onReleased:
                     {
-
                         flickable.interactive = true
                         if(rect.childAt(mouseX,mouseY).objectName === "Action")
                         {
-
                             rect.childAt(mouseX,mouseY).itemDepart = sortieCourante.parent
-
                             if(rect.childAt(mouseX,mouseY).getEntree(mouseX,mouseY) !== null)
                             {
                                 entreeCourante = rect.childAt(mouseX,mouseY).getEntree(mouseX,mouseY)
@@ -216,8 +200,6 @@ Item {
                                 sortieCourante.parent.parent.addFils(entreeCourante.parent.parent.getBloc())
                                 entreeCourante.parent.parent.addPere(sortieCourante.parent.parent.getBloc())
                                 rect.survolActif.colorEntry = "yellow"
-
-
                             }else
                             {
                                 sortieCourante.x2 = sortieCourante.x1
@@ -231,16 +213,26 @@ Item {
                         }
                         sortieCourante = null
                         entreeCourante = null
-
-
                     }
+                }
+
+                ListModel
+                {
+                    id:listAction
+                    ListElement{ _x:0 ; _y:10200; _title:"Action 0"; _indice:0;_type:0}
                 }
                 DropArea
                 {
                     anchors.fill: parent
                     onDropped:
                     {
-                        listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count})
+                        if(nomActionToAdd ==="Dynamixel")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:1})
+                        }else
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:typeToAdd})
+                        }
                     }
                 }
 
@@ -255,10 +247,18 @@ Item {
                         y:_y
                         title:_title
                         indice:_indice
+                        type : _type
+                        onMustBeDeleted:
+                        {
+                            for(var i=indice+1;i<listAction.count;i++)
+                            {
+                                listAction.get(i)._indice--;
+                            }
+
+                            listAction.remove(_indice)
+                        }
                     }
                 }
-
-
             }
         }
     }

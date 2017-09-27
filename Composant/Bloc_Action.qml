@@ -1,19 +1,23 @@
 import QtQuick 2.4
+import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
 import connector 1.0
 import bloc 1.0
 
 Item {
     id: item1
     objectName: "Action"
-    width: 130
-    height: 80
+    width: 200
+    height: 282
+    signal mustBeDeleted();
     property var itemArrive : []
-    property var title: "bonsoir"
+    property string title: "bonsoir"
     property int indice:-1
     property var itemDepart : null
     property int oldX : 111
     property int oldY : 83
-    property var colorEntry:"yellow"
+    property string colorEntry:"yellow"
+    property int type:0
 
     Component.onCompleted:
     {
@@ -22,7 +26,17 @@ Item {
             rectangle2.visible = false
             mouseArea3.enabled = false
         }
+        if(type === 0)
+        {
+            rectangle.state = " "
+        }else if(type === 1)
+        {
+            rectangle.state = "Dyna"
+            item1.height = 382
+        }
     }
+
+
     Bloc
     {
         id:bloc1
@@ -95,6 +109,20 @@ Item {
         }
     }
 
+    Menu
+    {
+        id:contextMenu1
+        MenuItem
+        {
+            text:"Supprimer le bloc"
+            onTriggered:
+            {
+                bloc1.haraKiri();
+                mustBeDeleted();
+            }
+        }
+    }
+
     MouseArea
     {
         id:mouseArea3
@@ -104,37 +132,33 @@ Item {
         drag.target: parent;
         propagateComposedEvents:true
         hoverEnabled: true
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
         onClicked:
         {
-
+            if(mouse.button === Qt.RightButton)
+            {
+                contextMenu1.popup()
+            }
         }
-
-
     }
 
-    Rectangle {
+    Info_Bloc {
         id: rectangle
-        color: "#655e5e"
-        radius: 0
+
         anchors.top: rectangle3.bottom
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.rightMargin: 7
         anchors.leftMargin: 7
-        border.color: "#00ff00"
-        border.width: 0
+
         anchors.bottomMargin: 0
         anchors.topMargin: 0
-
-        Text {
-            id: param
-            text: qsTr("Coucou")
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            anchors.fill: parent
-            font.pixelSize: 12
+        onTailleChange:
+        {
+            item1.height = 32 + taille
         }
+
     }
     ListModel
     {
@@ -201,23 +225,24 @@ Item {
         height: 2
         color: "#000000"
         anchors.top: parent.top
-        anchors.topMargin: 20
+        anchors.topMargin: 30
         anchors.right: parent.right
-        anchors.rightMargin: 5
+        anchors.rightMargin: 7
         anchors.left: parent.left
-        anchors.leftMargin: 5
+        anchors.leftMargin: 7
     }
 
     Rectangle {
         id: rectangle4
         color: "#4f4a4a"
+        z:-1
         radius: 5
         anchors.right: parent.right
-        anchors.rightMargin: 0
+        anchors.rightMargin: 7
         anchors.left: parent.left
-        anchors.leftMargin: 0
+        anchors.leftMargin: 7
         anchors.bottom: rectangle3.top
-        anchors.bottomMargin: 0
+        anchors.bottomMargin: -5
         anchors.top: parent.top
         anchors.topMargin: 0
 
@@ -226,9 +251,23 @@ Item {
             text: title
             font.bold: true
             anchors.fill: parent
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
+            anchors.leftMargin: 5
+            anchors.topMargin: 7
+            //horizontalAlignment: Text.AlignHCenter
             font.pixelSize: 13
+        }
+
+        Image
+        {
+            source:"../Image/arrowExit.png"
+            anchors.topMargin: 0
+            anchors.bottomMargin: 7
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+            anchors.rightMargin: 5
+            width: height
+
         }
     }
 

@@ -37,6 +37,9 @@ public:
 
     QList<bloc_Action *>* getListFils() const;
 
+    void otherHaraKiri(bloc_Action* other);
+
+
 signals:
     void xChanged();
     void yChanged();
@@ -48,6 +51,7 @@ signals:
     void nom_BlocChanged();
 
 
+
 public slots:
     void addFils(bloc_Action* toAdd);
     void addPere(bloc_Action* toAdd);
@@ -57,6 +61,7 @@ public slots:
     int getNbFils();
     void deleteFils(bloc_Action* toDelete);
     void deletePere(bloc_Action* toDelete);
+    void haraKiri();
 
 
 private:

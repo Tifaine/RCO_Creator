@@ -7,5 +7,10 @@
         <file>gestionSequence/ZoneEdition.qml</file>
         <file>gestionSequence/MainPage.qml</file>
         <file>Composant/PanelItem.qml</file>
+        <file>Composant/Info_Bloc.qml</file>
+        <file>Composant/CustomComboBox.qml</file>
+        <file>Image/enterArrow.png</file>
+        <file>Image/exitArrow.png</file>
+        <file>Image/arrowExit.png</file>
     </qresource>
 </RCC>

@@ -16,20 +16,20 @@ ApplicationWindow {
         color:"#323232"
     }
     menuBar: MenuBar {
-            Menu {
-                title: "File"
-                MenuItem { text: "Ouvrir..." }
-                MenuItem { text: "Enregistrer" }
-                MenuItem { text: "Enregistrer sous..." }
-            }
-
-            Menu {
-                title: "View"
-                MenuItem { text: "Table" }
-                MenuItem { text: "Points" }
-                MenuItem { text: "Actions" }
-            }
+        Menu {
+            title: "File"
+            MenuItem { text: "Ouvrir..." }
+            MenuItem { text: "Enregistrer" }
+            MenuItem { text: "Enregistrer sous..." }
         }
+
+        Menu {
+            title: "View"
+            MenuItem { text: "Table" }
+            MenuItem { text: "Points" }
+            MenuItem { text: "Actions" }
+        }
+    }
     MainPage {
         id: mainPage
         anchors.left: bandeauCote.right
@@ -37,9 +37,9 @@ ApplicationWindow {
         anchors.bottom: parent.bottom
         anchors.top: parent.top
         anchors.leftMargin: 5
+        visible:false
         z:0
     }
-
 
     BandeauCote {
         id: bandeauCote
@@ -53,42 +53,27 @@ ApplicationWindow {
             {
             case 0:
             {
-                pageGestionRobot.visible = true;
-                pageGestionAction.visible = false;
-                pageConfigActionneurs.visible = false;
-                pageGestionSequence.visible = false;
+                mainPage.visible = false;
             }
             break;
             case 1:
             {
-                pageGestionRobot.visible = false;
-                pageGestionAction.visible = false;
-                pageConfigActionneurs.visible = true;
-                pageGestionSequence.visible = false;
-
+                mainPage.visible = false;
             }
             break;
             case 2:
             {
-                pageGestionRobot.visible = false;
-                pageGestionAction.visible = true;
-                pageConfigActionneurs.visible = false;
-                pageGestionSequence.visible = false;
-
-                pageGestionAction.affich();
+                mainPage.visible = false;
             }
             break;
             case 3:
             {
-                pageGestionRobot.visible = false;
-                pageGestionAction.visible = false;
-                pageConfigActionneurs.visible = false;
-                pageGestionSequence.visible = true;
+                mainPage.visible = true;
             }
             break;
             case 4:
             {
-
+                mainPage.visible = false;
             }
             break;
             }

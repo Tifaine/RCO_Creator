@@ -7,10 +7,12 @@ Item {
 
     Component.onCompleted:
     {
-        listServo.append({_nom:"Bras Droit",        _color:"grey", _index:1})
-        listServo.append({_nom:"Bras bas droit",    _color:"grey", _index:2})
-        listServo.append({_nom:"Bras bas gauche",   _color:"grey", _index:3})
-        listServo.append({_nom:"jack",              _color:"grey", _index:4})
+        listServo.clear()
+        listServo.append({_nom:"Servomoteur",        _color:"grey", _index:0})
+        listServo.append({_nom:"Dynamixel",          _color:"grey", _index:1})
+        listServo.append({_nom:"Capteur",            _color:"grey", _index:2})
+        listServo.append({_nom:"Moteur",             _color:"grey", _index:3})
+        listServo.append({_nom:"Autre",              _color:"grey", _index:4})
     }
 
     ListModel
