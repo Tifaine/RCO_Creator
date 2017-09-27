@@ -34,6 +34,7 @@ Item {
             rectangle.state = "Dyna"
             item1.height = 382
         }
+        rectangle.setType(type)
     }
 
 

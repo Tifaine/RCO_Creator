@@ -5,14 +5,14 @@ import "../Composant"
 Item {
     id:root
     width: 116
-    height: 232
+    height: 175
     property bool tfValueEnable:false
     property bool tfVitesseEnable:false
-    signal dynaTailleChange(int taille)
+    signal servoTailleChange(int taille)
     Component.onCompleted:
     {
         root.state = "ferme"
-        dynaTailleChange(70)
+        servoTailleChange(70)
     }
 
     Text {
@@ -48,7 +48,7 @@ Item {
                 {
                     tfId.visible = true;
                     textValue.anchors.top = tfId.bottom
-                    dynaTailleChange(root.height+tfId.height+5)
+                    servoTailleChange(root.height+tfId.height+5)
                 }
             }else
             {
@@ -56,7 +56,7 @@ Item {
                 {
                     tfId.visible = false;
                     textValue.anchors.top = cbId.bottom
-                    dynaTailleChange(root.height-tfId.height-5)
+                    servoTailleChange(root.height-tfId.height+5)
                 }
             }
         }
@@ -115,8 +115,8 @@ Item {
                 {
                     tfValue.visible = true;
                     tfValueEnable = true
-                    textVitesse.anchors.top = tfValue.bottom
-                    dynaTailleChange(root.height+tfValue.height+5)
+                    textTimeOut.anchors.top = tfValue.bottom
+                    servoTailleChange(root.height+tfValue.height+5)
                 }
             }else
             {
@@ -124,8 +124,8 @@ Item {
                 {
                     tfValue.visible = false;
                     tfValueEnable = false
-                    textVitesse.anchors.top = cbValue.bottom
-                    dynaTailleChange(root.height-tfValue.height-5)
+                    textTimeOut.anchors.top = cbValue.bottom
+                    servoTailleChange(root.height-tfValue.height+5)
                 }
             }
         }
@@ -153,85 +153,11 @@ Item {
     }
 
     Text {
-        id: textVitesse
-        text: qsTr("Vitesse :")
-        visible: true
-        font.bold: true
-        anchors.top: cbValue.bottom
-        anchors.topMargin: 5
-        anchors.right: parent.right
-        anchors.rightMargin: 5
-        anchors.left: parent.left
-        anchors.leftMargin: 5
-        font.pixelSize: 12
-    }
-
-    CustomComboBox {
-        id: cbVitess
-        x: -297
-        y: 151
-        height: 30
-        visible: true
-        anchors.right: parent.right
-        anchors.rightMargin: 5
-        anchors.left: parent.left
-        anchors.leftMargin: 5
-        anchors.top: textVitesse.bottom
-        anchors.topMargin: 5
-        _model: [ "Ouvert", "Fermé", "Custom..." ]
-        onCustomCurrentIndexChanged:
-        {
-            if(indice === 2)
-            {
-
-                if(tfVitesse.visible===false)
-                {
-                    tfVitesse.visible = true;
-                    tfVitesseEnable = true
-                    textTimeOut.anchors.top = tfVitesse.bottom
-                    dynaTailleChange(root.height+tfVitesse.height+5)
-                }
-            }else
-            {
-                if(tfVitesse.visible===true)
-                {
-                    tfVitesse.visible = false;
-                    tfVitesseEnable = false
-                    textTimeOut.anchors.top = cbVitess.bottom
-                    dynaTailleChange(root.height-tfVitesse.height-5)
-                }
-            }
-        }
-
-    }
-
-    TextField {
-        id: tfVitesse
-        height: 30
-        text: qsTr("0")
-        visible: false
-        anchors.right: parent.right
-        anchors.rightMargin: 5
-        anchors.left: parent.left
-        anchors.leftMargin: 5
-        anchors.top: cbVitess.bottom
-        anchors.topMargin: 5
-        color: "white"
-
-        background:Rectangle
-        {
-            radius:7
-            anchors.fill: parent
-            color:"#4a4545"
-        }
-    }
-
-    Text {
         id: textTimeOut
         text: qsTr("TimeOut :")
         visible: true
         font.bold: true
-        anchors.top: cbVitess.bottom
+        anchors.top: cbValue.bottom
         anchors.topMargin: 5
         anchors.right: parent.right
         anchors.rightMargin: 5
@@ -283,25 +209,25 @@ Item {
                 var tailleToSend = 70
                 if(tfId.visible === true)
                 {
-                    dynaTailleChange(tailleToSend+tfId.height)
+                    servoTailleChange(tailleToSend+tfId.height+5)
                 }else
                 {
-                    dynaTailleChange(tailleToSend)
+                    servoTailleChange(tailleToSend)
                 }
             }else
             {
 
                 root.state = "ouvert"
                 button.text = "^"
-                var tailleToSend = 232
+                var tailleToSend = 175
                 if(tfValueEnable===true)tailleToSend+=tfValue.height+5
-                if(tfVitesseEnable===true)tailleToSend+=tfVitesse.height+5
                 if(tfId.visible===true)tailleToSend+=tfId.height+5;
-                dynaTailleChange(tailleToSend)
+                servoTailleChange(tailleToSend)
                 nbClic = 0;
             }
         }
     }
+
 
     states: [
         State {
@@ -326,22 +252,12 @@ Item {
             }
 
             PropertyChanges {
-                target: cbVitess
-                visible: true
-            }
-
-            PropertyChanges {
-                target: textVitesse
+                target: tfTimeOut
                 visible: true
             }
 
             PropertyChanges {
                 target: textTimeOut
-                visible: true
-            }
-
-            PropertyChanges {
-                target: tfTimeOut
                 visible: true
             }
         },
@@ -359,22 +275,7 @@ Item {
             }
 
             PropertyChanges {
-                target: textVitesse
-                visible: false
-            }
-
-            PropertyChanges {
-                target: cbVitess
-                visible: false
-            }
-
-            PropertyChanges {
                 target: tfValue
-                visible: false
-            }
-
-            PropertyChanges {
-                target: tfVitesse
                 visible: false
             }
 
@@ -384,12 +285,12 @@ Item {
             }
 
             PropertyChanges {
-                target: tfTimeOut
+                target: textTimeOut
                 visible: false
             }
 
             PropertyChanges {
-                target: textTimeOut
+                target: tfTimeOut
                 visible: false
             }
         }

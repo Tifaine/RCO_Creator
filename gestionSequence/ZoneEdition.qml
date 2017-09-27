@@ -14,7 +14,6 @@ Item {
     property var sortieCourante : null
     property var toRightClic:null
     property string nomActionToAdd : "Coucou"
-    property int typeToAdd:-1
 
     Rectangle
     {
@@ -219,7 +218,7 @@ Item {
                 ListModel
                 {
                     id:listAction
-                    ListElement{ _x:0 ; _y:10200; _title:"Action 0"; _indice:0;_type:0}
+                    ListElement{ _x:0 ; _y:10200; _title:"Init"; _indice:0; _type:-1 }
                 }
                 DropArea
                 {
@@ -229,10 +228,26 @@ Item {
                         if(nomActionToAdd ==="Dynamixel")
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:1})
-                        }else
+                        }else if(nomActionToAdd ==="Servomoteur")
                         {
-                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:typeToAdd})
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:0})
+                        }else if(nomActionToAdd ==="Capteur")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:2})
+                        }else if(nomActionToAdd ==="Moteur")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:3})
+                        }else if(nomActionToAdd ==="Autre")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:4})
+                        }else if(nomActionToAdd ==="Position")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:5})
+                        }else if(nomActionToAdd ==="Orientation")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:6})
                         }
+
                     }
                 }
 
@@ -262,4 +277,5 @@ Item {
             }
         }
     }
+
 }

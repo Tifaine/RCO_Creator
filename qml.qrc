@@ -14,5 +14,11 @@
         <file>Image/arrowExit.png</file>
         <file>configAction/MainConfigAction.qml</file>
         <file>configAction/BlocDyna.qml</file>
+        <file>configAction/BlocServo.qml</file>
+        <file>configAction/BlocCapteur.qml</file>
+        <file>configAction/BlocMoteur.qml</file>
+        <file>configAction/BlocAutre.qml</file>
+        <file>configAction/BlocPosition.qml</file>
+        <file>configAction/BlocOrientation.qml</file>
     </qresource>
 </RCC>

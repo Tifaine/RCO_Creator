@@ -23,256 +23,116 @@ Item {
 
         BlocDyna
         {
+            id:blocDyna
+            visible:false
             anchors.fill: parent
             onDynaTailleChange:
             {
                 tailleChange(taille)
             }
         }
-
-        /*
-        CustomComboBox
+        BlocServo
         {
-            id: cbId
-            height: 30
-            anchors.right: parent.right
-            anchors.rightMargin: 5
-            anchors.left: parent.left
-            anchors.leftMargin: 5
-            anchors.top: textId.bottom
-            anchors.topMargin: 5
-            _model: [ "Banana", "Apple", "Coconut" ]
-        }
-
-
-        Text {
-            id: textId
-            text: qsTr("Id :")
-            anchors.right: parent.right
-            anchors.rightMargin: 5
-            anchors.left: parent.left
-            anchors.leftMargin: 5
-            anchors.top: parent.top
-            anchors.topMargin: 5
-            font.bold: true
-            font.pixelSize: 12
-        }
-
-        TextField {
-            id: tfId
-            x: 5
-            y: 171
-            height: 30
-            text: qsTr("0")
-            visible: false
-            anchors.right: parent.right
-            anchors.rightMargin: 5
-            anchors.left: parent.left
-            anchors.leftMargin: 5
-            anchors.top: cbId.bottom
-            anchors.topMargin: 5
-            color: "white"
-
-            background:Rectangle
+            id:blocServo
+            visible:false
+            anchors.fill: parent
+            onServoTailleChange:
             {
-                radius:7
-                anchors.fill: parent
-                color:"#4a4545"
+                tailleChange(taille)
             }
         }
-
-        Text {
-            id: textValue
-            text: qsTr("Value :")
-            font.bold: true
-            anchors.right: parent.right
-            anchors.rightMargin: 5
-            anchors.left: parent.left
-            anchors.leftMargin: 5
-            anchors.top: tfId.bottom
-            anchors.topMargin: 5
-            font.pixelSize: 12
-        }
-
-        CustomComboBox {
-            id: cbValue
-            height: 30
-            anchors.right: parent.right
-            anchors.rightMargin: 5
-            anchors.left: parent.left
-            anchors.leftMargin: 5
-            anchors.top: textValue.bottom
-            anchors.topMargin: 5
-            _model: [ "Banana", "Apple", "Coconut" ]
-
-        }
-
-        TextField {
-            id: tfValue
-            height: 30
-            text: qsTr("Text Field")
-            visible: false
-            anchors.right: parent.right
-            anchors.rightMargin: 5
-            anchors.left: parent.left
-            anchors.leftMargin: 5
-            anchors.top: cbValue.bottom
-            anchors.topMargin: 5
-            color: "white"
-
-            background:Rectangle
+        BlocCapteur
+        {
+            id:blocCapteur
+            visible:false
+            anchors.fill: parent
+            onCapteurTailleChange:
             {
-                radius:7
-                anchors.fill: parent
-                color:"#4a4545"
+                tailleChange(taille)
             }
         }
-
-        Text {
-            id: textVitesse
-            text: qsTr("Vitesse :")
-            visible: false
-            font.bold: true
-            anchors.top: tfValue.bottom
-            anchors.topMargin: 5
-            anchors.right: parent.right
-            anchors.rightMargin: 5
-            anchors.left: parent.left
-            anchors.leftMargin: 5
-            font.pixelSize: 12
-        }
-
-        TextField {
-            id: tfVitesse
-            height: 30
-            text: qsTr("0")
-            visible: false
-            anchors.right: parent.right
-            anchors.rightMargin: 5
-            anchors.left: parent.left
-            anchors.leftMargin: 5
-            anchors.top: cbVitess.bottom
-            anchors.topMargin: 5
-            color: "white"
-
-            background:Rectangle
+        BlocMoteur
+        {
+            id:blocMoteur
+            visible:false
+            anchors.fill: parent
+            onMoteurTailleChange:
             {
-                radius:7
-                anchors.fill: parent
-                color:"#4a4545"
+                tailleChange(taille)
             }
         }
-
-        Button {
-            id: buttonExtand
-            x: -218
-            width: 20
-            height: 20
-            text: qsTr("Button")
-            anchors.right: parent.right
-            anchors.rightMargin: 5
-            anchors.top: parent.top
-            anchors.topMargin: 2
-
-            property int nbClic :0
-            onClicked:
+        BlocAutre
+        {
+            id:blocAutre
+            visible:false
+            anchors.fill: parent
+            onAutreTailleChange:
             {
-                if(nbClic ===0)
-                {
-                    nbClic = 1;
-                    tailleChange(30)
-                }else
-                {
-                    if(root.state === "Dyna")
-                    {
-                        tailleChange(350)
-
-                    }else
-                    {
-                        tailleChange(250)
-                    }
-                    nbClic = 0;
-                }
+                tailleChange(taille)
             }
         }
 
-        CustomComboBox {
-            id: cbVitess
-            x: -297
-            y: 151
-            height: 30
-            visible: false
-            anchors.right: parent.right
-            anchors.rightMargin: 5
-            anchors.left: parent.left
-            anchors.leftMargin: 5
-            anchors.top: textVitesse.bottom
-            anchors.topMargin: 5
-            _model: [ "Banana", "Pear", "Coconut" ]
-
-        }
-
-        Text {
-            id: textTimout
-            text: qsTr("Timeout :")
-            anchors.left: parent.left
-            anchors.leftMargin: 5
-            anchors.right: parent.right
-            anchors.rightMargin: 5
-            anchors.top: tfValue.bottom
-            anchors.topMargin: 5
-            font.bold: true
-            font.pixelSize: 12
-        }
-
-        TextField {
-            id: tfTimeout
-            height: 30
-            text: qsTr("1000")
-            anchors.right: parent.right
-            anchors.rightMargin: 5
-            anchors.left: parent.left
-            anchors.leftMargin: 5
-            anchors.top: textTimout.bottom
-            anchors.topMargin: 5
-            hoverEnabled: true
-            color: "white"
-
-            background:Rectangle
+        BlocPosition
+        {
+            id:blocPosition
+            visible:false
+            anchors.fill: parent
+            onPositionTailleChange:
             {
-                radius:7
-                anchors.fill: parent
-                color:"#4a4545"
-            }
-        }*/
-    }/*
-
-
-
-    states: [
-        State {
-            name: "Dyna"
-
-            PropertyChanges {
-                target: root
-                height: 350
-            }
-
-            PropertyChanges {
-                target: textTimout
-                anchors.topMargin: 105
-            }
-
-            PropertyChanges {
-                target: textVitesse
-                visible: true
-            }
-
-            PropertyChanges {
-                target: cbVitess
-                visible: true
+                tailleChange(taille)
             }
         }
-    ]*/
+        BlocOrientation
+        {
+            id:blocOrientation
+            visible:false
+            anchors.fill: parent
+            onOrientationTailleChange:
+            {
+                tailleChange(taille)
+            }
+        }
+    }
 
+    function setType(type)
+    {
+        switch(type)
+        {
+        case 0:
+        {
+            blocServo.visible = true
+            break;
+        }
+        case 1:
+        {
+            blocDyna.visible = true;
+            break;
+        }
+        case 2:
+        {
+            blocCapteur.visible = true;
+            break;
+        }
+        case 3:
+        {
+            blocMoteur.visible = true;
+            break;
+        }
+        case 4:
+        {
+            blocAutre.visible = true
+            break;
+        }
+        case 5:
+        {
+            blocPosition.visible = true
+            break;
+        }
+        case 6:
+        {
+            blocOrientation.visible = true
+            break;
+        }
+        }
+    }
 }
