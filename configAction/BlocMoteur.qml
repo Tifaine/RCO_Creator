@@ -205,7 +205,6 @@ Item {
                 nbClic = 1;
                 root.state = "ferme"
                 button.text = "v"
-
                 var tailleToSend = 70
                 if(tfId.visible === true)
                 {
@@ -216,7 +215,6 @@ Item {
                 }
             }else
             {
-
                 root.state = "ouvert"
                 button.text = "^"
                 var tailleToSend = 175

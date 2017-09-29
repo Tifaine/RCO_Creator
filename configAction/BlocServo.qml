@@ -1,6 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.1
 import "../Composant"
+//import gestServo 1.0
 
 Item {
     id:root
@@ -13,7 +14,39 @@ Item {
     {
         root.state = "ferme"
         servoTailleChange(70)
+        for(var i = 0; i< gestServo.getNbServo();i++)
+        {
+            listServo.insert(0,{"nom": gestServo.getNomServo(i)})
+        }
+
+        if(listServo.count>0)
+        {
+            tfId.visible = false;
+            textValue.anchors.top = cbId.bottom
+            for(var i = 0; i< gestServo.getNbAction(0);i++)
+            {
+                listValue.insert(0,{"nom": gestServo.getNomAction(0,i)+(" ("+gestServo.getIdAction(0,i)+") ")})
+            }
+
+            if(listValue.count>0)
+            {
+                tfValue.visible = false;
+                tfValueEnable = false
+                textTimeOut.anchors.top = cbValue.bottom
+            }
+
+        }
     }
+
+    function willDelete()
+    {
+        gestServo.mustDelete();
+    }
+
+   /* GestionServo
+    {
+        id:gestServo
+    }*/
 
     Text {
         id: textId
@@ -28,6 +61,16 @@ Item {
         font.pixelSize: 12
     }
 
+    ListModel
+    {
+        id:listServo
+        ListElement{ nom:"Custom..."  }
+    }
+    ListModel
+    {
+        id:listValue
+        ListElement{ nom:"Custom..."  }
+    }
     CustomComboBox
     {
         id: cbId
@@ -38,10 +81,10 @@ Item {
         anchors.leftMargin: 5
         anchors.top: textId.bottom
         anchors.topMargin: 5
-        _model: [ "Bras Droit", "bras Gauche", "Custom..." ]
+        _model: listServo
         onCustomCurrentIndexChanged:
         {
-            if(indice === 2)
+            if(indice === listServo.count-1)
             {
 
                 if(tfId.visible===false)
@@ -59,6 +102,28 @@ Item {
                     servoTailleChange(root.height-tfId.height+5)
                 }
             }
+
+            if(indice === listServo.count-1)
+            {
+                listValue.clear()
+                listValue.insert(0,{"nom": "Custom..."})
+            }else
+            {
+                listValue.clear()
+                for(var i = 0; i< gestServo.getNbAction(indice);i++)
+                {
+                    listValue.insert(0,{"nom": gestServo.getNomAction(indice,i)+(" ("+gestServo.getIdAction(indice,i)+") ")})
+                }
+                listValue.append({"nom": "Custom..."})
+            }
+
+            if(listValue.count>0)
+            {
+                tfValue.visible = false;
+                tfValueEnable = false
+                textTimeOut.anchors.top = cbValue.bottom
+            }
+
         }
     }
 
@@ -105,10 +170,10 @@ Item {
         anchors.leftMargin: 5
         anchors.top: textValue.bottom
         anchors.topMargin: 5
-        _model: [ "Ouvert", "Fermé", "Custom..." ]
+        _model: listValue
         onCustomCurrentIndexChanged:
         {
-            if(indice === 2)
+            if(indice === listValue.count-1)
             {
 
                 if(tfValue.visible===false)

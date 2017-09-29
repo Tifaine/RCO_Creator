@@ -1,10 +1,15 @@
 QT += qml quick
+QT += xml
 
 CONFIG += c++11
 
 SOURCES += main.cpp \
     connector.cpp \
-    bloc_action.cpp
+    bloc_action.cpp \
+    gestionservo.cpp \
+    servo.cpp \
+    gestiondyna.cpp \
+    dynamixel.cpp
 
 RESOURCES += qml.qrc
 
@@ -32,6 +37,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     connector.h \
-    bloc_action.h
+    bloc_action.h \
+    gestionservo.h \
+    servo.h \
+    gestiondyna.h \
+    dynamixel.h
 
-DISTFILES +=
+DISTFILES += \
+    servo.xml

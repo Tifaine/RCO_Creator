@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Fichier>
+        <Servo>
+                <nom>Servo_cale_module</nom>
+                <id>107</id>
+                <NomVal>Ferme</NomVal>
+                <val>10</val>
+                <NomVal>Ouvert</NomVal>
+                <val>140</val>
+        </Servo>
+        <Servo>
+                <nom>Servo_haut_gauche</nom>
+                <id>108</id>
+                <NomVal>Ferme</NomVal>
+                <val>13</val>
+                <NomVal>Ouvert</NomVal>
+                <val>125</val>
+        </Servo>
+</Fichier>

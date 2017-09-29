@@ -10,7 +10,10 @@ Item {
     height: 220
     signal tailleChange(int taille)
     property string _couleur:"#655e5e"
-
+    function mustDelete()
+    {
+        blocServo.willDelete();
+    }
 
     Rectangle {
 

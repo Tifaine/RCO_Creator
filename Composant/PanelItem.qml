@@ -34,7 +34,7 @@ Item {
                 }
                 horizontalAlignment: Text.AlignRight
                 verticalAlignment: Text.AlignVCenter
-                text: "^"
+                text: "v"
                 color:"white"
                 rotation: root.current ? "180" : 0
             }

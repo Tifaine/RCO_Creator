@@ -118,6 +118,7 @@ Item {
             text:"Supprimer le bloc"
             onTriggered:
             {
+                rectangle.mustDelete();
                 bloc1.haraKiri();
                 mustBeDeleted();
             }

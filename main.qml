@@ -3,9 +3,11 @@ import QtQuick.Controls 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.3
 import "gestionSequence"
+import "configAction"
 import "Composant"
 
 ApplicationWindow {
+    id: applicationWindow
     visible: true
     width: 1500
     height: 800
@@ -30,6 +32,11 @@ ApplicationWindow {
             MenuItem { text: "Actions" }
         }
     }
+    MainConfigAction
+    {
+
+    }
+
     MainPage {
         id: mainPage
         anchors.left: bandeauCote.right
@@ -37,12 +44,14 @@ ApplicationWindow {
         anchors.bottom: parent.bottom
         anchors.top: parent.top
         anchors.leftMargin: 5
-        visible:false
+        visible:true
         z:0
     }
 
     BandeauCote {
         id: bandeauCote
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 0
         anchors.top: parent.top
@@ -53,7 +62,7 @@ ApplicationWindow {
             {
             case 0:
             {
-                mainPage.visible = false;
+                mainPage.visible = true;
             }
             break;
             case 1:
@@ -68,7 +77,7 @@ ApplicationWindow {
             break;
             case 3:
             {
-                mainPage.visible = true;
+                mainPage.visible = false;
             }
             break;
             case 4:
@@ -80,9 +89,4 @@ ApplicationWindow {
 
         }
     }
-
-
-
-
-
 }

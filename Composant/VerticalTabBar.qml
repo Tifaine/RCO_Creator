@@ -22,7 +22,7 @@ Item {
             x: 0
             height: 100
 
-            text: qsTr("Config. Robot")
+            text: qsTr("Séquence")
             rotation: -90
             onClicked:
             {
@@ -56,7 +56,7 @@ Item {
         TabButton {
             id: tabButton3
             height: 100
-            text: qsTr("Séquence")
+            text: qsTr("Config. Robot")
             rotation: -90
             onClicked:
             {

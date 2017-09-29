@@ -13,6 +13,41 @@ Item {
     {
         root.state = "ferme"
         dynaTailleChange(70)
+
+        for(var i = 0; i< gestDyna.getNbDyna();i++)
+        {
+            listDyna.insert(0,{"nom": gestDyna.getNomDyna(i)})
+        }
+
+        if(listDyna.count>0)
+        {
+            tfId.visible = false;
+            textValue.anchors.top = cbId.bottom
+            for(var i = 0; i< gestDyna.getNbAction(0);i++)
+            {
+                listValue.insert(0,{"nom": gestDyna.getNomAction(0,i)+(" ("+gestDyna.getValAction(0,i)+") ")})
+            }
+
+            for(var i = 0; i< gestDyna.getNbVitesse(indice);i++)
+            {
+                listVitesse.insert(0,{"nom": gestDyna.getNomVitesse(indice,i)+(" ("+gestDyna.getValVitesse(indice,i)+") ")})
+            }
+
+            if(listValue.count>0)
+            {
+                tfValue.visible = false;
+                tfValueEnable = false
+                textTimeOut.anchors.top = cbVitess.bottom
+
+            }
+            if(listVitesse.count>0)
+            {
+                tfVitesse.visible = false;
+                tfVitesseEnable = false
+                textTimeOut.anchors.top = cbVitess.bottom
+            }
+
+        }
     }
 
     Text {
@@ -27,6 +62,22 @@ Item {
         font.bold: true
         font.pixelSize: 12
     }
+    ListModel
+    {
+        id:listDyna
+        ListElement{ nom:"Custom..."  }
+    }
+    ListModel
+    {
+        id:listValue
+        ListElement{ nom:"Custom..."  }
+    }
+    ListModel
+    {
+        id:listVitesse
+        ListElement{ nom:"Custom..."  }
+    }
+
 
     CustomComboBox
     {
@@ -38,10 +89,10 @@ Item {
         anchors.leftMargin: 5
         anchors.top: textId.bottom
         anchors.topMargin: 5
-        _model: [ "Bras Droit", "bras Gauche", "Custom..." ]
+        _model: listDyna
         onCustomCurrentIndexChanged:
         {
-            if(indice === 2)
+            if(indice === listDyna.count-1)
             {
 
                 if(tfId.visible===false)
@@ -58,6 +109,46 @@ Item {
                     textValue.anchors.top = cbId.bottom
                     dynaTailleChange(root.height-tfId.height-5)
                 }
+            }
+
+            if(indice === listDyna.count-1)
+            {
+                listValue.clear()
+                listValue.insert(0,{"nom": "Custom..."})
+
+                listVitesse.clear();
+                listVitesse.insert(0,{"nom": "Custom..."})
+
+
+            }else
+            {
+                listValue.clear()
+                for(var i = 0; i< gestDyna.getNbAction(indice);i++)
+                {
+                    listValue.insert(0,{"nom": gestDyna.getNomAction(indice,i)+(" ("+gestDyna.getValAction(indice,i)+") ")})
+                }
+                listValue.append({"nom": "Custom..."})
+
+                listVitesse.clear()
+                for(var i = 0; i< gestDyna.getNbVitesse(indice);i++)
+                {
+                    listVitesse.insert(0,{"nom": gestDyna.getNomVitesse(indice,i)+(" ("+gestDyna.getValVitesse(indice,i)+") ")})
+                }
+                listVitesse.append({"nom": "Custom..."})
+            }
+
+            if(listValue.count>0)
+            {
+                tfValue.visible = false;
+                tfValueEnable = false
+                textVitesse.anchors.top = cbValue.bottom
+            }
+
+            if(listVitesse.count>0)
+            {
+                tfVitesse.visible = false;
+                tfVitesseEnable = false
+                textTimeOut.anchors.top = cbVitess.bottom
             }
         }
     }
@@ -105,10 +196,10 @@ Item {
         anchors.leftMargin: 5
         anchors.top: textValue.bottom
         anchors.topMargin: 5
-        _model: [ "Ouvert", "Fermé", "Custom..." ]
+        _model: listValue
         onCustomCurrentIndexChanged:
         {
-            if(indice === 2)
+            if(indice === listValue.count-1)
             {
 
                 if(tfValue.visible===false)
@@ -178,10 +269,10 @@ Item {
         anchors.leftMargin: 5
         anchors.top: textVitesse.bottom
         anchors.topMargin: 5
-        _model: [ "Ouvert", "Fermé", "Custom..." ]
+        _model: listVitesse
         onCustomCurrentIndexChanged:
         {
-            if(indice === 2)
+            if(indice === listVitesse.count-1)
             {
 
                 if(tfVitesse.visible===false)
@@ -201,6 +292,8 @@ Item {
                     dynaTailleChange(root.height-tfVitesse.height-5)
                 }
             }
+
+
         }
 
     }
