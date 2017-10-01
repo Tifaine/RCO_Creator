@@ -9,11 +9,14 @@ Item {
     width: 116
     height: 220
     signal tailleChange(int taille)
+    signal afficherTab(string nom);
     property string _couleur:"#655e5e"
     function mustDelete()
     {
-        blocServo.willDelete();
+        //gestServo.mustDelete();
+        //gestDyna.mustDelete();
     }
+
 
     Rectangle {
 
@@ -95,6 +98,20 @@ Item {
                 tailleChange(taille)
             }
         }
+        BlocSequence
+        {//blocSequence
+            id:blocSequence
+            visible:false
+            anchors.fill: parent
+            onSequenceTailleChange:
+            {
+                tailleChange(taille)
+            }
+            onAfficheTab:
+            {
+                afficherTab(nom)
+            }
+        }
     }
 
     function setType(type)
@@ -134,6 +151,11 @@ Item {
         case 6:
         {
             blocOrientation.visible = true
+            break;
+        }
+        case 7:
+        {
+            blocSequence.visible = true
             break;
         }
         }

@@ -4,16 +4,16 @@ import QtQuick.Controls 2.1
 Item {
     id: item1
     width: 100
-    height: 500
+    height: 400
     signal changeIndice(int currentIndex);
     property int indice: tabBar.currentIndex
 
 
     TabBar {
         id: tabBar
-        x: -200
-        y: 200
-        width: 500
+        x: -150
+        y: 150
+        width: 400
         height: 100
         rotation: 90
 
@@ -42,16 +42,6 @@ Item {
             }
         }
 
-        TabButton {
-            id: tabButton2
-            height: 100
-            text: qsTr("Stratégie")
-            rotation: -90
-            onClicked:
-            {
-                changeIndice(2);
-            }
-        }
 
         TabButton {
             id: tabButton3
@@ -60,7 +50,7 @@ Item {
             rotation: -90
             onClicked:
             {
-                changeIndice(3);
+                changeIndice(2);
             }
         }
 
@@ -71,7 +61,7 @@ Item {
             rotation: -90
             onClicked:
             {
-                changeIndice(4);
+                changeIndice(3);
             }
         }
     }

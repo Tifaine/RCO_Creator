@@ -20,5 +20,6 @@
         <file>configAction/BlocAutre.qml</file>
         <file>configAction/BlocPosition.qml</file>
         <file>configAction/BlocOrientation.qml</file>
+        <file>configAction/BlocSequence.qml</file>
     </qresource>
 </RCC>

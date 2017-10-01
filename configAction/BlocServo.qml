@@ -99,7 +99,7 @@ Item {
                 {
                     tfId.visible = false;
                     textValue.anchors.top = cbId.bottom
-                    servoTailleChange(root.height-tfId.height+5)
+                    servoTailleChange(root.height-tfId.height-5)
                 }
             }
 
@@ -190,7 +190,7 @@ Item {
                     tfValue.visible = false;
                     tfValueEnable = false
                     textTimeOut.anchors.top = cbValue.bottom
-                    servoTailleChange(root.height-tfValue.height+5)
+                    servoTailleChange(root.height-tfValue.height-5)
                 }
             }
         }

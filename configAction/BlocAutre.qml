@@ -56,7 +56,7 @@ Item {
                 {
                     tfId.visible = false;
                     textValue.anchors.top = cbId.bottom
-                    autreTailleChange(root.height-tfId.height+5)
+                    autreTailleChange(root.height-tfId.height-5)
                 }
             }
         }
@@ -125,7 +125,7 @@ Item {
                     tfValue.visible = false;
                     tfValueEnable = false
                     textTimeOut.anchors.top = cbValue.bottom
-                    autreTailleChange(root.height-tfValue.height+5)
+                    autreTailleChange(root.height-tfValue.height-5)
                 }
             }
         }

@@ -9,11 +9,27 @@ import "../Composant"
 Item {
     width: 1500
     height: 800
+    property int indiceZoneEdi :-1
     property var rectEnCours:null
     property var entreeCourante : null
     property var sortieCourante : null
     property var toRightClic:null
     property string nomActionToAdd : "Coucou"
+    signal ajouterTab(string nom)
+
+    Component.onCompleted:
+    {
+        listAction.clear();
+        if(indiceZoneEdi===0)
+        {
+            listAction.append({_x:0,_y:10200, _title:"Init",_indice:0,_type:-1})
+        }else
+        {
+            listAction.append({_x:0,_y:10200, _title:"Entrée",_indice:0,_type:-1})
+            listAction.append({_x:500,_y:10200, _title:"Sortie",_indice:1,_type:8})
+        }
+
+    }
 
     Rectangle
     {
@@ -96,6 +112,13 @@ Item {
 
 
                 }
+            }
+
+            ListModel
+            {
+                id:listAction
+
+                ListElement{ _x:0 ; _y:10200; _title:"Init"; _indice:0; _type:-1 }
             }
 
             Rectangle
@@ -215,11 +238,7 @@ Item {
                     }
                 }
 
-                ListModel
-                {
-                    id:listAction
-                    ListElement{ _x:0 ; _y:10200; _title:"Init"; _indice:0; _type:-1 }
-                }
+
                 DropArea
                 {
                     anchors.fill: parent
@@ -246,8 +265,10 @@ Item {
                         }else if(nomActionToAdd ==="Orientation")
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:6})
+                        }else if(nomActionToAdd ==="Séquence")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:7})
                         }
-
                     }
                 }
 
@@ -271,6 +292,10 @@ Item {
                             }
 
                             listAction.remove(_indice)
+                        }
+                        onAfficherTabBloc:
+                        {
+                            ajouterTab(nom)
                         }
                     }
                 }

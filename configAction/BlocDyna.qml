@@ -13,13 +13,11 @@ Item {
     {
         root.state = "ferme"
         dynaTailleChange(70)
-
         for(var i = 0; i< gestDyna.getNbDyna();i++)
         {
             listDyna.insert(0,{"nom": gestDyna.getNomDyna(i)})
         }
-
-        if(listDyna.count>0)
+        if(gestDyna.getNbDyna()>0)
         {
             tfId.visible = false;
             textValue.anchors.top = cbId.bottom
@@ -27,12 +25,10 @@ Item {
             {
                 listValue.insert(0,{"nom": gestDyna.getNomAction(0,i)+(" ("+gestDyna.getValAction(0,i)+") ")})
             }
-
-            for(var i = 0; i< gestDyna.getNbVitesse(indice);i++)
+            for(var i = 0; i< gestDyna.getNbVitesse(0);i++)
             {
-                listVitesse.insert(0,{"nom": gestDyna.getNomVitesse(indice,i)+(" ("+gestDyna.getValVitesse(indice,i)+") ")})
+                listVitesse.insert(0,{"nom": gestDyna.getNomVitesse(0,i)+(" ("+gestDyna.getValVitesse(0,i)+") ")})
             }
-
             if(listValue.count>0)
             {
                 tfValue.visible = false;
@@ -46,8 +42,12 @@ Item {
                 tfVitesseEnable = false
                 textTimeOut.anchors.top = cbVitess.bottom
             }
-
         }
+    }
+
+    Component.onDestruction:
+    {
+
     }
 
     Text {
@@ -292,8 +292,6 @@ Item {
                     dynaTailleChange(root.height-tfVitesse.height-5)
                 }
             }
-
-
         }
 
     }

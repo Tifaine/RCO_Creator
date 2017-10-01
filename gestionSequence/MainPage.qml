@@ -1,10 +1,13 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
+import QtQuick.Controls.Styles 1.4
+import QtQuick.Controls 1.4
 import "../Composant"
 import "../gestionSequence"
 Item {
     id: item1
+    property var tabNomTab: []
 
     Component.onCompleted:
     {
@@ -14,17 +17,18 @@ Item {
         listCapteur.clear();
         listAutre.clear();
 
-        listServo.append({_nom:"Servomoteur",        _color:"grey", _index:0})
+        listServo.append({_nom:"Servomoteur",            _color:"grey", _index:0})
 
-        listDyna.append({_nom:"Dynamixel",          _color:"grey", _index:0})
+        listDyna.append({_nom:"Dynamixel",              _color:"grey", _index:0})
 
-        listDeplacement.append({_nom:"Position",           _color:"grey", _index:0})
-        listDeplacement.append({_nom:"Orientation",          _color:"grey", _index:1})
-        listDeplacement.append({_nom:"Moteur",             _color:"grey", _index:2})
+        listDeplacement.append({_nom:"Position",        _color:"grey", _index:0})
+        listDeplacement.append({_nom:"Orientation",     _color:"grey", _index:1})
+        listDeplacement.append({_nom:"Moteur",          _color:"grey", _index:2})
 
-        listCapteur.append({_nom:"Capteur",            _color:"grey", _index:0})
+        listCapteur.append({_nom:"Capteur",             _color:"grey", _index:0})
 
-        listAutre.append({_nom:"Autre",              _color:"grey", _index:0})
+        listAutre.append({_nom:"Autre",                 _color:"grey", _index:0})
+        listAutre.append({_nom:"Séquence",              _color:"grey", _index:1})
     }
 
     Rectangle {
@@ -112,19 +116,103 @@ Item {
         anchors.topMargin: 5
     }
 
+    Menu
+    {
+        id: contextMenu
+        visible:false
+        MenuItem
+        {
+            text: qsTr('Delete')
+            onTriggered:
+            {
+                tabNomTab.splice(tabNomTab.indexOf(listOnglet.get(bar.currentIndex)._nom),1)
+                listOnglet.remove(bar.currentIndex)
+            }
+        }
+    }
 
-    ZoneEdition {
-        id: zoneEdi
+    TabView {
+        id: bar
         anchors.left: rectangle.right
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.top: parent.top
         anchors.leftMargin: 5
+
+        style: TabViewStyle {
+            frameOverlap: 1
+            tab: Rectangle {
+                color: styleData.selected ? "dimgrey" :"#323232"
+
+                implicitWidth: Math.max(text.width + 4, 80)
+                implicitHeight: 20
+                radius: 2
+                Text {
+                    id: text
+                    anchors.centerIn: parent
+                    text: styleData.title
+                    color: "white"
+                }
+                MouseArea
+                {
+                    anchors.fill: parent
+                    acceptedButtons: Qt.LeftButton | Qt.RightButton
+
+                    onClicked:
+                    {
+                        bar.currentIndex = index
+                        if (mouse.button === Qt.RightButton && index !== 0)
+                        {
+                            contextMenu.popup()
+                        }
+                    }
+                }
+            }
+            frame: Rectangle { color: "steelblue" }
+        }
+
+        ListModel
+        {
+            id:listOnglet
+            ListElement{ _nom:"Séquence principale" ; _index:0}
+        }
+
+        Repeater
+        {
+
+            id:repeaterOnglet
+            model:listOnglet
+            Tab
+            {
+                title: _nom
+                ZoneEdition {
+                    id: zoneEdi
+                    indiceZoneEdi: _index
+                    anchors.fill: parent
+                    onAjouterTab:
+                    {
+                        if(tabNomTab.indexOf(nom)===-1)
+                        {
+                            tabNomTab.push(nom)
+                            listOnglet.append({_nom:nom,_index:listOnglet.count})
+                            bar.currentIndex = listOnglet.count-1
+                        }else
+                        {
+                            bar.currentIndex = tabNomTab.indexOf(nom)+1
+                        }
+                    }
+                }
+
+            }
+        }
     }
+
+
+
     Rectangle {
         id: rectangleCacheur
         color: "#323232"
-        anchors.right: zoneEdi.left
+        anchors.right: bar.left
         anchors.rightMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: -5
@@ -189,7 +277,8 @@ Item {
                                 drag.target: rect;
                                 drag.onActiveChanged: {
                                     if (mouseArea2.drag.active) {
-                                        zoneEdi.nomActionToAdd = listServo.get(index)._nom
+
+                                        repeaterOnglet.itemAt(bar.currentIndex).children[0].nomActionToAdd = listServo.get(index)._nom
 
                                     }
                                     rect.Drag.drop();
@@ -201,7 +290,7 @@ Item {
                                     when: rect.Drag.active
                                     ParentChange {
                                         target: rect
-                                        parent: zoneEdi
+                                        parent: repeaterOnglet.itemAt(bar.currentIndex).children[0]
                                     }
 
                                     AnchorChanges {
@@ -259,7 +348,7 @@ Item {
                                 drag.target: rectDyna;
                                 drag.onActiveChanged: {
                                     if (mouseArea3.drag.active) {
-                                        zoneEdi.nomActionToAdd = listDyna.get(index)._nom
+                                        repeaterOnglet.itemAt(bar.currentIndex).children[0].nomActionToAdd = listDyna.get(index)._nom
 
                                     }
                                     rectDyna.Drag.drop();
@@ -271,7 +360,7 @@ Item {
                                     when: rectDyna.Drag.active
                                     ParentChange {
                                         target: rectDyna
-                                        parent: zoneEdi
+                                        parent: repeaterOnglet.itemAt(bar.currentIndex).children[0]
                                     }
 
                                     AnchorChanges {
@@ -329,7 +418,7 @@ Item {
                                 drag.target: rectDepl;
                                 drag.onActiveChanged: {
                                     if (mouseArea4.drag.active) {
-                                        zoneEdi.nomActionToAdd = listDeplacement.get(index)._nom
+                                        repeaterOnglet.itemAt(bar.currentIndex).children[0].nomActionToAdd = listDeplacement.get(index)._nom
 
                                     }
                                     rectDepl.Drag.drop();
@@ -341,7 +430,7 @@ Item {
                                     when: rectDepl.Drag.active
                                     ParentChange {
                                         target: rectDepl
-                                        parent: zoneEdi
+                                        parent: repeaterOnglet.itemAt(bar.currentIndex).children[0]
                                     }
 
                                     AnchorChanges {
@@ -399,7 +488,7 @@ Item {
                                 drag.target: rectCapt;
                                 drag.onActiveChanged: {
                                     if (mouseArea5.drag.active) {
-                                        zoneEdi.nomActionToAdd = listCapteur.get(index)._nom
+                                        repeaterOnglet.itemAt(bar.currentIndex).children[0].nomActionToAdd = listCapteur.get(index)._nom
 
                                     }
                                     rectCapt.Drag.drop();
@@ -411,7 +500,7 @@ Item {
                                     when: rectCapt.Drag.active
                                     ParentChange {
                                         target: rectCapt
-                                        parent: zoneEdi
+                                        parent: repeaterOnglet.itemAt(bar.currentIndex).children[0]
                                     }
 
                                     AnchorChanges {
@@ -469,7 +558,7 @@ Item {
                                 drag.target: rectAutre;
                                 drag.onActiveChanged: {
                                     if (mouseArea6.drag.active) {
-                                        zoneEdi.nomActionToAdd = listAutre.get(index)._nom
+                                        repeaterOnglet.itemAt(bar.currentIndex).children[0].nomActionToAdd = listAutre.get(index)._nom
 
                                     }
                                     rectAutre.Drag.drop();
@@ -481,7 +570,7 @@ Item {
                                     when: rectAutre.Drag.active
                                     ParentChange {
                                         target: rectAutre
-                                        parent: zoneEdi
+                                        parent: repeaterOnglet.itemAt(bar.currentIndex).children[0]
                                     }
 
                                     AnchorChanges {

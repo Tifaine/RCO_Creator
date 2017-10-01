@@ -10,6 +10,7 @@ Item {
     width: 200
     height: 220
     signal mustBeDeleted();
+    signal afficherTabBloc(string nom)
     property var itemArrive : []
     property string title: "bonsoir"
     property int indice:-1
@@ -21,11 +22,16 @@ Item {
 
     Component.onCompleted:
     {
+
         if(indice===0)
         {
             rectangle2.visible = false
             mouseArea3.enabled = false
+        }else if(type === 8)
+        {
+            rectangle1.visible = false
         }
+
         if(type === 0)
         {
             rectangle.state = " "
@@ -137,7 +143,7 @@ Item {
         acceptedButtons: Qt.LeftButton | Qt.RightButton
         onClicked:
         {
-            if(mouse.button === Qt.RightButton)
+            if(mouse.button === Qt.RightButton && type !==8)
             {
                 contextMenu1.popup()
             }
@@ -159,6 +165,10 @@ Item {
         onTailleChange:
         {
             item1.height = 32 + taille
+        }
+        onAfficherTab:
+        {
+            afficherTabBloc(nom)
         }
 
     }

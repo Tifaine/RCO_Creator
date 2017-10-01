@@ -93,5 +93,11 @@ QString gestionDyna::getNomVitesse(int indiceDyna, int indiceVitesse)
 
 int gestionDyna::getValVitesse(int indiceDyna, int indiceVitesse)
 {
-    return listDyna.at(indiceDyna)->listValueVitesse.at(indiceVitesse);
+    if(indiceVitesse<listDyna.at(indiceDyna)->listValueVitesse.size())
+    {
+        return listDyna.at(indiceDyna)->listValueVitesse.at(indiceVitesse);
+    }else
+    {
+        return 0;
+    }
 }
