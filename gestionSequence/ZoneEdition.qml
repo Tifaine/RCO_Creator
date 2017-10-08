@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.3
 import connector 1.0
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
+import sequence 1.0
 
 import "../Composant"
 Item {
@@ -22,13 +23,23 @@ Item {
         listAction.clear();
         if(indiceZoneEdi===0)
         {
-            listAction.append({_x:0,_y:10200, _title:"Init",_indice:0,_type:-1})
+            listAction.append({_x:0,_y:10200, _title:"Début",_indice:0,_type:9})
         }else
         {
-            listAction.append({_x:0,_y:10200, _title:"Entrée",_indice:0,_type:-1})
+            listAction.append({_x:0,_y:10200, _title:"Entrée",_indice:0,_type:9})
             listAction.append({_x:500,_y:10200, _title:"Sortie",_indice:1,_type:8})
         }
 
+    }
+
+    Sequence
+    {
+        id:seq
+    }
+
+    function addActionToSeq(toAdd)
+    {
+        seq.addAction(toAdd);
     }
 
     Rectangle
@@ -175,8 +186,15 @@ Item {
                             {
                                 flickable.interactive = false
                                 if(rect.childAt(mouseX,mouseY).getSortie(mouseX,mouseY) !== null)
-                                {
+                                {                                    
                                     sortieCourante = rect.childAt(mouseX,mouseY).getSortie(mouseX,mouseY)
+                                    sortieCourante.x1 = sortieCourante.parent.width/2
+                                    sortieCourante.y1 = sortieCourante.parent.height/2
+                                    sortieCourante.x2 = sortieCourante.x1
+                                    sortieCourante.y2 = sortieCourante.y1
+                                }else if(rect.childAt(mouseX,mouseY).getTimeOut(mouseX,mouseY) !== null)
+                                {
+                                    sortieCourante = rect.childAt(mouseX,mouseY).getTimeOut(mouseX,mouseY)
                                     sortieCourante.x1 = sortieCourante.parent.width/2
                                     sortieCourante.y1 = sortieCourante.parent.height/2
                                     sortieCourante.x2 = sortieCourante.x1
@@ -212,7 +230,8 @@ Item {
                         if(rect.childAt(mouseX,mouseY).objectName === "Action")
                         {
                             rect.childAt(mouseX,mouseY).itemDepart = sortieCourante.parent
-                            if(rect.childAt(mouseX,mouseY).getEntree(mouseX,mouseY) !== null)
+
+                            if(rect.childAt(mouseX,mouseY).getEntree(mouseX,mouseY) !== null && sortieCourante.parent.objectName==="sortie")
                             {
                                 entreeCourante = rect.childAt(mouseX,mouseY).getEntree(mouseX,mouseY)
                                 sortieCourante.x2 = entreeCourante.parent.parent.x + entreeCourante.parent.x + entreeCourante.width/2 - sortieCourante.parent.x-sortieCourante.parent.parent.x
@@ -268,6 +287,9 @@ Item {
                         }else if(nomActionToAdd ==="Séquence")
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:7})
+                        }else if(nomActionToAdd ==="Départ")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:9})
                         }
                     }
                 }
@@ -296,6 +318,10 @@ Item {
                         onAfficherTabBloc:
                         {
                             ajouterTab(nom)
+                        }
+                        onAjouterAction:
+                        {
+                            addActionToSeq(actionToAdd)
                         }
                     }
                 }

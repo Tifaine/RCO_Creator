@@ -17,28 +17,19 @@ class bloc_Action : public QQuickItem
 
 public:
     explicit bloc_Action(QQuickItem *parent = nullptr);
-
     int getX();
     int getY();
-
     void setX(int _x);
     void setY(int _y);
-
     int getXDraw() const;
     void setXDraw(int value);
-
     int getYDraw() const;
     void setYDraw(int value);
     void setNom_Bloc(QString m_nomBloc);
-
     QString nom_Bloc();
-
-    QList<bloc_Action *> *getListPere() const;
-
+    QList<bloc_Action *>* getListPere() const;
     QList<bloc_Action *>* getListFils() const;
-
     void otherHaraKiri(bloc_Action* other);
-
 
 signals:
     void xChanged();
@@ -49,8 +40,6 @@ signals:
     void listFilsChanged();
     void removeFils(int filsIndigne);
     void nom_BlocChanged();
-
-
 
 public slots:
     void addFils(bloc_Action* toAdd);
@@ -63,7 +52,6 @@ public slots:
     void deletePere(bloc_Action* toDelete);
     void haraKiri();
 
-
 private:
     int posX = 0;
     int posY = 0;
@@ -71,6 +59,9 @@ private:
     int yDraw = 0;
     QList<bloc_Action*> * listPere;
     QList<bloc_Action*> * listFils;
+
+    QList<bloc_Action*> * listPereTimeout;
+    QList<bloc_Action*> * listFilsTimeout;
     QString nomBloc;
 };
 

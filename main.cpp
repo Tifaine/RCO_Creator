@@ -6,6 +6,8 @@
 #include "gestionservo.h"
 #include "gestiondyna.h"
 #include "gestionsequence.h"
+#include "action_position.h"
+#include "sequence.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,7 +19,9 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<connector>("connector", 1, 0, "Liaison");
     qmlRegisterType<bloc_Action>("bloc", 1, 0, "Bloc");
-   // qmlRegisterType<gestionServo>("gestServo", 1, 0, "GestionServo");
+    qmlRegisterType<Action_Position>("act_POS", 1, 0, "Act_POS");
+    qmlRegisterType<Sequence>("sequence", 1, 0, "Sequence");
+
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("gestServo", &serv);

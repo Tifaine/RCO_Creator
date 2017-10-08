@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 import "../Composant"
+import act_POS 1.0
 
 Item {
     id: root
@@ -15,6 +16,12 @@ Item {
     {
         root.state = "ferme"
         positionTailleChange(60)
+    }
+    Act_POS
+    {
+        id:act_pos
+        xRobot: tfX.text
+        yRobot:tfY.text
     }
 
     TextField {

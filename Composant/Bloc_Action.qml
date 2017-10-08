@@ -11,6 +11,7 @@ Item {
     height: 220
     signal mustBeDeleted();
     signal afficherTabBloc(string nom)
+    signal ajouterAction(var actionToAdd)
     property var itemArrive : []
     property string title: "bonsoir"
     property int indice:-1
@@ -23,10 +24,15 @@ Item {
     Component.onCompleted:
     {
 
-        if(indice===0)
+        if(type===9)
         {
             rectangle2.visible = false
-            mouseArea3.enabled = false
+            if(indice===0)
+            {
+                mouseArea3.enabled = false
+            }
+
+
         }else if(type === 8)
         {
             rectangle1.visible = false
@@ -76,14 +82,8 @@ Item {
 
     onXChanged:
     {
-        if (mouseArea3.drag.active) {
-            /*if(itemDepart!==null)
-            {
-
-
-                itemDepart.parent.deltaX2_fille(item1.x +rectangle2.x + rectangle2.width/2 ,0);
-            }*/
-
+        if (mouseArea3.drag.active)
+        {
             for(var i=0;i<bloc1.getNbPere();i++)
             {
                 bloc1.getPere(i).listFilsChanged();
@@ -97,13 +97,8 @@ Item {
     }
     onYChanged:
     {
-        if (mouseArea3.drag.active) {
-            /*if(itemDepart!==null)
-            {
-                itemDepart.parent.deltaY2_fille(item1.y + rectangle2.y + rectangle2.height/2,0);
-            }*/
-
-
+        if (mouseArea3.drag.active)
+        {
             for(var i=0;i<bloc1.getNbPere();i++)
             {
                 bloc1.getPere(i).listFilsChanged();
@@ -170,11 +165,20 @@ Item {
         {
             afficherTabBloc(nom)
         }
+        onAddAction:
+        {
+            ajouterAction(actionToAdd)
+        }
 
     }
     ListModel
     {
         id:listSortie
+        ListElement{ _indice:0}
+    }
+    ListModel
+    {
+        id:listTimeOut
         ListElement{ _indice:0}
     }
     Rectangle {
@@ -197,6 +201,35 @@ Item {
             {
                 id:gridSortie
                 model:listSortie
+                Liaison
+                {
+                    z:-1
+                    anchors.fill: parent
+                }
+            }
+        ]
+    }
+
+    Rectangle {
+        id: rectangle5
+        objectName: "timeout"
+        x: 162
+        z:0
+        width: 10
+        height: 10
+        color: "orange"
+        radius: 5
+        anchors.topMargin: 70
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+
+        children: [
+
+            Repeater
+            {
+                id:gridSortie3
+                model:listTimeOut
                 Liaison
                 {
                     z:-1
@@ -317,6 +350,23 @@ Item {
         if(item1.childAt(x-item1.x,y-item1.y) !== null)
         {
             if(item1.childAt(x-item1.x,y-item1.y).objectName === "sortie")
+            {
+                return item1.childAt(x-item1.x,y-item1.y).children[item1.childAt(x-item1.x,y-item1.y).children.length-1].itemAt(item1.childAt(x-item1.x,y-item1.y).children[item1.childAt(x-item1.x,y-item1.y).children.length-1].count-1)
+            }else
+            {
+                return null
+            }
+        }else
+        {
+            return null
+        }
+    }
+
+    function getTimeOut(x, y)
+    {
+        if(item1.childAt(x-item1.x,y-item1.y) !== null)
+        {
+            if(item1.childAt(x-item1.x,y-item1.y).objectName === "timeout")
             {
                 return item1.childAt(x-item1.x,y-item1.y).children[item1.childAt(x-item1.x,y-item1.y).children.length-1].itemAt(item1.childAt(x-item1.x,y-item1.y).children[item1.childAt(x-item1.x,y-item1.y).children.length-1].count-1)
             }else

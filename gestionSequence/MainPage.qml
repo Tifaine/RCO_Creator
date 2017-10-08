@@ -29,6 +29,7 @@ Item {
 
         listAutre.append({_nom:"Autre",                 _color:"grey", _index:0})
         listAutre.append({_nom:"Séquence",              _color:"grey", _index:1})
+        listAutre.append({_nom:"Départ",                _color:"grey", _index:2})
     }
 
     Rectangle {

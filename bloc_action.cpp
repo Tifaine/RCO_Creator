@@ -5,6 +5,9 @@ bloc_Action::bloc_Action(QQuickItem *parent) : QQuickItem(parent)
 {
     listPere = new QList<bloc_Action*>;
     listFils = new QList<bloc_Action*>;
+
+    listPereTimeout = new QList<bloc_Action*>;
+    listFilsTimeout = new QList<bloc_Action*>;
 }
 
 int bloc_Action::getX()
@@ -62,7 +65,6 @@ void bloc_Action::addFils(bloc_Action* toAdd)
     listFils->append(toAdd);
 }
 
-
 void bloc_Action::addPere(bloc_Action* toAdd)
 {
     listPere->append(toAdd);
@@ -94,7 +96,6 @@ void bloc_Action::deleteFils(bloc_Action* toDelete)
     {
         removeFils(listFils->indexOf(toDelete));
         listFils->removeAt(listFils->indexOf(toDelete));
-
         listFilsChanged();
     }
 }
@@ -119,7 +120,6 @@ void bloc_Action::setNom_Bloc(QString m_nomBloc)
 
 void bloc_Action::otherHaraKiri(bloc_Action* other)
 {
-
     while(listPere->contains(other))
     {
         listPere->removeAt(listPere->indexOf(other));
@@ -129,7 +129,6 @@ void bloc_Action::otherHaraKiri(bloc_Action* other)
     {
         removeFils(listFils->indexOf(other));
         listFils->removeAt(listFils->indexOf(other));
-
         listFilsChanged();
     }
 }

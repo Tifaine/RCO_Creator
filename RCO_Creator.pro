@@ -10,7 +10,10 @@ SOURCES += main.cpp \
     servo.cpp \
     gestiondyna.cpp \
     dynamixel.cpp \
-    gestionsequence.cpp
+    gestionsequence.cpp \
+    action.cpp \
+    action_position.cpp \
+    sequence.cpp
 
 RESOURCES += qml.qrc
 
@@ -43,7 +46,10 @@ HEADERS += \
     servo.h \
     gestiondyna.h \
     dynamixel.h \
-    gestionsequence.h
+    gestionsequence.h \
+    action.h \
+    action_position.h \
+    sequence.h
 
 DISTFILES += \
     servo.xml

@@ -11,6 +11,7 @@ Item {
     signal tailleChange(int taille)
     signal afficherTab(string nom);
     property string _couleur:"#655e5e"
+    signal addAction(var actionToAdd);
     function mustDelete()
     {
         //gestServo.mustDelete();
@@ -145,6 +146,7 @@ Item {
         }
         case 5:
         {
+            addAction(blocPosition.children[0])
             blocPosition.visible = true
             break;
         }
