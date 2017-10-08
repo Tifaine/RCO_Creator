@@ -27,17 +27,6 @@ Item {
         border.width: 3
         opacity: 0.8 //655e5e
         anchors.fill: parent
-
-        BlocDyna
-        {
-            id:blocDyna
-            visible:false
-            anchors.fill: parent
-            onDynaTailleChange:
-            {
-                tailleChange(taille)
-            }
-        }
         BlocServo
         {
             id:blocServo
@@ -48,6 +37,18 @@ Item {
                 tailleChange(taille)
             }
         }
+        BlocDyna
+        {
+            id:blocDyna
+            visible:false
+            anchors.fill: parent
+            onDynaTailleChange:
+            {
+                tailleChange(taille)
+            }
+        }
+
+
         BlocCapteur
         {
             id:blocCapteur

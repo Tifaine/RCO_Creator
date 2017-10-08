@@ -15,6 +15,8 @@ signals:
 
 public slots:
     void addAction(Action* toBeAdded);
+    void supprAction(Action* toBeDeletted);
+    void parcoursAction();
 
 private:
     QList<Action*> listAction;

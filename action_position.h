@@ -19,7 +19,7 @@ public:
     int getYRobot() const;
     void setYRobot(int value);
     void toString();
-
+    struct position getPosition();
 signals:
     void xRobotChanged();
     void YRobotChanged();
@@ -29,6 +29,8 @@ public slots:
 private:
     int xRobot = 0;
     int yRobot = 0;
+
+    struct position posRobot;
 };
 
 #endif // ACTION_POSITION_H

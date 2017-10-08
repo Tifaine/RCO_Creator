@@ -25,3 +25,10 @@ int Action::getTypeAction() const
     return typeAction;
 }
 
+struct position Action::getPosition()
+{
+    struct position posRobot;
+
+    return posRobot;
+}
+

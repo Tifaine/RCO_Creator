@@ -2,7 +2,9 @@
 
 Action_Position::Action_Position()
 {
-    setTypeAction(6);
+    setTypeAction(ACTION_POSITION);
+    (posRobot.x) = &xRobot;
+    (posRobot.y) = &yRobot;
 }
 
 int Action_Position::getXRobot() const
@@ -28,4 +30,9 @@ void Action_Position::setYRobot(int value)
 void Action_Position::toString()
 {
     qDebug()<<"Je suis une position. x : "<<xRobot<<" y :"<<yRobot;
+}
+
+struct position Action_Position::getPosition()
+{
+    return posRobot;
 }

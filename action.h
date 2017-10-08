@@ -4,6 +4,14 @@
 #include <QList>
 #include <QQuickItem>
 
+#define ACTION_POSITION 5
+
+struct position
+{
+    int *x;
+    int *y;
+};
+
 class Action : public QQuickItem
 {
     Q_OBJECT
@@ -21,6 +29,7 @@ public:
     int getTypeAction() const;
 
     virtual void toString() = 0;
+    virtual struct position getPosition();
 
 signals:
     void typeActionChanged();

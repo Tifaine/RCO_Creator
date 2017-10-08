@@ -291,6 +291,7 @@ Item {
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:9})
                         }
+                        seq.parcoursAction();
                     }
                 }
 
@@ -312,7 +313,7 @@ Item {
                             {
                                 listAction.get(i)._indice--;
                             }
-
+                            seq.supprAction(action1.children[2].children[0].children[_type].children[0])
                             listAction.remove(_indice)
                         }
                         onAfficherTabBloc:
