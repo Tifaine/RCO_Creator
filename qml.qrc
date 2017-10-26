@@ -1,25 +1,23 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>Composant/Bloc_Action.qml</file>
+        <file>Sequence/ZoneEdition.qml</file>
+        <file>Sequence/BlocAction.qml</file>
+        <file>ComposantBloc/EntreeBloc.qml</file>
+        <file>ComposantBloc/SortieBloc.qml</file>
         <file>Composant/BandeauCote.qml</file>
         <file>Composant/VerticalTabBar.qml</file>
-        <file>gestionSequence/ZoneEdition.qml</file>
-        <file>gestionSequence/MainPage.qml</file>
+        <file>Sequence/OngletSequence.qml</file>
         <file>Composant/PanelItem.qml</file>
-        <file>Composant/Info_Bloc.qml</file>
+        <file>ComposantBloc/TypeAction/BlocAutre.qml</file>
+        <file>ComposantBloc/TypeAction/BlocCapteur.qml</file>
+        <file>ComposantBloc/TypeAction/BlocDyna.qml</file>
+        <file>ComposantBloc/TypeAction/BlocMoteur.qml</file>
+        <file>ComposantBloc/TypeAction/BlocOrientation.qml</file>
+        <file>ComposantBloc/TypeAction/BlocPosition.qml</file>
+        <file>ComposantBloc/TypeAction/BlocSequence.qml</file>
+        <file>ComposantBloc/TypeAction/BlocServo.qml</file>
         <file>Composant/CustomComboBox.qml</file>
-        <file>Image/enterArrow.png</file>
-        <file>Image/exitArrow.png</file>
-        <file>Image/arrowExit.png</file>
-        <file>configAction/MainConfigAction.qml</file>
-        <file>configAction/BlocDyna.qml</file>
-        <file>configAction/BlocServo.qml</file>
-        <file>configAction/BlocCapteur.qml</file>
-        <file>configAction/BlocMoteur.qml</file>
-        <file>configAction/BlocAutre.qml</file>
-        <file>configAction/BlocPosition.qml</file>
-        <file>configAction/BlocOrientation.qml</file>
-        <file>configAction/BlocSequence.qml</file>
+        <file>ComposantBloc/Info_Bloc.qml</file>
     </qresource>
 </RCC>

@@ -2,16 +2,15 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.3
-import "gestionSequence"
-import "configAction"
 import "Composant"
+import "Sequence"
 
 ApplicationWindow {
-    id: applicationWindow
     visible: true
     width: 1500
     height: 800
-    title: qsTr("RCO Creator V0.2 Banane")
+    title: qsTr("RCO Creator V0.3 Chataigne")
+
     Rectangle
     {
         anchors.fill: parent
@@ -22,7 +21,14 @@ ApplicationWindow {
             title: "File"
             MenuItem { text: "Ouvrir..." }
             MenuItem { text: "Enregistrer" }
-            MenuItem { text: "Enregistrer sous..." }
+            MenuItem
+            {
+                text: "Enregistrer sous..."
+                onTriggered:
+                {
+                    ongletSequence.saveAs("Pouet")
+                }
+            }
         }
 
         Menu {
@@ -32,13 +38,9 @@ ApplicationWindow {
             MenuItem { text: "Actions" }
         }
     }
-    MainConfigAction
-    {
 
-    }
-
-    MainPage {
-        id: mainPage
+    OngletSequence {
+        id: ongletSequence
         anchors.left: bandeauCote.right
         anchors.right: parent.right
         anchors.bottom: parent.bottom
@@ -47,6 +49,7 @@ ApplicationWindow {
         visible:true
         z:0
     }
+
 
     BandeauCote {
         id: bandeauCote
@@ -62,27 +65,27 @@ ApplicationWindow {
             {
             case 0:
             {
-                mainPage.visible = true;
+                ongletSequence.visible = true;
             }
             break;
             case 1:
             {
-                mainPage.visible = false;
+                ongletSequence.visible = false;
             }
             break;
             case 2:
             {
-                mainPage.visible = false;
+                ongletSequence.visible = false;
             }
             break;
             case 3:
             {
-                mainPage.visible = false;
+                ongletSequence.visible = false;
             }
             break;
             case 4:
             {
-                mainPage.visible = false;
+                ongletSequence.visible = false;
             }
             break;
             }
