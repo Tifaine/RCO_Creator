@@ -20,14 +20,14 @@ public:
     void setYRobot(int value);
 
     void saveXML(QXmlStreamWriter *xmlWriter);
-    void getInfo();
+
 
 signals:
     void xRobotChanged();
     void YRobotChanged();
 
 public slots:
-
+    void getInfo();
 private:
     int xRobot = 0;
     int yRobot = 0;

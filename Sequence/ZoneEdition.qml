@@ -19,7 +19,7 @@ Item {
     Sequence
     {
         id:seq
-    }    
+    }
 
 
 
@@ -134,6 +134,7 @@ Item {
                                             sortieCourante.repaint((obj.x+obj2.x+5)-sortieCourante.parent.x-sortieCourante.x,
                                                                    (obj.y+obj2.y+5)-sortieCourante.parent.y-sortieCourante.y)
                                             sortieCourante.addLiaison(obj2);
+                                            sortieCourante.parent.bloc.ajouterFils(sortieCourante.indice,obj2.parent.bloc)
                                             obj2.tabPere.push(sortieCourante)
                                             if(rect1.survolActif!==null)
                                             {
@@ -245,6 +246,7 @@ Item {
                             text:_title
                             onTriggered:
                             {
+                                mouseArea.entreePopup.tabPere[index].parent.bloc.supprimerFils(mouseArea.entreePopup.parent.bloc)
                                 mouseArea.entreePopup.tabPere[index].supprimerFils(mouseArea.entreePopup)
                                 mouseArea.entreePopup.tabPere.splice(index,1)
                             }

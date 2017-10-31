@@ -5,7 +5,7 @@ Item {
     id:root
     property string couleur
     property string couleurSelected:"#FF007F"
-    property int indice
+    property int indice:-1
     objectName: "Sortie"
     height:12
     width:12

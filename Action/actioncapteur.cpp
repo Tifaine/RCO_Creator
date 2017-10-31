@@ -7,5 +7,5 @@ ActionCapteur::ActionCapteur()
 
 void ActionCapteur::saveXML(QXmlStreamWriter* xmlWriter)
 {
-qDebug()<<"Action capteur";
+    qDebug()<<"Action capteur";
 }

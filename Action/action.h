@@ -4,6 +4,7 @@
 #include <QQuickItem>
 #include <QObject>
 #include <QXmlStreamWriter>
+//#include "actionposition.h"
 
 #define typeServo       0
 #define typeDyna        1
@@ -22,17 +23,22 @@ public:
     Action(QQuickItem *parent = nullptr);
     int getType() const;
     void setType(int value);
-    virtual void getInfo();
+
     virtual void saveXML(QXmlStreamWriter* xmlWriter) = 0;
+    void creerAction(int type);
 
 signals:
 
 public slots:
+    virtual void getInfo();
+    void ajouterListFils();
+    void ajouterFils(int indiceListe, Action *act);
+    void supprimerFils(Action * actToDelete);
 
 protected:
 
 private:
-
+    QList<QList<Action* >*> listFils;
     int type = -1;
 
 };

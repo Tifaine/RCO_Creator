@@ -9,6 +9,7 @@ Item {
     property int indice
     property int type
     property var _couleurInfoBloc : "#655e5e"
+    property var bloc : null
     signal iWantToDie()
     signal creationComplete(var bloc)
     objectName: "BlocAction"
@@ -40,7 +41,7 @@ Item {
             listEntree.append({_x:2,_y:30,_indice:0,_color:"yellow"})
             listSortie.clear();
             listSortie.append({_x:188,_y:30,_indice:0,_color:"grey"})
-            listSortie.append({_x:188,_y:50,_indice:0,_color:"orange"})
+            listSortie.append({_x:188,_y:50,_indice:1,_color:"orange"})
             break;
         }
 
@@ -51,17 +52,23 @@ Item {
     {
         for(var i=0;i<listEntree.count;i++)
         {
-            for(var j=0;j<gridEntree.itemAt(i).tabPere.length;j++)
+            if(gridEntree.itemAt(i)!==null)
             {
-                gridEntree.itemAt(i).tabPere[j].filsBouge(gridEntree.itemAt(i),
-                                                          root.x+gridEntree.itemAt(i).x+5 - gridEntree.itemAt(i).tabPere[j].parent.x - gridEntree.itemAt(i).tabPere[j].x,
-                                                          root.y+gridEntree.itemAt(i).y+5 - gridEntree.itemAt(i).tabPere[j].parent.y - gridEntree.itemAt(i).tabPere[j].y)
+                for(var j=0;j<gridEntree.itemAt(i).tabPere.length;j++)
+                {
+                    gridEntree.itemAt(i).tabPere[j].filsBouge(gridEntree.itemAt(i),
+                                                              root.x+gridEntree.itemAt(i).x+5 - gridEntree.itemAt(i).tabPere[j].parent.x - gridEntree.itemAt(i).tabPere[j].x,
+                                                              root.y+gridEntree.itemAt(i).y+5 - gridEntree.itemAt(i).tabPere[j].parent.y - gridEntree.itemAt(i).tabPere[j].y)
+                }
             }
         }
 
         for(var i=0;i<listSortie.count;i++)
         {
-            gridSortie.itemAt(i).pereBouge(root.x,root.y)
+            if(gridSortie.itemAt(i)!==null)
+            {
+                gridSortie.itemAt(i).pereBouge(root.x,root.y)
+            }
         }
     }
 
@@ -69,16 +76,22 @@ Item {
     {
         for(var i=0;i<listEntree.count;i++)
         {
-            for(var j=0;j<gridEntree.itemAt(i).tabPere.length;j++)
+            if(gridEntree.itemAt(i)!==null)
             {
-                gridEntree.itemAt(i).tabPere[j].filsBouge(gridEntree.itemAt(i),
-                                                          root.x+gridEntree.itemAt(i).x+5 - gridEntree.itemAt(i).tabPere[j].parent.x - gridEntree.itemAt(i).tabPere[j].x,
-                                                          root.y+gridEntree.itemAt(i).y+5 - gridEntree.itemAt(i).tabPere[j].parent.y - gridEntree.itemAt(i).tabPere[j].y)
+                for(var j=0;j<gridEntree.itemAt(i).tabPere.length;j++)
+                {
+                    gridEntree.itemAt(i).tabPere[j].filsBouge(gridEntree.itemAt(i),
+                                                              root.x+gridEntree.itemAt(i).x+5 - gridEntree.itemAt(i).tabPere[j].parent.x - gridEntree.itemAt(i).tabPere[j].x,
+                                                              root.y+gridEntree.itemAt(i).y+5 - gridEntree.itemAt(i).tabPere[j].parent.y - gridEntree.itemAt(i).tabPere[j].y)
+                }
             }
         }
         for(var i=0;i<listSortie.count;i++)
         {
-            gridSortie.itemAt(i).pereBouge(root.x,root.y)
+            if(gridSortie.itemAt(i)!==null)
+            {
+                gridSortie.itemAt(i).pereBouge(root.x,root.y)
+            }
         }
     }
 
@@ -93,11 +106,21 @@ Item {
                 for(var i=0;i<listSortie.count;i++)
                 {
                     gridSortie.itemAt(i).haraKiri(gridSortie.itemAt(i))
+                    for(var j=0;j<gridSortie.itemAt(i).tabFils.length;j++)
+                    {
+                        gridSortie.itemAt(i).tabFils[j].parent.bloc.supprimerFils(gridSortie.itemAt(i).parent.bloc)
+                    }
+
                 }
+                console.log("entre")
                 //listSortie.clear()
                 for(var i=0;i<listEntree.count;i++)
                 {
                     gridEntree.itemAt(i).harakiri(gridEntree.itemAt(i))
+                    for(var j=0;j<gridEntree.itemAt(i).tabPere.length;j++)
+                    {
+                        gridEntree.itemAt(i).tabPere[j].parent.bloc.supprimerFils(gridEntree.itemAt(i).parent.bloc)
+                    }
                 }
                 iWantToDie();
             }
@@ -123,6 +146,30 @@ Item {
         }
 
     }
+
+    Rectangle {
+
+        id: rectangle //655e5e
+        color: "#655e5e"
+        border.color: _couleurInfoBloc
+        border.width: 3
+        opacity: 0.8 //655e5e
+        anchors.right: parent.right
+        anchors.rightMargin: 12
+        anchors.left: parent.left
+        anchors.leftMargin: 12
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
+        anchors.top: rectangle3.bottom
+        anchors.topMargin: 0
+        Component.onCompleted:
+        {
+            createSpriteObjects(type,0,0)
+            creationComplete(bloc);
+        }
+
+    }
+    /*
     Info_Bloc
     {
         _couleur : _couleurInfoBloc
@@ -144,7 +191,7 @@ Item {
             creationComplete(bloc);
         }
 
-    }
+    }*/
 
     ListModel
     {
@@ -226,5 +273,105 @@ Item {
             anchors.topMargin: 7
             font.pixelSize: 13
         }
+    }
+
+    property var component;
+    property var sprite;
+
+    function createSpriteObjects(type, x, y) {
+
+        switch(type)
+        {
+        case -1: //Init
+            break;
+        case 0: //Servomoteur
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocServo.qml");
+            break;
+        }
+        case 1: //Dynamixel
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocDyna.qml");
+            break;
+        }
+        case 2: //Capteur
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocCapteur.qml");
+            break;
+        }
+        case 3: //Moteur
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocMoteur.qml");
+            break;
+        }
+        case 4: //Autre
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocAutre.qml");
+            break;
+        }
+        case 5: //Position
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocPosition.qml");
+            break;
+        }
+        case 6: //Orientation
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocOrientation.qml");
+            break;
+        }
+        case 7: //Sequence
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocSequence.qml");
+            break;
+        }
+        case 9: //Depart Sequence
+        {
+            //component = Qt.createComponent("Point.qml");
+            break;
+        }
+        }
+        if(type!==-1)
+        {
+            if (component.status === Component.Ready)
+                finishCreation(type, x,y);
+            else
+                component.statusChanged.connect(finishCreation(x,y));
+
+            for(var i=0;i<listSortie.count;i++)
+            {
+                bloc.ajouterListFils();
+            }
+        }
+
+
+    }
+
+    function finishCreation(type, x, y) {
+
+        if (component.status == Component.Ready) {
+            x = parseInt(x);
+            y = parseInt(y);
+            sprite = component.createObject(rectangle, {"x": 0, "y": 0});
+            if (sprite === null) {
+                // Error Handling
+                console.log("Error creating object");
+            }else
+            {
+                sprite.anchors.fill = rectangle;
+                sprite.modifTaille.connect(modifTaille)
+                modifTaille(70)
+                creationComplete(sprite.fils);
+                bloc = sprite.fils
+            }
+
+        } else if (component.status === Component.Error) {
+            // Error Handling
+            console.log("Error loading component:", component.errorString());
+        }
+    }
+
+    function modifTaille(taille)
+    {
+        root.height = 32 + taille
     }
 }

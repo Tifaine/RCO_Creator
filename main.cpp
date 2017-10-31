@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<ActionServo>("actionServo", 1, 0, "Servo");
     qmlRegisterType<GestionSortie>("gestSortie", 1, 0, "GestSortie");
 
+
     QQmlApplicationEngine engine;
 
     engine.rootContext()->setContextProperty("gestServo", &serv);
