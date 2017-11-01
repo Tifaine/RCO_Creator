@@ -21,6 +21,7 @@ class Action : public QQuickItem
     Q_OBJECT
     Q_PROPERTY(int xBloc READ getXBloc WRITE setXBloc NOTIFY xBlocChanged)
     Q_PROPERTY(int yBloc READ getYBloc WRITE setYBloc NOTIFY yBlocChanged)
+    Q_PROPERTY(int timeOut READ getTimeOut WRITE setTimeOut NOTIFY timeOutChanged)
 public:
     Action(QQuickItem *parent = nullptr);
     int getType() const;
@@ -38,9 +39,13 @@ public:
     int getYBloc() const;
     void setYBloc(int value);
 
+    int getTimeOut() const;
+    void setTimeOut(int value);
+
 signals:
     void xBlocChanged();
     void yBlocChanged();
+    void timeOutChanged();
 
 public slots:
     virtual void getInfo();
@@ -55,6 +60,7 @@ private:
     int type = -1;
     int xBloc;
     int yBloc;
+    int timeOut = -1;
 
 };
 

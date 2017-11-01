@@ -311,12 +311,14 @@ Item {
 
         TextEdit
         {
+            id:teTimeOut
             height: 30
             text: qsTr("5000")
             anchors.fill: parent
             anchors.leftMargin: 10
             color: "white"
             verticalAlignment: Text.AlignVCenter
+            onTextChanged: servo.timeOut = text
         }
     }
 

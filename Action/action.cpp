@@ -54,6 +54,16 @@ void Action::supprimerFils(Action * actToDelete)
     }
 }
 
+int Action::getTimeOut() const
+{
+    return timeOut;
+}
+
+void Action::setTimeOut(int value)
+{
+    timeOut = value;
+}
+
 int Action::getYBloc() const
 {
     return yBloc;

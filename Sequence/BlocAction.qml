@@ -46,6 +46,8 @@ Item {
         }
 
         }
+
+
     }
 
     onXChanged:
@@ -369,6 +371,7 @@ Item {
                 sprite.modifTaille.connect(modifTaille)
                 modifTaille(70)
                 bloc = sprite.fils
+
             }
 
         } else if (component.status === Component.Error) {
