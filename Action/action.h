@@ -19,6 +19,8 @@
 class Action : public QQuickItem
 {
     Q_OBJECT
+    Q_PROPERTY(int xBloc READ getXBloc WRITE setXBloc NOTIFY xBlocChanged)
+    Q_PROPERTY(int yBloc READ getYBloc WRITE setYBloc NOTIFY yBlocChanged)
 public:
     Action(QQuickItem *parent = nullptr);
     int getType() const;
@@ -30,7 +32,15 @@ public:
 
     QList<QList<Action *> *> getListFils() const;
 
+    int getXBloc() const;
+    void setXBloc(int value);
+
+    int getYBloc() const;
+    void setYBloc(int value);
+
 signals:
+    void xBlocChanged();
+    void yBlocChanged();
 
 public slots:
     virtual void getInfo();
@@ -43,6 +53,8 @@ protected:
 private:
     QList<QList<Action* >*> listFils;
     int type = -1;
+    int xBloc;
+    int yBloc;
 
 };
 

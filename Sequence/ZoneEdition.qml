@@ -325,11 +325,13 @@ Item {
                     {
                         x:_x
                         y:_y
+                        id:act
                         title:_title
                         indice:_indice
                         type : _type
                         onIWantToDie:
                         {
+                            seq.supprimerAction(act.bloc)
                             listAction.remove(index,1)
                         }
                         onCreationComplete:
@@ -337,6 +339,8 @@ Item {
                             if(bloc!==null)
                             {
                                 seq.ajouterAction(bloc)
+                                bloc.xBloc = x;
+                                bloc.yBloc = y;
                             }
                         }
                     }

@@ -15,6 +15,7 @@ signals:
 
 public slots:
     void ajouterAction(Action* essai);
+    void supprimerAction(Action * toBeDeleted);
     void enregistrerSous(QString filename);
 
 private:

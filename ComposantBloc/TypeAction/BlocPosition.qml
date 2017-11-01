@@ -140,27 +140,32 @@ Item {
         }
     }
 
-    TextField {
+    Rectangle
+    {
         id: tfVitesse
         height: 30
-        text: qsTr("800")
-        visible:false
-        horizontalAlignment: Text.AlignHCenter
+        radius:7
         anchors.right: parent.right
         anchors.rightMargin: 5
         anchors.left: parent.left
         anchors.leftMargin: 5
         anchors.top: cbVitesse.bottom
         anchors.topMargin: 5
-        color: "white"
+        visible: true
+        color:"#4a4545"
 
-        background:Rectangle
+        TextEdit
         {
-            radius:7
+            height: 30
+            text: qsTr("800")
             anchors.fill: parent
-            color:"#4a4545"
+            anchors.leftMargin: 10
+            color: "white"
+            verticalAlignment: Text.AlignVCenter
         }
     }
+
+
 
     Text {
         id: textAcc

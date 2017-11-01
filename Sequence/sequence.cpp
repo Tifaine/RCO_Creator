@@ -8,12 +8,17 @@ Sequence::Sequence(QQuickItem *parent) : QQuickItem(parent)
 void Sequence::ajouterAction(Action* essai)
 {
     listAction.append(essai);
+}
 
+void Sequence::supprimerAction(Action * toBeDeleted)
+{
+    listAction.removeAt(listAction.indexOf(toBeDeleted));
 }
 
 void Sequence::enregistrerSous(QString filename)
 {
 
+    qDebug()<<listAction.size();
     QStringList listNom = filename.split('/');
     QString nomLast = listNom.last();
     if(nomLast.contains(".xml"))
@@ -36,6 +41,8 @@ void Sequence::enregistrerSous(QString filename)
         {
             xmlWriter.writeStartElement("Action");
             xmlWriter.writeTextElement("Action_numero",QString::number(i));
+            xmlWriter.writeTextElement("xBloc",QString::number(listAction.at(i)->getXBloc()));
+            xmlWriter.writeTextElement("yBloc",QString::number(listAction.at(i)->getYBloc()));
             listAction.at(i)->saveXML(&xmlWriter);
             for(int j=0;j<listAction.at(i)->getListFils().size();j++)
             {

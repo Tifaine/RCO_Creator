@@ -50,6 +50,7 @@ Item {
 
     onXChanged:
     {
+        bloc.xBloc = root.x;
         for(var i=0;i<listEntree.count;i++)
         {
             if(gridEntree.itemAt(i)!==null)
@@ -74,6 +75,7 @@ Item {
 
     onYChanged:
     {
+        bloc.yBloc = root.y;
         for(var i=0;i<listEntree.count;i++)
         {
             if(gridEntree.itemAt(i)!==null)

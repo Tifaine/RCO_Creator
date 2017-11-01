@@ -54,6 +54,26 @@ void Action::supprimerFils(Action * actToDelete)
     }
 }
 
+int Action::getYBloc() const
+{
+    return yBloc;
+}
+
+void Action::setYBloc(int value)
+{
+    yBloc = value;
+}
+
+int Action::getXBloc() const
+{
+    return xBloc;
+}
+
+void Action::setXBloc(int value)
+{
+    xBloc = value;
+}
+
 QList<QList<Action *> *> Action::getListFils() const
 {
     return listFils;
