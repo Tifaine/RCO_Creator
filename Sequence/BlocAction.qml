@@ -360,7 +360,6 @@ Item {
                 sprite.anchors.fill = rectangle;
                 sprite.modifTaille.connect(modifTaille)
                 modifTaille(70)
-                creationComplete(sprite.fils);
                 bloc = sprite.fils
             }
 

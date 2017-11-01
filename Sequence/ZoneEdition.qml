@@ -334,7 +334,10 @@ Item {
                         }
                         onCreationComplete:
                         {
-                            seq.ajouterAction(bloc)
+                            if(bloc!==null)
+                            {
+                                seq.ajouterAction(bloc)
+                            }
                         }
                     }
                 }

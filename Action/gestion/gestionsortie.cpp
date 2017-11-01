@@ -7,5 +7,5 @@ GestionSortie::GestionSortie()
 
 void GestionSortie::affichTest(int var)
 {
-    qDebug()<<var;
+
 }

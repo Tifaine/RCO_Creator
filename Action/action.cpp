@@ -45,14 +45,16 @@ void Action::ajouterFils(int indiceListe, Action* act)
 
 void Action::supprimerFils(Action * actToDelete)
 {
-    qDebug()<<"On supprime ! ";
     for(int i=0;i<listFils.size();i++)
     {
-        qDebug()<<listFils.at(i)->size();
         if(listFils.at(i)->indexOf(actToDelete)!=-1)
         {
             listFils.at(i)->removeAt(listFils.at(i)->indexOf(actToDelete));
         }
-        qDebug()<<listFils.at(i)->size();
     }
+}
+
+QList<QList<Action *> *> Action::getListFils() const
+{
+    return listFils;
 }

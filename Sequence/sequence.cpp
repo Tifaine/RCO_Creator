@@ -8,10 +8,12 @@ Sequence::Sequence(QQuickItem *parent) : QQuickItem(parent)
 void Sequence::ajouterAction(Action* essai)
 {
     listAction.append(essai);
+
 }
 
 void Sequence::enregistrerSous(QString filename)
 {
+
     QStringList listNom = filename.split('/');
     QString nomLast = listNom.last();
     if(nomLast.contains(".xml"))
@@ -20,6 +22,7 @@ void Sequence::enregistrerSous(QString filename)
     }
     filename = nomLast+".xml";
     QFile file(filename);
+
     if(file.open(QIODevice::WriteOnly))
     {
         QString element;
@@ -28,9 +31,26 @@ void Sequence::enregistrerSous(QString filename)
         xmlWriter.writeStartDocument();
         xmlWriter.writeStartElement("Sequence");
         xmlWriter.writeTextElement("version",element.number(3,'f',0));
+
         for(int i=0;i<listAction.size();i++)
         {
+            xmlWriter.writeStartElement("Action");
+            xmlWriter.writeTextElement("Action_numero",QString::number(i));
             listAction.at(i)->saveXML(&xmlWriter);
+            for(int j=0;j<listAction.at(i)->getListFils().size();j++)
+            {
+
+                QString listFils;
+                listFils.clear();
+                for(int k=0;k<listAction.at(i)->getListFils().at(j)->size();k++)
+                {
+                    listFils.append(QString::number(listAction.indexOf(listAction.at(i)->getListFils().at(j)->at(k))));
+                    listFils.append(";");
+                }
+                xmlWriter.writeTextElement("ListFils",listFils);
+
+            }
+            xmlWriter.writeEndElement();
         }
         xmlWriter.writeEndElement();
         xmlWriter.writeEndDocument();

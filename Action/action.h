@@ -27,6 +27,9 @@ public:
     virtual void saveXML(QXmlStreamWriter* xmlWriter) = 0;
     void creerAction(int type);
 
+
+    QList<QList<Action *> *> getListFils() const;
+
 signals:
 
 public slots:

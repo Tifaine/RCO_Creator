@@ -6,7 +6,6 @@ GestionServo::GestionServo(QObject *parent)
     if(fichierServo->exists())
     {
         listFichierServo();
-        qDebug()<<listServo.size();
     }
     watcher = new QFileSystemWatcher();
     watcher->addPath("servo.xml");
