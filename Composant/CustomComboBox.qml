@@ -3,6 +3,7 @@ import QtQuick.Controls 2.2
 
 Item {
     property var _model : null
+    property var indice : -1
     signal customCurrentIndexChanged(int indice)
     ComboBox {
         id: customCombo
@@ -13,6 +14,7 @@ Item {
         onCurrentIndexChanged:
         {
             customCurrentIndexChanged(currentIndex)
+            indice = currentIndex
         }
 
         indicator: Image {

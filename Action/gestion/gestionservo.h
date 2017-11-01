@@ -19,9 +19,11 @@ public slots:
     void mustDelete();
     int getNbServo();
     QString getNomServo(int indice);
+    int getIdServo(int indiceServo);
     int getNbAction(int indiceServo);
     QString getNomAction(int indiceServo, int indiceAction);
-    int getIdAction(int indiceServo, int indiceAction);
+    int getValAction(int indiceServo, int indiceAction);
+
 
 private:
     QList<Servo*> listServo;

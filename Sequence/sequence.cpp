@@ -47,7 +47,14 @@ void Sequence::enregistrerSous(QString filename)
                     listFils.append(QString::number(listAction.indexOf(listAction.at(i)->getListFils().at(j)->at(k))));
                     listFils.append(";");
                 }
-                xmlWriter.writeTextElement("ListFils",listFils);
+                if(j == listAction.at(i)->getListFils().size() -1)
+                {
+                    xmlWriter.writeTextElement("ListTimeOut",listFils);
+                }else
+                {
+                  xmlWriter.writeTextElement("ListFils",listFils);
+                }
+
 
             }
             xmlWriter.writeEndElement();

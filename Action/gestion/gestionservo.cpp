@@ -63,6 +63,11 @@ QString GestionServo::getNomServo(int indice)
     return listServo.at(indice)->getNom();
 }
 
+int GestionServo::getIdServo(int indiceServo)
+{
+    return listServo.at(indiceServo)->getId();
+}
+
 int GestionServo::getNbAction(int indiceServo)
 {
     return listServo.at(indiceServo)->listNom.size();
@@ -73,7 +78,7 @@ QString GestionServo::getNomAction(int indiceServo, int indiceAction)
     return listServo.at(indiceServo)->listNom.at(indiceAction);
 }
 
-int GestionServo::getIdAction(int indiceServo, int indiceAction)
+int GestionServo::getValAction(int indiceServo, int indiceAction)
 {
     return listServo.at(indiceServo)->listValue.at(indiceAction);
 }
