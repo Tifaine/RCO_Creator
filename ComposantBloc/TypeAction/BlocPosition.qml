@@ -30,6 +30,7 @@ Item {
         id:pos
         xRobot: tfX.text
         yRobot: tfY.text
+        sens:switchSens.checked
     }
 
     TextField {
@@ -137,6 +138,21 @@ Item {
                     tailleChange(root.height-tfVitesse.height-5)
                 }
             }
+            switch(indice)
+            {
+            case 0:
+                pos.vitesse = 1000;
+                break;
+            case 1:
+                pos.vitesse = 700;
+                break;
+            case 2:
+                pos.vitesse = 300;
+                break;
+            case 3:
+                pos.vitesse = tfVit.text;
+                break;
+            }
         }
     }
 
@@ -156,12 +172,17 @@ Item {
 
         TextEdit
         {
+            id:tfVit
             height: 30
             text: qsTr("800")
             anchors.fill: parent
             anchors.leftMargin: 10
             color: "white"
             verticalAlignment: Text.AlignVCenter
+            onTextChanged:
+            {
+                pos.vitesse = text
+            }
         }
     }
 
@@ -212,13 +233,29 @@ Item {
                     tailleChange(root.height-tfAcc.height-5)
                 }
             }
+            switch(indice)
+            {
+            case 0:
+                pos.acceleration = 1000;
+                break;
+            case 1:
+                pos.acceleration = 700;
+                break;
+            case 2:
+                pos.acceleration = 300;
+                break;
+            case 3:
+                pos.acceleration = tfAccel.text;
+                break;
+            }
         }
     }
 
-    TextField {
+    Rectangle
+    {
         id: tfAcc
         height: 30
-        text: qsTr("200")
+        radius:7
         anchors.right: parent.right
         anchors.rightMargin: 5
         visible:false
@@ -226,18 +263,24 @@ Item {
         anchors.leftMargin: 5
         anchors.top: cbAcc.bottom
         anchors.topMargin: 5
-        horizontalAlignment: Text.AlignHCenter
-        color: "white"
 
-        background:Rectangle
+        color:"#4a4545"
+
+        TextEdit
         {
-            radius:7
+            id:tfAccel
+            height: 30
+            text: qsTr("800")
             anchors.fill: parent
-            color:"#4a4545"
+            anchors.leftMargin: 10
+            color: "white"
+            verticalAlignment: Text.AlignVCenter
+            onTextChanged:
+            {
+                pos.acceleration = text
+            }
         }
     }
-
-
 
     Text {
         id: textDec
@@ -284,28 +327,51 @@ Item {
                     tailleChange(root.height-tfDec.height-5)
                 }
             }
+            switch(indice)
+            {
+            case 0:
+                pos.deceleration = 1000;
+                break;
+            case 1:
+                pos.deceleration = 700;
+                break;
+            case 2:
+                pos.deceleration = 300;
+                break;
+            case 3:
+                pos.deceleration = tfDecel.text;
+                break;
+            }
         }
     }
 
-    TextField {
+    Rectangle
+    {
         id: tfDec
         height: 30
-        visible:false
-        text: qsTr("200")
+        radius:7
         anchors.right: parent.right
         anchors.rightMargin: 5
         anchors.left: parent.left
         anchors.leftMargin: 5
         anchors.top: cbDec.bottom
         anchors.topMargin: 5
-        horizontalAlignment: Text.AlignHCenter
-        color: "white"
 
-        background:Rectangle
+        color:"#4a4545"
+
+        TextEdit
         {
-            radius:7
+            id:tfDecel
+            height: 30
+            text: qsTr("800")
             anchors.fill: parent
-            color:"#4a4545"
+            anchors.leftMargin: 10
+            color: "white"
+            verticalAlignment: Text.AlignVCenter
+            onTextChanged:
+            {
+                pos.deceleration = text
+            }
         }
     }
 

@@ -24,6 +24,7 @@ Item {
     Orientation
     {
         id:orientation
+        angle: tfAngle.text
     }
 
     Rectangle {
@@ -154,6 +155,8 @@ Item {
             color:"#4a4545"
         }
     }
+
+
 
     Button {
         id: button
