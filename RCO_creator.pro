@@ -22,7 +22,8 @@ SOURCES += main.cpp \
     Action/gestion/gestionsortie.cpp \
     Action/actiondepart.cpp \
     Action/attente/attenteservo.cpp \
-    Action/attente/attentedyna.cpp
+    Action/attente/attentedyna.cpp \
+    Action/attente/attentetemps.cpp
 
 RESOURCES += qml.qrc
 
@@ -67,4 +68,5 @@ HEADERS += \
     Action/gestion/gestionsortie.h \
     Action/actiondepart.h \
     Action/attente/attenteservo.h \
-    Action/attente/attentedyna.h
+    Action/attente/attentedyna.h \
+    Action/attente/attentetemps.h

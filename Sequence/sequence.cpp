@@ -43,10 +43,9 @@ void Sequence::enregistrerSous(QString filename)
             xmlWriter.writeTextElement("yBloc",QString::number(listAction.at(i)->getYBloc()));
             xmlWriter.writeTextElement("timeOut",QString::number(listAction.at(i)->getTimeOut()));
 
-            listAction.at(i)->saveXML(&xmlWriter);
+
             for(int j=0;j<listAction.at(i)->getListFils().size();j++)
             {
-
                 QString listFils;
                 listFils.clear();
                 for(int k=0;k<listAction.at(i)->getListFils().at(j)->size();k++)
@@ -54,16 +53,16 @@ void Sequence::enregistrerSous(QString filename)
                     listFils.append(QString::number(listAction.indexOf(listAction.at(i)->getListFils().at(j)->at(k))));
                     listFils.append(";");
                 }
-                if(j == listAction.at(i)->getListFils().size() -1)
+                if(j == listAction.at(i)->getListFils().size() -1 && j != 0)
                 {
                     xmlWriter.writeTextElement("ListTimeOut",listFils);
                 }else
                 {
                   xmlWriter.writeTextElement("ListFils",listFils);
                 }
-
-
             }
+
+            listAction.at(i)->saveXML(&xmlWriter);
             xmlWriter.writeEndElement();
         }
         xmlWriter.writeEndElement();

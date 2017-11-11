@@ -22,5 +22,6 @@
         <file>ComposantBloc/TypeAction/BlocDepart.qml</file>
         <file>ComposantBloc/TypeAction/BlocAttenteServo.qml</file>
         <file>ComposantBloc/TypeAction/BlocAttenteDyna.qml</file>
+        <file>ComposantBloc/TypeAction/BlocAttenteTemps.qml</file>
     </qresource>
 </RCC>

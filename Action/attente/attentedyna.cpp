@@ -7,7 +7,7 @@ AttenteDyna::AttenteDyna()
 
 void AttenteDyna::saveXML(QXmlStreamWriter *xmlWriter)
 {
-    xmlWriter->writeStartElement("attenteDyna");
+    xmlWriter->writeStartElement("actionRetourDyna");
     xmlWriter->writeTextElement("nomDyna",getNomDyna());
     xmlWriter->writeTextElement("idDyna",QString::number(getIdDyna(),'f',0));
     xmlWriter->writeTextElement("valueAttente",QString::number(getValueDyna(),'f',0));

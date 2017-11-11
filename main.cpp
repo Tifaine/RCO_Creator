@@ -17,6 +17,7 @@
 #include "Action/gestion/gestionsortie.h"
 #include "Action/attente/attenteservo.h"
 #include "Action/attente/attentedyna.h"
+#include "Action/attente/attentetemps.h"
 
 int main(int argc, char *argv[])
 {
@@ -38,6 +39,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<ActionDepart>("actionDepart", 1, 0, "Depart");
     qmlRegisterType<AttenteServo>("attenteServo", 1, 0, "AttenteServo");
     qmlRegisterType<AttenteDyna>("attenteDyna", 1, 0, "AttenteDyna");
+    qmlRegisterType<AttenteTemps>("attenteTemps", 1, 0, "AttenteTemps");
     qmlRegisterType<GestionSortie>("gestSortie", 1, 0, "GestSortie");
 
 

@@ -18,6 +18,7 @@
 
 #define typeAttenteServo    10
 #define typeAttenteDyna     11
+#define typeAttenteTemps    12
 
 //define typeServo 9
 

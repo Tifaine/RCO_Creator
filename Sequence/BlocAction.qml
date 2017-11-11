@@ -36,8 +36,17 @@ Item {
         case 5: //Position
         case 6: //Orientation
         case 7: //Sequence
+        {
+            listEntree.clear();
+            listEntree.append({_x:2,_y:30,_indice:0,_color:"yellow"})
+            listSortie.clear();
+            listSortie.append({_x:188,_y:30,_indice:0,_color:"grey"})
+            break;
+        }
+
         case 10://attente servo
         case 11://attente dyna
+        case 12://attente temps
         {
             listEntree.clear();
             listEntree.append({_x:2,_y:30,_indice:0,_color:"yellow"})
@@ -348,6 +357,11 @@ Item {
         case 11: //Attente dyna
         {
             component = Qt.createComponent("../ComposantBloc/TypeAction/BlocAttenteDyna.qml");
+            break;
+        }
+        case 12: //Attente temps
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocAttenteTemps.qml");
             break;
         }
         }

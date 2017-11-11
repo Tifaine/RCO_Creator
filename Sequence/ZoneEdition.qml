@@ -319,6 +319,9 @@ Item {
                         }else if(nomActionToAdd === "Attente dyna")
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:11})
+                        }else if(nomActionToAdd === "Attente temps")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:12})
                         }
                     }
                 }
