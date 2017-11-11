@@ -11,9 +11,12 @@
 #include "Action/actionposition.h"
 #include "Action/actionsequence.h"
 #include "Action/actionservo.h"
+#include "Action/actiondepart.h"
 #include "Action/gestion/gestionservo.h"
 #include "Action/gestion/gestiondynamixel.h"
 #include "Action/gestion/gestionsortie.h"
+#include "Action/attente/attenteservo.h"
+#include "Action/attente/attentedyna.h"
 
 int main(int argc, char *argv[])
 {
@@ -32,6 +35,9 @@ int main(int argc, char *argv[])
     qmlRegisterType<ActionPosition>("actionPos", 1, 0, "Pos");
     qmlRegisterType<ActionSequence>("actionSequence", 1, 0, "Sequence");
     qmlRegisterType<ActionServo>("actionServo", 1, 0, "Servo");
+    qmlRegisterType<ActionDepart>("actionDepart", 1, 0, "Depart");
+    qmlRegisterType<AttenteServo>("attenteServo", 1, 0, "AttenteServo");
+    qmlRegisterType<AttenteDyna>("attenteDyna", 1, 0, "AttenteDyna");
     qmlRegisterType<GestionSortie>("gestSortie", 1, 0, "GestSortie");
 
 

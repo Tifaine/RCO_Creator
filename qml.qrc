@@ -19,5 +19,8 @@
         <file>ComposantBloc/TypeAction/BlocServo.qml</file>
         <file>Composant/CustomComboBox.qml</file>
         <file>ComposantBloc/Info_Bloc.qml</file>
+        <file>ComposantBloc/TypeAction/BlocDepart.qml</file>
+        <file>ComposantBloc/TypeAction/BlocAttenteServo.qml</file>
+        <file>ComposantBloc/TypeAction/BlocAttenteDyna.qml</file>
     </qresource>
 </RCC>

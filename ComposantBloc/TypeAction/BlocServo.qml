@@ -58,8 +58,6 @@ Item {
                 servo.valueServo = gestServo.getValAction(0,0);
             }
         }
-
-
     }
 
     Servo

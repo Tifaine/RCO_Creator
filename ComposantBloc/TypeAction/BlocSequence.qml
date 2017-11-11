@@ -29,7 +29,7 @@ Item {
     Component.onCompleted:
     {
         root.state = "ferme"
-        sequenceTailleChange(70)
+        tailleChange(70)
 
         listSequence.clear()
         for(var i=0;i<gestSequence.getNbFile();i++)

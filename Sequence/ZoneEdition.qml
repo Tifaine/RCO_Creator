@@ -277,7 +277,7 @@ Item {
                 {
                     id:listAction
 
-                    ListElement{ _x:50 ; _y:250; _title:"Debut"; _indice:0; _type:-1 }
+                    ListElement{ _x:50 ; _y:250; _title:"Debut"; _indice:0; _type:9 }
 
                 }
 
@@ -313,6 +313,12 @@ Item {
                         }else if(nomActionToAdd === "Départ")
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:9})
+                        }else if(nomActionToAdd === "Attente servo")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:10})
+                        }else if(nomActionToAdd === "Attente dyna")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:11})
                         }
                     }
                 }
@@ -341,6 +347,9 @@ Item {
                                 seq.ajouterAction(bloc)
                                 bloc.xBloc = x;
                                 bloc.yBloc = y;
+                            }else
+                            {
+                                console.log("je suis nuuuuuul")
                             }
                         }
                     }

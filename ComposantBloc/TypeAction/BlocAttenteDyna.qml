@@ -1,40 +1,40 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.1
-import actionDyna 1.0
 import "../../Composant"
+import attenteDyna 1.0
 
 Item {
     id:root
     width: 116
-    height: 232
+    height: 175
     property bool tfValueEnable:false
-    property bool tfVitesseEnable:false
     signal modifTaille(int taille)
-    property var fils:dyna
     property int taille:70
+    property var fils:attente
+
     function tailleChange(_taille)
     {
         root.taille = _taille
         modifTaille(taille);
-
     }
-    Dyna
+
+    AttenteDyna
     {
-        id:dyna
+        id:attente
     }
 
     Component.onCompleted:
     {
         root.state = "ferme"
         tailleChange(70)
-        listDyna.clear()
+        listDyna.clear();
         for(var i = 0; i< gestDyna.getNbDyna();i++)
         {
             listDyna.insert(listDyna.count,{"nom": gestDyna.getNomDyna(i)})
         }
         listDyna.insert(listDyna.count,{"nom": "Custom..."})
 
-        if(gestDyna.getNbDyna()>0)
+        if(listDyna.count>0)
         {
             tfId.visible = false;
             textValue.anchors.top = cbId.bottom
@@ -44,36 +44,31 @@ Item {
                 listValue.insert(listValue.count,{"nom": gestDyna.getNomAction(0,i)+(" ("+gestDyna.getValAction(0,i)+") ")})
             }
             listValue.insert(listValue.count,{"nom": "Custom..."})
-            listVitesse.clear()
-            for(var i = 0; i< gestDyna.getNbVitesse(0);i++)
-            {
-                listVitesse.insert(listVitesse.count,{"nom": gestDyna.getNomVitesse(0,i)+(" ("+gestDyna.getValVitesse(0,i)+") ")})
-            }
-            listVitesse.insert(listVitesse.count,{"nom": "Custom..."})
+
             if(listValue.count>0)
             {
                 tfValue.visible = false;
                 tfValueEnable = false
-                textTimeOut.anchors.top = cbVitess.bottom
-
-            }
-            if(listVitesse.count>0)
-            {
-                tfVitesse.visible = false;
-                tfVitesseEnable = false
-                textTimeOut.anchors.top = cbVitess.bottom
+                textTimeOut.anchors.top = cbValue.bottom
             }
         }
-    }
+        if(gestDyna.getNbDyna()>0)
+        {
+            attente.nomDyna = gestDyna.getNomDyna(0);
+            attente.idDyna = gestDyna.getIdDyna(0);
 
-    Component.onDestruction:
-    {
-
+            if(gestDyna.getNbAction(0)>0)
+            {
+                attente.valueDyna = gestDyna.getValAction(0,0);
+            }
+        }
     }
 
     Text {
         id: textId
         text: qsTr("Id :")
+        verticalAlignment: Text.AlignVCenter
+        horizontalAlignment: Text.AlignLeft
         anchors.right: parent.right
         anchors.rightMargin: 5
         anchors.left: parent.left
@@ -83,6 +78,7 @@ Item {
         font.bold: true
         font.pixelSize: 12
     }
+
     ListModel
     {
         id:listDyna
@@ -93,13 +89,6 @@ Item {
         id:listValue
         ListElement{ nom:"Custom..."  }
     }
-    ListModel
-    {
-        id:listVitesse
-        ListElement{ nom:"Custom..."  }
-    }
-
-
     CustomComboBox
     {
         id: cbId
@@ -115,7 +104,6 @@ Item {
         {
             if(indice === listDyna.count-1)
             {
-
                 if(tfId.visible===false)
                 {
                     tfId.visible = true;
@@ -123,10 +111,9 @@ Item {
                     tailleChange(root.height+tfId.height+5)
                 }
 
-                dyna.idDyna = -1;
-                dyna.nomDyna = "custom"
-                dyna.ValueDyna = -1;
-                dyna.vitesseDyna = -1;
+                attente.idDyna=-1;
+                attente.nomDyna="custom";
+                attente.valueDyna=-1;
             }else
             {
                 if(tfId.visible===true)
@@ -135,24 +122,15 @@ Item {
                     textValue.anchors.top = cbId.bottom
                     tailleChange(root.height-tfId.height-5)
                 }
-
-                dyna.idDyna = gestDyna.getIdDyna(indice);
-                dyna.nomDyna = gestDyna.getNomDyna(indice);
+                attente.idDyna =gestDyna.getIdDyna(indice);
+                attente.nomDyna=gestDyna.getNomDyna(indice);
 
                 if(gestDyna.getNbAction(indice)>0)
                 {
-                    dyna.ValueDyna=gestDyna.getValAction(indice,0);
+                    attente.valueDyna=gestDyna.getValAction(indice,0);
                 }else
                 {
-                    dyna.ValueDyna=0;
-                }
-
-                if(gestDyna.getNbVitesse(indice) > 0 )
-                {
-                    dyna.vitesseDyna = gestDyna.getValVitesse(indice,0);
-                }else
-                {
-                    dyna.vitesseDyna = 0;
+                    attente.valueDyna=0;
                 }
             }
 
@@ -160,11 +138,6 @@ Item {
             {
                 listValue.clear()
                 listValue.insert(0,{"nom": "Custom..."})
-
-                listVitesse.clear();
-                listVitesse.insert(0,{"nom": "Custom..."})
-
-
             }else
             {
                 listValue.clear()
@@ -173,30 +146,17 @@ Item {
                     listValue.insert(listValue.count,{"nom": gestDyna.getNomAction(indice,i)+(" ("+gestDyna.getValAction(indice,i)+") ")})
                 }
                 listValue.append({"nom": "Custom..."})
-
-                listVitesse.clear()
-                for(var i = 0; i< gestDyna.getNbVitesse(indice);i++)
-                {
-                    listVitesse.insert(listVitesse.count,{"nom": gestDyna.getNomVitesse(indice,i)+(" ("+gestDyna.getValVitesse(indice,i)+") ")})
-                }
-                listVitesse.append({"nom": "Custom..."})
             }
 
             if(listValue.count>0)
             {
                 tfValue.visible = false;
                 tfValueEnable = false
-                textVitesse.anchors.top = cbValue.bottom
+                textTimeOut.anchors.top = cbValue.bottom
             }
 
-            if(listVitesse.count>0)
-            {
-                tfVitesse.visible = false;
-                tfVitesseEnable = false
-                textTimeOut.anchors.top = cbVitess.bottom
-            }
         }
-    }   
+    }
 
     Rectangle
     {
@@ -209,7 +169,7 @@ Item {
         anchors.leftMargin: 5
         anchors.top: cbId.bottom
         anchors.topMargin: 5
-        visible: false
+        visible: true
         color:"#4a4545"
 
         TextEdit
@@ -222,10 +182,11 @@ Item {
             verticalAlignment: Text.AlignVCenter
             onTextChanged:
             {
-                dyna.idDyna = text
+                attente.idDyna = text
             }
         }
     }
+
 
 
     Text {
@@ -258,20 +219,20 @@ Item {
                 {
                     tfValue.visible = true;
                     tfValueEnable = true
-                    textVitesse.anchors.top = tfValue.bottom
+                    textTimeOut.anchors.top = tfValue.bottom
                     tailleChange(root.height+tfValue.height+5)
                 }
-                dyna.ValueDyna = tfValue.text
+                attente.valueDyna = tfVal.text;
             }else
             {
                 if(tfValue.visible===true)
                 {
                     tfValue.visible = false;
                     tfValueEnable = false
-                    textVitesse.anchors.top = cbValue.bottom
+                    textTimeOut.anchors.top = cbValue.bottom
                     tailleChange(root.height-tfValue.height-5)
                 }
-                dyna.ValueDyna = gestDyna.getValAction(cbId.indice,indice);
+                attente.valueDyna = gestDyna.getValAction(cbId.indice,indice)
             }
         }
     }
@@ -304,92 +265,11 @@ Item {
             color: "white"
             onTextChanged:
             {
-                dyna.ValueDyna = text
+                attente.valueDyna = text
             }
         }
     }
 
-    Text {
-        id: textVitesse
-        text: qsTr("Vitesse :")
-        visible: true
-        font.bold: true
-        anchors.top: cbValue.bottom
-        anchors.topMargin: 5
-        anchors.right: parent.right
-        anchors.rightMargin: 5
-        anchors.left: parent.left
-        anchors.leftMargin: 5
-        font.pixelSize: 12
-    }
-
-    CustomComboBox {
-        id: cbVitess
-        x: -297
-        y: 151
-        height: 30
-        visible: true
-        anchors.right: parent.right
-        anchors.rightMargin: 5
-        anchors.left: parent.left
-        anchors.leftMargin: 5
-        anchors.top: textVitesse.bottom
-        anchors.topMargin: 5
-        _model: listVitesse
-        onCustomCurrentIndexChanged:
-        {
-            if(indice === listVitesse.count-1)
-            {
-
-                if(tfVitesse.visible===false)
-                {
-                    tfVitesse.visible = true;
-                    tfVitesseEnable = true
-                    textTimeOut.anchors.top = tfVitesse.bottom
-                    tailleChange(root.height+tfVitesse.height+5)
-                }
-                dyna.vitesseDyna = tfVitesse.text
-            }else
-            {
-                if(tfVitesse.visible===true)
-                {
-                    tfVitesse.visible = false;
-                    tfVitesseEnable = false
-                    textTimeOut.anchors.top = cbVitess.bottom
-                    tailleChange(root.height-tfVitesse.height-5)
-                }
-                dyna.vitesseDyna = gestDyna.getValVitesse(cbId.indice, indice)
-            }
-        }
-
-    }
-
-    Rectangle
-    {
-        id: tfVitesse
-        height: 30
-        radius:7
-        visible: false
-        anchors.right: parent.right
-        anchors.rightMargin: 5
-        anchors.left: parent.left
-        anchors.leftMargin: 5
-        anchors.top: cbVitess.bottom
-        anchors.topMargin: 5
-        color:"#4a4545"
-
-        TextEdit
-        {
-            id:teVitesse
-            height: 30
-            text: qsTr("5000")
-            anchors.fill: parent
-            anchors.leftMargin: 10
-            color: "white"
-            verticalAlignment: Text.AlignVCenter
-            onTextChanged: dyna.vitesseDyna = text
-        }
-    }
 
 
     Text {
@@ -397,7 +277,7 @@ Item {
         text: qsTr("TimeOut :")
         visible: true
         font.bold: true
-        anchors.top: cbVitess.bottom
+        anchors.top: cbValue.bottom
         anchors.topMargin: 5
         anchors.right: parent.right
         anchors.rightMargin: 5
@@ -411,14 +291,13 @@ Item {
         id: tfTimeOut
         height: 30
         radius:7
-        visible: true
         anchors.right: parent.right
         anchors.rightMargin: 5
         anchors.left: parent.left
         anchors.leftMargin: 5
         anchors.top: textTimeOut.bottom
         anchors.topMargin: 5
-
+        visible: true
         color:"#4a4545"
 
         TextEdit
@@ -430,9 +309,10 @@ Item {
             anchors.leftMargin: 10
             color: "white"
             verticalAlignment: Text.AlignVCenter
-            onTextChanged: dyna.timeOut = text
+            onTextChanged: attente.timeOut = text
         }
     }
+
 
 
     Button {
@@ -457,7 +337,7 @@ Item {
                 var tailleToSend = 70
                 if(tfId.visible === true)
                 {
-                    tailleChange(tailleToSend+tfId.height)
+                    tailleChange(tailleToSend+tfId.height+5)
                 }else
                 {
                     tailleChange(tailleToSend)
@@ -467,15 +347,17 @@ Item {
 
                 root.state = "ouvert"
                 button.text = "^"
-                var tailleToSend = 232
+                var tailleToSend = 175
                 if(tfValueEnable===true)tailleToSend+=tfValue.height+5
-                if(tfVitesseEnable===true)tailleToSend+=tfVitesse.height+5
                 if(tfId.visible===true)tailleToSend+=tfId.height+5;
                 tailleChange(tailleToSend)
                 nbClic = 0;
             }
         }
     }
+
+
+
 
     states: [
         State {
@@ -500,22 +382,12 @@ Item {
             }
 
             PropertyChanges {
-                target: cbVitess
-                visible: true
-            }
-
-            PropertyChanges {
-                target: textVitesse
+                target: tfTimeOut
                 visible: true
             }
 
             PropertyChanges {
                 target: textTimeOut
-                visible: true
-            }
-
-            PropertyChanges {
-                target: tfTimeOut
                 visible: true
             }
         },
@@ -533,22 +405,7 @@ Item {
             }
 
             PropertyChanges {
-                target: textVitesse
-                visible: false
-            }
-
-            PropertyChanges {
-                target: cbVitess
-                visible: false
-            }
-
-            PropertyChanges {
                 target: tfValue
-                visible: false
-            }
-
-            PropertyChanges {
-                target: tfVitesse
                 visible: false
             }
 
@@ -558,12 +415,12 @@ Item {
             }
 
             PropertyChanges {
-                target: tfTimeOut
+                target: textTimeOut
                 visible: false
             }
 
             PropertyChanges {
-                target: textTimeOut
+                target: tfTimeOut
                 visible: false
             }
         }

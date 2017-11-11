@@ -22,6 +22,7 @@ public slots:
     QString getNomAction(int indiceDyna, int indiceAction);
     int getValAction(int indiceDyna, int indiceAction);
     int getNbVitesse(int indiceDyna);
+    int getIdDyna(int indice);
     QString getNomVitesse(int indiceDyna, int indiceVitesse);
     int getValVitesse(int indiceDyna, int indiceVitesse);
 private:

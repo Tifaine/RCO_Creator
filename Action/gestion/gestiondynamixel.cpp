@@ -66,6 +66,11 @@ QString GestionDynamixel::getNomDyna(int indice)
     return listDyna.at(indice)->getNom();
 }
 
+int GestionDynamixel::getIdDyna(int indice)
+{
+    return listDyna.at(indice)->getId();
+}
+
 int GestionDynamixel::getNbAction(int indiceDyna)
 {
     return listDyna.at(indiceDyna)->listNom.size();

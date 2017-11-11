@@ -19,7 +19,10 @@ SOURCES += main.cpp \
     Action/gestion/servo.cpp \
     Action/gestion/dynamixel.cpp \
     Action/gestion/gestiondynamixel.cpp \
-    Action/gestion/gestionsortie.cpp
+    Action/gestion/gestionsortie.cpp \
+    Action/actiondepart.cpp \
+    Action/attente/attenteservo.cpp \
+    Action/attente/attentedyna.cpp
 
 RESOURCES += qml.qrc
 
@@ -61,4 +64,7 @@ HEADERS += \
     Action/gestion/servo.h \
     Action/gestion/dynamixel.h \
     Action/gestion/gestiondynamixel.h \
-    Action/gestion/gestionsortie.h
+    Action/gestion/gestionsortie.h \
+    Action/actiondepart.h \
+    Action/attente/attenteservo.h \
+    Action/attente/attentedyna.h

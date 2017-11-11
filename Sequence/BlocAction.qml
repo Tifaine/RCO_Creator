@@ -36,6 +36,8 @@ Item {
         case 5: //Position
         case 6: //Orientation
         case 7: //Sequence
+        case 10://attente servo
+        case 11://attente dyna
         {
             listEntree.clear();
             listEntree.append({_x:2,_y:30,_indice:0,_color:"yellow"})
@@ -120,9 +122,8 @@ Item {
                     {
                         gridSortie.itemAt(i).tabFils[j].parent.bloc.supprimerFils(gridSortie.itemAt(i).parent.bloc)
                     }
-
                 }
-                console.log("entre")
+
                 //listSortie.clear()
                 for(var i=0;i<listEntree.count;i++)
                 {
@@ -336,7 +337,17 @@ Item {
         }
         case 9: //Depart Sequence
         {
-            //component = Qt.createComponent("Point.qml");
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocDepart.qml");
+            break;
+        }
+        case 10: //Attente servo
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocAttenteServo.qml");
+            break;
+        }
+        case 11: //Attente dyna
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocAttenteDyna.qml");
             break;
         }
         }
@@ -368,7 +379,7 @@ Item {
             }else
             {
                 sprite.anchors.fill = rectangle;
-                sprite.modifTaille.connect(modifTaille)
+                if(type !== 9)sprite.modifTaille.connect(modifTaille)
                 modifTaille(70)
                 bloc = sprite.fils
 

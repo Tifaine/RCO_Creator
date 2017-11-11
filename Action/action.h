@@ -6,14 +6,19 @@
 #include <QXmlStreamWriter>
 //#include "actionposition.h"
 
-#define typeServo       0
-#define typeDyna        1
-#define typeCapteur     2
-#define typeMoteur      3
-#define typeAutre       4
-#define typePosition    5
-#define typeOrientation 6
-#define typeSequence    7
+#define typeServo           0
+#define typeDyna            1
+#define typeCapteur         2
+#define typeMoteur          3
+#define typeAutre           4
+#define typePosition        5
+#define typeOrientation     6
+#define typeSequence        7
+#define typeEntree          9
+
+#define typeAttenteServo    10
+#define typeAttenteDyna     11
+
 //define typeServo 9
 
 class Action : public QQuickItem
@@ -29,7 +34,6 @@ public:
 
     virtual void saveXML(QXmlStreamWriter* xmlWriter) = 0;
     void creerAction(int type);
-
 
     QList<QList<Action *> *> getListFils() const;
 

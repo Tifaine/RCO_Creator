@@ -16,9 +16,11 @@ Item {
         listCapteur.clear();
         listAutre.clear();
 
-        listServo.append({_nom:"Servomoteur",            _color:"grey", _index:0})
+        listServo.append({_nom:"Servomoteur",           _color:"grey", _index:0})
+        listServo.append({_nom:"Attente servo",         _color:"grey", _index:1})
 
         listDyna.append({_nom:"Dynamixel",              _color:"grey", _index:0})
+        listDyna.append({_nom:"Attente dyna",           _color:"grey", _index:1})
 
         listDeplacement.append({_nom:"Position",        _color:"grey", _index:0})
         listDeplacement.append({_nom:"Orientation",     _color:"grey", _index:1})

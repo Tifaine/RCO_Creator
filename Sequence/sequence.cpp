@@ -17,8 +17,6 @@ void Sequence::supprimerAction(Action * toBeDeleted)
 
 void Sequence::enregistrerSous(QString filename)
 {
-
-    qDebug()<<listAction.size();
     QStringList listNom = filename.split('/');
     QString nomLast = listNom.last();
     if(nomLast.contains(".xml"))
@@ -40,7 +38,7 @@ void Sequence::enregistrerSous(QString filename)
         for(int i=0;i<listAction.size();i++)
         {
             xmlWriter.writeStartElement("Action");
-            xmlWriter.writeTextElement("Action_numero",QString::number(i));
+            xmlWriter.writeTextElement("ActionNumero",QString::number(i));
             xmlWriter.writeTextElement("xBloc",QString::number(listAction.at(i)->getXBloc()));
             xmlWriter.writeTextElement("yBloc",QString::number(listAction.at(i)->getYBloc()));
             xmlWriter.writeTextElement("timeOut",QString::number(listAction.at(i)->getTimeOut()));
