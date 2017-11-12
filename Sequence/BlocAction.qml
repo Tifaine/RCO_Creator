@@ -36,6 +36,7 @@ Item {
         case 5: //Position
         case 6: //Orientation
         case 7: //Sequence
+        case 17://GPIO
         {
             listEntree.clear();
             listEntree.append({_x:2,_y:30,_indice:0,_color:"yellow"})
@@ -47,6 +48,10 @@ Item {
         case 10://attente servo
         case 11://attente dyna
         case 12://attente temps
+        case 13://Retour déplacement
+        case 14://Retour orientation
+        case 15://Retour position
+        case 16://Retour GPIO
         {
             listEntree.clear();
             listEntree.append({_x:2,_y:30,_indice:0,_color:"yellow"})
@@ -364,6 +369,31 @@ Item {
             component = Qt.createComponent("../ComposantBloc/TypeAction/BlocAttenteTemps.qml");
             break;
         }
+        case 13: //Retour déplacement
+        {
+            //component = Qt.createComponent("../ComposantBloc/TypeAction/BlocAttenteTemps.qml");
+            break;
+        }
+        case 14: //Retour orientation
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocRetourOrientation.qml");
+            break;
+        }
+        case 15: //Retour position
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocRetourPosition.qml");
+            break;
+        }
+        case 16: //GPIO
+        {
+            //component = Qt.createComponent("../ComposantBloc/TypeAction/BlocAttenteTemps.qml");
+            break;
+        }
+        case 17: //retour GPIO
+        {
+            //component = Qt.createComponent("../ComposantBloc/TypeAction/BlocAttenteTemps.qml");
+            break;
+        }
         }
         if(type!==-1)
         {
@@ -377,8 +407,6 @@ Item {
                 bloc.ajouterListFils();
             }
         }
-
-
     }
 
     function finishCreation(type, x, y) {
@@ -394,7 +422,7 @@ Item {
             {
                 sprite.anchors.fill = rectangle;
                 if(type !== 9)sprite.modifTaille.connect(modifTaille)
-                modifTaille(70)
+                modifTaille(sprite.taille)
                 bloc = sprite.fils
 
             }

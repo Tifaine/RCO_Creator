@@ -295,10 +295,10 @@ Item {
                         }else if(nomActionToAdd === "Capteur")
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:2})
-                        }else if(nomActionToAdd === "Moteur")
+                        }else if(nomActionToAdd === "Déplacement")
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:3})
-                        }else if(nomActionToAdd === "Autre")
+                        }else if(nomActionToAdd === "Métier")
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:4})
                         }else if(nomActionToAdd === "Position")
@@ -322,6 +322,21 @@ Item {
                         }else if(nomActionToAdd === "Attente temps")
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:12})
+                        }else if(nomActionToAdd === "Retour déplacement")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:13})
+                        }else if(nomActionToAdd === "Retour orientation")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:14})
+                        }else if(nomActionToAdd === "Retour position")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:15})
+                        }else if(nomActionToAdd === "GPIO")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:16})
+                        }else if(nomActionToAdd === "retour GPIO")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:17})
                         }
                     }
                 }

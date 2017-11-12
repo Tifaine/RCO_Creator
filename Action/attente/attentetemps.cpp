@@ -17,7 +17,7 @@ void AttenteTemps::setTemps(int value)
 
 void AttenteTemps::saveXML(QXmlStreamWriter *xmlWriter)
 {
-    xmlWriter->writeStartElement("actionTemps");
+    xmlWriter->writeStartElement("actionPause");
     xmlWriter->writeTextElement("valueAttente",QString::number(getTemps(),'f',0));
     xmlWriter->writeEndElement();
 }

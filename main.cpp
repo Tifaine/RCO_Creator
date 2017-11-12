@@ -18,6 +18,8 @@
 #include "Action/attente/attenteservo.h"
 #include "Action/attente/attentedyna.h"
 #include "Action/attente/attentetemps.h"
+#include "Action/attente/retourposition.h"
+#include "Action/attente/retourorientation.h"
 
 int main(int argc, char *argv[])
 {
@@ -40,8 +42,9 @@ int main(int argc, char *argv[])
     qmlRegisterType<AttenteServo>("attenteServo", 1, 0, "AttenteServo");
     qmlRegisterType<AttenteDyna>("attenteDyna", 1, 0, "AttenteDyna");
     qmlRegisterType<AttenteTemps>("attenteTemps", 1, 0, "AttenteTemps");
+    qmlRegisterType<RetourPosition>("retourPosition", 1, 0, "RetourPosition");
+    qmlRegisterType<RetourOrientation>("retourOrientation", 1, 0, "RetourOrientation");
     qmlRegisterType<GestionSortie>("gestSortie", 1, 0, "GestSortie");
-
 
     QQmlApplicationEngine engine;
 

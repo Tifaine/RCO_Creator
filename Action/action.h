@@ -6,19 +6,26 @@
 #include <QXmlStreamWriter>
 //#include "actionposition.h"
 
-#define typeServo           0
-#define typeDyna            1
-#define typeCapteur         2
-#define typeMoteur          3
-#define typeAutre           4
-#define typePosition        5
-#define typeOrientation     6
-#define typeSequence        7
-#define typeEntree          9
+#define typeServo               0
+#define typeDyna                1
+#define typeCapteur             2
+#define typeMoteur              3
+#define typeAutre               4
+#define typePosition            5
+#define typeOrientation         6
+#define typeSequence            7
+#define typeEntree              9
+#define typeGPIO                16
 
-#define typeAttenteServo    10
-#define typeAttenteDyna     11
-#define typeAttenteTemps    12
+#define typeAttenteServo        10
+#define typeAttenteDyna         11
+#define typeAttenteTemps        12
+#define typeRetourDeplacement   13
+#define typeRetourOrientation   14
+#define typeRetourPosition      15
+#define typeRetourGPIO          17
+
+
 
 //define typeServo 9
 

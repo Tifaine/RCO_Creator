@@ -7,7 +7,7 @@ ActionOrientation::ActionOrientation()
 
 void ActionOrientation::saveXML(QXmlStreamWriter* xmlWriter)
 {
-    xmlWriter->writeStartElement("actionOrientation");
+    xmlWriter->writeStartElement("actionRotation");
     xmlWriter->writeTextElement("orientation",QString::number(angle,'f',0));
     xmlWriter->writeEndElement();
 }

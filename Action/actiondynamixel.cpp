@@ -10,8 +10,8 @@ void ActionDynamixel::saveXML(QXmlStreamWriter* xmlWriter)
     xmlWriter->writeStartElement("actionDyna");
     xmlWriter->writeTextElement("nomDyna",getNomDyna());
     xmlWriter->writeTextElement("idDyna",QString::number(getIdDyna(),'f',0));
-    xmlWriter->writeTextElement("valueDyna",QString::number(getValueDyna(),'f',0));
-    xmlWriter->writeTextElement("vitesseDyna",QString::number(getVitesseDyna(),'f',0));
+    xmlWriter->writeTextElement("angle",QString::number(getValueDyna(),'f',0));
+    xmlWriter->writeTextElement("vitesse",QString::number(getVitesseDyna(),'f',0));
     xmlWriter->writeEndElement();
 }
 

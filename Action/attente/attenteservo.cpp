@@ -10,7 +10,7 @@ void AttenteServo::saveXML(QXmlStreamWriter *xmlWriter)
     xmlWriter->writeStartElement("actionRetourServo");
     xmlWriter->writeTextElement("nomServo",getNomServo());
     xmlWriter->writeTextElement("idServo",QString::number(getIdServo(),'f',0));
-    xmlWriter->writeTextElement("valueAttente",QString::number(getValueAttente(),'f',0));
+    xmlWriter->writeTextElement("retourAngle",QString::number(getValueAttente(),'f',0));
     xmlWriter->writeEndElement();
 }
 

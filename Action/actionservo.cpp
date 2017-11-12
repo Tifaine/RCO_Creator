@@ -10,7 +10,7 @@ void ActionServo::saveXML(QXmlStreamWriter* xmlWriter)
     xmlWriter->writeStartElement("actionServo");
     xmlWriter->writeTextElement("nomServo",getNomServo());
     xmlWriter->writeTextElement("idServo",QString::number(getIdServo(),'f',0));
-    xmlWriter->writeTextElement("valueServo",QString::number(getValueServo(),'f',0));
+    xmlWriter->writeTextElement("angle",QString::number(getValueServo(),'f',0));
     xmlWriter->writeEndElement();
 }
 

@@ -16,22 +16,28 @@ Item {
         listCapteur.clear();
         listAutre.clear();
 
-        listServo.append({_nom:"Servomoteur",           _color:"grey", _index:0})
-        listServo.append({_nom:"Attente servo",         _color:"grey", _index:1})
+        listServo.append({_nom:"Servomoteur",                   _color:"grey", _index:0})
+        listServo.append({_nom:"Attente servo",                 _color:"grey", _index:1})
 
-        listDyna.append({_nom:"Dynamixel",              _color:"grey", _index:0})
-        listDyna.append({_nom:"Attente dyna",           _color:"grey", _index:1})
+        listDyna.append({_nom:"Dynamixel",                      _color:"grey", _index:0})
+        listDyna.append({_nom:"Attente dyna",                   _color:"grey", _index:1})
 
-        listDeplacement.append({_nom:"Position",        _color:"grey", _index:0})
-        listDeplacement.append({_nom:"Orientation",     _color:"grey", _index:1})
-        listDeplacement.append({_nom:"Moteur",          _color:"grey", _index:2})
+        listDeplacement.append({_nom:"Position",                _color:"grey", _index:0})
+        listDeplacement.append({_nom:"Orientation",             _color:"grey", _index:1})
+        listDeplacement.append({_nom:"Déplacement",             _color:"grey", _index:2})
+        listDeplacement.append({_nom:"Retour déplacement",      _color:"grey", _index:3})
+        listDeplacement.append({_nom:"Retour orientation",      _color:"grey", _index:4})
+        listDeplacement.append({_nom:"Retour position",         _color:"grey", _index:5})
 
         listCapteur.append({_nom:"Capteur",             _color:"grey", _index:0})
+        listCapteur.append({_nom:"GPIO",                _color:"grey", _index:1})
+        listCapteur.append({_nom:"Retour GPIO",         _color:"grey", _index:2})
 
-        listAutre.append({_nom:"Autre",                 _color:"grey", _index:0})
+        listAutre.append({_nom:"Métier",                _color:"grey", _index:0})
         listAutre.append({_nom:"Séquence",              _color:"grey", _index:1})
         listAutre.append({_nom:"Départ",                _color:"grey", _index:2})
         listAutre.append({_nom:"Attente temps",         _color:"grey", _index:3})
+
     }
 
     function saveAs(nomFichier)

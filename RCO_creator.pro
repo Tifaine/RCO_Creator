@@ -23,7 +23,12 @@ SOURCES += main.cpp \
     Action/actiondepart.cpp \
     Action/attente/attenteservo.cpp \
     Action/attente/attentedyna.cpp \
-    Action/attente/attentetemps.cpp
+    Action/attente/attentetemps.cpp \
+    Action/attente/retourdeplacement.cpp \
+    Action/attente/retourorientation.cpp \
+    Action/attente/retourposition.cpp \
+    Action/attente/retourgpio.cpp \
+    Action/actiongpio.cpp
 
 RESOURCES += qml.qrc
 
@@ -69,4 +74,9 @@ HEADERS += \
     Action/actiondepart.h \
     Action/attente/attenteservo.h \
     Action/attente/attentedyna.h \
-    Action/attente/attentetemps.h
+    Action/attente/attentetemps.h \
+    Action/attente/retourdeplacement.h \
+    Action/attente/retourorientation.h \
+    Action/attente/retourposition.h \
+    Action/attente/retourgpio.h \
+    Action/actiongpio.h

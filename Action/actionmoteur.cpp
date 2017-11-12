@@ -7,6 +7,8 @@ ActionMoteur::ActionMoteur()
 
 void ActionMoteur::saveXML(QXmlStreamWriter* xmlWriter)
 {
-qDebug()<<"Action moteur";
+    xmlWriter->writeStartElement("actionDeplacement");
+
+    xmlWriter->writeEndElement();
 }
 

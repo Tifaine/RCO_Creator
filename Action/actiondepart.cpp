@@ -7,7 +7,7 @@ ActionDepart::ActionDepart()
 
 void ActionDepart::saveXML(QXmlStreamWriter* xmlWriter)
 {
-    xmlWriter->writeStartElement("actionDépart");
+    xmlWriter->writeStartElement("actionDepart");
     xmlWriter->writeTextElement("Lets"," Go");
     xmlWriter->writeEndElement();
 }

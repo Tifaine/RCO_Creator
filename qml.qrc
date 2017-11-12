@@ -23,5 +23,7 @@
         <file>ComposantBloc/TypeAction/BlocAttenteServo.qml</file>
         <file>ComposantBloc/TypeAction/BlocAttenteDyna.qml</file>
         <file>ComposantBloc/TypeAction/BlocAttenteTemps.qml</file>
+        <file>ComposantBloc/TypeAction/BlocRetourPosition.qml</file>
+        <file>ComposantBloc/TypeAction/BlocRetourOrientation.qml</file>
     </qresource>
 </RCC>
