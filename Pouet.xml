@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Sequence>
+    <version>3</version>
+    <Action>
+        <ActionNumero>0</ActionNumero>
+        <xBloc>50</xBloc>
+        <yBloc>250</yBloc>
+        <ListFils>1;3;</ListFils>
+        <actionDepart>
+            <Lets> Go</Lets>
+        </actionDepart>
+    </Action>
+    <Action>
+        <ActionNumero>1</ActionNumero>
+        <xBloc>347</xBloc>
+        <yBloc>185</yBloc>
+        <ListFils>2;</ListFils>
+        <actionServo>
+            <nomServo>Servo_cale_module</nomServo>
+            <idServo>107</idServo>
+            <angle>10</angle>
+        </actionServo>
+    </Action>
+    <Action>
+        <ActionNumero>2</ActionNumero>
+        <xBloc>640</xBloc>
+        <yBloc>174</yBloc>
+        <timeOut>5000</timeOut>
+        <ListFils></ListFils>
+        <ListTimeOut></ListTimeOut>
+        <actionRetourServo>
+            <nomServo>Servo_cale_module</nomServo>
+            <idServo>107</idServo>
+            <retourAngle>10</retourAngle>
+        </actionRetourServo>
+    </Action>
+    <Action>
+        <ActionNumero>3</ActionNumero>
+        <xBloc>371</xBloc>
+        <yBloc>403</yBloc>
+        <ListFils>4;</ListFils>
+        <actionDyna>
+            <nomDyna>Dyna bas droit</nomDyna>
+            <idDyna>207</idDyna>
+            <angle>140</angle>
+            <vitesse>800</vitesse>
+        </actionDyna>
+    </Action>
+    <Action>
+        <ActionNumero>4</ActionNumero>
+        <xBloc>643</xBloc>
+        <yBloc>404</yBloc>
+        <timeOut>5000</timeOut>
+        <ListFils></ListFils>
+        <ListTimeOut></ListTimeOut>
+        <actionRetourDyna>
+            <nomDyna>Dyna bas gauche</nomDyna>
+            <idDyna>208</idDyna>
+            <retourAngle>120</retourAngle>
+        </actionRetourDyna>
+    </Action>
+</Sequence>

@@ -6,7 +6,7 @@ import "../../Composant"
 Item {
     id:root
     width: 116
-    height: 232
+    height: 182
     property bool tfValueEnable:false
     property bool tfVitesseEnable:false
     signal modifTaille(int taille)
@@ -54,14 +54,12 @@ Item {
             {
                 tfValue.visible = false;
                 tfValueEnable = false
-                textTimeOut.anchors.top = cbVitess.bottom
 
             }
             if(listVitesse.count>0)
             {
                 tfVitesse.visible = false;
                 tfVitesseEnable = false
-                textTimeOut.anchors.top = cbVitess.bottom
             }
         }
     }
@@ -193,7 +191,6 @@ Item {
             {
                 tfVitesse.visible = false;
                 tfVitesseEnable = false
-                textTimeOut.anchors.top = cbVitess.bottom
             }
         }
     }   
@@ -345,7 +342,6 @@ Item {
                 {
                     tfVitesse.visible = true;
                     tfVitesseEnable = true
-                    textTimeOut.anchors.top = tfVitesse.bottom
                     tailleChange(root.height+tfVitesse.height+5)
                 }
                 dyna.vitesseDyna = tfVitesse.text
@@ -355,7 +351,6 @@ Item {
                 {
                     tfVitesse.visible = false;
                     tfVitesseEnable = false
-                    textTimeOut.anchors.top = cbVitess.bottom
                     tailleChange(root.height-tfVitesse.height-5)
                 }
                 dyna.vitesseDyna = gestDyna.getValVitesse(cbId.indice, indice)
@@ -392,48 +387,6 @@ Item {
     }
 
 
-    Text {
-        id: textTimeOut
-        text: qsTr("TimeOut :")
-        visible: true
-        font.bold: true
-        anchors.top: cbVitess.bottom
-        anchors.topMargin: 5
-        anchors.right: parent.right
-        anchors.rightMargin: 5
-        anchors.left: parent.left
-        anchors.leftMargin: 5
-        font.pixelSize: 12
-    }
-
-    Rectangle
-    {
-        id: tfTimeOut
-        height: 30
-        radius:7
-        visible: true
-        anchors.right: parent.right
-        anchors.rightMargin: 5
-        anchors.left: parent.left
-        anchors.leftMargin: 5
-        anchors.top: textTimeOut.bottom
-        anchors.topMargin: 5
-
-        color:"#4a4545"
-
-        TextEdit
-        {
-            id:teTimeOut
-            height: 30
-            text: qsTr("5000")
-            anchors.fill: parent
-            anchors.leftMargin: 10
-            color: "white"
-            verticalAlignment: Text.AlignVCenter
-            onTextChanged: dyna.timeOut = text
-        }
-    }
-
 
     Button {
         id: button
@@ -467,7 +420,7 @@ Item {
 
                 root.state = "ouvert"
                 button.text = "^"
-                var tailleToSend = 232
+                var tailleToSend = 182
                 if(tfValueEnable===true)tailleToSend+=tfValue.height+5
                 if(tfVitesseEnable===true)tailleToSend+=tfVitesse.height+5
                 if(tfId.visible===true)tailleToSend+=tfId.height+5;
@@ -508,16 +461,6 @@ Item {
                 target: textVitesse
                 visible: true
             }
-
-            PropertyChanges {
-                target: textTimeOut
-                visible: true
-            }
-
-            PropertyChanges {
-                target: tfTimeOut
-                visible: true
-            }
         },
         State {
             name: "ferme"
@@ -555,16 +498,6 @@ Item {
             PropertyChanges {
                 target: root
                 height: 80
-            }
-
-            PropertyChanges {
-                target: tfTimeOut
-                visible: false
-            }
-
-            PropertyChanges {
-                target: textTimeOut
-                visible: false
             }
         }
     ]

@@ -6,7 +6,7 @@ import actionServo 1.0
 Item {
     id:root
     width: 116
-    height: 175
+    height: 125
     property bool tfValueEnable:false
     property bool tfVitesseEnable:false
     signal modifTaille(int taille)
@@ -198,7 +198,7 @@ Item {
 
     Text {
         id: textValue
-        text: qsTr("Value :")
+        text: qsTr("Angle :")
         anchors.left: parent.left
         anchors.leftMargin: 5
         anchors.top: cbId.bottom
@@ -226,7 +226,6 @@ Item {
                 {
                     tfValue.visible = true;
                     tfValueEnable = true
-                    textTimeOut.anchors.top = tfValue.bottom
                     tailleChange(root.height+tfValue.height+5)
                 }
                 servo.valueServo = tfVal.text;
@@ -236,7 +235,6 @@ Item {
                 {
                     tfValue.visible = false;
                     tfValueEnable = false
-                    textTimeOut.anchors.top = cbValue.bottom
                     tailleChange(root.height-tfValue.height-5)
                 }
                 servo.valueServo = gestServo.getValAction(cbId.indice,indice)
@@ -279,47 +277,6 @@ Item {
 
 
 
-    Text {
-        id: textTimeOut
-        text: qsTr("TimeOut :")
-        visible: true
-        font.bold: true
-        anchors.top: cbValue.bottom
-        anchors.topMargin: 5
-        anchors.right: parent.right
-        anchors.rightMargin: 5
-        anchors.left: parent.left
-        anchors.leftMargin: 5
-        font.pixelSize: 12
-    }
-
-    Rectangle
-    {
-        id: tfTimeOut
-        height: 30
-        radius:7
-        anchors.right: parent.right
-        anchors.rightMargin: 5
-        anchors.left: parent.left
-        anchors.leftMargin: 5
-        anchors.top: textTimeOut.bottom
-        anchors.topMargin: 5
-        visible: true
-        color:"#4a4545"
-
-        TextEdit
-        {
-            id:teTimeOut
-            height: 30
-            text: qsTr("5000")
-            anchors.fill: parent
-            anchors.leftMargin: 10
-            color: "white"
-            verticalAlignment: Text.AlignVCenter
-            onTextChanged: servo.timeOut = text
-        }
-    }
-
 
 
     Button {
@@ -354,7 +311,7 @@ Item {
 
                 root.state = "ouvert"
                 button.text = "^"
-                var tailleToSend = 175
+                var tailleToSend = 125
                 if(tfValueEnable===true)tailleToSend+=tfValue.height+5
                 if(tfId.visible===true)tailleToSend+=tfId.height+5;
                 tailleChange(tailleToSend)
@@ -387,16 +344,6 @@ Item {
 
             PropertyChanges {
             }
-
-            PropertyChanges {
-                target: tfTimeOut
-                visible: true
-            }
-
-            PropertyChanges {
-                target: textTimeOut
-                visible: true
-            }
         },
         State {
             name: "ferme"
@@ -419,16 +366,6 @@ Item {
             PropertyChanges {
                 target: root
                 height: 80
-            }
-
-            PropertyChanges {
-                target: textTimeOut
-                visible: false
-            }
-
-            PropertyChanges {
-                target: tfTimeOut
-                visible: false
             }
         }
     ]

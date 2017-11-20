@@ -25,5 +25,6 @@
         <file>ComposantBloc/TypeAction/BlocAttenteTemps.qml</file>
         <file>ComposantBloc/TypeAction/BlocRetourPosition.qml</file>
         <file>ComposantBloc/TypeAction/BlocRetourOrientation.qml</file>
+        <file>Pouet.xml</file>
     </qresource>
 </RCC>

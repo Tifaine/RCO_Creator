@@ -41,7 +41,10 @@ void Sequence::enregistrerSous(QString filename)
             xmlWriter.writeTextElement("ActionNumero",QString::number(i));
             xmlWriter.writeTextElement("xBloc",QString::number(listAction.at(i)->getXBloc()));
             xmlWriter.writeTextElement("yBloc",QString::number(listAction.at(i)->getYBloc()));
-            xmlWriter.writeTextElement("timeOut",QString::number(listAction.at(i)->getTimeOut()));
+            if(listAction.at(i)->getTimeOut() != -1)
+            {
+                xmlWriter.writeTextElement("timeOut",QString::number(listAction.at(i)->getTimeOut()));
+            }
 
 
             for(int j=0;j<listAction.at(i)->getListFils().size();j++)

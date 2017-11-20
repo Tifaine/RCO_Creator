@@ -6,7 +6,7 @@ import "../../Composant"
 Item {
     id:root
     width: 116
-    height: 175
+    height: 125
     property bool tfValueEnable:false
     property bool tfVitesseEnable:false
     signal modifTaille(int taille)
@@ -129,7 +129,6 @@ Item {
                 {
                     tfValue.visible = true;
                     tfValueEnable = true
-                    textTimeOut.anchors.top = tfValue.bottom
                     tailleChange(root.height+tfValue.height+5)
                 }
             }else
@@ -138,7 +137,6 @@ Item {
                 {
                     tfValue.visible = false;
                     tfValueEnable = false
-                    textTimeOut.anchors.top = cbValue.bottom
                     tailleChange(root.height-tfValue.height-5)
                 }
             }
@@ -155,41 +153,6 @@ Item {
         anchors.left: parent.left
         anchors.leftMargin: 5
         anchors.top: cbValue.bottom
-        anchors.topMargin: 5
-        color: "white"
-
-        background:Rectangle
-        {
-            radius:7
-            anchors.fill: parent
-            color:"#4a4545"
-        }
-    }
-
-    Text {
-        id: textTimeOut
-        text: qsTr("TimeOut :")
-        visible: true
-        font.bold: true
-        anchors.top: cbValue.bottom
-        anchors.topMargin: 5
-        anchors.right: parent.right
-        anchors.rightMargin: 5
-        anchors.left: parent.left
-        anchors.leftMargin: 5
-        font.pixelSize: 12
-    }
-
-    TextField {
-        id: tfTimeOut
-        height: 30
-        text: qsTr("0")
-        visible: true
-        anchors.right: parent.right
-        anchors.rightMargin: 5
-        anchors.left: parent.left
-        anchors.leftMargin: 5
-        anchors.top: textTimeOut.bottom
         anchors.topMargin: 5
         color: "white"
 
@@ -231,7 +194,7 @@ Item {
             {
                 root.state = "ouvert"
                 button.text = "^"
-                var tailleToSend = 175
+                var tailleToSend = 125
                 if(tfValueEnable===true)tailleToSend+=tfValue.height+5
                 if(tfId.visible===true)tailleToSend+=tfId.height+5;
                 tailleChange(tailleToSend)
@@ -262,16 +225,6 @@ Item {
 
             PropertyChanges {
             }
-
-            PropertyChanges {
-                target: tfTimeOut
-                visible: true
-            }
-
-            PropertyChanges {
-                target: textTimeOut
-                visible: true
-            }
         },
         State {
             name: "ferme"
@@ -294,16 +247,6 @@ Item {
             PropertyChanges {
                 target: root
                 height: 80
-            }
-
-            PropertyChanges {
-                target: textTimeOut
-                visible: false
-            }
-
-            PropertyChanges {
-                target: tfTimeOut
-                visible: false
             }
         }
     ]
