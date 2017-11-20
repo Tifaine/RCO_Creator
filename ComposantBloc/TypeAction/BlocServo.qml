@@ -45,7 +45,6 @@ Item {
             {
                 tfValue.visible = false;
                 tfValueEnable = false
-                textTimeOut.anchors.top = cbValue.bottom
             }
         }
         if(gestServo.getNbServo()>0)
@@ -159,7 +158,6 @@ Item {
             {
                 tfValue.visible = false;
                 tfValueEnable = false
-                textTimeOut.anchors.top = cbValue.bottom
             }
 
         }

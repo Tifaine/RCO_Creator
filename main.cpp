@@ -21,12 +21,16 @@
 #include "Action/attente/retourposition.h"
 #include "Action/attente/retourorientation.h"
 
+#include "libXML/xmlmanager.h"
+
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
     GestionServo serv;
     GestionDynamixel dyna;
+    XMLManager xmlManage;
+    xmlManage.setNomXmlFile("Pouet.xml");
 
     qmlRegisterType<connector>("connector", 1, 0, "Liaison");
     qmlRegisterType<Sequence>("sequence", 1, 0, "Sequence");
@@ -50,6 +54,7 @@ int main(int argc, char *argv[])
 
     engine.rootContext()->setContextProperty("gestServo", &serv);
     engine.rootContext()->setContextProperty("gestDyna", &dyna);
+    engine.rootContext()->setContextProperty("gestionXML", &xmlManage);
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

@@ -65,6 +65,19 @@ void Sequence::enregistrerSous(QString filename)
                 }
             }
 
+            for(int j=0;j<listAction.at(i)->getListPere().size();j++)
+            {
+                QString listPere;
+                listPere.clear();
+                for(int k=0;k<listAction.at(i)->getListPere().at(j)->size();k++)
+                {
+                    listPere.append(QString::number(listAction.indexOf(listAction.at(i)->getListPere().at(j)->at(k))));
+                    listPere.append(";");
+                }
+                xmlWriter.writeTextElement("ListPere",listPere);
+
+            }
+
             listAction.at(i)->saveXML(&xmlWriter);
             xmlWriter.writeEndElement();
         }

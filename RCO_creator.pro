@@ -4,31 +4,36 @@ QT += xml
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    Composant/connector.cpp \
-    Sequence/sequence.cpp \
-    Action/action.cpp \
-    Action/actionposition.cpp \
-    Action/actionautre.cpp \
-    Action/actioncapteur.cpp \
-    Action/actiondynamixel.cpp \
-    Action/actionmoteur.cpp \
-    Action/actionorientation.cpp \
-    Action/actionsequence.cpp \
-    Action/actionservo.cpp \
-    Action/gestion/gestionservo.cpp \
-    Action/gestion/servo.cpp \
-    Action/gestion/dynamixel.cpp \
-    Action/gestion/gestiondynamixel.cpp \
-    Action/gestion/gestionsortie.cpp \
-    Action/actiondepart.cpp \
-    Action/attente/attenteservo.cpp \
     Action/attente/attentedyna.cpp \
+    Action/attente/attenteservo.cpp \
     Action/attente/attentetemps.cpp \
     Action/attente/retourdeplacement.cpp \
+    Action/attente/retourgpio.cpp \
     Action/attente/retourorientation.cpp \
     Action/attente/retourposition.cpp \
-    Action/attente/retourgpio.cpp \
-    Action/actiongpio.cpp
+    Action/gestion/dynamixel.cpp \
+    Action/gestion/gestiondynamixel.cpp \
+    Action/gestion/gestionservo.cpp \
+    Action/gestion/gestionsortie.cpp \
+    Action/gestion/servo.cpp \
+    Action/action.cpp \
+    Action/actionautre.cpp \
+    Action/actioncapteur.cpp \
+    Action/actiondepart.cpp \
+    Action/actiondynamixel.cpp \
+    Action/actiongpio.cpp \
+    Action/actionmoteur.cpp \
+    Action/actionorientation.cpp \
+    Action/actionposition.cpp \
+    Action/actionsequence.cpp \
+    Action/actionservo.cpp \
+    Composant/connector.cpp \
+    libXML/tinystr.cpp \
+    libXML/tinyxml.cpp \
+    libXML/tinyxmlerror.cpp \
+    libXML/tinyxmlparser.cpp \
+    Sequence/sequence.cpp \
+    libXML/xmlmanager.cpp
 
 RESOURCES += qml.qrc
 
@@ -55,28 +60,32 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    Composant/connector.h \
-    Sequence/sequence.h \
-    Action/action.h \
-    Action/actionposition.h \
-    Action/actionautre.h \
-    Action/actioncapteur.h \
-    Action/actiondynamixel.h \
-    Action/actionmoteur.h \
-    Action/actionorientation.h \
-    Action/actionsequence.h \
-    Action/actionservo.h \
-    Action/gestion/gestionservo.h \
-    Action/gestion/servo.h \
-    Action/gestion/dynamixel.h \
-    Action/gestion/gestiondynamixel.h \
-    Action/gestion/gestionsortie.h \
-    Action/actiondepart.h \
-    Action/attente/attenteservo.h \
     Action/attente/attentedyna.h \
+    Action/attente/attenteservo.h \
     Action/attente/attentetemps.h \
     Action/attente/retourdeplacement.h \
+    Action/attente/retourgpio.h \
     Action/attente/retourorientation.h \
     Action/attente/retourposition.h \
-    Action/attente/retourgpio.h \
-    Action/actiongpio.h
+    Action/gestion/dynamixel.h \
+    Action/gestion/gestiondynamixel.h \
+    Action/gestion/gestionservo.h \
+    Action/gestion/gestionsortie.h \
+    Action/gestion/servo.h \
+    Action/action.h \
+    Action/actionautre.h \
+    Action/actioncapteur.h \
+    Action/actiondepart.h \
+    Action/actiondynamixel.h \
+    Action/actiongpio.h \
+    Action/actionmoteur.h \
+    Action/actionorientation.h \
+    Action/actionposition.h \
+    Action/actionsequence.h \
+    Action/actionservo.h \
+    Composant/connector.h \
+    libXML/tinystr.h \
+    libXML/tinyxml.h \
+    Sequence/sequence.h \
+    libXML/xmlmanager.h
+

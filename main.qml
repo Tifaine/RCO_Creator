@@ -19,7 +19,15 @@ ApplicationWindow {
     menuBar: MenuBar {
         Menu {
             title: "File"
-            MenuItem { text: "Ouvrir..." }
+            MenuItem
+            {
+                text: "Ouvrir..."
+                onTriggered:
+                {
+                    gestionXML.parseFile()
+                }
+            }
+
             MenuItem { text: "Enregistrer" }
             MenuItem
             {

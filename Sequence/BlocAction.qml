@@ -406,6 +406,11 @@ Item {
             {
                 bloc.ajouterListFils();
             }
+            for(var i=0;i<listEntree.count;i++)
+            {
+                bloc.ajouterListPere();
+            }
+
         }
     }
 

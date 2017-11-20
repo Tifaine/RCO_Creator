@@ -24,6 +24,7 @@ Item {
 
     function supprimerPere(toBeDeleted)
     {
+
         tabPere.splice(tabPere.indexOf(toBeDeleted),1)
     }
 }

@@ -41,7 +41,6 @@ public:
     void setType(int value);
 
     virtual void saveXML(QXmlStreamWriter* xmlWriter) = 0;
-    void creerAction(int type);
 
     QList<QList<Action *> *> getListFils() const;
 
@@ -54,6 +53,8 @@ public:
     int getTimeOut() const;
     void setTimeOut(int value);
 
+    QList<QList<Action *> *> getListPere() const;
+
 signals:
     void xBlocChanged();
     void yBlocChanged();
@@ -65,10 +66,15 @@ public slots:
     void ajouterFils(int indiceListe, Action *act);
     void supprimerFils(Action * actToDelete);
 
+    void ajouterListPere();
+    void ajouterPere(int indiceListe, Action *act);
+    void supprimerPere(Action * actToDelete);
+
 protected:
 
 private:
     QList<QList<Action* >*> listFils;
+    QList<QList<Action* >*> listPere;
     int type = -1;
     int xBloc;
     int yBloc;

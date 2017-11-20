@@ -135,6 +135,7 @@ Item {
                                             sortieCourante.addLiaison(obj2);
                                             sortieCourante.parent.bloc.ajouterFils(sortieCourante.indice,obj2.parent.bloc)
                                             obj2.tabPere.push(sortieCourante)
+                                            obj2.parent.bloc.ajouterPere(0,sortieCourante.parent.bloc)
                                             if(rect1.survolActif!==null)
                                             {
                                                 rect1.survolActif.couleur = "yellow"
@@ -246,6 +247,8 @@ Item {
                             onTriggered:
                             {
                                 mouseArea.entreePopup.tabPere[index].parent.bloc.supprimerFils(mouseArea.entreePopup.parent.bloc)
+                                mouseArea.entreePopup.parent.bloc.supprimerPere(mouseArea.entreePopup.tabPere[index].parent.bloc)
+
                                 mouseArea.entreePopup.tabPere[index].supprimerFils(mouseArea.entreePopup)
                                 mouseArea.entreePopup.tabPere.splice(index,1)
                             }
@@ -278,6 +281,106 @@ Item {
 
                     ListElement{ _x:50 ; _y:250; _title:"Debut"; _indice:0; _type:9 }
 
+                }
+
+                Connections
+                {
+                    target:gestionXML
+                    onGenererAction:
+                    {
+                        switch(typeBloc)
+                        {
+                        case -1: //Init
+                            break;
+                        case 0: //Servomoteur
+                        {
+                            listAction.append({_x:xBloc,_y:yBloc, _title:"Servomoteur",_indice:listAction.count,_type:typeBloc})
+                            break;
+                        }
+                        case 1: //Dynamixel
+                        {
+                            listAction.append({_x:xBloc,_y:yBloc, _title:"Dynamixel",_indice:listAction.count,_type:typeBloc})
+                            break;
+                        }
+                        case 2: //Capteur
+                        {
+                            listAction.append({_x:xBloc,_y:yBloc, _title:"Capteur",_indice:listAction.count,_type:typeBloc})
+                            break;
+                        }
+                        case 3: //Moteur
+                        {
+                            listAction.append({_x:xBloc,_y:yBloc, _title:"Moteur",_indice:listAction.count,_type:typeBloc})
+                            break;
+                        }
+                        case 4: //Autre
+                        {
+                            listAction.append({_x:xBloc,_y:yBloc, _title:"Autre",_indice:listAction.count,_type:typeBloc})
+                            break;
+                        }
+                        case 5: //Position
+                        {
+                            listAction.append({_x:xBloc,_y:yBloc, _title:"Position",_indice:listAction.count,_type:typeBloc})
+                            break;
+                        }
+                        case 6: //Orientation
+                        {
+                            listAction.append({_x:xBloc,_y:yBloc, _title:"Orientation",_indice:listAction.count,_type:typeBloc})
+                            break;
+                        }
+                        case 7: //Sequence
+                        {
+                            listAction.append({_x:xBloc,_y:yBloc, _title:"Sequence",_indice:listAction.count,_type:typeBloc})
+                            break;
+                        }
+                        case 9: //Depart Sequence
+                        {
+                            listAction.append({_x:xBloc,_y:yBloc, _title:"Depart",_indice:listAction.count,_type:typeBloc})
+                            break;
+                        }
+                        case 10: //Attente servo
+                        {
+                            listAction.append({_x:xBloc,_y:yBloc, _title:"Retour servo",_indice:listAction.count,_type:typeBloc})
+                            break;
+                        }
+                        case 11: //Attente dyna
+                        {
+                            listAction.append({_x:xBloc,_y:yBloc, _title:"Retour dyna",_indice:listAction.count,_type:typeBloc})
+                            break;
+                        }
+                        case 12: //Attente temps
+                        {
+                            listAction.append({_x:xBloc,_y:yBloc, _title:"Retour temps",_indice:listAction.count,_type:typeBloc})
+                            break;
+                        }
+                        case 13: //Retour déplacement
+                        {
+                            listAction.append({_x:xBloc,_y:yBloc, _title:"Retour déplacement",_indice:listAction.count,_type:typeBloc})
+                            break;
+                        }
+                        case 14: //Retour orientation
+                        {
+                            listAction.append({_x:xBloc,_y:yBloc, _title:"Retour orientation",_indice:listAction.count,_type:typeBloc})
+                            break;
+                        }
+                        case 15: //Retour position
+                        {
+                            listAction.append({_x:xBloc,_y:yBloc, _title:"Retour orientation",_indice:listAction.count,_type:typeBloc})
+                            break;
+                        }
+                        case 16: //GPIO
+                        {
+                            //listAction.append({_x:xBloc,_y:yBloc, _title:"GPIO,_indice:listAction.count,_type:typeBloc})
+                            break;
+                        }
+                        case 17: //retour GPIO
+                        {
+                            //listAction.append({_x:xBloc,_y:yBloc, _title:"retour GPIO,_indice:listAction.count,_type:typeBloc})
+                            break;
+                        }
+                        }
+
+
+                    }
                 }
 
                 DropArea

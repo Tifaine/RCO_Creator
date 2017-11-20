@@ -21,17 +21,7 @@ void Action::getInfo()
     qDebug()<<"Pas redéfinit, je suis une mère.";
 }
 
-void Action::creerAction(int type)
-{
-    switch(type)
-    {
-    case typePosition:
-    {
-        //this = new ActionPosition;
-        break;
-    }
-    }
-}
+
 
 void Action::ajouterListFils()
 {
@@ -52,6 +42,32 @@ void Action::supprimerFils(Action * actToDelete)
             listFils.at(i)->removeAt(listFils.at(i)->indexOf(actToDelete));
         }
     }
+}
+
+void Action::ajouterListPere()
+{
+    listPere.append(new QList<Action *>);
+}
+
+void Action::ajouterPere(int indiceListe, Action* act)
+{
+    listPere.at(indiceListe)->append(act);
+}
+
+void Action::supprimerPere(Action * actToDelete)
+{
+    for(int i=0;i<listPere.size();i++)
+    {
+        if(listPere.at(i)->indexOf(actToDelete)!=-1)
+        {
+            listPere.at(i)->removeAt(listPere.at(i)->indexOf(actToDelete));
+        }
+    }
+}
+
+QList<QList<Action *> *> Action::getListPere() const
+{
+    return listPere;
 }
 
 int Action::getTimeOut() const
