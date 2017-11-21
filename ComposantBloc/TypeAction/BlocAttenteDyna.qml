@@ -11,7 +11,26 @@ Item {
     signal modifTaille(int taille)
     property int taille:70
     property var fils:attente
+    function setParam(id, value, nom, timeOut)
+    {
+        for(var i = 0; i< gestDyna.getNbDyna();i++)
+        {
+            if(gestDyna.getNomDyna(i) === nom)
+            {
+                cbId.setIndice(i);
+            }
+        }
 
+        for(var i = 0; i< gestDyna.getNbAction(cbId.indice);i++)
+        {
+            if(gestDyna.getValAction(cbId.indice,i) === parseInt(value))
+            {
+               cbValue.setIndice(i)
+            }
+        }
+
+        teTimeOut.text = timeOut
+    }
     function tailleChange(_taille)
     {
         root.taille = _taille

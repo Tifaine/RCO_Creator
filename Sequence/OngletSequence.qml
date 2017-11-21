@@ -45,6 +45,11 @@ Item {
         repeaterOnglet.itemAt(bar.currentIndex).children[0].saveAs(nomFichier)
     }
 
+    function clearAll()
+    {
+        repeaterOnglet.itemAt(bar.currentIndex).children[0].clearAll();
+    }
+
 
     ListModel
     {

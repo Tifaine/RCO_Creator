@@ -27,6 +27,7 @@ int XMLManager::parseFile(void)
     }else
     {
         TiXmlElement* root = doc.FirstChildElement();
+        root = root->NextSiblingElement();
         for(TiXmlElement* elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement())
         {
             std::string elemName = elem->Value();
@@ -35,7 +36,10 @@ int XMLManager::parseFile(void)
                 int id;
                 int xBloc;
                 int yBloc;
-                qDebug()<<"--------- ------------ -------";
+                int timeout;//timeOut
+                QString listFils;
+                QString listPere;
+                QString listTimeout;
                 for(TiXmlElement* elemBis = elem->FirstChildElement(); elemBis != NULL; elemBis = elemBis->NextSiblingElement())
                 {
                     std::string elemNameBis = elemBis->Value();
@@ -67,21 +71,49 @@ int XMLManager::parseFile(void)
                             std::string s = text->Value();
                             yBloc = QString::fromStdString(s).toInt();
                         }
+                    }else if(elemNameBis == "timeOut")
+                    {
+                        TiXmlNode* e = elemBis->FirstChild();
+                        if(e!=NULL)
+                        {
+                            TiXmlText* text = e->ToText();
+                            std::string s = text->Value();
+                            timeout = QString::fromStdString(s).toInt();
+                        }
                     }else if(elemNameBis == "ListFils")
                     {
+                        TiXmlNode* e = elemBis->FirstChild();
 
-
-
+                        if(e!=NULL)
+                        {
+                            TiXmlText* text = e->ToText();
+                            std::string s = text->Value();
+                            listFils = QString::fromStdString(s);
+                        }
 
                     }else if(elemNameBis == "ListPere")
                     {
+                        TiXmlNode* e = elemBis->FirstChild();
 
+                        if(e!=NULL)
+                        {
+                            TiXmlText* text = e->ToText();
+                            std::string s = text->Value();
+                            listPere = QString::fromStdString(s);
+                        }
                     }else if(elemNameBis == "ListTimeOut")
                     {
+                        TiXmlNode* e = elemBis->FirstChild();
 
+                        if(e!=NULL)
+                        {
+                            TiXmlText* text = e->ToText();
+                            std::string s = text->Value();
+                            listTimeout = QString::fromStdString(s);
+                        }
                     }else if(elemNameBis == "actionDepart")
                     {
-                        //genererAction(xBloc, yBloc, typeEntree);
+                        genererAction(xBloc, yBloc, typeEntree, listPere, listFils,0,0,0,0,0,0);
                         /* ActionDepart* actionDepart = new ActionDepart(eave);
                         actionDepart->copie(action,actionDepart);
                         rc = actionDepart->xmlAutoParse(elemBis);
@@ -96,7 +128,7 @@ int XMLManager::parseFile(void)
                         }*/
                     }else if(elemNameBis == "actionDeplacement")
                     {
-                        genererAction(xBloc, yBloc, typeMoteur);
+                        genererAction(xBloc, yBloc, typeMoteur, listPere, listFils,0,0,0,0,0,0);
                         /* ActionDeplacement* actionDeplacement = new ActionDeplacement(eave);
                         actionDeplacement->copie(action,actionDeplacement);
                         rc = actionDeplacement->xmlAutoParse(elemBis);
@@ -111,7 +143,78 @@ int XMLManager::parseFile(void)
                         }*/
                     }else if(elemNameBis == "actionDyna")
                     {
-                        genererAction(xBloc, yBloc, typeDyna);
+
+
+                        QString nomDyna;
+                        int idDyna=-1;
+                        int angleDyna=-1;
+                        int vitesseDyna=-1;
+
+                        for(TiXmlElement* elemTer = elemBis->FirstChildElement(); elemTer != NULL; elemTer = elemTer->NextSiblingElement())
+                        {
+                            std::string elemNameTer = elemTer->Value();
+                            if(elemNameTer == "nomDyna")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    nomDyna = QString::fromStdString(s);
+
+                                    /*nom = (char*)realloc(nom,s.length());
+                                    nom = strdup(s.c_str());
+                                    valideParseElement();*/
+                                }
+                                else return -1;
+                            }else if(elemNameTer == "idDyna")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    idDyna = QString::fromStdString(s).toInt();
+                                    /*reference = atoi(s.c_str());
+                                    valideParseElement();*/
+                                }
+                                else return -1;
+                            }else if(elemNameTer == "angle")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    angleDyna = QString::fromStdString(s).toInt();
+                                    /*value = atoi(s.c_str());
+                                    valideParseElement();*/
+                                }
+                                else return -1;
+                            }else if(elemNameTer == "vitesse")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    vitesseDyna = QString::fromStdString(s).toInt();
+                                    /*value = atoi(s.c_str());
+                                    valideParseElement();*/
+                                }
+                                else return -1;
+                            }
+                        }
+
+                        if(idDyna != -1 && angleDyna != -1 && vitesseDyna != -1)
+                        {
+                            genererAction(xBloc, yBloc, typeDyna, listPere, listFils,QString::number(idDyna),QString::number(angleDyna),QString::number(vitesseDyna),nomDyna,0,0);
+
+                        }else
+                        {
+                            qDebug()<<"Erreur parsage dyna";
+                            return -1;
+                        }
                         /* ActionDyna* actionDyna = new ActionDyna(eave);
                         actionDyna->copie(action,actionDyna);
                         rc = actionDyna->xmlAutoParse(elemBis);
@@ -126,7 +229,7 @@ int XMLManager::parseFile(void)
                         }*/
                     }else if(elemNameBis == "actionGpio")
                     {
-                        genererAction(xBloc, yBloc, typeGPIO);
+                        genererAction(xBloc, yBloc, typeGPIO, listPere, listFils,0,0,0,0,0,0);
                         /* ActionGpio* actionGpio = new ActionGpio(eave);
                         actionGpio->copie(action,actionGpio);
                         rc = actionGpio->xmlAutoParse(elemBis);
@@ -141,7 +244,7 @@ int XMLManager::parseFile(void)
                         }*/
                     }else if(elemNameBis == "actionMetier")
                     {
-                        genererAction(xBloc, yBloc, typeAutre);
+                        genererAction(xBloc, yBloc, typeAutre, listPere, listFils,0,0,0,0,0,0);
                         /*ActionMetier* actionMetier = new ActionMetier(eave);
                         actionMetier->copie(action,actionMetier);
                         rc = actionMetier->xmlAutoParse(elemBis);
@@ -156,7 +259,7 @@ int XMLManager::parseFile(void)
                         }*/
                     }else if(elemNameBis == "actionPause")
                     {
-                        genererAction(xBloc, yBloc, typeAttenteTemps);
+                        genererAction(xBloc, yBloc, typeAttenteTemps, listPere, listFils,0,0,0,0,0,0);
                         /*  ActionPause* actionPause = new ActionPause(eave);
                         actionPause->copie(action,actionPause);
                         rc = actionPause->xmlAutoParse(elemBis);
@@ -171,7 +274,7 @@ int XMLManager::parseFile(void)
                         }*/
                     }else if(elemNameBis == "actionPosition")
                     {
-                        genererAction(xBloc, yBloc, typePosition);
+                        genererAction(xBloc, yBloc, typePosition, listPere, listFils,0,0,0,0,0,0);
                         /*  ActionPosition* actionPosition = new ActionPosition(eave);
                         actionPosition->copie(action,actionPosition);
                         rc = actionPosition->xmlAutoParse(elemBis);
@@ -186,7 +289,7 @@ int XMLManager::parseFile(void)
                         }*/
                     }else if(elemNameBis == "actionRetourDeplacement")
                     {
-                        genererAction(xBloc, yBloc, typeRetourDeplacement);
+                        genererAction(xBloc, yBloc, typeRetourDeplacement, listPere, listFils,0,0,0,0,0,0);
                         /*ActionRetourDeplacement* actionRetourDeplacement = new ActionRetourDeplacement(eave);
                         actionRetourDeplacement->copie(action,actionRetourDeplacement);
                         rc = actionRetourDeplacement->xmlAutoParse(elemBis);
@@ -201,22 +304,67 @@ int XMLManager::parseFile(void)
                         }*/
                     }else if(elemNameBis == "actionRetourDyna")
                     {
-                        genererAction(xBloc, yBloc, typeAttenteDyna);
-                        /*ActionRetourDyna* actionRetourDyna = new ActionRetourDyna(eave);
-                        actionRetourDyna->copie(action,actionRetourDyna);
-                        rc = actionRetourDyna->xmlAutoParse(elemBis);
-                        if(rc != EAVE_ERR_SUCCESS) eaveLogPrintf(eave,EAVE_LOG_WARNING,"Valeur manquante au parsage XML de : id:%d:element:%s",action->getId(),elemNameBis.c_str());
-                        if(actionRetourDyna->getValideParsage() == VALIDE_PARSE_ACTION_RETOUR_DYNA)
+
+                        QString nomDyna;
+                        int idDyna=-1;
+                        int retourAngle=-1;
+
+                        for(TiXmlElement* elemTer = elemBis->FirstChildElement(); elemTer != NULL; elemTer = elemTer->NextSiblingElement())
                         {
-                            robot->addAction(actionRetourDyna);
+                            std::string elemNameTer = elemTer->Value();
+                            if(elemNameTer == "nomDyna")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    nomDyna = QString::fromStdString(s);
+
+                                    /*nom = (char*)realloc(nom,s.length());
+                                    nom = strdup(s.c_str());
+                                    valideParseElement();*/
+                                }
+                                else return -1;
+                            }else if(elemNameTer == "idDyna")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    idDyna = QString::fromStdString(s).toInt();
+                                    /*reference = atoi(s.c_str());
+                                    valideParseElement();*/
+                                }
+                                else return -1;
+                            }else if(elemNameTer == "retourAngle")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    retourAngle = QString::fromStdString(s).toInt();
+                                    /*value = atoi(s.c_str());
+                                    valideParseElement();*/
+                                }
+                                else return -1;
+                            }
                         }
-                        else
+
+                        if(idDyna != -1 && retourAngle != -1)
                         {
-                            eaveLogPrintf(eave,EAVE_LOG_ERR,"Impossible d'ajouter l'action [id : %d] a la liste d'action, nombre d'argument invalide",action->getId());
-                        }*/
+                            genererAction(xBloc, yBloc, typeAttenteDyna, listPere, listFils,QString::number(idDyna),QString::number(retourAngle),nomDyna,listTimeout,QString::number(timeout),0);
+                        }else
+                        {
+                            qDebug()<<"Erreur parsage retour dyna";
+                            return -1;
+                        }
                     }else if(elemNameBis == "actionRetourGpio")
                     {
-                        genererAction(xBloc, yBloc, typeRetourGPIO);
+                        genererAction(xBloc, yBloc, typeRetourGPIO, listPere, listFils,0,0,0,0,0,0);
+
                         /* ActionRetourGpio* actionRetourGpio = new ActionRetourGpio(eave);
                         actionRetourGpio->copie(action,actionRetourGpio);
                         rc = actionRetourGpio->xmlAutoParse(elemBis);
@@ -231,7 +379,7 @@ int XMLManager::parseFile(void)
                         }*/
                     }else if(elemNameBis == "actionRetourPosition")
                     {
-                        genererAction(xBloc, yBloc, typeRetourPosition);
+                        genererAction(xBloc, yBloc, typeRetourPosition, listPere, listFils,0,0,0,0,0,0);
                         /*ActionRetourPosition* actionRetourPosition = new ActionRetourPosition(eave);
                         actionRetourPosition->copie(action,actionRetourPosition);
                         rc = actionRetourPosition->xmlAutoParse(elemBis);
@@ -246,7 +394,7 @@ int XMLManager::parseFile(void)
                         }*/
                     }else if(elemNameBis == "actionRetourRotation")
                     {
-                        genererAction(xBloc, yBloc, typeRetourOrientation);
+                        genererAction(xBloc, yBloc, typeRetourOrientation, listPere, listFils,0,0,0,0,0,0);
                         /* ActionRetourRotation* actionRetourRotation = new ActionRetourRotation(eave);
                         actionRetourRotation->copie(action,actionRetourRotation);
                         rc = actionRetourRotation->xmlAutoParse(elemBis);
@@ -261,7 +409,7 @@ int XMLManager::parseFile(void)
                         }*/
                     }else if(elemNameBis == "actionRotation")
                     {
-                        genererAction(xBloc, yBloc, typeOrientation);
+                        genererAction(xBloc, yBloc, typeOrientation, listPere, listFils,0,0,0,0,0,0);
                         /* ActionRotation* actionRotation = new ActionRotation(eave);
                         actionRotation->copie(action,actionRotation);
                         rc = actionRotation->xmlAutoParse(elemBis);
@@ -276,7 +424,64 @@ int XMLManager::parseFile(void)
                         }*/
                     }else if(elemNameBis == "actionServo")
                     {
-                        genererAction(xBloc, yBloc, typeServo);
+
+                        QString nomServo;
+                        int idServo=-1;
+                        int valueServo=-1;
+
+                        for(TiXmlElement* elemTer = elemBis->FirstChildElement(); elemTer != NULL; elemTer = elemTer->NextSiblingElement())
+                        {
+                            std::string elemNameTer = elemTer->Value();
+                            if(elemNameTer == "nomServo")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    nomServo = QString::fromStdString(s);
+
+                                    /*nom = (char*)realloc(nom,s.length());
+                                    nom = strdup(s.c_str());
+                                    valideParseElement();*/
+                                }
+                                else return -1;
+                            }else if(elemNameTer == "idServo")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    idServo = QString::fromStdString(s).toInt();
+                                    /*reference = atoi(s.c_str());
+                                    valideParseElement();*/
+                                }
+                                else return -1;
+                            }else if(elemNameTer == "angle")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    valueServo = QString::fromStdString(s).toInt();
+                                    /*value = atoi(s.c_str());
+                                    valideParseElement();*/
+                                }
+                                else return -1;
+                            }
+                        }
+
+                        if(idServo != -1 && valueServo != -1)
+                        {
+                            genererAction(xBloc, yBloc, typeServo, listPere, listFils,QString::number(idServo),QString::number(valueServo),nomServo,0,0,0);
+                        }else
+                        {
+                            qDebug()<<"Erreur parsage Servo";
+                            return -1;
+                        }
+
                         /* ActionServo* actionServo = new ActionServo(eave);
                         actionServo->copie(action,actionServo);
                         rc = actionServo->xmlAutoParse(elemBis);
@@ -294,6 +499,6 @@ int XMLManager::parseFile(void)
             }
         }
     }
-
+    finParsage();
     return rc;
 }

@@ -24,6 +24,7 @@ ApplicationWindow {
                 text: "Ouvrir..."
                 onTriggered:
                 {
+                    ongletSequence.clearAll();
                     gestionXML.parseFile()
                 }
             }

@@ -17,6 +17,12 @@ Item {
         seq.enregistrerSous(nomFichier)
     }
 
+    function clearAll()
+    {
+        listAction.clear()
+        seq.clearAll()
+    }
+
     Sequence
     {
         id:seq
@@ -286,6 +292,48 @@ Item {
                 Connections
                 {
                     target:gestionXML
+
+                    onFinParsage:
+                    {
+                        for(var i=0;i<listAction.count;i++)
+                        {
+                            if(gridAction.itemAt(i).listPere !== null && gridAction.itemAt(i).listFils !== null )
+                            {
+                                var stringList = gridAction.itemAt(i).listFils.split(';')
+                                var sortieCourante = gridAction.itemAt(i).listSortie_.itemAt(0)
+                                for(var j=0;j<stringList.length-1;j++)
+                                {
+                                    var obj2 = gridAction.itemAt(parseInt(stringList[j])).listEntree_.itemAt(0)
+                                    sortieCourante.repaint((obj2.parent.x+obj2.x+5)-sortieCourante.parent.x-sortieCourante.x,
+                                                           (obj2.parent.y+obj2.y+5)-sortieCourante.parent.y-sortieCourante.y)
+                                    sortieCourante.addLiaison(obj2);
+                                    sortieCourante.parent.bloc.ajouterFils(sortieCourante.indice,obj2.parent.bloc)
+                                    obj2.tabPere.push(sortieCourante)
+                                    obj2.parent.bloc.ajouterPere(0,sortieCourante.parent.bloc)
+                                }
+                                stringList = gridAction.itemAt(i).listPere.split(';')
+                            }
+
+                            if(gridAction.itemAt(i).listTimeOut !== null)
+                            {
+                                var stringList2 = gridAction.itemAt(i).listTimeOut.split(';')
+                                var sortieCourante2 = gridAction.itemAt(i).listSortie_.itemAt(1)
+                                for(var k=0;k<stringList2.length-1;k++)
+                                {
+                                    var obj3 = gridAction.itemAt(parseInt(stringList2[k])).listEntree_.itemAt(0)
+                                    sortieCourante2.repaint((obj3.parent.x+obj3.x+5)-sortieCourante2.parent.x-sortieCourante2.x,
+                                                           (obj3.parent.y+obj3.y+5)-sortieCourante2.parent.y-sortieCourante2.y)
+                                    sortieCourante2.addLiaison(obj3);
+                                    sortieCourante2.parent.bloc.ajouterFils(sortieCourante2.indice,obj3.parent.bloc)
+                                    obj3.tabPere.push(sortieCourante2)
+                                    obj3.parent.bloc.ajouterPere(0,sortieCourante2.parent.bloc)
+                                }
+                                stringList = gridAction.itemAt(i).listPere.split(';')
+                            }
+                            //console.log("Liste Pere : "+gridAction.itemAt(i).listPere+" Liste Fils : "+gridAction.itemAt(i).listFils)
+                        }
+                    }
+
                     onGenererAction:
                     {
                         switch(typeBloc)
@@ -294,12 +342,19 @@ Item {
                             break;
                         case 0: //Servomoteur
                         {
+
                             listAction.append({_x:xBloc,_y:yBloc, _title:"Servomoteur",_indice:listAction.count,_type:typeBloc})
+                            gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2);
+                            gridAction.itemAt(listAction.count-1).listPere = listPere;
+                            gridAction.itemAt(listAction.count-1).listFils = listFils;
                             break;
                         }
                         case 1: //Dynamixel
                         {
                             listAction.append({_x:xBloc,_y:yBloc, _title:"Dynamixel",_indice:listAction.count,_type:typeBloc})
+                            gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2,param3);
+                            gridAction.itemAt(listAction.count-1).listPere = listPere;
+                            gridAction.itemAt(listAction.count-1).listFils = listFils;
                             break;
                         }
                         case 2: //Capteur
@@ -335,6 +390,8 @@ Item {
                         case 9: //Depart Sequence
                         {
                             listAction.append({_x:xBloc,_y:yBloc, _title:"Depart",_indice:listAction.count,_type:typeBloc})
+                            gridAction.itemAt(listAction.count-1).listPere = listPere;
+                            gridAction.itemAt(listAction.count-1).listFils = listFils;
                             break;
                         }
                         case 10: //Attente servo
@@ -345,6 +402,11 @@ Item {
                         case 11: //Attente dyna
                         {
                             listAction.append({_x:xBloc,_y:yBloc, _title:"Retour dyna",_indice:listAction.count,_type:typeBloc})
+
+                            gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2,param4);
+                            gridAction.itemAt(listAction.count-1).listPere = listPere;
+                            gridAction.itemAt(listAction.count-1).listFils = listFils;
+                            gridAction.itemAt(listAction.count-1).listTimeOut = param3;
                             break;
                         }
                         case 12: //Attente temps
@@ -378,8 +440,6 @@ Item {
                             break;
                         }
                         }
-
-
                     }
                 }
 

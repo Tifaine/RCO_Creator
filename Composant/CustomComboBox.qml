@@ -5,6 +5,13 @@ Item {
     property var _model : null
     property var indice : -1
     signal customCurrentIndexChanged(int indice)
+
+    function setIndice(indice)
+    {
+
+        customCombo.currentIndex = indice
+    }
+
     ComboBox {
         id: customCombo
         height: 30

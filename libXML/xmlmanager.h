@@ -18,7 +18,9 @@ public:
 
 
 signals:
-    void genererAction(int xBloc, int yBloc, int typeBloc);
+    void genererAction(int xBloc, int yBloc, int typeBloc, QString listPere, QString listFils,QString param0 ,QString param1, QString param2, QString param3, QString param4, QString param5);
+    void finParsage();
+
 public slots:
     int parseFile(void);
 

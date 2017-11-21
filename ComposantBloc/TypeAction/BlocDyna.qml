@@ -18,6 +18,34 @@ Item {
         modifTaille(taille);
 
     }
+
+    function setParam(id, value, vitesse, nom)
+    {
+        for(var i = 0; i< gestDyna.getNbDyna();i++)
+        {
+            if(gestDyna.getNomDyna(i) === nom)
+            {
+                cbId.setIndice(i);
+            }
+        }
+
+        for(var i = 0; i< gestDyna.getNbAction(cbId.indice);i++)
+        {
+            if(gestDyna.getValAction(cbId.indice,i) === parseInt(value))
+            {
+               cbValue.setIndice(i)
+            }
+        }
+        for(var i = 0; i< gestDyna.getNbVitesse(cbId.indice);i++)
+        {
+            if(gestDyna.getValVitesse(cbId.indice,i) === parseInt(vitesse))
+            {
+               cbVitess.setIndice(i)
+            }
+        }
+    }
+
+
     Dyna
     {
         id:dyna

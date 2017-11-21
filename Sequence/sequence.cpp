@@ -15,6 +15,11 @@ void Sequence::supprimerAction(Action * toBeDeleted)
     listAction.removeAt(listAction.indexOf(toBeDeleted));
 }
 
+void Sequence::clearAll()
+{
+    listAction.clear();
+}
+
 void Sequence::enregistrerSous(QString filename)
 {
     QStringList listNom = filename.split('/');
@@ -32,6 +37,7 @@ void Sequence::enregistrerSous(QString filename)
         QXmlStreamWriter xmlWriter(&file);
         xmlWriter.setAutoFormatting(true);
         xmlWriter.writeStartDocument();
+        xmlWriter.writeTextElement("TypeXml","Scenario");
         xmlWriter.writeStartElement("Sequence");
         xmlWriter.writeTextElement("version",element.number(3,'f',0));
 

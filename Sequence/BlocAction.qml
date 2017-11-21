@@ -9,9 +9,16 @@ Item {
     property int indice
     property int type
     property var _couleurInfoBloc : "#655e5e"
+
+    property var listSortie_ : gridSortie
+    property var listEntree_ : gridEntree
     property var bloc : null
     signal iWantToDie()
     signal creationComplete(var bloc)
+
+    property var listPere:null;
+    property var listFils:null;
+    property var listTimeOut:null;
     objectName: "BlocAction"
     width: 200
     height: 92
@@ -62,9 +69,9 @@ Item {
         }
 
         }
-
-
     }
+
+
 
     onXChanged:
     {

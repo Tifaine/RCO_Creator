@@ -13,10 +13,32 @@ Item {
     property int taille:70
     property var fils:servo
 
+
+
+
     function tailleChange(_taille)
     {
         root.taille = _taille
         modifTaille(taille);
+    }
+
+    function setParam(id, value, nom)
+    {
+        for(var i = 0; i< gestServo.getNbServo();i++)
+        {
+            if(gestServo.getNomServo(i) === nom)
+            {
+                cbId.setIndice(i);
+            }
+        }
+
+        for(var i = 0; i< gestServo.getNbAction(cbId.indice);i++)
+        {
+            if(gestServo.getValAction(cbId.indice,i) === parseInt(value))
+            {
+               cbValue.setIndice(i)
+            }
+        }
     }
 
     Component.onCompleted:
