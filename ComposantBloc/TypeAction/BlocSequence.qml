@@ -103,21 +103,7 @@ Item {
                 }
             }
 
-            var nomFound = false
-            for(var i=0;i<gestSequence.getNbFile();i++)
-            {
-                if(nomSequ === gestSequence.getNameFile(i))
-                {
-                    nomFound = true
-                    cbId.indice = i
-                }
-            }
-            if(nomFound === false)
-            {
-                tfNomSeq.text = nomSequ
-                cbId.indice = listSequence.count - 1
-                tfId.visible = true;
-            }
+
         }
     }
 

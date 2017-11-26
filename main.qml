@@ -24,6 +24,7 @@ ApplicationWindow {
         title: "Enregistrer sous ..."
         nameFilters: [ "Fichier XML (*.xml )"]
         selectMultiple: false
+        selectExisting: false
         selectFolder: false
         onAccepted: {
             ongletSequence.saveAs(fileDialog.fileUrl)
