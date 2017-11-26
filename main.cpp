@@ -15,6 +15,7 @@
 #include "Action/gestion/gestionservo.h"
 #include "Action/gestion/gestiondynamixel.h"
 #include "Action/gestion/gestionsortie.h"
+#include "Action/gestion/gestionsequence.h"
 #include "Action/attente/attenteservo.h"
 #include "Action/attente/attentedyna.h"
 #include "Action/attente/attentetemps.h"
@@ -30,6 +31,7 @@ int main(int argc, char *argv[])
     GestionServo serv;
     GestionDynamixel dyna;
     XMLManager xmlManage;
+    GestionSequence gestSequence;
     xmlManage.setNomXmlFile("Pouet.xml");
 
     qmlRegisterType<connector>("connector", 1, 0, "Liaison");
@@ -55,6 +57,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("gestServo", &serv);
     engine.rootContext()->setContextProperty("gestDyna", &dyna);
     engine.rootContext()->setContextProperty("gestionXML", &xmlManage);
+    engine.rootContext()->setContextProperty("gestSequence", &gestSequence);
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

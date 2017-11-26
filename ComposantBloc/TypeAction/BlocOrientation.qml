@@ -15,6 +15,11 @@ Item {
         modifTaille(taille);
 
     }
+    function setParam(orien)
+    {
+        tfAngle.text = orien
+
+    }
     Component.onCompleted:
     {
         root.state = "ferme"

@@ -13,23 +13,56 @@ Item {
     property var fils:attente
     function setParam(id, value, nom, timeOut)
     {
+        var size = 70
+
+        var idFound = false
         for(var i = 0; i< gestDyna.getNbDyna();i++)
         {
             if(gestDyna.getNomDyna(i) === nom)
             {
                 cbId.setIndice(i);
+                idFound = true
             }
         }
 
-        for(var i = 0; i< gestDyna.getNbAction(cbId.indice);i++)
+        if(idFound === false)
         {
-            if(gestDyna.getValAction(cbId.indice,i) === parseInt(value))
+            cbId.setIndice(listDyna.count -1)
+
+            teId.text = id
+            attente.nomDyna = "custom"
+            tfId.visible = true;
+            textValue.anchors.top = tfId.bottom
+
+            tfValueEnable = true
+            cbValue.setIndice(listValue.count-1)
+            tfVal.text = value
+            attente.valueDyna = value
+            tfValue.visible = false
+            size = 100
+
+        }else
+        {
+            var valFound = false
+            for(var i = 0; i< gestDyna.getNbAction(cbId.indice);i++)
             {
-               cbValue.setIndice(i)
+                if(gestDyna.getValAction(cbId.indice,i) === parseInt(value))
+                {
+                    cbValue.setIndice(i)
+                    valFound = true
+                }
+            }
+            if(valFound === false)
+            {
+                tfValueEnable = true
+                cbValue.setIndice(listValue.count-1)
+                tfVal.text = value
+                attente.valueDyna = value
+                tfValue.visible = false
             }
         }
-
         teTimeOut.text = timeOut
+        tailleChange(size)
     }
     function tailleChange(_taille)
     {
@@ -193,6 +226,7 @@ Item {
 
         TextEdit
         {
+            id:teId
             height: 30
             text: qsTr("0")
             anchors.fill: parent
@@ -366,6 +400,10 @@ Item {
 
                 root.state = "ouvert"
                 button.text = "^"
+                if(cbValue.indice == (listValue.count-1))
+                {
+                    tfValue.visible = true
+                }
                 var tailleToSend = 175
                 if(tfValueEnable===true)tailleToSend+=tfValue.height+5
                 if(tfId.visible===true)tailleToSend+=tfId.height+5;

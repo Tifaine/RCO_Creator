@@ -33,7 +33,8 @@ SOURCES += main.cpp \
     libXML/tinyxmlerror.cpp \
     libXML/tinyxmlparser.cpp \
     Sequence/sequence.cpp \
-    libXML/xmlmanager.cpp
+    libXML/xmlmanager.cpp \
+    Action/gestion/gestionsequence.cpp
 
 RESOURCES += qml.qrc
 
@@ -87,5 +88,6 @@ HEADERS += \
     libXML/tinystr.h \
     libXML/tinyxml.h \
     Sequence/sequence.h \
-    libXML/xmlmanager.h
+    libXML/xmlmanager.h \
+    Action/gestion/gestionsequence.h
 

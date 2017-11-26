@@ -100,7 +100,7 @@ Item {
         {
             if(mouse.button === Qt.LeftButton)
             {
-                afficheTab(nomSequence)
+                gestSequence.afficheTab(nomSequence)
             }
         }
     }

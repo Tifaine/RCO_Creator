@@ -143,8 +143,6 @@ int XMLManager::parseFile(void)
                         }*/
                     }else if(elemNameBis == "actionDyna")
                     {
-
-
                         QString nomDyna;
                         int idDyna=-1;
                         int angleDyna=-1;
@@ -259,7 +257,37 @@ int XMLManager::parseFile(void)
                         }*/
                     }else if(elemNameBis == "actionPause")
                     {
-                        genererAction(xBloc, yBloc, typeAttenteTemps, listPere, listFils,0,0,0,0,0,0);
+
+                        int attente = -1;
+
+                        for(TiXmlElement* elemTer = elemBis->FirstChildElement(); elemTer != NULL; elemTer = elemTer->NextSiblingElement())
+                        {
+                            std::string elemNameTer = elemTer->Value();
+                            if(elemNameTer == "valueAttente")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    attente = QString::fromStdString(s).toInt();
+
+                                    /*nom = (char*)realloc(nom,s.length());
+                                    nom = strdup(s.c_str());
+                                    valideParseElement();*/
+                                }
+                                else return -1;
+                            }
+                        }
+
+                        if(attente != -1)
+                        {
+                            genererAction(xBloc, yBloc, typeAttenteTemps, listPere, listFils,QString::number(attente),0,0,0,0,0);
+                        }else
+                        {
+                            qDebug()<<"Erreur parsage rotation";
+                            return -1;
+                        }
                         /*  ActionPause* actionPause = new ActionPause(eave);
                         actionPause->copie(action,actionPause);
                         rc = actionPause->xmlAutoParse(elemBis);
@@ -274,19 +302,106 @@ int XMLManager::parseFile(void)
                         }*/
                     }else if(elemNameBis == "actionPosition")
                     {
-                        genererAction(xBloc, yBloc, typePosition, listPere, listFils,0,0,0,0,0,0);
-                        /*  ActionPosition* actionPosition = new ActionPosition(eave);
-                        actionPosition->copie(action,actionPosition);
-                        rc = actionPosition->xmlAutoParse(elemBis);
-                        if(rc != EAVE_ERR_SUCCESS) eaveLogPrintf(eave,EAVE_LOG_WARNING,"Valeur manquante au parsage XML de : id:%d:element:%s",action->getId(),elemNameBis.c_str());
-                        if(actionPosition->getValideParsage() == VALIDE_PARSE_ACTION_POSITION)
+                        int posX=-1;
+                        int posY=-1;
+                        int vitesseRobot=-1;
+                        int acc=-1;
+                        int dec=-1;
+                        int sens=-1;
+
+                        for(TiXmlElement* elemTer = elemBis->FirstChildElement(); elemTer != NULL; elemTer = elemTer->NextSiblingElement())
                         {
-                            robot->addAction(actionPosition);
+                            std::string elemNameTer = elemTer->Value();
+
+                            if(elemNameTer == "coordX")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    posX = QString::fromStdString(s).toInt();
+
+                                    /*nom = (char*)realloc(nom,s.length());
+                                nom = strdup(s.c_str());
+                                valideParseElement();*/
+                                }
+                                else return -1;
+                            }else if(elemNameTer == "coordY")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    posY = QString::fromStdString(s).toInt();
+                                    /*reference = atoi(s.c_str());
+                                valideParseElement();*/
+                                }
+                                else return -1;
+                            }else if(elemNameTer == "vitesse")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    vitesseRobot = QString::fromStdString(s).toInt();
+                                    /*value = atoi(s.c_str());
+                                valideParseElement();*/
+                                }
+                                else return -1;
+                            }else if(elemNameTer == "acc")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    acc = QString::fromStdString(s).toInt();
+                                    /*value = atoi(s.c_str());
+                                valideParseElement();*/
+                                }
+                                else return -1;
+                            }else if(elemNameTer == "dec")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    dec = QString::fromStdString(s).toInt();
+                                    /*value = atoi(s.c_str());
+                                valideParseElement();*/
+                                }
+                                else return -1;
+                            }else if(elemNameTer == "sens")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    sens = QString::fromStdString(s).toInt();
+                                    /*value = atoi(s.c_str());
+                                valideParseElement();*/
+                                }
+                                else return -1;
+                            }
+
+
                         }
-                        else
+                        if(posX != -1 && posY != -1 && vitesseRobot != -1)
                         {
-                            eaveLogPrintf(eave,EAVE_LOG_ERR,"Impossible d'ajouter l'action [id : %d] a la liste d'action, nombre d'argument invalide",action->getId());
-                        }*/
+                            //genererAction(xBloc, yBloc, typeAttenteTemps, listPere, listFils,0,0,0,0,0,0);
+
+                            genererAction(xBloc, yBloc, typePosition, listPere, listFils,QString::number(posX),QString::number(posY),QString::number(vitesseRobot),QString::number(acc),QString::number(dec),QString::number(sens));
+
+                        }else
+                        {
+                            qDebug()<<"Erreur parsage position"<<posX<<" "<<posY<<" "<<vitesseRobot;
+                            return -1;
+                        }
                     }else if(elemNameBis == "actionRetourDeplacement")
                     {
                         genererAction(xBloc, yBloc, typeRetourDeplacement, listPere, listFils,0,0,0,0,0,0);
@@ -379,7 +494,62 @@ int XMLManager::parseFile(void)
                         }*/
                     }else if(elemNameBis == "actionRetourPosition")
                     {
-                        genererAction(xBloc, yBloc, typeRetourPosition, listPere, listFils,0,0,0,0,0,0);
+                        int coordX=-1;
+                        int coordY=-1;
+                        int precision=-1;
+
+                        for(TiXmlElement* elemTer = elemBis->FirstChildElement(); elemTer != NULL; elemTer = elemTer->NextSiblingElement())
+                        {
+                            std::string elemNameTer = elemTer->Value();
+                            if(elemNameTer == "coordX")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    coordX = QString::fromStdString(s).toInt();
+
+                                    /*nom = (char*)realloc(nom,s.length());
+                                    nom = strdup(s.c_str());
+                                    valideParseElement();*/
+                                }
+                                else return -1;
+                            }else if(elemNameTer == "coordY")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    coordY = QString::fromStdString(s).toInt();
+                                    /*reference = atoi(s.c_str());
+                                    valideParseElement();*/
+                                }
+                                else return -1;
+                            }else if(elemNameTer == "precision")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    precision = QString::fromStdString(s).toInt();
+                                    /*value = atoi(s.c_str());
+                                    valideParseElement();*/
+                                }
+                                else return -1;
+                            }
+                        }
+
+                        if(coordX != -1 && coordY != -1 && precision != -1)
+                        {
+                            genererAction(xBloc, yBloc, typeRetourPosition, listPere, listFils,QString::number(coordX),QString::number(coordY),QString::number(precision),listTimeout,QString::number(timeout),0);
+                        }else
+                        {
+                            qDebug()<<"Erreur parsage retour position";
+                            return -1;
+                        }
                         /*ActionRetourPosition* actionRetourPosition = new ActionRetourPosition(eave);
                         actionRetourPosition->copie(action,actionRetourPosition);
                         rc = actionRetourPosition->xmlAutoParse(elemBis);
@@ -394,7 +564,52 @@ int XMLManager::parseFile(void)
                         }*/
                     }else if(elemNameBis == "actionRetourRotation")
                     {
-                        genererAction(xBloc, yBloc, typeRetourOrientation, listPere, listFils,0,0,0,0,0,0);
+
+                        int orientation = -400;
+                        int precision = -1;
+
+                        for(TiXmlElement* elemTer = elemBis->FirstChildElement(); elemTer != NULL; elemTer = elemTer->NextSiblingElement())
+                        {
+                            std::string elemNameTer = elemTer->Value();
+                            if(elemNameTer == "rotation")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    orientation = QString::fromStdString(s).toInt();
+
+                                    /*nom = (char*)realloc(nom,s.length());
+                                    nom = strdup(s.c_str());
+                                    valideParseElement();*/
+                                }
+                                else return -1;
+                            }else if(elemNameTer == "precision")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    precision = QString::fromStdString(s).toInt();
+
+                                    /*nom = (char*)realloc(nom,s.length());
+                                    nom = strdup(s.c_str());
+                                    valideParseElement();*/
+                                }
+                                else return -1;
+                            }
+                        }
+
+                        if(orientation != -400 && precision != -1)
+                        {
+                            genererAction(xBloc, yBloc, typeRetourOrientation, listPere, listFils,QString::number(orientation),QString::number(precision),listTimeout,QString::number(timeout),0,0);
+                        }else
+                        {
+                            qDebug()<<"Erreur parsage retour orientation";
+                            return -1;
+                        }
                         /* ActionRetourRotation* actionRetourRotation = new ActionRetourRotation(eave);
                         actionRetourRotation->copie(action,actionRetourRotation);
                         rc = actionRetourRotation->xmlAutoParse(elemBis);
@@ -409,7 +624,38 @@ int XMLManager::parseFile(void)
                         }*/
                     }else if(elemNameBis == "actionRotation")
                     {
-                        genererAction(xBloc, yBloc, typeOrientation, listPere, listFils,0,0,0,0,0,0);
+
+                        int orientation = -400;
+
+                        for(TiXmlElement* elemTer = elemBis->FirstChildElement(); elemTer != NULL; elemTer = elemTer->NextSiblingElement())
+                        {
+                            std::string elemNameTer = elemTer->Value();
+                            if(elemNameTer == "orientation")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    orientation = QString::fromStdString(s).toInt();
+
+                                    /*nom = (char*)realloc(nom,s.length());
+                                    nom = strdup(s.c_str());
+                                    valideParseElement();*/
+                                }
+                                else return -1;
+                            }
+                        }
+
+                        if(orientation != -400)
+                        {
+                            genererAction(xBloc, yBloc, typeOrientation, listPere, listFils,QString::number(orientation),0,0,0,0,0);
+                        }else
+                        {
+                            qDebug()<<"Erreur parsage rotation";
+                            return -1;
+                        }
+
                         /* ActionRotation* actionRotation = new ActionRotation(eave);
                         actionRotation->copie(action,actionRotation);
                         rc = actionRotation->xmlAutoParse(elemBis);

@@ -10,6 +10,10 @@ Item {
     property int taille:70
     property var fils:attente
     signal modifTaille(int taille)
+    function setParam(temps)
+    {
+        tfAttente.text=temps
+    }
 
     function tailleChange(_taille)
     {
@@ -26,11 +30,11 @@ Item {
     AttenteTemps
     {
         id:attente
-        temps: tfId.text
+        temps: tfAttente.text
     }
 
     TextField {
-        id: tfId
+        id: tfAttente
         x: 5
         height: 30
         text: qsTr("0")

@@ -13,9 +13,6 @@ Item {
     property int taille:70
     property var fils:servo
 
-
-
-
     function tailleChange(_taille)
     {
         root.taille = _taille
@@ -24,21 +21,51 @@ Item {
 
     function setParam(id, value, nom)
     {
+        var idFound = false;
         for(var i = 0; i< gestServo.getNbServo();i++)
         {
             if(gestServo.getNomServo(i) === nom)
             {
                 cbId.setIndice(i);
+                idFound = true
+            }
+        }
+        if(idFound === false)
+        {
+            cbId.setIndice(listServo.count-1)
+
+            servo.idServo=id;
+            servo.nomServo="custom";
+            servo.valueServo=value;
+            teId.text = id
+            tfValueEnable = true
+            cbValue.setIndice(listValue.count-1);
+            tfVal.text = value
+            tfValue.visible = false
+            var tailleToSend = 125
+            tailleChange(tailleToSend)
+
+        }else
+        {
+            var valFound = false
+            for(var i = 0; i< gestServo.getNbAction(cbId.indice);i++)
+            {
+                if(gestServo.getValAction(cbId.indice,i) === parseInt(value))
+                {
+                    cbValue.setIndice(i)
+                    valFound = true
+                }
+            }
+            if(valFound === false)
+            {
+                servo.valueServo=value;
+                cbValue.setIndice(listValue.count-1);
+                tfVal.text = value
+                tfValue.visible = false
             }
         }
 
-        for(var i = 0; i< gestServo.getNbAction(cbId.indice);i++)
-        {
-            if(gestServo.getValAction(cbId.indice,i) === parseInt(value))
-            {
-               cbValue.setIndice(i)
-            }
-        }
+
     }
 
     Component.onCompleted:
@@ -201,6 +228,7 @@ Item {
 
         TextEdit
         {
+            id:teId
             height: 30
             text: qsTr("0")
             anchors.fill: parent
@@ -278,7 +306,6 @@ Item {
         color:"#4a4545"
         property string text:"0"
 
-
         TextEdit {
             id:tfVal
             height: 30
@@ -294,10 +321,6 @@ Item {
             }
         }
     }
-
-
-
-
 
     Button {
         id: button
@@ -331,6 +354,11 @@ Item {
 
                 root.state = "ouvert"
                 button.text = "^"
+                if(cbValue.indice == (listValue.count-1))
+                {
+                    tfValue.visible = true
+                }
+
                 var tailleToSend = 125
                 if(tfValueEnable===true)tailleToSend+=tfValue.height+5
                 if(tfId.visible===true)tailleToSend+=tfId.height+5;

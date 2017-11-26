@@ -16,6 +16,81 @@ Item {
         modifTaille(taille);
     }
 
+    function setParam(posX, posY, vitesse, acc, dec, sens)
+    {
+        tfX.text = posX;
+        tfY.text = posY
+
+        switch(vitesse)
+        {
+        case "1000":
+            cbVitesse.setIndice(0);
+            break;
+        case "700":
+            cbVitesse.setIndice(1);
+            break;
+        case "300":
+            cbVitesse.setIndice(2);
+            break;
+        default:
+            cbVitesse.setIndice(3);
+            tfVitesseEnable = true
+            pos.vitesse = true
+            tfVitesse.visible = true
+            tfVit.text = vitesse
+            break;
+        }
+
+        switch(acc)
+        {
+        case "1000":
+            cbAcc.setIndice(0);
+            break;
+        case "700":
+            cbAcc.setIndice(1);
+            break;
+        case "300":
+            cbAcc.setIndice(2);
+            break;
+        default:
+            cbAcc.setIndice(3);
+            tfAccEnable = true
+            pos.acceleration = acc
+            tfAcc.visible = true
+            tfAccel.text = acc
+            break;
+        }
+
+        switch(dec)
+        {
+        case "1000":
+            cbDec.setIndice(0);
+            break;
+        case "700":
+            cbDec.setIndice(1);
+            break;
+        case "300":
+            cbDec.setIndice(2);
+            break;
+        default:
+            cbDec.setIndice(3);
+            tfDecEnable = true
+            pos.deceleration = dec
+            tfDec.visible = false
+            tfDecel.text = dec;
+            break;
+        }
+
+        if(sens === "0")
+        {
+            switchSens.checked = false
+        }else
+        {
+            switchSens.checked = true
+        }
+        tailleChange(60)
+    }
+
     property bool tfVitesseEnable:false
     property bool tfAccEnable:false
     property bool tfDecEnable:false
@@ -30,7 +105,7 @@ Item {
         id:pos
         xRobot: tfX.text
         yRobot: tfY.text
-        sens:switchSens.checked
+        //sens:switchSens.checked
     }
 
     TextField {
@@ -132,6 +207,7 @@ Item {
             {
                 if(tfVitesse.visible===true)
                 {
+
                     tfVitesseEnable = false
                     tfVitesse.visible = false;
                     textAcc.anchors.top = cbVitesse.bottom
@@ -383,6 +459,10 @@ Item {
         anchors.leftMargin: 5
         anchors.top: cbDec.bottom
         anchors.topMargin: 5
+        onClicked:
+        {
+            pos.sens = checked
+        }
     }
 
     Button {
@@ -410,6 +490,22 @@ Item {
             {
                 root.state = "ouvert"
                 button.text = "^"
+
+                if(cbAcc.indice === 3)
+                {
+                    tfAcc.visible = true
+                }
+
+                if(cbDec.indice === 3)
+                {
+                    tfDec.visible = true
+                }
+
+                if(cbVitesse.indice === 3)
+                {
+                    tfVit.visible = true
+                }
+
                 var tailleToSend = 275
                 if(tfVitesseEnable===true)tailleToSend+=tfVitesse.height+5
                 if(tfAccEnable===true)tailleToSend+=tfAcc.height+5

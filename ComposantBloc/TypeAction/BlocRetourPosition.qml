@@ -17,6 +17,14 @@ Item {
         modifTaille(taille);
     }
 
+    function setParam(posX, posY, preci,timeOut)
+    {
+        tfX.text = posX
+        tfY.text = posY
+        tfPrecision.text = preci
+        teTimeOut.text = timeOut
+    }
+
     Component.onCompleted:
     {
         tailleChange(60)

@@ -21,28 +21,79 @@ Item {
 
     function setParam(id, value, vitesse, nom)
     {
+        var idFound = false;
         for(var i = 0; i< gestDyna.getNbDyna();i++)
         {
             if(gestDyna.getNomDyna(i) === nom)
             {
                 cbId.setIndice(i);
+                idFound = true
+            }
+        }
+        if(idFound === false)
+        {
+            cbId.setIndice(listDyna.count -1)
+            dyna.idDyna = id;
+            teId.text = id
+            dyna.nomDyna = "custom"
+            tfId.visible = true;
+            textValue.anchors.top = tfId.bottom
+
+            tfValueEnable = true
+            cbValue.setIndice(listValue.count-1)
+            tfVal.text = value
+            dyna.ValueDyna = value
+            tfValue.visible = false
+
+            tfVitesseEnable = true;
+            cbVitess.setIndice(listVitesse.count - 1)
+            teVitesse.text = vitesse
+            dyna.vitesseDyna = vitesse
+            tfVitesse.visible = false
+
+            tailleChange(100)
+        }else
+        {
+            var valFound = false
+            for(var i = 0; i< gestDyna.getNbAction(cbId.indice);i++)
+            {
+                if(gestDyna.getValAction(cbId.indice,i) === parseInt(value))
+                {
+                    cbValue.setIndice(i)
+                    valFound = true
+                }
+            }
+
+            if(valFound === false)
+            {
+                tfValueEnable = true
+                cbValue.setIndice(listValue.count-1)
+                tfVal.text = value
+                dyna.ValueDyna = value
+                tfValue.visible = false
+            }
+
+            var vitesseFound = false
+            for(var i = 0; i< gestDyna.getNbVitesse(cbId.indice);i++)
+            {
+                if(gestDyna.getValVitesse(cbId.indice,i) === parseInt(vitesse))
+                {
+                    vitesseFound = true
+                    cbVitess.setIndice(i)
+                }
+            }
+
+            if(vitesseFound===false)
+            {
+                tfVitesseEnable = true;
+                cbVitess.setIndice(listVitesse.count - 1)
+                teVitesse.text = vitesse
+                dyna.vitesseDyna = vitesse
+                tfVitesse.visible = false
             }
         }
 
-        for(var i = 0; i< gestDyna.getNbAction(cbId.indice);i++)
-        {
-            if(gestDyna.getValAction(cbId.indice,i) === parseInt(value))
-            {
-               cbValue.setIndice(i)
-            }
-        }
-        for(var i = 0; i< gestDyna.getNbVitesse(cbId.indice);i++)
-        {
-            if(gestDyna.getValVitesse(cbId.indice,i) === parseInt(vitesse))
-            {
-               cbVitess.setIndice(i)
-            }
-        }
+
     }
 
 
@@ -221,7 +272,7 @@ Item {
                 tfVitesseEnable = false
             }
         }
-    }   
+    }
 
     Rectangle
     {
@@ -239,6 +290,7 @@ Item {
 
         TextEdit
         {
+            id:teId
             height: 30
             text: qsTr("0")
             anchors.fill: parent
@@ -443,11 +495,21 @@ Item {
                 {
                     tailleChange(tailleToSend)
                 }
+
             }else
             {
 
                 root.state = "ouvert"
                 button.text = "^"
+                if(cbValue.indice == (listValue.count-1))
+                {
+                    tfValue.visible = true
+                }
+
+                if(cbVitess.indice == (listVitesse.count-1))
+                {
+                    tfVitesse.visible = true
+                }
                 var tailleToSend = 182
                 if(tfValueEnable===true)tailleToSend+=tfValue.height+5
                 if(tfVitesseEnable===true)tailleToSend+=tfVitesse.height+5

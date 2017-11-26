@@ -7,6 +7,7 @@ import "../Composant"
 
 
 Item {
+    property var tabNomTab:[]
     id:item1
     Component.onCompleted:
     {
@@ -38,6 +39,11 @@ Item {
         listAutre.append({_nom:"Départ",                _color:"grey", _index:2})
         listAutre.append({_nom:"Attente temps",         _color:"grey", _index:3})
 
+    }
+
+    function ouvrir(nomFichier)
+    {
+        repeaterOnglet.itemAt(bar.currentIndex).children[0].ouvrirFile(nomFichier)
     }
 
     function saveAs(nomFichier)
@@ -75,6 +81,19 @@ Item {
     {
         id:listAutre
         ListElement{ _nom:"Bras Gauche" ; _color:"grey"; _index:0}
+    }
+
+    Menu
+    {
+        id:contextMenu
+        MenuItem
+        {
+            text:"Supprimer"
+            onTriggered:
+            {
+                console.log("You gonna die");
+            }
+        }
     }
 
     TabView {
@@ -122,6 +141,22 @@ Item {
             id:listOnglet
             ListElement{ _nom:"Séquence principale" ; _index:0}
         }
+        Connections
+        {
+            target:gestSequence
+            onAfficherSequence:
+            {
+                if(tabNomTab.indexOf(nomSequence)===-1)
+                {
+                    tabNomTab.push(nomSequence)
+                    listOnglet.append({_nom:nomSequence,_index:listOnglet.count})
+                    bar.currentIndex = listOnglet.count-1
+                }else
+                {
+                    bar.currentIndex = tabNomTab.indexOf(nomSequence)+1
+                }
+            }
+        }
 
         Repeater
         {
@@ -138,15 +173,7 @@ Item {
                     anchors.fill: parent
                     /*onAjouterTab:
                     {
-                        if(tabNomTab.indexOf(nom)===-1)
-                        {
-                            tabNomTab.push(nom)
-                            listOnglet.append({_nom:nom,_index:listOnglet.count})
-                            bar.currentIndex = listOnglet.count-1
-                        }else
-                        {
-                            bar.currentIndex = tabNomTab.indexOf(nom)+1
-                        }
+
                     }*/
                 }
 

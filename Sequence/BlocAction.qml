@@ -15,6 +15,7 @@ Item {
     property var bloc : null
     signal iWantToDie()
     signal creationComplete(var bloc)
+    signal ajouterTab(var nom);
 
     property var listPere:null;
     property var listFils:null;
@@ -43,6 +44,7 @@ Item {
         case 5: //Position
         case 6: //Orientation
         case 7: //Sequence
+        case 12://attente temps
         case 17://GPIO
         {
             listEntree.clear();
@@ -54,7 +56,6 @@ Item {
 
         case 10://attente servo
         case 11://attente dyna
-        case 12://attente temps
         case 13://Retour déplacement
         case 14://Retour orientation
         case 15://Retour position
@@ -448,5 +449,5 @@ Item {
     function modifTaille(taille)
     {
         root.height = 32 + taille
-    }
+    }    
 }

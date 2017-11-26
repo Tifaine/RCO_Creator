@@ -25,7 +25,7 @@ ApplicationWindow {
                 onTriggered:
                 {
                     ongletSequence.clearAll();
-                    gestionXML.parseFile()
+                    ongletSequence.ouvrir("Pouet.xml");
                 }
             }
 
