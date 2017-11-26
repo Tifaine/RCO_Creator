@@ -18,7 +18,6 @@ Item {
     function setParam(orien)
     {
         tfAngle.text = orien
-
     }
     Component.onCompleted:
     {

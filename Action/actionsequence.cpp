@@ -7,5 +7,17 @@ ActionSequence::ActionSequence()
 
 void ActionSequence::saveXML(QXmlStreamWriter* xmlWriter)
 {
-qDebug()<<"Action sequence";
+    xmlWriter->writeStartElement("actionSequence");
+    xmlWriter->writeTextElement("nomSequence",getNomSequence());
+    xmlWriter->writeEndElement();
+}
+
+QString ActionSequence::getNomSequence() const
+{
+    return _nomSequence;
+}
+
+void ActionSequence::setNomSequence(const QString &value)
+{
+    _nomSequence = value;
 }

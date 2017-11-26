@@ -2,6 +2,7 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.3
+import QtQuick.Dialogs 1.2
 import "Composant"
 import "Sequence"
 
@@ -16,6 +17,30 @@ ApplicationWindow {
         anchors.fill: parent
         color:"#323232"
     }
+
+
+    FileDialog {
+        id: fileDialog
+        title: "Enregistrer sous ..."
+        nameFilters: [ "Fichier XML (*.xml )"]
+        selectMultiple: false
+        selectFolder: false
+        onAccepted: {
+            ongletSequence.saveAs(fileDialog.fileUrl)
+        }
+    }
+
+    FileDialog {
+        id: fileDialogOuvrir
+        title: "Enregistrer sous ..."
+        nameFilters: [ "Fichier XML (*.xml )"]
+        selectMultiple: false
+        selectFolder: false
+        onAccepted: {
+            ongletSequence.clearAll();
+            ongletSequence.ouvrir(fileDialogOuvrir.fileUrl)
+        }
+    }
     menuBar: MenuBar {
         Menu {
             title: "File"
@@ -24,8 +49,7 @@ ApplicationWindow {
                 text: "Ouvrir..."
                 onTriggered:
                 {
-                    ongletSequence.clearAll();
-                    ongletSequence.ouvrir("Pouet.xml");
+                    fileDialogOuvrir.open();
                 }
             }
 
@@ -35,7 +59,7 @@ ApplicationWindow {
                 text: "Enregistrer sous..."
                 onTriggered:
                 {
-                    ongletSequence.saveAs("Pouet")
+                    fileDialog.open();
                 }
             }
         }

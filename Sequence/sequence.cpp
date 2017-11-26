@@ -22,13 +22,14 @@ void Sequence::clearAll()
 
 void Sequence::enregistrerSous(QString filename)
 {
-    QStringList listNom = filename.split('/');
-    QString nomLast = listNom.last();
-    if(nomLast.contains(".xml"))
+    if(filename.contains(".xml"))
     {
-        nomLast = nomLast.left(nomLast.size()-4);
+        filename = filename.left(filename.size()-4);
     }
-    filename = nomLast+".xml";
+    filename = filename+".xml";
+    filename = filename.right(filename.size()-7);
+
+
     QFile file(filename);
 
     if(file.open(QIODevice::WriteOnly))
@@ -67,7 +68,7 @@ void Sequence::enregistrerSous(QString filename)
                     xmlWriter.writeTextElement("ListTimeOut",listFils);
                 }else
                 {
-                  xmlWriter.writeTextElement("ListFils",listFils);
+                    xmlWriter.writeTextElement("ListFils",listFils);
                 }
             }
 
@@ -90,13 +91,21 @@ void Sequence::enregistrerSous(QString filename)
         xmlWriter.writeEndElement();
         xmlWriter.writeEndDocument();
         file.close();
+    }else
+    {
+        qDebug()<<"Echec de l'ouverture";
     }
 }
 
 int Sequence::ouvrirFichier(QString fileName)
 {
     int rc = 0;
+    if(fileName.left(4)=="file")
+    {
+        fileName = fileName.right(fileName.size()-7);
+    }
     TiXmlDocument doc(fileName.toStdString().c_str());
+
     if(!doc.LoadFile())
     {
         qDebug()<<fileName+" Fichier introuvable";
@@ -812,6 +821,41 @@ int Sequence::ouvrirFichier(QString fileName)
                         if(actionServo->getValideParsage() == VALIDE_PARSE_ACTION_SERVO)
                         {
                             robot->addAction(actionServo);
+                        }
+                        else
+                        {
+                            eaveLogPrintf(eave,EAVE_LOG_ERR,"Impossible d'ajouter l'action [id : %d] a la liste d'action, nombre d'argument invalide",action->getId());
+                        }*/
+                    }else if(elemNameBis == "actionSequence")
+                    {
+
+                        QString nomSequence = " ";
+
+                        for(TiXmlElement* elemTer = elemBis->FirstChildElement(); elemTer != NULL; elemTer = elemTer->NextSiblingElement())
+                        {
+                            std::string elemNameTer = elemTer->Value();
+                            if(elemNameTer == "nomSequence")
+                            {
+                                TiXmlNode* e = elemTer->FirstChild();
+                                if(e!=NULL)
+                                {
+                                    TiXmlText* text = e->ToText();
+                                    std::string s = text->Value();
+                                    nomSequence = QString::fromStdString(s);
+                                }
+                                else return -1;
+                            }
+                        }
+                        genererAction(xBloc, yBloc, typeSequence, listPere, listFils,nomSequence,0,0,0,0,0);
+
+
+                        /* ActionRotation* actionRotation = new ActionRotation(eave);
+                        actionRotation->copie(action,actionRotation);
+                        rc = actionRotation->xmlAutoParse(elemBis);
+                        if(rc != EAVE_ERR_SUCCESS) eaveLogPrintf(eave,EAVE_LOG_WARNING,"Valeur manquante au parsage XML de : id:%d:element:%s",action->getId(),elemNameBis.c_str());
+                        if(actionRotation->getValideParsage() == VALIDE_PARSE_ACTION_ROTATION)
+                        {
+                            robot->addAction(actionRotation);
                         }
                         else
                         {

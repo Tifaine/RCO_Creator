@@ -91,7 +91,8 @@ Item {
             text:"Supprimer"
             onTriggered:
             {
-                console.log("You gonna die");
+                listOnglet.remove(bar.currentIndex,1)
+                tabNomTab.splice(bar.currentIndex-1,1)
             }
         }
     }
@@ -151,6 +152,8 @@ Item {
                     tabNomTab.push(nomSequence)
                     listOnglet.append({_nom:nomSequence,_index:listOnglet.count})
                     bar.currentIndex = listOnglet.count-1
+                    clearAll()
+                    repeaterOnglet.itemAt(bar.currentIndex).children[0].ouvrirFile("scripts/"+nomSequence)
                 }else
                 {
                     bar.currentIndex = tabNomTab.indexOf(nomSequence)+1

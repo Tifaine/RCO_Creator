@@ -4,7 +4,7 @@ import connector 1.0
 Item {
     id:root
     property string couleur
-    property string couleurSelected:"#FF007F"
+    property string couleurSelected:"#151b70"
     property int indice:-1
     objectName: "Sortie"
     height:12

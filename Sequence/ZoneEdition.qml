@@ -131,6 +131,9 @@ Item {
             case 7: //Sequence
             {
                 listAction.append({_x:xBloc,_y:yBloc, _title:"Sequence",_indice:listAction.count,_type:typeBloc})
+                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0);
+                gridAction.itemAt(listAction.count-1).listPere = listPere;
+                gridAction.itemAt(listAction.count-1).listFils = listFils;
                 break;
             }
             case 9: //Depart Sequence
