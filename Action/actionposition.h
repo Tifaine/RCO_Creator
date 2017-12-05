@@ -17,12 +17,6 @@ class ActionPosition : public Action
 public:
     ActionPosition();
 
-    int getXRobot() const;
-    void setXRobot(int value);
-
-    int getYRobot() const;
-    void setYRobot(int value);
-
     void saveXML(QXmlStreamWriter *xmlWriter);
 
 
@@ -47,6 +41,11 @@ signals:
     void sensChanged();
 
 public slots:
+
+    int getXRobot() const;
+    void setXRobot(int value);
+    int getYRobot() const;
+    void setYRobot(int value);
     void getInfo();
 
 private:

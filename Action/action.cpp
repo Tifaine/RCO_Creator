@@ -31,6 +31,7 @@ void Action::ajouterListFils()
 void Action::ajouterFils(int indiceListe, Action* act)
 {
     listFils.at(indiceListe)->append(act);
+    paramChanged(this,"ajoutFils",act);
 }
 
 void Action::supprimerFils(Action * actToDelete)
@@ -40,6 +41,7 @@ void Action::supprimerFils(Action * actToDelete)
         if(listFils.at(i)->indexOf(actToDelete)!=-1)
         {
             listFils.at(i)->removeAt(listFils.at(i)->indexOf(actToDelete));
+            paramChanged(this,"deleteFils",actToDelete);
         }
     }
 }

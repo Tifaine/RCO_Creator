@@ -34,7 +34,8 @@ SOURCES += main.cpp \
     libXML/tinyxmlparser.cpp \
     Sequence/sequence.cpp \
     libXML/xmlmanager.cpp \
-    Action/gestion/gestionsequence.cpp
+    Action/gestion/gestionsequence.cpp \
+    gestionTable/gestiontable.cpp
 
 RESOURCES += qml.qrc
 
@@ -89,5 +90,6 @@ HEADERS += \
     libXML/tinyxml.h \
     Sequence/sequence.h \
     libXML/xmlmanager.h \
-    Action/gestion/gestionsequence.h
+    Action/gestion/gestionsequence.h \
+    gestionTable/gestiontable.h
 

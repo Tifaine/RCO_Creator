@@ -12,6 +12,7 @@
 #include "Action/actionsequence.h"
 #include "Action/actionservo.h"
 #include "Action/actiondepart.h"
+#include "gestionTable/gestiontable.h"
 #include "Action/gestion/gestionservo.h"
 #include "Action/gestion/gestiondynamixel.h"
 #include "Action/gestion/gestionsortie.h"
@@ -51,6 +52,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<RetourPosition>("retourPosition", 1, 0, "RetourPosition");
     qmlRegisterType<RetourOrientation>("retourOrientation", 1, 0, "RetourOrientation");
     qmlRegisterType<GestionSortie>("gestSortie", 1, 0, "GestSortie");
+    qmlRegisterType<GestionTable>("gestTable", 1, 0, "GestTable");
 
     QQmlApplicationEngine engine;
 

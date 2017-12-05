@@ -59,6 +59,8 @@ int ActionPosition::getXRobot() const
 void ActionPosition::setXRobot(int value)
 {
     xRobot = value;
+    emit xRobotChanged();
+    emit paramChanged(this, "x",xRobot);
 }
 
 int ActionPosition::getYRobot() const
@@ -69,6 +71,8 @@ int ActionPosition::getYRobot() const
 void ActionPosition::setYRobot(int value)
 {
     yRobot = value;
+    emit YRobotChanged();
+    emit paramChanged(this, "y",yRobot);
 }
 
 void ActionPosition::saveXML(QXmlStreamWriter* xmlWriter)

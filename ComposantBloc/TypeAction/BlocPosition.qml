@@ -105,6 +105,17 @@ Item {
         id:pos
         xRobot: tfX.text
         yRobot: tfY.text
+
+        onXRobotChanged:
+        {
+            tfX.text = xRobot
+        }
+
+        onYRobotChanged:
+        {
+            tfY.text = yRobot
+        }
+
         //sens:switchSens.checked
     }
 

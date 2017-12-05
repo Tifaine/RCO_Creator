@@ -7,10 +7,12 @@ import "../Composant"
 
 
 Item {
+
     property var tabNomTab:[]
     id:item1
     Component.onCompleted:
     {
+
         listServo.clear()
         listDyna.clear();
         listDeplacement.clear();
@@ -151,7 +153,14 @@ Item {
                 {
                     tabNomTab.push(nomSequence)
                     listOnglet.append({_nom:nomSequence,_index:listOnglet.count})
+                    repeaterOnglet.nbTabOpen++
                     bar.currentIndex = listOnglet.count-1
+                    console.log("coucou");
+                    for(var i = 0;i<listOnglet.count;i++)
+                    {
+                        console.log(repeaterOnglet.itemAt(i).title+" "+repeaterOnglet.itemAt(i).children[0].indiceTab)
+                    }
+
                     clearAll()
                     repeaterOnglet.itemAt(bar.currentIndex).children[0].ouvrirFile("scripts/"+nomSequence)
                 }else
@@ -166,6 +175,7 @@ Item {
 
             id:repeaterOnglet
             model:listOnglet
+            property int nbTabOpen:0
             Tab
             {
                 id:tab
@@ -174,6 +184,7 @@ Item {
                     id: zoneEdi
                     //indiceZoneEdi: _index
                     anchors.fill: parent
+                    indiceTab:index
                     /*onAjouterTab:
                     {
 

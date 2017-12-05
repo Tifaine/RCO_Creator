@@ -20,6 +20,11 @@ void Sequence::clearAll()
     listAction.clear();
 }
 
+int Sequence::getNbAction()
+{
+    return listAction.size();
+}
+
 void Sequence::enregistrerSous(QString filename)
 {
     if(filename.contains(".xml"))
@@ -95,6 +100,8 @@ void Sequence::enregistrerSous(QString filename)
     {
         qDebug()<<"Echec de l'ouverture";
     }
+
+
 }
 
 int Sequence::ouvrirFichier(QString fileName)
@@ -866,6 +873,55 @@ int Sequence::ouvrirFichier(QString fileName)
             }
         }
     }
-    finParsage();
+    emit finParsage();
+
+
     return rc;
 }
+
+void Sequence::test()
+{
+    for(int i = 0;i<listAction.size();i++)
+    {
+        qDebug()<<i<<" "<<listAction.at(i)->getListFils().at(0)->size();
+    }
+}
+
+//void Sequence::gestionTable()
+//{
+//    QList<Action*> listToParse;
+//    QList<Action*> listFilsToParse;
+//    listToParse.append(listAction.at(0));
+
+//    while(listToParse.size()>0)
+//    {
+//        for(int i = 0; i < listAction.at(listAction.indexOf(listToParse.at(0)))->getListFils().size();i++)
+//        {
+//            for(int j=0;j<listAction.at(listAction.indexOf(listToParse.at(0)))->getListFils().at(i)->size();j++)
+//            {
+//                listFilsToParse.append((listAction.at(listAction.indexOf(listToParse.at(0)))->getListFils().at(i)->at(j)));
+//            }
+//        }
+//        while(listFilsToParse.size()>0)
+//        {
+//            if(listFilsToParse.at(0)->getType()==typePosition)
+//            {
+//                listToParse.append(listAction.at(listAction.indexOf(listFilsToParse.at(0))));
+//                qDebug()<<listAction.indexOf(listFilsToParse.at(0))<<" est un descendant de "<<listAction.indexOf(listToParse.at(0));
+//            }else
+//            {
+//                for(int i = 0; i < listAction.at(listAction.indexOf(listFilsToParse.at(0)))->getListFils().size();i++)
+//                {
+//                    for(int j=0;j<listAction.at(listAction.indexOf(listFilsToParse.at(0)))->getListFils().at(i)->size();j++)
+//                    {
+//                        listFilsToParse.append((listAction.at(listAction.indexOf(listFilsToParse.at(0)))->getListFils().at(i)->at(j)));
+//                    }
+//                }
+//            }
+//            listFilsToParse.removeFirst();
+//        }
+//        listToParse.removeFirst();
+//    }
+//}
+
+

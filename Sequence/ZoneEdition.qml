@@ -8,10 +8,12 @@ import QtQuick.XmlListModel 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import "../ComposantBloc"
+import "../gestionTable"
 
 Item {
     id:root
     signal ajouterTab(var nom);
+    property int indiceTab : 0
     property string nomActionToAdd : "Coucou"
     function saveAs(nomFichier)
     {
@@ -22,6 +24,7 @@ Item {
     {
         listAction.clear()
         seq.clearAll()
+        table1.gestionTable.clearAll()
     }
 
     function ouvrirFile(nomFichier)
@@ -62,7 +65,7 @@ Item {
                     {
                         var obj3 = gridAction.itemAt(parseInt(stringList2[k])).listEntree_.itemAt(0)
                         sortieCourante2.repaint((obj3.parent.x+obj3.x+5)-sortieCourante2.parent.x-sortieCourante2.x,
-                                               (obj3.parent.y+obj3.y+5)-sortieCourante2.parent.y-sortieCourante2.y)
+                                                (obj3.parent.y+obj3.y+5)-sortieCourante2.parent.y-sortieCourante2.y)
                         sortieCourante2.addLiaison(obj3);
                         sortieCourante2.parent.bloc.ajouterFils(sortieCourante2.indice,obj3.parent.bloc)
                         obj3.tabPere.push(sortieCourante2)
@@ -72,10 +75,12 @@ Item {
                 }
                 //console.log("Liste Pere : "+gridAction.itemAt(i).listPere+" Liste Fils : "+gridAction.itemAt(i).listFils)
             }
+            table1.updateTable()
         }
 
         onGenererAction:
         {
+
             switch(typeBloc)
             {
             case -1: //Init
@@ -201,6 +206,18 @@ Item {
             }
             }
         }
+    }
+
+    GestionTable
+    {
+        id:table1
+        z:1
+        seqPapa:gridAction
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
+
     }
 
     Rectangle
@@ -464,179 +481,11 @@ Item {
 
                 }
 
-                Connections
-                {
-                    target:gestionXML
-
-                    onFinParsage:
-                    {
-                        for(var i=0;i<listAction.count;i++)
-                        {
-                            if(gridAction.itemAt(i).listPere !== null && gridAction.itemAt(i).listFils !== null )
-                            {
-                                var stringList = gridAction.itemAt(i).listFils.split(';')
-                                var sortieCourante = gridAction.itemAt(i).listSortie_.itemAt(0)
-                                for(var j=0;j<stringList.length-1;j++)
-                                {
-                                    var obj2 = gridAction.itemAt(parseInt(stringList[j])).listEntree_.itemAt(0)
-                                    sortieCourante.repaint((obj2.parent.x+obj2.x+5)-sortieCourante.parent.x-sortieCourante.x,
-                                                           (obj2.parent.y+obj2.y+5)-sortieCourante.parent.y-sortieCourante.y)
-                                    sortieCourante.addLiaison(obj2);
-                                    sortieCourante.parent.bloc.ajouterFils(sortieCourante.indice,obj2.parent.bloc)
-                                    obj2.tabPere.push(sortieCourante)
-                                    obj2.parent.bloc.ajouterPere(0,sortieCourante.parent.bloc)
-                                }
-                                stringList = gridAction.itemAt(i).listPere.split(';')
-                            }
-
-                            if(gridAction.itemAt(i).listTimeOut !== null)
-                            {
-                                var stringList2 = gridAction.itemAt(i).listTimeOut.split(';')
-                                var sortieCourante2 = gridAction.itemAt(i).listSortie_.itemAt(1)
-                                for(var k=0;k<stringList2.length-1;k++)
-                                {
-                                    var obj3 = gridAction.itemAt(parseInt(stringList2[k])).listEntree_.itemAt(0)
-                                    sortieCourante2.repaint((obj3.parent.x+obj3.x+5)-sortieCourante2.parent.x-sortieCourante2.x,
-                                                           (obj3.parent.y+obj3.y+5)-sortieCourante2.parent.y-sortieCourante2.y)
-                                    sortieCourante2.addLiaison(obj3);
-                                    sortieCourante2.parent.bloc.ajouterFils(sortieCourante2.indice,obj3.parent.bloc)
-                                    obj3.tabPere.push(sortieCourante2)
-                                    obj3.parent.bloc.ajouterPere(0,sortieCourante2.parent.bloc)
-                                }
-                                stringList = gridAction.itemAt(i).listPere.split(';')
-                            }
-                            //console.log("Liste Pere : "+gridAction.itemAt(i).listPere+" Liste Fils : "+gridAction.itemAt(i).listFils)
-                        }
-                    }
-
-                    onGenererAction:
-                    {
-                        switch(typeBloc)
-                        {
-                        case -1: //Init
-                            break;
-                        case 0: //Servomoteur
-                        {
-
-                            listAction.append({_x:xBloc,_y:yBloc, _title:"Servomoteur",_indice:listAction.count,_type:typeBloc})
-                            gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2);
-                            gridAction.itemAt(listAction.count-1).listPere = listPere;
-                            gridAction.itemAt(listAction.count-1).listFils = listFils;
-                            break;
-                        }
-                        case 1: //Dynamixel
-                        {
-                            listAction.append({_x:xBloc,_y:yBloc, _title:"Dynamixel",_indice:listAction.count,_type:typeBloc})
-                            gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2,param3);
-                            gridAction.itemAt(listAction.count-1).listPere = listPere;
-                            gridAction.itemAt(listAction.count-1).listFils = listFils;
-                            break;
-                        }
-                        case 2: //Capteur
-                        {
-                            listAction.append({_x:xBloc,_y:yBloc, _title:"Capteur",_indice:listAction.count,_type:typeBloc})
-                            break;
-                        }
-                        case 3: //Moteur
-                        {
-                            listAction.append({_x:xBloc,_y:yBloc, _title:"Moteur",_indice:listAction.count,_type:typeBloc})
-                            break;
-                        }
-                        case 4: //Autre
-                        {
-                            listAction.append({_x:xBloc,_y:yBloc, _title:"Autre",_indice:listAction.count,_type:typeBloc})
-                            break;
-                        }
-                        case 5: //Position
-                        {
-                            listAction.append({_x:xBloc,_y:yBloc, _title:"Position",_indice:listAction.count,_type:typeBloc})
-                            gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2,param3,param4,param5);
-                            gridAction.itemAt(listAction.count-1).listPere = listPere;
-                            gridAction.itemAt(listAction.count-1).listFils = listFils;
-                            break;
-                        }
-                        case 6: //Orientation
-                        {
-                            listAction.append({_x:xBloc,_y:yBloc, _title:"Orientation",_indice:listAction.count,_type:typeBloc})
-                            gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0);
-                            gridAction.itemAt(listAction.count-1).listPere = listPere;
-                            gridAction.itemAt(listAction.count-1).listFils = listFils;
-                            break;
-                        }
-                        case 7: //Sequence
-                        {
-                            listAction.append({_x:xBloc,_y:yBloc, _title:"Sequence",_indice:listAction.count,_type:typeBloc})
-                            break;
-                        }
-                        case 9: //Depart Sequence
-                        {
-                            listAction.append({_x:xBloc,_y:yBloc, _title:"Depart",_indice:listAction.count,_type:typeBloc})
-                            gridAction.itemAt(listAction.count-1).listPere = listPere;
-                            gridAction.itemAt(listAction.count-1).listFils = listFils;
-                            break;
-                        }
-                        case 10: //Attente servo
-                        {
-                            listAction.append({_x:xBloc,_y:yBloc, _title:"Retour servo",_indice:listAction.count,_type:typeBloc})
-                            break;
-                        }
-                        case 11: //Attente dyna
-                        {
-                            listAction.append({_x:xBloc,_y:yBloc, _title:"Retour dyna",_indice:listAction.count,_type:typeBloc})
-
-                            gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2,param4);
-                            gridAction.itemAt(listAction.count-1).listPere = listPere;
-                            gridAction.itemAt(listAction.count-1).listFils = listFils;
-                            gridAction.itemAt(listAction.count-1).listTimeOut = param3;
-                            break;
-                        }
-                        case 12: //Attente temps
-                        {
-                            listAction.append({_x:xBloc,_y:yBloc, _title:"Retour temps",_indice:listAction.count,_type:typeBloc})
-                            gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0);
-                            gridAction.itemAt(listAction.count-1).listPere = listPere;
-                            gridAction.itemAt(listAction.count-1).listFils = listFils;
-                            break;
-                        }
-                        case 13: //Retour déplacement
-                        {
-                            listAction.append({_x:xBloc,_y:yBloc, _title:"Retour déplacement",_indice:listAction.count,_type:typeBloc})
-                            break;
-                        }
-                        case 14: //Retour orientation
-                        {
-                            listAction.append({_x:xBloc,_y:yBloc, _title:"Retour orientation",_indice:listAction.count,_type:typeBloc})
-                            gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param3);
-                            gridAction.itemAt(listAction.count-1).listPere = listPere;
-                            gridAction.itemAt(listAction.count-1).listFils = listFils;
-                            gridAction.itemAt(listAction.count-1).listTimeOut = param2;
-                            break;
-                        }
-                        case 15: //Retour position
-                        {
-                            listAction.append({_x:xBloc,_y:yBloc, _title:"Retour position",_indice:listAction.count,_type:typeBloc})
-                            gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2,param4);
-                            gridAction.itemAt(listAction.count-1).listPere = listPere;
-                            gridAction.itemAt(listAction.count-1).listFils = listFils;
-                            gridAction.itemAt(listAction.count-1).listTimeOut = param3;
-                            break;
-                        }
-                        case 16: //GPIO
-                        {
-                            //listAction.append({_x:xBloc,_y:yBloc, _title:"GPIO,_indice:listAction.count,_type:typeBloc})
-                            break;
-                        }
-                        case 17: //retour GPIO
-                        {
-                            //listAction.append({_x:xBloc,_y:yBloc, _title:"retour GPIO,_indice:listAction.count,_type:typeBloc})
-                            break;
-                        }
-                        }
-                    }
-                }
 
                 DropArea
                 {
+                    id:drop1
+                    property bool wasDropped:false
                     anchors.fill: parent
                     onDropped:
                     {
@@ -657,6 +506,7 @@ Item {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:4})
                         }else if(nomActionToAdd === "Position")
                         {
+                            drop1.wasDropped = true;
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:5})
                         }else if(nomActionToAdd === "Orientation")
                         {
@@ -707,17 +557,26 @@ Item {
                         title:_title
                         indice:_indice
                         type : _type
+                        _couleurInfoBloc:(indice==table1.indiceSelect) ? "blue":"#655e5e"
                         onIWantToDie:
                         {
                             seq.supprimerAction(act.bloc)
+                            table1.gestionTable.supprimerAction(act.bloc)
                             listAction.remove(index,1)
-                        }                        
+                        }
 
                         onCreationComplete:
                         {
                             if(bloc!==null)
                             {
                                 seq.ajouterAction(bloc)
+                                table1.gestionTable.ajouterAction(bloc)
+                                if(drop1.wasDropped === true)
+                                {
+                                    drop1.wasDropped = false;
+                                    table1.updateTable()
+                                }
+
                                 bloc.xBloc = x;
                                 bloc.yBloc = y;
                             }else

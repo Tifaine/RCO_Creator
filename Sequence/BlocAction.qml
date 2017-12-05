@@ -8,7 +8,7 @@ Item {
     property string title
     property int indice
     property int type
-    property var _couleurInfoBloc : "#655e5e"
+    property string _couleurInfoBloc : "#655e5e"
 
     property var listSortie_ : gridSortie
     property var listEntree_ : gridEntree
@@ -177,7 +177,6 @@ Item {
                 contextMenu1.popup()
             }
         }
-
     }
 
     Rectangle {
@@ -200,31 +199,7 @@ Item {
             createSpriteObjects(type,0,0)
             creationComplete(bloc);
         }
-
     }
-    /*
-    Info_Bloc
-    {
-        _couleur : _couleurInfoBloc
-        anchors.right: parent.right
-        anchors.rightMargin: 12
-        anchors.left: parent.left
-        anchors.leftMargin: 12
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        anchors.top: rectangle3.bottom
-        anchors.topMargin: 0
-        typeBloc:type
-        onIFTailleChange:
-        {
-            root.height = 32 + taille
-        }
-        onFinCreation:
-        {
-            creationComplete(bloc);
-        }
-
-    }*/
 
     ListModel
     {
@@ -244,11 +219,9 @@ Item {
         }
     }
 
-
     ListModel
     {
         id:listSortie
-
         ListElement{ _x:188 ; _y:30; _indice:0;_color:"grey" }
         ListElement{ _x:188 ; _y:45; _indice:1;_color:"orange" }
         ListElement{ _x:188 ; _y:60; _indice:2;_color:"yellow" }
@@ -299,7 +272,7 @@ Item {
         Text {
             id: textTitre
             z:2
-            text: title
+            text: title+" "+indice
             font.bold: true
             anchors.fill: parent
             anchors.leftMargin: 15

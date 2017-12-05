@@ -102,8 +102,6 @@ Item {
                     tailleChange(70)
                 }
             }
-
-
         }
     }
 

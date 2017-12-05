@@ -98,32 +98,21 @@ ApplicationWindow {
             switch(currentIndex)
             {
             case 0:
-            {
                 ongletSequence.visible = true;
-            }
-            break;
+                break;
             case 1:
-            {
                 ongletSequence.visible = false;
-            }
-            break;
+                break;
             case 2:
-            {
                 ongletSequence.visible = false;
-            }
-            break;
+                break;
             case 3:
-            {
                 ongletSequence.visible = false;
-            }
-            break;
+                break;
             case 4:
-            {
                 ongletSequence.visible = false;
+                break;
             }
-            break;
-            }
-
         }
     }
 }

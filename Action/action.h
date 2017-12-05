@@ -60,6 +60,9 @@ signals:
     void yBlocChanged();
     void timeOutChanged();
 
+    void paramChanged(Action* act, QString nomParam, int newValue);
+    void paramChanged(Action* act, QString nomParam, Action* newValue);
+
 public slots:
     virtual void getInfo();
     void ajouterListFils();
