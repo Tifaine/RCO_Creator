@@ -12,7 +12,7 @@ class AttenteDyna : public Action
 public:
     AttenteDyna();
     void saveXML(QXmlStreamWriter *xmlWriter);
-
+void saveXML(TiXmlElement * root, int indice);
     int getIdDyna() const;
     void setIdDyna(int value);
 

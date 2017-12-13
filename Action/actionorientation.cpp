@@ -22,3 +22,15 @@ void ActionOrientation::setAngle(int value)
     angle = value;
 }
 
+
+void ActionOrientation::saveXML(TiXmlElement * root, int indice)
+{
+    switch(indice)
+    {
+    case 1:
+        root->SetAttribute("type", "actionRotation");
+        break;
+    case 2:
+        break;
+    }
+}

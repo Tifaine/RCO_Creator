@@ -14,6 +14,18 @@ void AttenteDyna::saveXML(QXmlStreamWriter *xmlWriter)
     xmlWriter->writeEndElement();
 }
 
+void AttenteDyna::saveXML(TiXmlElement * root, int indice)
+{
+    switch(indice)
+    {
+    case 1:
+        root->SetAttribute("type", "actionRetourDyna");
+        break;
+    case 2:
+        break;
+    }
+}
+
 int AttenteDyna::getIdDyna() const
 {
     return idDyna;

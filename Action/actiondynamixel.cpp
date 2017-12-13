@@ -15,6 +15,24 @@ void ActionDynamixel::saveXML(QXmlStreamWriter* xmlWriter)
     xmlWriter->writeEndElement();
 }
 
+void ActionDynamixel::saveXML(TiXmlElement * root, int indice)
+{
+    switch(indice)
+    {
+    case 1:
+        root->SetAttribute("type", "actionDyna");
+        break;
+    case 2:
+        TiXmlElement * param = new TiXmlElement( "parametres" );
+        root->LinkEndChild( param );
+        param->SetAttribute("nom", getNomDyna().toStdString().c_str());
+        param->SetAttribute("id", QString::number(getIdDyna(),'f',0).toStdString().c_str());
+        param->SetAttribute("angle", QString::number(getValueDyna(),'f',0).toStdString().c_str());
+        param->SetAttribute("vitesse", QString::number(getVitesseDyna(),'f',0).toStdString().c_str());
+        break;
+    }
+}
+
 int ActionDynamixel::getIdDyna() const
 {
     return idDyna;

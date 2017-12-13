@@ -18,7 +18,7 @@ public:
     ActionPosition();
 
     void saveXML(QXmlStreamWriter *xmlWriter);
-
+    void saveXML(TiXmlElement * root, int indice);
 
     int getVitesse() const;
     void setVitesse(int value);

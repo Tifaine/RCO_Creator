@@ -12,7 +12,7 @@ class AttenteServo : public Action
 public:
     AttenteServo();
     void saveXML(QXmlStreamWriter *xmlWriter);
-
+    void saveXML(TiXmlElement * root, int indice);
     int getIdServo() const;
     void setIdServo(int value);
 

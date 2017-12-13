@@ -35,71 +35,145 @@ void Sequence::enregistrerSous(QString filename)
     filename = filename.right(filename.size()-7);
 
 
-    QFile file(filename);
+    TiXmlDocument doc;
+    TiXmlElement* msg;
+    TiXmlDeclaration* decl = new TiXmlDeclaration( "1.0", "UTF-8", "" );
+    doc.LinkEndChild( decl );
 
-    if(file.open(QIODevice::WriteOnly))
+    msg = new TiXmlElement( "typeXml" );
+    msg->LinkEndChild( new TiXmlText( "scenario" ));
+    doc.LinkEndChild( msg );
+
+    TiXmlElement * root = new TiXmlElement( "Sequence" );
+    doc.LinkEndChild( root );
+    msg = new TiXmlElement( "version" );
+    msg->LinkEndChild( new TiXmlText( "3.1" ));
+    root->LinkEndChild( msg );
+    for(int i=0;i<listAction.size();i++)
     {
-        QString element;
-        QXmlStreamWriter xmlWriter(&file);
-        xmlWriter.setAutoFormatting(true);
-        xmlWriter.writeStartDocument();
-        xmlWriter.writeTextElement("TypeXml","Scenario");
-        xmlWriter.writeStartElement("Sequence");
-        xmlWriter.writeTextElement("version",element.number(3,'f',0));
 
-        for(int i=0;i<listAction.size();i++)
+
+        TiXmlElement * action = new TiXmlElement( "Action" );
+        root->LinkEndChild( action );
+        listAction.at(i)->saveXML(action,1);
+        action->SetAttribute("numero", i);
+
+        TiXmlElement * posBloc = new TiXmlElement( "bloc" );
+        action->LinkEndChild( posBloc );
+        posBloc->SetAttribute("x", listAction.at(i)->getXBloc());
+        posBloc->SetAttribute("y", listAction.at(i)->getYBloc());
+
+        for(int j=0;j<listAction.at(i)->getListFils().size();j++)
         {
-            xmlWriter.writeStartElement("Action");
-            xmlWriter.writeTextElement("ActionNumero",QString::number(i));
-            xmlWriter.writeTextElement("xBloc",QString::number(listAction.at(i)->getXBloc()));
-            xmlWriter.writeTextElement("yBloc",QString::number(listAction.at(i)->getYBloc()));
-            if(listAction.at(i)->getTimeOut() != -1)
+            QString listFils;
+            listFils.clear();
+            for(int k=0;k<listAction.at(i)->getListFils().at(j)->size();k++)
             {
-                xmlWriter.writeTextElement("timeOut",QString::number(listAction.at(i)->getTimeOut()));
+                listFils.append(QString::number(listAction.indexOf(listAction.at(i)->getListFils().at(j)->at(k))));
+                listFils.append(";");
             }
-
-
-            for(int j=0;j<listAction.at(i)->getListFils().size();j++)
+            if(j == listAction.at(i)->getListFils().size() -1 && j != 0)
             {
-                QString listFils;
-                listFils.clear();
-                for(int k=0;k<listAction.at(i)->getListFils().at(j)->size();k++)
-                {
-                    listFils.append(QString::number(listAction.indexOf(listAction.at(i)->getListFils().at(j)->at(k))));
-                    listFils.append(";");
-                }
-                if(j == listAction.at(i)->getListFils().size() -1 && j != 0)
-                {
-                    xmlWriter.writeTextElement("ListTimeOut",listFils);
-                }else
-                {
-                    xmlWriter.writeTextElement("ListFils",listFils);
-                }
-            }
+                TiXmlElement * posBloc = new TiXmlElement( "timeout" );
+                action->LinkEndChild( posBloc );
+                posBloc->SetAttribute("liste", listFils.toStdString().c_str());
 
-            for(int j=0;j<listAction.at(i)->getListPere().size();j++)
+
+            }else
             {
-                QString listPere;
-                listPere.clear();
-                for(int k=0;k<listAction.at(i)->getListPere().at(j)->size();k++)
-                {
-                    listPere.append(QString::number(listAction.indexOf(listAction.at(i)->getListPere().at(j)->at(k))));
-                    listPere.append(";");
-                }
-                xmlWriter.writeTextElement("ListPere",listPere);
+                TiXmlElement * posBloc = new TiXmlElement( "fils" );
+                action->LinkEndChild( posBloc );
+                posBloc->SetAttribute("liste", listFils.toStdString().c_str());
 
             }
-
-            listAction.at(i)->saveXML(&xmlWriter);
-            xmlWriter.writeEndElement();
         }
-        xmlWriter.writeEndElement();
-        xmlWriter.writeEndDocument();
-        file.close();
-    }else
-    {
-        qDebug()<<"Echec de l'ouverture";
+
+        for(int j=0;j<listAction.at(i)->getListPere().size();j++)
+        {
+            QString listPere;
+            listPere.clear();
+            for(int k=0;k<listAction.at(i)->getListPere().at(j)->size();k++)
+            {
+                listPere.append(QString::number(listAction.indexOf(listAction.at(i)->getListPere().at(j)->at(k))));
+                listPere.append(";");
+            }
+            TiXmlElement * posBloc = new TiXmlElement( "peres" );
+            action->LinkEndChild( posBloc );
+            posBloc->SetAttribute("liste", listPere.toStdString().c_str());
+
+        }
+
+        listAction.at(i)->saveXML(action,2);
     }
+
+    doc.SaveFile( filename.toStdString().c_str() );
+
+
+    //    QFile file(filename);
+
+    //    if(file.open(QIODevice::WriteOnly))
+    //    {
+    //        QString element;
+    //        QXmlStreamWriter xmlWriter(&file);
+    //        xmlWriter.setAutoFormatting(true);
+    //        xmlWriter.writeStartDocument();
+    //        xmlWriter.writeTextElement("TypeXml","Scenario");
+    //        xmlWriter.writeStartElement("Sequence");
+    //        xmlWriter.writeTextElement("version",element.number(3,'f',0));
+
+    //        for(int i=0;i<listAction.size();i++)
+    //        {
+    //            xmlWriter.writeStartElement("Action");
+    //            xmlWriter.writeTextElement("ActionNumero",QString::number(i));
+    //            xmlWriter.writeTextElement("xBloc",QString::number(listAction.at(i)->getXBloc()));
+    //            xmlWriter.writeTextElement("yBloc",QString::number(listAction.at(i)->getYBloc()));
+    //            if(listAction.at(i)->getTimeOut() != -1)
+    //            {
+    //                xmlWriter.writeTextElement("timeOut",QString::number(listAction.at(i)->getTimeOut()));
+    //            }
+
+
+    //            for(int j=0;j<listAction.at(i)->getListFils().size();j++)
+    //            {
+    //                QString listFils;
+    //                listFils.clear();
+    //                for(int k=0;k<listAction.at(i)->getListFils().at(j)->size();k++)
+    //                {
+    //                    listFils.append(QString::number(listAction.indexOf(listAction.at(i)->getListFils().at(j)->at(k))));
+    //                    listFils.append(";");
+    //                }
+    //                if(j == listAction.at(i)->getListFils().size() -1 && j != 0)
+    //                {
+    //                    xmlWriter.writeTextElement("ListTimeOut",listFils);
+    //                }else
+    //                {
+    //                    xmlWriter.writeTextElement("ListFils",listFils);
+    //                }
+    //            }
+
+    //            for(int j=0;j<listAction.at(i)->getListPere().size();j++)
+    //            {
+    //                QString listPere;
+    //                listPere.clear();
+    //                for(int k=0;k<listAction.at(i)->getListPere().at(j)->size();k++)
+    //                {
+    //                    listPere.append(QString::number(listAction.indexOf(listAction.at(i)->getListPere().at(j)->at(k))));
+    //                    listPere.append(";");
+    //                }
+    //                xmlWriter.writeTextElement("ListPere",listPere);
+
+    //            }
+
+    //            listAction.at(i)->saveXML(&xmlWriter);
+    //            xmlWriter.writeEndElement();
+    //        }
+    //        xmlWriter.writeEndElement();
+    //        xmlWriter.writeEndDocument();
+    //        file.close();
+    //    }else
+    //    {
+    //        qDebug()<<"Echec de l'ouverture";
+    //    }
 
 
 }

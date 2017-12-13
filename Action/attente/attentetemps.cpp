@@ -21,3 +21,15 @@ void AttenteTemps::saveXML(QXmlStreamWriter *xmlWriter)
     xmlWriter->writeTextElement("valueAttente",QString::number(getTemps(),'f',0));
     xmlWriter->writeEndElement();
 }
+
+void AttenteTemps::saveXML(TiXmlElement * root, int indice)
+{
+    switch(indice)
+    {
+    case 1:
+        root->SetAttribute("type", "actionPause");
+        break;
+    case 2:
+        break;
+    }
+}

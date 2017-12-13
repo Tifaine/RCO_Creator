@@ -9,6 +9,7 @@ class ActionSequence : public Action
 public:
     ActionSequence();
     void saveXML(QXmlStreamWriter *xmlWriter);
+    void saveXML(TiXmlElement * root, int indice);
 
     QString getNomSequence() const;
     void setNomSequence(const QString &value);

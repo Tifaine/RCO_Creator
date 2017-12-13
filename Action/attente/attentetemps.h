@@ -9,6 +9,7 @@ class AttenteTemps : public Action
 public:
     AttenteTemps();
     void saveXML(QXmlStreamWriter *xmlWriter);
+    void saveXML(TiXmlElement * root, int indice);
     int getTemps() const;
     void setTemps(int value);
 

@@ -4,6 +4,8 @@
 #include <QQuickItem>
 #include <QObject>
 #include <QXmlStreamWriter>
+#include "../libXML/tinystr.h"
+#include "../libXML/tinyxml.h"
 //#include "actionposition.h"
 
 #define typeServo               0
@@ -40,7 +42,7 @@ public:
     void setType(int value);
 
     virtual void saveXML(QXmlStreamWriter* xmlWriter) = 0;
-
+    virtual void saveXML(TiXmlElement * root, int indice) = 0;
     QList<QList<Action *> *> getListFils() const;
 
     int getXBloc() const;

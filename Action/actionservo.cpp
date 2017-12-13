@@ -13,6 +13,17 @@ void ActionServo::saveXML(QXmlStreamWriter* xmlWriter)
     xmlWriter->writeTextElement("angle",QString::number(getValueServo(),'f',0));
     xmlWriter->writeEndElement();
 }
+void ActionServo::saveXML(TiXmlElement * root, int indice)
+{
+    switch(indice)
+    {
+    case 1:
+        root->SetAttribute("type", "actionServo");
+        break;
+    case 2:
+        break;
+    }
+}
 
 int ActionServo::getIdServo() const
 {

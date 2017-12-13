@@ -9,3 +9,9 @@ void ActionAutre::saveXML(QXmlStreamWriter *xmlWriter)
 {
     qDebug()<<"Action autre";
 }
+
+
+void ActionAutre::saveXML(TiXmlElement * root, int indice)
+{
+
+}

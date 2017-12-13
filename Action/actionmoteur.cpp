@@ -12,3 +12,8 @@ void ActionMoteur::saveXML(QXmlStreamWriter* xmlWriter)
     xmlWriter->writeEndElement();
 }
 
+
+void ActionMoteur::saveXML(TiXmlElement * root, int indice)
+{
+
+}

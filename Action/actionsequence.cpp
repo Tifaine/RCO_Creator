@@ -12,6 +12,18 @@ void ActionSequence::saveXML(QXmlStreamWriter* xmlWriter)
     xmlWriter->writeEndElement();
 }
 
+void ActionSequence::saveXML(TiXmlElement * root, int indice)
+{
+    switch(indice)
+    {
+    case 1:
+        root->SetAttribute("type", "actionSequence");
+        break;
+    case 2:
+        break;
+    }
+}
+
 QString ActionSequence::getNomSequence() const
 {
     return _nomSequence;

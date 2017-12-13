@@ -12,6 +12,7 @@ class ActionDynamixel : public Action
 public:
     ActionDynamixel();
     void saveXML(QXmlStreamWriter *xmlWriter);
+    void saveXML(TiXmlElement * root, int indice);
 
     int getIdDyna() const;
     void setIdDyna(int value);

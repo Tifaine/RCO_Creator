@@ -43,3 +43,15 @@ void RetourPosition::saveXML(QXmlStreamWriter* xmlWriter)
     xmlWriter->writeTextElement("precision",QString::number(precision,'f',0));
     xmlWriter->writeEndElement();
 }
+
+void RetourPosition::saveXML(TiXmlElement * root, int indice)
+{
+    switch(indice)
+    {
+    case 1:
+        root->SetAttribute("type", "actionRetourPosition");
+        break;
+    case 2:
+        break;
+    }
+}

@@ -9,7 +9,7 @@ class ActionOrientation : public Action
 public:
     ActionOrientation();
     void saveXML(QXmlStreamWriter *xmlWriter);
-
+    void saveXML(TiXmlElement * root, int indice);
 
     int getAngle() const;
     void setAngle(int value);

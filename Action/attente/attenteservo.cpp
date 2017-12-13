@@ -14,6 +14,18 @@ void AttenteServo::saveXML(QXmlStreamWriter *xmlWriter)
     xmlWriter->writeEndElement();
 }
 
+void AttenteServo::saveXML(TiXmlElement * root, int indice)
+{
+    switch(indice)
+    {
+    case 1:
+        root->SetAttribute("type", "actionRetourServo");
+        break;
+    case 2:
+        break;
+    }
+}
+
 int AttenteServo::getIdServo() const
 {
     return idServo;

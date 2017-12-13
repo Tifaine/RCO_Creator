@@ -86,3 +86,24 @@ void ActionPosition::saveXML(QXmlStreamWriter* xmlWriter)
     xmlWriter->writeTextElement("sens",QString::number(sens,'f',0));
     xmlWriter->writeEndElement();
 }
+
+void ActionPosition::saveXML(TiXmlElement * root, int indice)
+{
+    switch(indice)
+    {
+    case 1:
+        root->SetAttribute("type", "actionPosition");
+        break;
+    case 2:
+        TiXmlElement * param = new TiXmlElement( "parametres" );
+        root->LinkEndChild( param );
+        param->SetAttribute("x", QString::number(xRobot,'f',0).toStdString().c_str());
+        param->SetAttribute("y", QString::number(yRobot,'f',0).toStdString().c_str());
+        param->SetAttribute("vitesse", QString::number(vitesse,'f',0).toStdString().c_str());
+        param->SetAttribute("acc", QString::number(acceleration,'f',0).toStdString().c_str());
+        param->SetAttribute("dec", QString::number(deceleration,'f',0).toStdString().c_str());
+        param->SetAttribute("sens", QString::number(sens,'f',0).toStdString().c_str());
+
+        break;
+    }
+}
