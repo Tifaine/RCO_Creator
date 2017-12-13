@@ -37,7 +37,6 @@ class Action : public QQuickItem
     Q_PROPERTY(int timeOut READ getTimeOut WRITE setTimeOut NOTIFY timeOutChanged)
 public:
     Action(QQuickItem *parent = nullptr);
-    int getType() const;
     void setType(int value);
 
     virtual void saveXML(QXmlStreamWriter* xmlWriter) = 0;
@@ -64,6 +63,8 @@ signals:
     void paramChanged(Action* act, QString nomParam, Action* newValue);
 
 public slots:
+    int getType() const;
+
     virtual void getInfo();
     void ajouterListFils();
     void ajouterFils(int indiceListe, Action *act);

@@ -23,9 +23,7 @@ Item {
                 listPoint.append({"indice":i,"couleur":"#FF007F"})
                 repeaterPoint.itemAt(listPoint.count-1).x = image.x + ((gestTable.getAction(i).getXRobot()+1500)*image.width / 3000) - repeaterPoint.itemAt(listPoint.count-1).width/2
                 repeaterPoint.itemAt(listPoint.count-1).y = image.y + ((2000-gestTable.getAction(i).getYRobot())*image.height/ 2000) - repeaterPoint.itemAt(listPoint.count-1).height/2
-
             }
-
             //x:image.x + ((gestTable.getAction(indice).getXRobot()+1500)*image.width / 3000) - width/2
             //y:image.y + ((2000-gestTable.getAction(indice).getYRobot())*image.height/ 2000) - height/2
         }
@@ -163,19 +161,30 @@ Item {
             {
                 if(mouseArea2.pressed)
                 {
-                    gestTable.getAction(indice).setXRobot(((x- image.x + width/2) * 3000/image.width)-1500);
-                    rect.x++;
-                    rect.x--;
+                    if(gestTable.getAction(indice).getType() === 5)
+                    {
+                        gestTable.getAction(indice).setXRobot(((x- image.x + width/2) * 3000/image.width)-1500);
+                        rect.x++;
+                        rect.x--;
+                    }else
+                    {
+                        gestTable.gestionTable();
+                    }
                 }
             }
             onYChanged:
             {
-
                 if(mouseArea2.pressed)
                 {
-                    gestTable.getAction(indice).setYRobot((((y- image.y + height/2) * 2000/image.height)-2000)*-1);
-                    rect.x++;
-                    rect.x--;
+                    if(gestTable.getAction(indice).getType() === 5)
+                    {
+                        gestTable.getAction(indice).setYRobot((((y- image.y + height/2) * 2000/image.height)-2000)*-1);
+                        rect.x++;
+                        rect.x--;
+                    }else
+                    {
+                        gestTable.gestionTable();
+                    }
                 }
             }
 

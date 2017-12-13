@@ -123,7 +123,7 @@ Item {
         id: tfX
         width: 50
         height: 30
-        text: qsTr("2000")
+        text: qsTr("0")
         anchors.left: parent.left
         anchors.leftMargin: 5
         anchors.top: textX.bottom
@@ -143,7 +143,7 @@ Item {
         x: 64
         width: 50
         height: 30
-        text: qsTr("2000")
+        text: qsTr("1000")
         anchors.right: parent.right
         anchors.rightMargin: 5
         anchors.top: textY.bottom

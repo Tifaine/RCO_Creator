@@ -41,7 +41,7 @@ void Action::supprimerFils(Action * actToDelete)
         if(listFils.at(i)->indexOf(actToDelete)!=-1)
         {
             listFils.at(i)->removeAt(listFils.at(i)->indexOf(actToDelete));
-            paramChanged(this,"deleteFils",actToDelete);
+            paramChanged(actToDelete,"deleteFils",actToDelete);
         }
     }
 }

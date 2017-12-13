@@ -21,7 +21,6 @@ class GestionTable : public QObject
 public:
     explicit GestionTable(QObject *parent = nullptr);
 
-
 signals:
     void changeX(int indice, int newValue);
     void changeY(int indice, int newValue);

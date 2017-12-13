@@ -563,6 +563,7 @@ Item {
                             seq.supprimerAction(act.bloc)
                             table1.gestionTable.supprimerAction(act.bloc)
                             listAction.remove(index,1)
+                            table1.updateTable()
                         }
 
                         onCreationComplete:
