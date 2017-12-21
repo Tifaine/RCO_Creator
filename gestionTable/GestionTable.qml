@@ -7,11 +7,18 @@ Item {
     width:600
     height:400
 
-    property int essaiX:500
-    property int essaiY:1000
+    property int longueurTable: 3000
+    property int hauteurTable: 2000
+
+    property int decaleHaut:45
+    property int decaleBas:23
+    property int decaleGauche:24
+    property int decaleDroit:24
+
     property var seqPapa:null
     property var gestionTable:gestTable
     property int indiceSelect:-1
+    property var itemTable:imageTable
 
     function updateTable()
     {
@@ -21,11 +28,9 @@ Item {
             if(gestTable.getTypeAction(i)===5)
             {
                 listPoint.append({"indice":i,"couleur":"#FF007F"})
-                repeaterPoint.itemAt(listPoint.count-1).x = image.x + ((gestTable.getAction(i).getXRobot()+1500)*image.width / 3000) - repeaterPoint.itemAt(listPoint.count-1).width/2
-                repeaterPoint.itemAt(listPoint.count-1).y = image.y + ((2000-gestTable.getAction(i).getYRobot())*image.height/ 2000) - repeaterPoint.itemAt(listPoint.count-1).height/2
+                repeaterPoint.itemAt(listPoint.count-1).x = image.x + ((gestTable.getAction(i).getXRobot()+(longueurTable/2.))*image.width / longueurTable) - repeaterPoint.itemAt(listPoint.count-1).width/2
+                repeaterPoint.itemAt(listPoint.count-1).y = image.y + ((hauteurTable-gestTable.getAction(i).getYRobot())*image.height/ hauteurTable) - repeaterPoint.itemAt(listPoint.count-1).height/2
             }
-            //x:image.x + ((gestTable.getAction(indice).getXRobot()+1500)*image.width / 3000) - width/2
-            //y:image.y + ((2000-gestTable.getAction(indice).getYRobot())*image.height/ 2000) - height/2
         }
         gestTable.gestionTable();
     }
@@ -47,7 +52,7 @@ Item {
                 {
                     if(listPoint.get(i).indice === indice)
                     {
-                        repeaterPoint.itemAt(i).x = image.x + ((gestTable.getAction(indice).getXRobot()+1500)*image.width / 3000) - repeaterPoint.itemAt(listPoint.count-1).width/2
+                        repeaterPoint.itemAt(i).x = image.x + ((gestTable.getAction(indice).getXRobot()+(longueurTable/2.))*image.width / longueurTable) - repeaterPoint.itemAt(listPoint.count-1).width/2
                         //Je sais pas non plu. Mais ça fait le job.
                         rect.x++;
                         rect.x--
@@ -64,7 +69,7 @@ Item {
                 {
                     if(listPoint.get(i).indice === indice)
                     {
-                        repeaterPoint.itemAt(i).y = image.y + ((2000-gestTable.getAction(indice).getYRobot())*image.height/ 2000) - repeaterPoint.itemAt(listPoint.count-1).height/2
+                        repeaterPoint.itemAt(i).y = image.y + ((hauteurTable-gestTable.getAction(indice).getYRobot())*image.height/ hauteurTable) - repeaterPoint.itemAt(listPoint.count-1).height/2
                         //Je sais pas non plu. Mais ça fait le job.
                         rect.x++;
                         rect.x--;
@@ -109,16 +114,16 @@ Item {
             //y1:repeaterPoint.itemAt(indicePere).y + 10*image.width / 600/2
             //x2:repeaterPoint.itemAt(indiceFils).x + 10*image.width / 600/2
             //y2:repeaterPoint.itemAt(indiceFils).y + 10*image.width / 600/2
-            x1:image.x + ((gestTable.getAction(indicePere).getXRobot()+1500)*image.width / 3000)// - 10*image.width / 600/2
-            y1:image.y + ((2000-gestTable.getAction(indicePere).getYRobot())*image.height/ 2000)// - 10*image.height / 400/2
-            x2:image.x + ((gestTable.getAction(indiceFils).getXRobot()+1500)*image.width / 3000)// - 10*image.width / 600/2
-            y2:image.y + ((2000-gestTable.getAction(indiceFils).getYRobot())*image.height/ 2000)// - 10*image.height / 400/2
+            x1:image.x + ((gestTable.getAction(indicePere).getXRobot()+(longueurTable/2.))*image.width / longueurTable)// - 10*image.width / 600/2
+            y1:image.y + ((hauteurTable-gestTable.getAction(indicePere).getYRobot())*image.height/ hauteurTable)// - 10*image.height / 400/2
+            x2:image.x + ((gestTable.getAction(indiceFils).getXRobot()+(longueurTable/2.))*image.width / longueurTable)// - 10*image.width / 600/2
+            y2:image.y + ((hauteurTable-gestTable.getAction(indiceFils).getYRobot())*image.height/ hauteurTable)// - 10*image.height / 400/2
 
         }
     }
 
     Image {
-        id: image
+        id: imageTable
         z:-10
         anchors.leftMargin: -5
         anchors.bottomMargin: 0
@@ -127,7 +132,20 @@ Item {
         anchors.bottom: parent.bottom
         anchors.left: rect.right
         anchors.topMargin: -5
-        source: "file::/../image/table.jpg"
+        rotation: 180
+        source: "file::/../image/Table.svg"
+    }
+
+    Rectangle
+    {
+        id:image
+        color:"transparent"
+        anchors.fill: imageTable
+        anchors.topMargin: decaleHaut * imageTable.height / hauteurTable
+        anchors.bottomMargin: decaleBas * imageTable.height / hauteurTable
+        anchors.leftMargin: decaleGauche * imageTable.width / longueurTable
+        anchors.rightMargin: decaleDroit * imageTable.width / longueurTable
+
     }
 
     ListModel
@@ -163,7 +181,7 @@ Item {
                 {
                     if(gestTable.getAction(indice).getType() === 5)
                     {
-                        gestTable.getAction(indice).setXRobot(((x- image.x + width/2) * 3000/image.width)-1500);
+                        gestTable.getAction(indice).setXRobot(((x- image.x + width/2) * longueurTable/image.width)-(longueurTable/2.));
                         rect.x++;
                         rect.x--;
                     }else
@@ -178,7 +196,7 @@ Item {
                 {
                     if(gestTable.getAction(indice).getType() === 5)
                     {
-                        gestTable.getAction(indice).setYRobot((((y- image.y + height/2) * 2000/image.height)-2000)*-1);
+                        gestTable.getAction(indice).setYRobot((((y- image.y + height/2) * hauteurTable/image.height)-hauteurTable)*-1);
                         rect.x++;
                         rect.x--;
                     }else
@@ -205,6 +223,7 @@ Item {
                 drag {
                     target: rectPoint
                     axis: Drag.XAndYAxis
+                    //dragStarted:
                 }
                 onPressed:
                 {
@@ -233,8 +252,8 @@ Item {
             {
                 for(var i = 0; i <listPoint.count; i++)
                 {
-                    repeaterPoint.itemAt(i).x = image.x + ((gestTable.getAction(listPoint.get(i).indice).getXRobot()+1500)*image.width / 3000) - repeaterPoint.itemAt(i).width/2
-                    repeaterPoint.itemAt(i).y = image.y + ((2000-gestTable.getAction(listPoint.get(i).indice).getYRobot())*image.height/ 2000) - repeaterPoint.itemAt(i).height/2
+                    repeaterPoint.itemAt(i).x = image.x + ((gestTable.getAction(listPoint.get(i).indice).getXRobot()+(longueurTable/2.))*image.width / longueurTable) - repeaterPoint.itemAt(i).width/2
+                    repeaterPoint.itemAt(i).y = image.y + ((hauteurTable-gestTable.getAction(listPoint.get(i).indice).getYRobot())*image.height/ hauteurTable) - repeaterPoint.itemAt(i).height/2
                 }
             }
         }

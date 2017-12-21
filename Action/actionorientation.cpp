@@ -31,6 +31,9 @@ void ActionOrientation::saveXML(TiXmlElement * root, int indice)
         root->SetAttribute("type", "actionRotation");
         break;
     case 2:
+        TiXmlElement * param = new TiXmlElement( "parametres" );
+        root->LinkEndChild( param );
+        param->SetAttribute("orientation", QString::number(angle,'f',0).toStdString().c_str());
         break;
     }
 }

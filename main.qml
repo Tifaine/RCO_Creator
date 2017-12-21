@@ -33,7 +33,7 @@ ApplicationWindow {
 
     FileDialog {
         id: fileDialogOuvrir
-        title: "Enregistrer sous ..."
+        title: "Ouvrir ..."
         nameFilters: [ "Fichier XML (*.xml )"]
         selectMultiple: false
         selectFolder: false

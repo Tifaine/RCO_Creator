@@ -208,7 +208,6 @@ Item {
                 tfValue.visible = false;
                 tfValueEnable = false
             }
-
         }
     }
 

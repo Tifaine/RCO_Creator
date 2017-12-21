@@ -22,6 +22,11 @@ void AttenteDyna::saveXML(TiXmlElement * root, int indice)
         root->SetAttribute("type", "actionRetourDyna");
         break;
     case 2:
+        TiXmlElement * param = new TiXmlElement( "parametres" );
+        root->LinkEndChild( param );
+        param->SetAttribute("nom", getNomDyna().toStdString().c_str());
+        param->SetAttribute("id", QString::number(getIdDyna(),'f',0).toStdString().c_str());
+        param->SetAttribute("angle", QString::number(getValueDyna(),'f',0).toStdString().c_str());
         break;
     }
 }

@@ -28,5 +28,6 @@
         <file>Pouet.xml</file>
         <file>table.png</file>
         <file>gestionTable/GestionTable.qml</file>
+        <file>gestionTable/PanneauPosition.qml</file>
     </qresource>
 </RCC>

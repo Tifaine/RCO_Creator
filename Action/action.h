@@ -27,8 +27,6 @@
 #define typeRetourPosition      15
 #define typeRetourGPIO          17
 
-
-
 //define typeServo 9
 
 class Action : public QQuickItem

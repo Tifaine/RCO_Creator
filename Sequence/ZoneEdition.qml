@@ -15,6 +15,8 @@ Item {
     signal ajouterTab(var nom);
     property int indiceTab : 0
     property string nomActionToAdd : "Coucou"
+
+
     function saveAs(nomFichier)
     {
         seq.enregistrerSous(nomFichier)
@@ -100,6 +102,7 @@ Item {
                 gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2,param3);
                 gridAction.itemAt(listAction.count-1).listPere = listPere;
                 gridAction.itemAt(listAction.count-1).listFils = listFils;
+
                 break;
             }
             case 2: //Capteur
@@ -217,6 +220,20 @@ Item {
         anchors.rightMargin: 0
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
+
+    }
+
+    PanneauPosition
+    {
+        id:panneauPos
+        z:1
+        height: table1.itemTable.height
+        width:root.width-table1.itemTable.width
+        anchors.left: parent.left
+        anchors.leftMargin: 0
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
+
 
     }
 

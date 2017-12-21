@@ -52,6 +52,11 @@ void RetourPosition::saveXML(TiXmlElement * root, int indice)
         root->SetAttribute("type", "actionRetourPosition");
         break;
     case 2:
+        TiXmlElement * param = new TiXmlElement( "parametres" );
+        root->LinkEndChild( param );
+        param->SetAttribute("x", QString::number(xRobot,'f',0).toStdString().c_str());
+        param->SetAttribute("y", QString::number(yRobot,'f',0).toStdString().c_str());
+        param->SetAttribute("precision", QString::number(precision,'f',0).toStdString().c_str());
         break;
     }
 }

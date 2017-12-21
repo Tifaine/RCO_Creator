@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.7
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Styles 1.4
@@ -155,7 +155,7 @@ Item {
                     listOnglet.append({_nom:nomSequence,_index:listOnglet.count})
                     repeaterOnglet.nbTabOpen++
                     bar.currentIndex = listOnglet.count-1
-                    console.log("coucou");
+
                     for(var i = 0;i<listOnglet.count;i++)
                     {
                         console.log(repeaterOnglet.itemAt(i).title+" "+repeaterOnglet.itemAt(i).children[0].indiceTab)

@@ -30,6 +30,9 @@ void AttenteTemps::saveXML(TiXmlElement * root, int indice)
         root->SetAttribute("type", "actionPause");
         break;
     case 2:
+        TiXmlElement * param = new TiXmlElement( "parametres" );
+        root->LinkEndChild( param );
+        param->SetAttribute("valueAttente", QString::number(getTemps(),'f',0).toStdString().c_str());
         break;
     }
 }

@@ -5,7 +5,6 @@ GestionTable::GestionTable(QObject *parent) : QObject(parent)
 
 }
 
-
 void GestionTable::ajouterAction(Action* essai)
 {
     listAction.append(essai);

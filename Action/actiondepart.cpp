@@ -20,6 +20,9 @@ void ActionDepart::saveXML(TiXmlElement * root, int indice)
         root->SetAttribute("type", "actionDepart");
         break;
     case 2:
+        TiXmlElement * param = new TiXmlElement( "parametres" );
+        root->LinkEndChild( param );
+        param->SetAttribute("Lets", "Go");
         break;
     }
 }
