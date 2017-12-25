@@ -8,7 +8,11 @@ Item {
     signal save();
     signal open();
     signal upload();
-
+    Rectangle
+    {
+        anchors.fill: parent
+        color:"#323232"
+    }
     Rectangle
     {
         y: 49

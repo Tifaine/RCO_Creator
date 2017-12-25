@@ -7,6 +7,8 @@ Item {
     width:600
     height:400
 
+    signal positionClicked(var action);
+
     property int longueurTable: 3000
     property int hauteurTable: 2000
 
@@ -234,6 +236,7 @@ Item {
                 {
                     clicking = true
                     indiceSelect = indice
+                    positionClicked(gestTable.getAction(indice))
                 }
                 onReleased: clicking = false
             }

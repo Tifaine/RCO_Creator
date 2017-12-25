@@ -25,6 +25,11 @@ int Sequence::getNbAction()
     return listAction.size();
 }
 
+int Sequence::getIndice(Action* act)
+{
+    return listAction.indexOf(act);
+}
+
 void Sequence::enregistrerSous(QString filename)
 {
     if(filename.contains(".xml"))

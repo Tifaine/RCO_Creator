@@ -29,6 +29,8 @@ public slots:
 
     int ouvrirFichier(QString fileName);
 
+    int getIndice(Action* act);
+
     int getNbAction();
 private:
     QList<Action*> listAction;

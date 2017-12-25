@@ -106,3 +106,28 @@ QList<QList<Action *> *> Action::getListFils() const
 {
     return listFils;
 }
+
+int Action::getNbPere()
+{
+    return listPere.at(0)->size();
+}
+
+int Action::getnbListFils()
+{
+    return listFils.size();
+}
+
+int Action::getNbFils(int indiceListe)
+{
+    return listFils.at(indiceListe)->size();
+}
+
+Action* Action::getFils(int indiceListe, int indiceFils)
+{
+    return listFils.at(indiceListe)->at(indiceFils);
+}
+
+Action* Action::getPere(int indicePere)
+{
+    return listPere.at(0)->at(indicePere);
+}

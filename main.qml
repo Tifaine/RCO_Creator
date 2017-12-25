@@ -13,15 +13,11 @@ ApplicationWindow {
     height: 800
     title: qsTr("RCO Creator V0.3 Chataigne")
 
-
-
-
     Rectangle
     {
         anchors.fill: parent
         color:"#323232"
     }
-
 
     FileDialog {
         id: fileDialog
@@ -46,36 +42,6 @@ ApplicationWindow {
             ongletSequence.ouvrir(fileDialogOuvrir.fileUrl)
         }
     }
-//    menuBar: MenuBar {
-//        Menu {
-//            title: "File"
-//            MenuItem
-//            {
-//                text: "Ouvrir..."
-//                onTriggered:
-//                {
-//                    fileDialogOuvrir.open();
-//                }
-//            }
-
-//            MenuItem { text: "Enregistrer" }
-//            MenuItem
-//            {
-//                text: "Enregistrer sous..."
-//                onTriggered:
-//                {
-//                    fileDialog.open();
-//                }
-//            }
-//        }
-
-//        Menu {
-//            title: "View"
-//            MenuItem { text: "Table" }
-//            MenuItem { text: "Points" }
-//            MenuItem { text: "Actions" }
-//        }
-//    }
 
     OngletSequence {
         id: ongletSequence
@@ -89,39 +55,9 @@ ApplicationWindow {
         z:5
     }
 
-    /*BandeauCote {
-        id: bandeauCote
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        anchors.left: parent.left
-        anchors.leftMargin: 0
-        anchors.top: bandeauMenu.bottom
-        anchors.topMargin: 0
-        onChangeAffich:
-        {
-            switch(currentIndex)
-            {
-            case 0:
-                ongletSequence.visible = true;
-                break;
-            case 1:
-                ongletSequence.visible = false;
-                break;
-            case 2:
-                ongletSequence.visible = false;
-                break;
-            case 3:
-                ongletSequence.visible = false;
-                break;
-            case 4:
-                ongletSequence.visible = false;
-                break;
-            }
-        }
-    }*/
-
     BandeauMenu {
         id: bandeauMenu
+        z:6
         anchors.right: parent.right
         anchors.rightMargin: 0
         anchors.left: parent.left

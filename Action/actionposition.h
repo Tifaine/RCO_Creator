@@ -20,13 +20,13 @@ public:
     void saveXML(QXmlStreamWriter *xmlWriter);
     void saveXML(TiXmlElement * root, int indice);
 
-    int getVitesse() const;
+
     void setVitesse(int value);
 
-    int getAcceleration() const;
+
     void setAcceleration(int value);
 
-    int getDeceleration() const;
+
     void setDeceleration(int value);
 
     bool getSens() const;
@@ -43,8 +43,11 @@ signals:
 public slots:
 
     int getXRobot() const;
-    void setXRobot(int value);
     int getYRobot() const;
+    int getVitesse() const;
+    int getAcceleration() const;
+    int getDeceleration() const;
+    void setXRobot(int value);
     void setYRobot(int value);
     void getInfo();
 

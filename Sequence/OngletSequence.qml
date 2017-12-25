@@ -10,6 +10,7 @@ Item {
     focus:true
     property bool ctrlPressed:false
     property bool majPressed:false
+    property var fichierLoad:""
 
     Keys.onPressed: {
         if (event.key === Qt.Key_Control)
@@ -18,6 +19,18 @@ Item {
         }else if(event.key === Qt.Key_Shift)
         {
             majPressed = true;
+        }else if(event.key === Qt.Key_S)
+        {
+            if(ctrlPressed && fichierLoad!="")
+            {
+                saveAs(fichierLoad)
+            }
+        }else if(event.key === Qt.Key_I)
+        {
+            if(ctrlPressed)
+            {
+                repeaterOnglet.itemAt(bar.currentIndex).children[0].reorganiserBloc()
+            }
         }
     }
     Keys.onReleased: {
@@ -68,6 +81,7 @@ Item {
     function ouvrir(nomFichier)
     {
         repeaterOnglet.itemAt(bar.currentIndex).children[0].ouvrirFile(nomFichier)
+        fichierLoad = nomFichier;
     }
 
     function saveAs(nomFichier)
@@ -231,6 +245,8 @@ Item {
         anchors.top: parent.top
         z:2
 
+
+
         Text {
             id: text1
             text: qsTr("<")
@@ -277,8 +293,20 @@ Item {
         anchors.topMargin: 5
     }
 
-
     property int dragItemIndex: -1
+
+    Rectangle
+    {
+        anchors.right: rectangle.left
+        anchors.rightMargin: 0
+        anchors.left: parent.left
+        anchors.leftMargin: 0
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
+        anchors.top: parent.top
+        anchors.topMargin: 0
+        color:"#323232"
+    }
 
     ColumnLayout {
         id: columnLayout

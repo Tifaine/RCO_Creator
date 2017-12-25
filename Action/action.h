@@ -74,6 +74,13 @@ public slots:
     void ajouterPere(int indiceListe, Action *act);
     void supprimerPere(Action * actToDelete);
 
+
+    int getNbPere();
+    int getnbListFils();
+    int getNbFils(int indiceListe);
+    Action* getFils(int indiceListe, int indiceFils);
+    Action* getPere(int indicePere);
+
 protected:
 
 private:

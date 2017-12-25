@@ -34,6 +34,29 @@ Item {
 
     }
 
+    function reorganiserBloc()
+    {
+
+        for(var i=0;i<listAction.count;i++)
+        {
+            if(gridAction.itemAt(i).x%220 > 110)
+            {
+                gridAction.itemAt(i).x = gridAction.itemAt(i).x + (220-(gridAction.itemAt(i).x%220))
+            }else
+            {
+                gridAction.itemAt(i).x = gridAction.itemAt(i).x - gridAction.itemAt(i).x%220
+            }
+
+            if(gridAction.itemAt(i).y%120 > 60)
+            {
+                gridAction.itemAt(i).y = gridAction.itemAt(i).y + (120-(gridAction.itemAt(i).y%120))
+            }else
+            {
+                gridAction.itemAt(i).y = gridAction.itemAt(i).y - gridAction.itemAt(i).y%120
+            }
+        }
+    }
+
     function ouvrirFile(nomFichier)
     {
         seq.ouvrirFichier(nomFichier)
@@ -225,6 +248,7 @@ Item {
         anchors.rightMargin: 0
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
+        onPositionClicked: panneauPos.afficherPosition(action)
 
     }
 
@@ -238,6 +262,7 @@ Item {
         anchors.leftMargin: 0
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
+        seq:seq
 
 
     }
