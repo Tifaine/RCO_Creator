@@ -29,5 +29,6 @@
         <file>table.png</file>
         <file>gestionTable/GestionTable.qml</file>
         <file>gestionTable/PanneauPosition.qml</file>
+        <file>Composant/BandeauMenu.qml</file>
     </qresource>
 </RCC>

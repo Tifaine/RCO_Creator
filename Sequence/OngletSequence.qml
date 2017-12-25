@@ -7,6 +7,28 @@ import "../Composant"
 
 
 Item {
+    focus:true
+    property bool ctrlPressed:false
+    property bool majPressed:false
+
+    Keys.onPressed: {
+        if (event.key === Qt.Key_Control)
+        {
+            ctrlPressed = true
+        }else if(event.key === Qt.Key_Shift)
+        {
+            majPressed = true;
+        }
+    }
+    Keys.onReleased: {
+        if (event.key === Qt.Key_Control)
+        {
+            ctrlPressed = false
+        }else if(event.key === Qt.Key_Shift)
+        {
+            majPressed = false;
+        }
+    }
 
     property var tabNomTab:[]
     id:item1
@@ -113,7 +135,7 @@ Item {
                 color: styleData.selected ? "dimgrey" :"#323232"
 
                 implicitWidth: Math.max(text.width + 4, 80)
-                implicitHeight: 20
+                implicitHeight: 35
                 radius: 2
                 Text {
                     id: text
@@ -185,6 +207,8 @@ Item {
                     //indiceZoneEdi: _index
                     anchors.fill: parent
                     indiceTab:index
+                    ctrlPressed: item1.ctrlPressed
+                    majPressed: item1.majPressed
                     /*onAjouterTab:
                     {
 

@@ -31,6 +31,7 @@ Action* GestionTable::getAction(int indice)
 void GestionTable::clearAll()
 {
     listAction.clear();
+    listLienAction.clear();
 }
 
 void GestionTable::actionChanged(Action* actChanged, QString param, int newValue)

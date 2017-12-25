@@ -7,10 +7,14 @@ import "Composant"
 import "Sequence"
 
 ApplicationWindow {
+    id: applicationWindow
     visible: true
     width: 1500
     height: 800
     title: qsTr("RCO Creator V0.3 Chataigne")
+
+
+
 
     Rectangle
     {
@@ -42,56 +46,56 @@ ApplicationWindow {
             ongletSequence.ouvrir(fileDialogOuvrir.fileUrl)
         }
     }
-    menuBar: MenuBar {
-        Menu {
-            title: "File"
-            MenuItem
-            {
-                text: "Ouvrir..."
-                onTriggered:
-                {
-                    fileDialogOuvrir.open();
-                }
-            }
+//    menuBar: MenuBar {
+//        Menu {
+//            title: "File"
+//            MenuItem
+//            {
+//                text: "Ouvrir..."
+//                onTriggered:
+//                {
+//                    fileDialogOuvrir.open();
+//                }
+//            }
 
-            MenuItem { text: "Enregistrer" }
-            MenuItem
-            {
-                text: "Enregistrer sous..."
-                onTriggered:
-                {
-                    fileDialog.open();
-                }
-            }
-        }
+//            MenuItem { text: "Enregistrer" }
+//            MenuItem
+//            {
+//                text: "Enregistrer sous..."
+//                onTriggered:
+//                {
+//                    fileDialog.open();
+//                }
+//            }
+//        }
 
-        Menu {
-            title: "View"
-            MenuItem { text: "Table" }
-            MenuItem { text: "Points" }
-            MenuItem { text: "Actions" }
-        }
-    }
+//        Menu {
+//            title: "View"
+//            MenuItem { text: "Table" }
+//            MenuItem { text: "Points" }
+//            MenuItem { text: "Actions" }
+//        }
+//    }
 
     OngletSequence {
         id: ongletSequence
-        anchors.left: bandeauCote.right
+        anchors.topMargin: 0
+        anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.top: parent.top
-        anchors.leftMargin: 5
+        anchors.top: bandeauMenu.bottom
+        anchors.leftMargin: 0
         visible:true
-        z:0
+        z:5
     }
 
-
-    BandeauCote {
+    /*BandeauCote {
         id: bandeauCote
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 0
-        anchors.top: parent.top
+        anchors.top: bandeauMenu.bottom
         anchors.topMargin: 0
         onChangeAffich:
         {
@@ -113,6 +117,23 @@ ApplicationWindow {
                 ongletSequence.visible = false;
                 break;
             }
+        }
+    }*/
+
+    BandeauMenu {
+        id: bandeauMenu
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+        anchors.left: parent.left
+        anchors.leftMargin: 0
+        anchors.top: parent.top
+        anchors.topMargin: 0
+        onSaveAs: fileDialog.open();
+        onOpen: fileDialogOuvrir.open();
+        onUpload:
+        {
+            ongletSequence.saveAs("file:///tmp/temp.xml")
+            gestMQTT.upload();
         }
     }
 }

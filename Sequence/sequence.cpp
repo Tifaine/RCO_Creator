@@ -41,6 +41,7 @@ void Sequence::enregistrerSous(QString filename)
     doc.LinkEndChild( decl );
 
     msg = new TiXmlElement( "typeXml" );
+    msg->SetAttribute("key", QDateTime::currentDateTimeUtc().toString().toStdString().c_str());
     msg->LinkEndChild( new TiXmlText( "scenario" ));
     doc.LinkEndChild( msg );
 
@@ -114,6 +115,7 @@ void Sequence::enregistrerSous(QString filename)
 
 int Sequence::ouvrirFichier(QString fileName)
 {
+
     int _type = -1;
     int xBloc = -1;
     int yBloc = -1;
@@ -167,6 +169,7 @@ int Sequence::ouvrirFichier(QString fileName)
             }
         }else if(elemName == "Action")
         {
+
             if(elem->Attribute("type"))
             {
                 std::string type = elem->Attribute("type");
@@ -333,7 +336,7 @@ int Sequence::ouvrirFichier(QString fileName)
                         }
                         break;
                     case typeEntree:
-                        genererAction(xBloc, yBloc, _type, listPere, listFils,0,0,0,0,0,0);
+                        //genererAction(xBloc, yBloc, _type, listPere, listFils,0,0,0,0,0,0);
                         break;
                     case typeGPIO:
                         break;
@@ -418,6 +421,7 @@ int Sequence::ouvrirFichier(QString fileName)
             genererAction(xBloc, yBloc, _type, listPere, listFils,param0,param1,param2,param3,param4,param5);
         }
     }
+
     emit finParsage();
     return rc;
 

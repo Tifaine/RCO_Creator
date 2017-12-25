@@ -14,6 +14,8 @@ Item {
     id:root
     signal ajouterTab(var nom);
     property int indiceTab : 0
+    property bool ctrlPressed:false
+    property bool majPressed:false
     property string nomActionToAdd : "Coucou"
 
 
@@ -24,14 +26,16 @@ Item {
 
     function clearAll()
     {
+
         listAction.clear()
         seq.clearAll()
         table1.gestionTable.clearAll()
+        table1.clear()
+
     }
 
     function ouvrirFile(nomFichier)
     {
-        console.log(nomFichier)
         seq.ouvrirFichier(nomFichier)
     }
 
@@ -77,6 +81,7 @@ Item {
                 }
                 //console.log("Liste Pere : "+gridAction.itemAt(i).listPere+" Liste Fils : "+gridAction.itemAt(i).listFils)
             }
+
             table1.updateTable()
         }
 
@@ -247,6 +252,7 @@ Item {
             property real echelle :1.0
             anchors.fill: parent
             contentWidth: 20000; contentHeight: 20000
+
             contentX: 0
             contentY:0
             scale: echelle
@@ -271,17 +277,53 @@ Item {
                 property var survolActif :null
                 color:"transparent"
 
+                focus:true
+                Keys.onRightPressed: console.log("Pouet")
                 MouseArea
                 {
                     id:mouseArea
                     acceptedButtons: Qt.LeftButton | Qt.RightButton
                     anchors.fill: parent
                     propagateComposedEvents: true
-
                     property var obj
                     property var obj2
                     property var sortieCourante:null
                     property var entreePopup:null
+                    onWheel:
+                    {
+                        if(root.ctrlPressed)
+                        {
+                            if(wheel.angleDelta.y<0 && flickable.scale + wheel.angleDelta.y/25  > 0.1)
+                            {
+                                flickable.scale += wheel.angleDelta.y/25
+                            }else if(wheel.angleDelta.y>0 && flickable.scale + wheel.angleDelta.y/25  < 2)
+                            {
+                                flickable.scale += wheel.angleDelta.y/25
+                            }
+                        }else
+                        {
+                            if(root.majPressed)
+                            {
+                                if(wheel.angleDelta.y<0 && flickable.contentX + wheel.angleDelta.y  > 0)
+                                {
+                                    flickable.contentX += wheel.angleDelta.y
+                                }else if(wheel.angleDelta.y>0 && flickable.contentX + wheel.angleDelta.y  < flickable.contentWidth)
+                                {
+                                    flickable.contentX += wheel.angleDelta.y
+                                }
+
+                            }else
+                            {
+                                if(wheel.angleDelta.y<0 && flickable.contentY + wheel.angleDelta.y  > 0)
+                                {
+                                    flickable.contentY += wheel.angleDelta.y
+                                }else if(wheel.angleDelta.y>0 && flickable.contentY + wheel.angleDelta.y  < flickable.contentHeight)
+                                {
+                                    flickable.contentY += wheel.angleDelta.y
+                                }
+                            }
+                        }
+                    }
 
                     onPressed:
                     {

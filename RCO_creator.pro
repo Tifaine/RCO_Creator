@@ -1,5 +1,5 @@
 QT += qml quick
-QT += xml
+QT += xml network
 
 CONFIG += c++11
 
@@ -35,7 +35,11 @@ SOURCES += main.cpp \
     Sequence/sequence.cpp \
     libXML/xmlmanager.cpp \
     Action/gestion/gestionsequence.cpp \
-    gestionTable/gestiontable.cpp
+    gestionTable/gestiontable.cpp \
+    Sequence/gestionmqtt.cpp \
+    Sequence/mqtt.cpp \
+    MQTT/QMqttMessage.cpp \
+    MQTT/QMqttClient.cpp
 
 RESOURCES += qml.qrc
 
@@ -50,6 +54,11 @@ QML_DESIGNER_IMPORT_PATH =
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
+DEFINES += MQTT4QT_LIBRARY
+
+LIBS += -lmosquittopp
+
+LIBS += -L/usr/local/lib -lmosquitto
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -91,5 +100,10 @@ HEADERS += \
     Sequence/sequence.h \
     libXML/xmlmanager.h \
     Action/gestion/gestionsequence.h \
-    gestionTable/gestiontable.h
+    gestionTable/gestiontable.h \
+    Sequence/gestionmqtt.h \
+    Sequence/mqtt.h \
+    MQTT/QMqttMessage.h \
+    MQTT/QMqttClient.h \
+    MQTT/mqtt4qt_global.h
 

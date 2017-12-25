@@ -35,6 +35,11 @@ Item {
         gestTable.gestionTable();
     }
 
+    function clear()
+    {
+        listPoint.clear();
+    }
+
     Component.onCompleted:
     {
         listPoint.clear()

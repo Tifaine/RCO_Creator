@@ -22,6 +22,7 @@
 #include "Action/attente/attentetemps.h"
 #include "Action/attente/retourposition.h"
 #include "Action/attente/retourorientation.h"
+#include "Sequence/gestionmqtt.h"
 
 #include "libXML/xmlmanager.h"
 
@@ -33,7 +34,8 @@ int main(int argc, char *argv[])
     GestionDynamixel dyna;
     XMLManager xmlManage;
     GestionSequence gestSequence;
-    xmlManage.setNomXmlFile("Pouet.xml");
+    gestionMQTT gestMQTT;
+    //xmlManage.setNomXmlFile("Pouet.xml");
 
     qmlRegisterType<connector>("connector", 1, 0, "Liaison");
     qmlRegisterType<Sequence>("sequence", 1, 0, "Sequence");
@@ -60,6 +62,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("gestDyna", &dyna);
     engine.rootContext()->setContextProperty("gestionXML", &xmlManage);
     engine.rootContext()->setContextProperty("gestSequence", &gestSequence);
+    engine.rootContext()->setContextProperty("gestMQTT", &gestMQTT);
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

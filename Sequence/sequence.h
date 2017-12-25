@@ -2,6 +2,7 @@
 #define SEQUENCE_H
 
 #include <QQuickItem>
+#include <QDateTime>
 #include <QList>
 #include "../Action/action.h"
 
