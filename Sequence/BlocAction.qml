@@ -42,8 +42,6 @@ Item {
         case 2: //Capteur
         case 3: //Moteur
         case 4: //Autre
-        case 5: //Position
-        case 6: //Orientation
         case 7: //Sequence
         case 12://attente temps
         case 17://GPIO
@@ -54,7 +52,8 @@ Item {
             listSortie.append({_x:188,_y:30,_indice:0,_color:"grey"})
             break;
         }
-
+        case 5: //Position
+        case 6: //Orientation
         case 10://attente servo
         case 11://attente dyna
         case 13://Retour déplacement
@@ -426,5 +425,5 @@ Item {
     function modifTaille(taille)
     {
         root.height = 32 + taille
-    }    
+    }
 }

@@ -3,8 +3,8 @@ import QtQuick.Controls 2.2
 import actionOrientation 1.0
 
 Item {
-    width: 186
-    height: 182
+    width: 200
+    height: 300
     id:root
     property int taille:70
     signal modifTaille(int taille)
@@ -15,9 +15,11 @@ Item {
         modifTaille(taille);
 
     }
-    function setParam(orien)
+    function setParam(orien,precision,timeout)
     {
         tfAngle.text = orien
+        tfPrecision.text = precision
+        tfTimeOut.text = timeout
     }
     Component.onCompleted:
     {
@@ -66,23 +68,22 @@ Item {
             anchors.top: parent.top
             anchors.topMargin: 0
             anchors.right: parent.right
-            anchors.rightMargin: 5
+            anchors.rightMargin: 11
             anchors.left: parent.left
-            anchors.leftMargin: 17
+            anchors.leftMargin: 11
             font.pixelSize: 12
         }
 
         Rectangle {
             id: rectangle3
+            width: 2
             color: "black"
-            anchors.right: parent.right
-            anchors.rightMargin: 79
+            anchors.leftMargin: parent.width/2 -1
             anchors.top: parent.top
             anchors.topMargin: 20
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 20
             anchors.left: parent.left
-            anchors.leftMargin: 79
         }
 
         Text {
@@ -94,9 +95,9 @@ Item {
             anchors.bottomMargin: 5
             horizontalAlignment: Text.AlignHCenter
             anchors.right: parent.right
-            anchors.rightMargin: 5
+            anchors.rightMargin: 11
             anchors.left: parent.left
-            anchors.leftMargin: 17
+            anchors.leftMargin: 11
             font.pixelSize: 12
         }
 
@@ -160,6 +161,83 @@ Item {
         }
     }
 
+    Text {
+        id: textPreci
+        x: 4
+        text: qsTr("Précision :")
+        anchors.left: parent.left
+        anchors.top: tfAngle.bottom
+        anchors.topMargin: 5
+        font.bold: true
+        font.pixelSize: 12
+        anchors.leftMargin: 5
+    }
+
+    Rectangle {
+        id: tfPreci
+        x: 1
+        y: 5
+        height: 30
+        color: "#4a4545"
+        radius: 7
+        anchors.right: parent.right
+        anchors.left: parent.left
+        anchors.top: textPreci.bottom
+        visible: true
+        TextEdit {
+            id: tfPrecision
+            height: 30
+            color: "#ffffff"
+            text: qsTr("3")
+            anchors.fill: parent
+            verticalAlignment: Text.AlignVCenter
+            anchors.leftMargin: 10
+            onTextChanged: orientation.precision = text
+        }
+        anchors.topMargin: 5
+        anchors.rightMargin: 5
+        anchors.leftMargin: 5
+    }
+
+    Text {
+        id: textTimeout
+        x: -3
+        y: 1
+        text: qsTr("TimeOut :")
+        anchors.left: parent.left
+        anchors.top: tfPreci.bottom
+        anchors.topMargin: 5
+        font.bold: true
+        font.pixelSize: 12
+        anchors.leftMargin: 5
+    }
+
+    Rectangle {
+        id: tfTimeout
+        x: -6
+        y: -2
+        height: 30
+        color: "#4a4545"
+        radius: 7
+        anchors.right: parent.right
+        anchors.left: parent.left
+        anchors.top: textTimeout.bottom
+        visible: true
+        TextEdit {
+            id: tfTimeOut
+            height: 30
+            color: "#ffffff"
+            text: qsTr("5000")
+            anchors.fill: parent
+            verticalAlignment: Text.AlignVCenter
+            anchors.leftMargin: 10
+            onTextChanged: orientation.timeOut = text
+        }
+        anchors.topMargin: 5
+        anchors.rightMargin: 5
+        anchors.leftMargin: 5
+    }
+
 
 
     Button {
@@ -187,7 +265,7 @@ Item {
             {
                 root.state = "ouvert"
                 button.text = "^"
-                var tailleToSend = 182
+                var tailleToSend = 300
                 tailleChange(tailleToSend)
                 nbClic = 0;
             }
@@ -202,6 +280,26 @@ Item {
 
             PropertyChanges {
                 target: rectangle2
+                visible: false
+            }
+
+            PropertyChanges {
+                target: textPreci
+                visible: false
+            }
+
+            PropertyChanges {
+                target: tfPreci
+                visible: false
+            }
+
+            PropertyChanges {
+                target: textTimeout
+                visible: false
+            }
+
+            PropertyChanges {
+                target: tfTimeout
                 visible: false
             }
         }

@@ -22,6 +22,16 @@ void ActionOrientation::setAngle(int value)
     angle = value;
 }
 
+int ActionOrientation::getPrecision() const
+{
+    return precision;
+}
+
+void ActionOrientation::setPrecision(int value)
+{
+    precision = value;
+}
+
 
 void ActionOrientation::saveXML(TiXmlElement * root, int indice)
 {
@@ -34,6 +44,7 @@ void ActionOrientation::saveXML(TiXmlElement * root, int indice)
         TiXmlElement * param = new TiXmlElement( "parametres" );
         root->LinkEndChild( param );
         param->SetAttribute("orientation", QString::number(angle,'f',0).toStdString().c_str());
+        param->SetAttribute("precision", QString::number(precision,'f',0).toStdString().c_str());
         break;
     }
 }

@@ -95,7 +95,6 @@ void Sequence::enregistrerSous(QString filename)
                 TiXmlElement * posBloc = new TiXmlElement( "fils" );
                 action->LinkEndChild( posBloc );
                 posBloc->SetAttribute("liste", listFils.toStdString().c_str());
-
             }
         }
 
@@ -334,6 +333,11 @@ int Sequence::ouvrirFichier(QString fileName)
                         {
                             param0 = QString::fromStdString(elemBis->Attribute("orientation"));
                         }
+                        if(elemBis->Attribute("precision"))
+                        {
+                            param1 = QString::fromStdString(elemBis->Attribute("precision"));
+                        }
+                        param2 = QString::number(timeOut);
                         break;
                         if(elemBis->Attribute("nomSequence"))
                         {
@@ -537,42 +541,5 @@ void Sequence::test()
         qDebug()<<i<<" "<<listAction.at(i)->getListFils().at(0)->size();
     }
 }
-
-//void Sequence::gestionTable()
-//{
-//    QList<Action*> listToParse;
-//    QList<Action*> listFilsToParse;
-//    listToParse.append(listAction.at(0));
-
-//    while(listToParse.size()>0)
-//    {
-//        for(int i = 0; i < listAction.at(listAction.indexOf(listToParse.at(0)))->getListFils().size();i++)
-//        {
-//            for(int j=0;j<listAction.at(listAction.indexOf(listToParse.at(0)))->getListFils().at(i)->size();j++)
-//            {
-//                listFilsToParse.append((listAction.at(listAction.indexOf(listToParse.at(0)))->getListFils().at(i)->at(j)));
-//            }
-//        }
-//        while(listFilsToParse.size()>0)
-//        {
-//            if(listFilsToParse.at(0)->getType()==typePosition)
-//            {
-//                listToParse.append(listAction.at(listAction.indexOf(listFilsToParse.at(0))));
-//                qDebug()<<listAction.indexOf(listFilsToParse.at(0))<<" est un descendant de "<<listAction.indexOf(listToParse.at(0));
-//            }else
-//            {
-//                for(int i = 0; i < listAction.at(listAction.indexOf(listFilsToParse.at(0)))->getListFils().size();i++)
-//                {
-//                    for(int j=0;j<listAction.at(listAction.indexOf(listFilsToParse.at(0)))->getListFils().at(i)->size();j++)
-//                    {
-//                        listFilsToParse.append((listAction.at(listAction.indexOf(listFilsToParse.at(0)))->getListFils().at(i)->at(j)));
-//                    }
-//                }
-//            }
-//            listFilsToParse.removeFirst();
-//        }
-//        listToParse.removeFirst();
-//    }
-//}
 
 

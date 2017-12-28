@@ -607,6 +607,7 @@ Item {
         anchors.rightMargin: 5
         anchors.leftMargin: 5
     }
+
     states: [
         State {
             name: "ouvert"

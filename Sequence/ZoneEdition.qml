@@ -168,7 +168,7 @@ Item {
             case 6: //Orientation
             {
                 listAction.append({_x:xBloc,_y:yBloc, _title:"Orientation",_indice:listAction.count,_type:typeBloc})
-                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0);
+                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2);
                 gridAction.itemAt(listAction.count-1).listPere = listPere;
                 gridAction.itemAt(listAction.count-1).listFils = listFils;
                 break;
