@@ -350,7 +350,7 @@ Item {
     Text {
         id: textPreci
         color: "#ffffff"
-        text: qsTr("Précision : ")
+        text: qsTr("Précision : 50")
         anchors.leftMargin: parent.width/2
         anchors.top: textDec.bottom
         anchors.topMargin: 10

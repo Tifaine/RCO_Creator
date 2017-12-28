@@ -16,7 +16,7 @@ public:
     Sequence(QQuickItem *parent = nullptr);
 
 signals:
-    void genererAction(int xBloc, int yBloc, int typeBloc, QString listPere, QString listFils,QString param0 ,QString param1, QString param2, QString param3, QString param4, QString param5);
+    void genererAction(int xBloc, int yBloc, int typeBloc, QString listPere, QString listFils,QString param0 ,QString param1, QString param2, QString param3, QString param4, QString param5, QString param6, QString param7);
     void finParsage();
 
 public slots:

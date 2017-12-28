@@ -43,10 +43,10 @@ public:
     virtual void saveXML(TiXmlElement * root, int indice) = 0;
     QList<QList<Action *> *> getListFils() const;
 
-    int getXBloc() const;
+
     void setXBloc(int value);
 
-    int getYBloc() const;
+
     void setYBloc(int value);
 
     int getTimeOut() const;
@@ -74,6 +74,8 @@ public slots:
     void ajouterPere(int indiceListe, Action *act);
     void supprimerPere(Action * actToDelete);
 
+    int getXBloc() const;
+    int getYBloc() const;
 
     int getNbPere();
     int getnbListFils();

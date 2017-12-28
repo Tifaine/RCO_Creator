@@ -17,7 +17,7 @@ Item {
     property bool ctrlPressed:false
     property bool majPressed:false
     property string nomActionToAdd : "Coucou"
-
+    property var actionSelected:[]
 
     function saveAs(nomFichier)
     {
@@ -60,6 +60,15 @@ Item {
     function ouvrirFile(nomFichier)
     {
         seq.ouvrirFichier(nomFichier)
+    }
+
+    function clearSelection()
+    {
+        for(var i = 0; i<actionSelected.length; i++)
+        {
+            gridAction.itemAt(actionSelected[i])._couleurInfoBloc="#655e5e"
+        }
+        actionSelected = []
     }
 
     Sequence
@@ -151,7 +160,7 @@ Item {
             case 5: //Position
             {
                 listAction.append({_x:xBloc,_y:yBloc, _title:"Position",_indice:listAction.count,_type:typeBloc})
-                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2,param3,param4,param5);
+                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2,param3,param4,param5,param6,param7);
                 gridAction.itemAt(listAction.count-1).listPere = listPere;
                 gridAction.itemAt(listAction.count-1).listFils = listFils;
                 break;
@@ -248,8 +257,12 @@ Item {
         anchors.rightMargin: 0
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
-        onPositionClicked: panneauPos.afficherPosition(action)
-
+        onPositionClicked:
+        {
+            flickable.contentX = action.getXBloc() - (flickable.visibleArea.widthRatio*flickable.contentWidth)/2
+            flickable.contentY = action.getYBloc() - (flickable.visibleArea.heightRatio*flickable.contentHeight)/2
+            panneauPos.afficherPosition(action)
+        }
     }
 
     PanneauPosition
@@ -263,15 +276,17 @@ Item {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 0
         seq:seq
-
-
     }
 
     Rectangle
     {
         id:rect
         color:"#323232"
-        anchors.fill: parent
+        anchors.bottom: panneauPos.top
+        anchors.right: parent.right
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottomMargin: 0
         Flickable {
             id: flickable
             property real echelle :1.0
@@ -303,7 +318,7 @@ Item {
                 color:"transparent"
 
                 focus:true
-                Keys.onRightPressed: console.log("Pouet")
+
                 MouseArea
                 {
                     id:mouseArea
@@ -318,6 +333,7 @@ Item {
                     {
                         if(root.ctrlPressed)
                         {
+                            console.log(wheel.angleDelta.y,flickable.scale)
                             if(wheel.angleDelta.y<0 && flickable.scale + wheel.angleDelta.y/25  > 0.1)
                             {
                                 flickable.scale += wheel.angleDelta.y/25
@@ -357,7 +373,6 @@ Item {
                             obj = rect1.childAt(mouse.x,mouse.y)
                             if(obj!==null)
                             {
-
                                 if(obj.objectName==="BlocAction")
                                 {
                                     flickable.interactive = false
@@ -367,6 +382,9 @@ Item {
                                     {
                                         sortieCourante = obj2
                                     }
+                                }else
+                                {
+                                    clearSelection()
                                 }
                             }
                         }else if(mouse.button === Qt.RightButton)
@@ -667,6 +685,14 @@ Item {
                             }else
                             {
                                 console.log("je suis nuuuuuul")
+                            }
+                        }
+                        onClick:
+                        {
+                            if(root.ctrlPressed)
+                            {
+                                actionSelected.push(indice)
+                                _couleurInfoBloc="#0B0B3B"
                             }
                         }
                     }

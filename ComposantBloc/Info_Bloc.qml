@@ -13,8 +13,8 @@ Item {
         createSpriteObjects(typeBloc,0,0)
     }
 
-    Rectangle {
-
+    Rectangle
+    {
         id: rectangle //655e5e
         color: "#655e5e"
         border.color: _couleur

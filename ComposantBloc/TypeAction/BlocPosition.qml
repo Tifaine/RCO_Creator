@@ -6,7 +6,7 @@ import "../../Composant"
 Item {
     id: root
     width: 180
-    height: 275
+    height: 395
     signal modifTaille(int taille)
     property int taille:70
     property var fils:pos
@@ -16,7 +16,7 @@ Item {
         modifTaille(taille);
     }
 
-    function setParam(posX, posY, vitesse, acc, dec, sens)
+    function setParam(posX, posY, vitesse, acc, dec, sens, precision, timeout)
     {
         tfX.text = posX;
         tfY.text = posY
@@ -88,6 +88,10 @@ Item {
         {
             switchSens.checked = true
         }
+
+        tfPrecision.text = precision
+        tfTimeOut.text = timeout
+
         tailleChange(60)
     }
 
@@ -496,7 +500,6 @@ Item {
                 button.text = "v"
                 var tailleToSend = 60
                 tailleChange(tailleToSend)
-
             }else
             {
                 root.state = "ouvert"
@@ -517,7 +520,7 @@ Item {
                     tfVit.visible = true
                 }
 
-                var tailleToSend = 275
+                var tailleToSend = 395
                 if(tfVitesseEnable===true)tailleToSend+=tfVitesse.height+5
                 if(tfAccEnable===true)tailleToSend+=tfAcc.height+5
                 if(tfDecEnable===true)tailleToSend+=tfDec.height+5;
@@ -525,6 +528,84 @@ Item {
                 nbClic = 0;
             }
         }
+    }
+
+    Text {
+        id: textPreci
+        x: 4
+        y: 8
+        text: qsTr("Précision :")
+        anchors.left: parent.left
+        anchors.top: switchSens.bottom
+        anchors.topMargin: 5
+        font.bold: true
+        font.pixelSize: 12
+        anchors.leftMargin: 5
+    }
+
+    Rectangle {
+        id: tfPreci
+        x: 1
+        y: 5
+        height: 30
+        color: "#4a4545"
+        radius: 7
+        anchors.right: parent.right
+        anchors.left: parent.left
+        anchors.top: textPreci.bottom
+        visible: true
+        TextEdit {
+            id: tfPrecision
+            height: 30
+            color: "#ffffff"
+            text: qsTr("50")
+            anchors.fill: parent
+            verticalAlignment: Text.AlignVCenter
+            anchors.leftMargin: 10
+            onTextChanged: pos.precision = text
+        }
+        anchors.topMargin: 5
+        anchors.rightMargin: 5
+        anchors.leftMargin: 5
+    }
+
+    Text {
+        id: textTimeout
+        x: -3
+        y: 1
+        text: qsTr("TimeOut :")
+        anchors.left: parent.left
+        anchors.top: tfPreci.bottom
+        anchors.topMargin: 5
+        font.bold: true
+        font.pixelSize: 12
+        anchors.leftMargin: 5
+    }
+
+    Rectangle {
+        id: tfTimeout
+        x: -6
+        y: -2
+        height: 30
+        color: "#4a4545"
+        radius: 7
+        anchors.right: parent.right
+        anchors.left: parent.left
+        anchors.top: textTimeout.bottom
+        visible: true
+        TextEdit {
+            id: tfTimeOut
+            height: 30
+            color: "#ffffff"
+            text: qsTr("5000")
+            anchors.fill: parent
+            verticalAlignment: Text.AlignVCenter
+            anchors.leftMargin: 10
+            onTextChanged: pos.timeOut = text
+        }
+        anchors.topMargin: 5
+        anchors.rightMargin: 5
+        anchors.leftMargin: 5
     }
     states: [
         State {
@@ -615,6 +696,26 @@ Item {
 
             PropertyChanges {
                 target: switchSens
+                visible: false
+            }
+
+            PropertyChanges {
+                target: textPreci
+                visible: false
+            }
+
+            PropertyChanges {
+                target: tfPreci
+                visible: false
+            }
+
+            PropertyChanges {
+                target: textTimeout
+                visible: false
+            }
+
+            PropertyChanges {
+                target: tfTimeout
                 visible: false
             }
         }

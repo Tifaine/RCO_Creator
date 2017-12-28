@@ -16,6 +16,7 @@ Item {
     signal iWantToDie()
     signal creationComplete(var bloc)
     signal ajouterTab(var nom);
+    signal click()
 
     property var listPere:null;
     property var listFils:null;
@@ -175,6 +176,9 @@ Item {
             if(mouse.button === Qt.RightButton)
             {
                 contextMenu1.popup()
+            }else
+            {
+                click()
             }
         }
     }

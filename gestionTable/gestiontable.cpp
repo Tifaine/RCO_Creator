@@ -64,77 +64,18 @@ void GestionTable::actionChanged(Action* actChanged, QString param, Action* newV
         if(actChanged->getType() == typePosition)
         {
             gestionTable();
-            // emit ajouterFils(listAction.indexOf(actChanged), newValue);
-            //emit finTraitementTable();
         }
     }else if(param.compare("deleteFils")==0)
     {
         if(actChanged->getType() == typePosition)
         {
             gestionTable();
-
-            // emit ajouterFils(listAction.indexOf(actChanged), newValue);
-            //emit finTraitementTable();
         }
     }
 }
 
 void GestionTable::gestionTable()
 {
-    //    bool nonPositionTrouve = true;
-    //    QList<Action*> listToParse;
-    //    listToParse = listAction;
-    //    while(nonPositionTrouve)
-    //    {
-    //        for(int i = 0;i < listToParse.size();i++)
-    //        {
-    //            nonPositionTrouve = false;
-    //            if(listToParse.at(i)->getType()!=typePosition && listToParse.at(i)->getType()!=typeEntree)
-    //            {
-    //                for(int j=0;j<listToParse.at(i)->getListFils().at(0)->size();j++)
-    //                {
-    //                    listToParse.at(i)->getListPere().at(0)->at(0)->getListFils().at(0)->append(listToParse.at(i)->getListFils().at(0)->at(j));
-    //                    listToParse.at(i)->getListFils().at(0)->at(j)->getListPere().at(0)->removeAll(listToParse.at(i));
-    //                    listToParse.at(i)->getListFils().at(0)->at(j)->ajouterPere(0, listToParse.at(i)->getListPere().at(0)->at(0));
-    //                }
-
-    //                listToParse.removeAt(i);
-    //                nonPositionTrouve = true;
-    //                break;
-    //            }
-    //        }
-    //    }
-
-    //    for(int i=0; i<listToParse.size();i++)
-    //    {
-    //        for(int j=0;j<listToParse.at(i)->getListFils().size();j++)
-    //        {
-    //            for(int k=0;k<listToParse.at(i)->getListFils().at(j)->size();k++)
-    //            {
-    //                if(listToParse.at(i)->getListFils().at(j)->at(k)->getType()!=typePosition)
-    //                {
-    //                    listToParse.at(i)->getListFils().at(j)->removeAt(k);
-    //                    k--;
-    //                }
-    //            }
-    //        }
-    //    }
-
-    //    for(int i = 0; i < listToParse.size();i++)
-    //    {
-    //        for(int j=0;j<listToParse.at(i)->getListFils().size();j++)
-    //        {
-    //            for(int k=0;k<listToParse.at(i)->getListFils().at(j)->size();k++)
-    //            {
-    //                listLienAction.append(new lienAction());
-    //                listLienAction.last()->indicePere = i;
-    //                listLienAction.last()->indiceFils = listAction.indexOf(listToParse.at(i)->getListFils().at(j)->at(k));
-    //                listAction.at(listAction.indexOf(listToParse.at(i)->getListFils().at(j)->at(k)))->getInfo();
-    //            }
-    //        }
-    //    }
-
-
     QList<Action*> listPerePosition, listFils;
 
     listPerePosition.append(listAction.at(0));

@@ -11,6 +11,16 @@ void ActionPosition::getInfo()
     qDebug()<<xRobot<<" "<<yRobot;
 }
 
+int ActionPosition::getPrecision() const
+{
+    return precision;
+}
+
+void ActionPosition::setPrecision(int value)
+{
+    precision = value;
+}
+
 bool ActionPosition::getSens() const
 {
     return sens;
@@ -84,6 +94,7 @@ void ActionPosition::saveXML(QXmlStreamWriter* xmlWriter)
     xmlWriter->writeTextElement("acc",QString::number(acceleration,'f',0));
     xmlWriter->writeTextElement("dec",QString::number(deceleration,'f',0));
     xmlWriter->writeTextElement("sens",QString::number(sens,'f',0));
+
     xmlWriter->writeEndElement();
 }
 
@@ -103,7 +114,7 @@ void ActionPosition::saveXML(TiXmlElement * root, int indice)
         param->SetAttribute("acc", QString::number(acceleration,'f',0).toStdString().c_str());
         param->SetAttribute("dec", QString::number(deceleration,'f',0).toStdString().c_str());
         param->SetAttribute("sens", QString::number(sens,'f',0).toStdString().c_str());
-
+        param->SetAttribute("precision", QString::number(precision,'f',0).toStdString().c_str());
         break;
     }
 }

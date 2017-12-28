@@ -125,7 +125,7 @@ int Sequence::ouvrirFichier(QString fileName)
     int xBloc = -1;
     int yBloc = -1;
     int timeOut = -1;
-    QString listPere, listFils, listTimeout, param0, param1, param2, param3, param4, param5;
+    QString listPere, listFils, listTimeout, param0, param1, param2, param3, param4, param5, param6, param7;
     int rc = 0;
     if(fileName.left(4)=="file")
     {
@@ -321,6 +321,11 @@ int Sequence::ouvrirFichier(QString fileName)
                         {
                             param5 = QString::fromStdString(elemBis->Attribute("sens"));
                         }
+                        if(elemBis->Attribute("precision"))
+                        {
+                            param6 = QString::fromStdString(elemBis->Attribute("precision"));
+                        }
+                        param7 = QString::number(timeOut);
 
 
                         break;
@@ -423,7 +428,7 @@ int Sequence::ouvrirFichier(QString fileName)
                     }
                 }
             }
-            genererAction(xBloc, yBloc, _type, listPere, listFils,param0,param1,param2,param3,param4,param5);
+            genererAction(xBloc, yBloc, _type, listPere, listFils,param0,param1,param2,param3,param4,param5,param6,param7);
         }
     }
 
