@@ -60,6 +60,7 @@ Item {
         case 14://Retour orientation
         case 15://Retour position
         case 16://Retour GPIO
+        case 18://Bloc AND
         {
             listEntree.clear();
             listEntree.append({_x:2,_y:30,_indice:0,_color:"yellow"})
@@ -376,6 +377,11 @@ Item {
         case 17: //retour GPIO
         {
             //component = Qt.createComponent("../ComposantBloc/TypeAction/BlocAttenteTemps.qml");
+            break;
+        }
+        case 18: //Bloc AND
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocAND.qml");
             break;
         }
         }

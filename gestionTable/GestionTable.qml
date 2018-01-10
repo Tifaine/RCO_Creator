@@ -128,6 +128,13 @@ Item {
 
         }
     }
+    Rectangle
+    {
+        visible:false
+        anchors.fill: parent
+        z:-11
+        color:"#323232"
+    }
 
     Image {
         id: imageTable

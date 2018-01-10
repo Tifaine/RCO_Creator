@@ -244,6 +244,15 @@ Item {
                 //listAction.append({_x:xBloc,_y:yBloc, _title:"retour GPIO,_indice:listAction.count,_type:typeBloc})
                 break;
             }
+            case 18: //Bloc AND
+            {
+                listAction.append({_x:xBloc,_y:yBloc, _title:"AND",_indice:listAction.count,_type:typeBloc})
+                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param1);
+                gridAction.itemAt(listAction.count-1).listPere = listPere;
+                gridAction.itemAt(listAction.count-1).listFils = listFils;
+                gridAction.itemAt(listAction.count-1).listTimeOut = param0;
+                break;
+            }
             }
         }
     }
@@ -643,6 +652,9 @@ Item {
                         }else if(nomActionToAdd === "retour GPIO")
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:17})
+                        }else if(nomActionToAdd === "AND")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:18})
                         }
                     }
                 }

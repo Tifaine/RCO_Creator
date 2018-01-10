@@ -26,6 +26,7 @@
 #define typeRetourOrientation   14
 #define typeRetourPosition      15
 #define typeRetourGPIO          17
+#define typeAND                 18
 
 //define typeServo 9
 

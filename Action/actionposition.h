@@ -63,7 +63,7 @@ private:
     int acceleration = 0;
     int deceleration = 0;
     int precision = 50;
-    bool sens;
+    bool sens = false;
 };
 
 #endif // ACTIONPOSITION_H

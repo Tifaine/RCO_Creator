@@ -107,7 +107,7 @@ void Sequence::enregistrerSous(QString filename)
                 listPere.append(QString::number(listAction.indexOf(listAction.at(i)->getListPere().at(j)->at(k))));
                 listPere.append(";");
             }
-            TiXmlElement * posBloc = new TiXmlElement( "peres" );
+            TiXmlElement * posBloc = new TiXmlElement( "pere" );
             action->LinkEndChild( posBloc );
             posBloc->SetAttribute("liste", listPere.toStdString().c_str());
         }
@@ -219,6 +219,9 @@ int Sequence::ouvrirFichier(QString fileName)
                 }else if(type == "actionServo")
                 {
                     _type =  typeServo;
+                }else if(type == "actionBlocAND")
+                {
+                    _type =  typeAND;
                 }
             }
             if(elem->Attribute("numero"))
@@ -233,7 +236,7 @@ int Sequence::ouvrirFichier(QString fileName)
             for(TiXmlElement* elemBis = elem->FirstChildElement(); elemBis != NULL; elemBis = elemBis->NextSiblingElement())
             {
                 std::string elemNameBis = elemBis->Value();
-                if(elemNameBis == "peres")
+                if(elemNameBis == "pere")
                 {
                     if(elemBis->Attribute("liste"))
                     {
@@ -418,6 +421,11 @@ int Sequence::ouvrirFichier(QString fileName)
                         break;
                     case typeRetourGPIO:
                         break;
+                    case typeAND:
+                        param0 = listTimeout;
+                        param1 = QString::number(timeOut);
+                        break;
+
 
                     }
                 }else if(elemNameBis == "bloc")

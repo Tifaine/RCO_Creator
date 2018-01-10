@@ -30,5 +30,6 @@
         <file>gestionTable/GestionTable.qml</file>
         <file>gestionTable/PanneauPosition.qml</file>
         <file>Composant/BandeauMenu.qml</file>
+        <file>ComposantBloc/TypeAction/BlocAND.qml</file>
     </qresource>
 </RCC>

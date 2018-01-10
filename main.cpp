@@ -22,6 +22,7 @@
 #include "Action/attente/attentetemps.h"
 #include "Action/attente/retourposition.h"
 #include "Action/attente/retourorientation.h"
+#include "Action/attente/blocand.h"
 #include "Sequence/gestionmqtt.h"
 
 #include "libXML/xmlmanager.h"
@@ -52,7 +53,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<AttenteDyna>("attenteDyna", 1, 0, "AttenteDyna");
     qmlRegisterType<AttenteTemps>("attenteTemps", 1, 0, "AttenteTemps");
     qmlRegisterType<RetourPosition>("retourPosition", 1, 0, "RetourPosition");
-    qmlRegisterType<RetourOrientation>("retourOrientation", 1, 0, "RetourOrientation");
+    qmlRegisterType<RetourOrientation>("retourOrientation", 1, 0, "RetourOrientation");    
+    qmlRegisterType<BlocAND>("blocAND", 1, 0, "BlocAnd");
     qmlRegisterType<GestionSortie>("gestSortie", 1, 0, "GestSortie");
     qmlRegisterType<GestionTable>("gestTable", 1, 0, "GestTable");
 
