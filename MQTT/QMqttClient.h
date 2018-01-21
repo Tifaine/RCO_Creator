@@ -75,7 +75,7 @@ private:
     void on_connect(int rc);
     void on_message(const struct mosquitto_message* mqtt_message);
     void on_subscribe(int mid, int qos_count, const int* granted_qos);
-    int send_message(const QString& topic, const QString& data, bool retain, QMqttMessage::QoS qos = QMqttMessage::AT_MOST_ONCE);
+    int send_message(const QString& topic, const QString& data, bool retain, QMqttMessage::QoS qos = QMqttMessage::EXACTLY_ONCE);
     void on_publish(int mid);
 
 public:

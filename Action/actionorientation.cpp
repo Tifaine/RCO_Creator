@@ -8,7 +8,7 @@ ActionOrientation::ActionOrientation()
 void ActionOrientation::saveXML(QXmlStreamWriter* xmlWriter)
 {
     xmlWriter->writeStartElement("actionRotation");
-    xmlWriter->writeTextElement("orientation",QString::number(angle,'f',0));
+    xmlWriter->writeTextElement("angle",QString::number(angle,'f',0));
     xmlWriter->writeEndElement();
 }
 
@@ -32,6 +32,16 @@ void ActionOrientation::setPrecision(int value)
     precision = value;
 }
 
+int ActionOrientation::getVitesse() const
+{
+    return vitesse;
+}
+
+void ActionOrientation::setVitesse(int value)
+{
+    vitesse = value;
+}
+
 
 void ActionOrientation::saveXML(TiXmlElement * root, int indice)
 {
@@ -43,7 +53,8 @@ void ActionOrientation::saveXML(TiXmlElement * root, int indice)
     case 2:
         TiXmlElement * param = new TiXmlElement( "parametres" );
         root->LinkEndChild( param );
-        param->SetAttribute("orientation", QString::number(angle,'f',0).toStdString().c_str());
+        param->SetAttribute("angle", QString::number(angle,'f',0).toStdString().c_str());
+        param->SetAttribute("vitesse", QString::number(vitesse,'f',0).toStdString().c_str());
         param->SetAttribute("precision", QString::number(precision,'f',0).toStdString().c_str());
         break;
     }

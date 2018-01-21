@@ -124,7 +124,7 @@ int Sequence::ouvrirFichier(QString fileName)
     int xBloc = -1;
     int yBloc = -1;
     int timeOut = -1;
-    QString listPere, listFils, listTimeout, param0, param1, param2, param3, param4, param5, param6, param7;
+    QString listPere, listFils, listTimeout, param0, param1, param2, param3, param4, param5, param6, param7,param8;
     int rc = 0;
     if(fileName.left(4)=="file")
     {
@@ -328,7 +328,7 @@ int Sequence::ouvrirFichier(QString fileName)
                             param6 = QString::fromStdString(elemBis->Attribute("precision"));
                         }
                         param7 = QString::number(timeOut);
-
+                        param8 = listTimeout;
 
                         break;
                     case typeOrientation:
@@ -340,7 +340,12 @@ int Sequence::ouvrirFichier(QString fileName)
                         {
                             param1 = QString::fromStdString(elemBis->Attribute("precision"));
                         }
+                        if(elemBis->Attribute("vitesse"))
+                        {
+                            param3 = QString::fromStdString(elemBis->Attribute("vitesse"));
+                        }
                         param2 = QString::number(timeOut);
+                        param4 = listTimeout;
                         break;
                         if(elemBis->Attribute("nomSequence"))
                         {
@@ -440,7 +445,7 @@ int Sequence::ouvrirFichier(QString fileName)
                     }
                 }
             }
-            genererAction(xBloc, yBloc, _type, listPere, listFils,param0,param1,param2,param3,param4,param5,param6,param7);
+            genererAction(xBloc, yBloc, _type, listPere, listFils,param0,param1,param2,param3,param4,param5,param6,param7,param8);
         }
     }
 

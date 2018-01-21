@@ -31,5 +31,7 @@
         <file>gestionTable/PanneauPosition.qml</file>
         <file>Composant/BandeauMenu.qml</file>
         <file>ComposantBloc/TypeAction/BlocAND.qml</file>
+        <file>ComposantBloc/InputValueBloc.qml</file>
+        <file>ComposantBloc/OutputValueBloc.qml</file>
     </qresource>
 </RCC>

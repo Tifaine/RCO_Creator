@@ -1,10 +1,11 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2
 import actionOrientation 1.0
+import "../../Composant"
 
 Item {
     width: 200
-    height: 300
+    height: 350
     id:root
     property int taille:70
     signal modifTaille(int taille)
@@ -15,11 +16,31 @@ Item {
         modifTaille(taille);
 
     }
-    function setParam(orien,precision,timeout)
+    function setParam(orien, precision, timeout, vitesse)
     {
         tfAngle.text = orien
         tfPrecision.text = precision
         tfTimeOut.text = timeout
+
+        switch(vitesse)
+        {
+        case "1000":
+            cbVitesse.setIndice(0);
+            break;
+        case "700":
+            cbVitesse.setIndice(1);
+            break;
+        case "300":
+            cbVitesse.setIndice(2);
+            break;
+        default:
+            cbVitesse.setIndice(3);
+            tfVitesseEnable = true
+            orientation.vitesse = true
+            tfVitesse.visible = true
+            tfVit.text = vitesse
+            break;
+        }
     }
     Component.onCompleted:
     {
@@ -200,12 +221,104 @@ Item {
     }
 
     Text {
+        id: textVitesse
+        text: qsTr("Vitesse :")
+        font.bold: true
+        anchors.left: parent.left
+        anchors.leftMargin: 5
+        anchors.top: tfPreci.bottom
+        anchors.topMargin: 5
+        font.pixelSize: 12
+    }
+
+    CustomComboBox
+    {
+        id: cbVitesse
+        height: 30
+        anchors.right: parent.right
+        anchors.rightMargin: 5
+        anchors.left: parent.left
+        anchors.leftMargin: 5
+        anchors.top: textVitesse.bottom
+        anchors.topMargin: 5
+        _model: [ "Forte (1000 mm/s)", "Moyenne (700 mm/s)", "Faible (300 mm/s)", "Custom..." ]
+        onCustomCurrentIndexChanged:
+        {
+            if(indice === 3)
+            {
+                if(tfVitesse.visible===false)
+                {
+                    tfVitesseEnable = true
+                    tfVitesse.visible = true;
+                    textTimeout.anchors.top = tfVitesse.bottom
+                    tailleChange(root.height+tfVitesse.height+5)
+                }
+            }else
+            {
+                if(tfVitesse.visible===true)
+                {
+
+                    tfVitesseEnable = false
+                    tfVitesse.visible = false;
+                    textTimeout.anchors.top = cbVitesse.bottom
+                    tailleChange(root.height-tfVitesse.height-5)
+                }
+            }
+            switch(indice)
+            {
+            case 0:
+                orientation.vitesse = 1000;
+                break;
+            case 1:
+                orientation.vitesse = 700;
+                break;
+            case 2:
+                orientation.vitesse = 300;
+                break;
+            case 3:
+                orientation.vitesse = tfVit.text;
+                break;
+            }
+        }
+    }
+
+    Rectangle
+    {
+        id: tfVitesse
+        height: 30
+        radius:7
+        anchors.right: parent.right
+        anchors.rightMargin: 5
+        anchors.left: parent.left
+        anchors.leftMargin: 5
+        anchors.top: cbVitesse.bottom
+        anchors.topMargin: 5
+        visible: false
+        color:"#4a4545"
+
+        TextEdit
+        {
+            id:tfVit
+            height: 30
+            text: qsTr("800")
+            anchors.fill: parent
+            anchors.leftMargin: 10
+            color: "white"
+            verticalAlignment: Text.AlignVCenter
+            onTextChanged:
+            {
+                orientation.vitesse = text
+            }
+        }
+    }
+
+    Text {
         id: textTimeout
         x: -3
         y: 1
         text: qsTr("TimeOut :")
         anchors.left: parent.left
-        anchors.top: tfPreci.bottom
+        anchors.top: cbVitesse.bottom
         anchors.topMargin: 5
         font.bold: true
         font.pixelSize: 12
@@ -238,7 +351,7 @@ Item {
         anchors.leftMargin: 5
     }
 
-
+    property bool tfVitesseEnable:false
 
     Button {
         id: button
@@ -265,7 +378,15 @@ Item {
             {
                 root.state = "ouvert"
                 button.text = "^"
-                var tailleToSend = 300
+
+                if(cbVitesse.indice === 3)
+                {
+                    tfVit.visible = true
+                }
+
+
+                var tailleToSend = 330
+                if(tfVitesseEnable===true)tailleToSend+=tfVitesse.height+5
                 tailleChange(tailleToSend)
                 nbClic = 0;
             }
@@ -300,6 +421,21 @@ Item {
 
             PropertyChanges {
                 target: tfTimeout
+                visible: false
+            }
+
+            PropertyChanges {
+                target: tfVitesse
+                visible: false
+            }
+
+            PropertyChanges {
+                target: cbVitesse
+                visible: false
+            }
+
+            PropertyChanges {
+                target: textVitesse
                 visible: false
             }
         }
