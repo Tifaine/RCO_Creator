@@ -31,7 +31,10 @@
         <file>gestionTable/PanneauPosition.qml</file>
         <file>Composant/BandeauMenu.qml</file>
         <file>ComposantBloc/TypeAction/BlocAND.qml</file>
-        <file>ComposantBloc/InputValueBloc.qml</file>
         <file>ComposantBloc/OutputValueBloc.qml</file>
+        <file>ComposantBloc/NumberEntreeBloc.qml</file>
+        <file>ComposantBloc/NumberSortieBloc.qml</file>
+        <file>ComposantBloc/TypeAction/BlocSetValue.qml</file>
+        <file>ComposantBloc/TypeAction/BlocCourbe.qml</file>
     </qresource>
 </RCC>

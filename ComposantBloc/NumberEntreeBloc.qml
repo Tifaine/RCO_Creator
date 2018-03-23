@@ -3,7 +3,7 @@ import QtQuick 2.0
 Item {
     property string couleur
     property int indice
-    objectName: "InputValue"
+    objectName: "NumberIn"
     height:10
     width:10
     property var tabPere:[]

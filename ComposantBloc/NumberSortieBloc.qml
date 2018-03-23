@@ -6,7 +6,7 @@ Item {
     property string couleur
     property string couleurSelected:"#151b70"
     property int indice:-1
-    objectName: "Sortie"
+    objectName: "NumberOut"
     height:12
     width:12
     property var tabFils:[]
@@ -33,7 +33,7 @@ Item {
         {
             id:liaison
             antialiasing: true
-            _color:"yellow"
+            _color:"#8ec1ff"
             z:  -1
             x1: _x1
             y1: _y1
@@ -60,7 +60,7 @@ Item {
     function repaint(x,y)
     {
         listLien.setProperty(listLien.count-1,"_x2",x)
-        listLien.setProperty(listLien.count-1,"_y2",y)       
+        listLien.setProperty(listLien.count-1,"_y2",y)
     }
 
     function pereBouge(xPere, yPere)

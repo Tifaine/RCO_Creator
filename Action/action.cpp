@@ -46,6 +46,37 @@ void Action::supprimerFils(Action * actToDelete)
     }
 }
 
+void Action::ajouterNumberIn(Action* newNumberIn)
+{
+    listNumberIn.append(newNumberIn);
+    paramChanged(this,"ajouterNumberIn",newNumberIn);
+}
+
+void Action::supprimerNumberIn(Action * numberInToDelete)
+{
+
+    if(listNumberIn.indexOf(numberInToDelete)!=-1)
+    {
+        listNumberIn.removeAt(listNumberIn.indexOf(numberInToDelete));
+        paramChanged(numberInToDelete,"supprimerNumberIn",numberInToDelete);
+    }
+}
+
+void Action::ajouterNumberOut(Action* newNumberOut)
+{
+    listNumberOut.append(newNumberOut);
+}
+
+void Action::supprimerNumberOut(Action* numberOutToDelete)
+{
+    if(listNumberOut.indexOf(numberOutToDelete)!=-1)
+    {
+        listNumberOut.removeAt(listNumberOut.indexOf(numberOutToDelete));
+    }
+}
+
+
+
 void Action::ajouterListPere()
 {
     listPere.append(new QList<Action *>);
@@ -130,4 +161,14 @@ Action* Action::getFils(int indiceListe, int indiceFils)
 Action* Action::getPere(int indicePere)
 {
     return listPere.at(0)->at(indicePere);
+}
+
+QList<Action *> Action::getListNumberIn() const
+{
+    return listNumberIn;
+}
+
+QList<Action *> Action::getListNumberOut() const
+{
+    return listNumberOut;
 }

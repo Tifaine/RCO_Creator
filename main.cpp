@@ -11,6 +11,7 @@
 #include "Action/actionposition.h"
 #include "Action/actionsequence.h"
 #include "Action/actionservo.h"
+#include "Action/actionsetvaleur.h"
 #include "Action/actiondepart.h"
 #include "gestionTable/gestiontable.h"
 #include "Action/gestion/gestionservo.h"
@@ -44,6 +45,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<ActionCapteur>("actionCapteur", 1, 0, "Capteur");
     qmlRegisterType<ActionDynamixel>("actionDyna", 1, 0, "Dyna");
     qmlRegisterType<ActionMoteur>("actionMoteur", 1, 0, "Moteur");
+    qmlRegisterType<ActionSetValeur>("actionSetValeur", 1, 0, "SetValeur");
     qmlRegisterType<ActionOrientation>("actionOrientation", 1, 0, "Orientation");
     qmlRegisterType<ActionPosition>("actionPos", 1, 0, "Pos");
     qmlRegisterType<ActionSequence>("actionSequence", 1, 0, "Sequence");

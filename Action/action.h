@@ -27,6 +27,7 @@
 #define typeRetourPosition      15
 #define typeRetourGPIO          17
 #define typeAND                 18
+#define typeSetValeur           19
 
 //define typeServo 9
 
@@ -55,6 +56,10 @@ public:
 
     QList<QList<Action *> *> getListPere() const;
 
+    QList<Action *> getListNumberOut() const;
+
+    QList<Action *> getListNumberIn() const;
+
 signals:
     void xBlocChanged();
     void yBlocChanged();
@@ -75,6 +80,12 @@ public slots:
     void ajouterPere(int indiceListe, Action *act);
     void supprimerPere(Action * actToDelete);
 
+    void ajouterNumberIn(Action* newNumberIn);
+    void supprimerNumberIn(Action* numberInToDelete);
+
+    void ajouterNumberOut(Action* newNumberOut);
+    void supprimerNumberOut(Action* numberOutToDelete);
+
     int getXBloc() const;
     int getYBloc() const;
 
@@ -89,6 +100,10 @@ protected:
 private:
     QList<QList<Action* >*> listFils;
     QList<QList<Action* >*> listPere;
+
+    QList<Action* > listNumberIn;
+    QList<Action* > listNumberOut;
+
     int type = -1;
     int xBloc;
     int yBloc;

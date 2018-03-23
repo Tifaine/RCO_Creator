@@ -40,7 +40,8 @@ SOURCES += main.cpp \
     Sequence/mqtt.cpp \
     MQTT/QMqttMessage.cpp \
     MQTT/QMqttClient.cpp \
-    Action/attente/blocand.cpp
+    Action/attente/blocand.cpp \
+    Action/actionsetvaleur.cpp
 
 RESOURCES += qml.qrc
 
@@ -107,5 +108,6 @@ HEADERS += \
     MQTT/QMqttMessage.h \
     MQTT/QMqttClient.h \
     MQTT/mqtt4qt_global.h \
-    Action/attente/blocand.h
+    Action/attente/blocand.h \
+    Action/actionsetvaleur.h
 

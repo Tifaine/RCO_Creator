@@ -112,6 +112,26 @@ void Sequence::enregistrerSous(QString filename)
             posBloc->SetAttribute("liste", listPere.toStdString().c_str());
         }
 
+        QString listNumberIn;
+        listNumberIn.clear();
+        for(int j=0;j<listAction.at(i)->getListNumberIn().size();j++)
+        {
+            listNumberIn.append(QString::number(listAction.indexOf(listAction.at(i)->getListNumberIn().at(j))));
+        }
+        TiXmlElement * numberIn = new TiXmlElement( "numberIn" );
+        action->LinkEndChild( numberIn );
+        numberIn->SetAttribute("index", listNumberIn.toStdString().c_str());
+
+        QString listNumberOut;
+        listNumberOut.clear();
+        for(int j=0;j<listAction.at(i)->getListNumberOut().size();j++)
+        {
+            listNumberOut.append(QString::number(listAction.indexOf(listAction.at(i)->getListNumberOut().at(j))));
+        }
+        TiXmlElement * numberOut = new TiXmlElement( "numberOut" );
+        action->LinkEndChild( numberOut );
+        numberOut->SetAttribute("index", listNumberOut.toStdString().c_str());
+
         listAction.at(i)->saveXML(action,2);
     }
     doc.SaveFile( filename.toStdString().c_str() );
@@ -222,6 +242,9 @@ int Sequence::ouvrirFichier(QString fileName)
                 }else if(type == "actionBlocAND")
                 {
                     _type =  typeAND;
+                }else if(type == "actionSetValeur")
+                {
+                    _type =  typeSetValeur;
                 }
             }
             if(elem->Attribute("numero"))
@@ -332,9 +355,9 @@ int Sequence::ouvrirFichier(QString fileName)
 
                         break;
                     case typeOrientation:
-                        if(elemBis->Attribute("orientation"))
+                        if(elemBis->Attribute("angle"))
                         {
-                            param0 = QString::fromStdString(elemBis->Attribute("orientation"));
+                            param0 = QString::fromStdString(elemBis->Attribute("angle"));
                         }
                         if(elemBis->Attribute("precision"))
                         {
@@ -429,6 +452,16 @@ int Sequence::ouvrirFichier(QString fileName)
                     case typeAND:
                         param0 = listTimeout;
                         param1 = QString::number(timeOut);
+                        break;
+                    case typeSetValeur:
+                        if(elemBis->Attribute("id"))
+                        {
+                            param0 = QString::fromStdString(elemBis->Attribute("id"));
+                        }
+                        if(elemBis->Attribute("value"))
+                        {
+                            param1 = QString::fromStdString(elemBis->Attribute("value"));
+                        }
                         break;
 
 

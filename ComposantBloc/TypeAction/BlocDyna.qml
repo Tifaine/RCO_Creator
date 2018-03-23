@@ -11,6 +11,7 @@ Item {
     property bool tfVitesseEnable:false
     signal modifTaille(int taille)
     property var fils:dyna
+
     property int taille:70
     function tailleChange(_taille)
     {
@@ -165,11 +166,13 @@ Item {
         id:listDyna
         ListElement{ nom:"Custom..."  }
     }
+
     ListModel
     {
         id:listValue
         ListElement{ nom:"Custom..."  }
     }
+
     ListModel
     {
         id:listVitesse

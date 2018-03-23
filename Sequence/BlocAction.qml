@@ -17,7 +17,10 @@ Item {
     signal creationComplete(var bloc)
     signal ajouterTab(var nom);
     signal click()
+    signal xChange(int value)
+    signal yChange(int value)
 
+    property bool inhibeMoveXY :false
     property var listPere:null;
     property var listFils:null;
     property var listTimeOut:null;
@@ -34,7 +37,7 @@ Item {
         case 9: //Depart Sequence
             listEntree.clear();
             listSortie.clear();
-            listSortie.append({_x:188,_y:30,_indice:0,_color:"grey"})
+            listSortie.append({_x:188,_y:30,_indice:0,_color:"yellow"})
             break;
 
         case 0: //Servomoteur
@@ -44,12 +47,13 @@ Item {
         case 4: //Autre
         case 7: //Sequence
         case 12://attente temps
+        case 19://SetValue
         case 17://GPIO
         {
             listEntree.clear();
             listEntree.append({_x:2,_y:30,_indice:0,_color:"yellow"})
             listSortie.clear();
-            listSortie.append({_x:188,_y:30,_indice:0,_color:"grey"})
+            listSortie.append({_x:188,_y:30,_indice:0,_color:"yellow"})
             break;
         }
         case 5: //Position
@@ -65,18 +69,25 @@ Item {
             listEntree.clear();
             listEntree.append({_x:2,_y:30,_indice:0,_color:"yellow"})
             listSortie.clear();
-            listSortie.append({_x:188,_y:30,_indice:0,_color:"grey"})
-            listSortie.append({_x:188,_y:50,_indice:1,_color:"orange"})
+            listSortie.append({_x:188,_y:30,_indice:0,_color:"yellow"})
+            listSortie.append({_x:188,_y:50,_indice:1,_color:"yellow"})
             break;
         }
 
         }
     }
 
-
-
+    property int oldX: 0
+    property int oldY: 0
     onXChanged:
     {
+        if(inhibeMoveXY===false)
+        {
+            xChange(root.x-oldX);
+            oldX = root.x
+        }
+
+
         if(bloc!==null)
         {
             bloc.xBloc = root.x;
@@ -94,6 +105,27 @@ Item {
             }
         }
 
+        for(var i=0;i<listNumberIn.count;i++)
+        {
+            if(gridNumberIn.itemAt(i)!==null)
+            {
+                for(var j=0;j<gridNumberIn.itemAt(i).tabPere.length;j++)
+                {
+                    gridNumberIn.itemAt(i).tabPere[j].filsBouge(gridNumberIn.itemAt(i),
+                                                              root.x+gridNumberIn.itemAt(i).x+5 - gridNumberIn.itemAt(i).tabPere[j].parent.x - gridNumberIn.itemAt(i).tabPere[j].x,
+                                                              root.y+gridNumberIn.itemAt(i).y+5 - gridNumberIn.itemAt(i).tabPere[j].parent.y - gridNumberIn.itemAt(i).tabPere[j].y)
+                }
+            }
+        }
+
+        for(var i=0;i<listNumberOut.count;i++)
+        {
+            if(gridNumberOut.itemAt(i)!==null)
+            {
+                gridNumberOut.itemAt(i).pereBouge(root.x,root.y)
+            }
+        }
+
         for(var i=0;i<listSortie.count;i++)
         {
             if(gridSortie.itemAt(i)!==null)
@@ -105,6 +137,11 @@ Item {
 
     onYChanged:
     {
+        if(inhibeMoveXY===false)
+        {
+            yChange(root.y-oldY);
+            oldY = root.y
+        }
         if(bloc!==null)
         {
             bloc.yBloc = root.y;
@@ -121,6 +158,28 @@ Item {
                 }
             }
         }
+
+        for(var i=0;i<listNumberIn.count;i++)
+        {
+            if(gridNumberIn.itemAt(i)!==null)
+            {
+                for(var j=0;j<gridNumberIn.itemAt(i).tabPere.length;j++)
+                {
+                    gridNumberIn.itemAt(i).tabPere[j].filsBouge(gridNumberIn.itemAt(i),
+                                                              root.x+gridNumberIn.itemAt(i).x+5 - gridNumberIn.itemAt(i).tabPere[j].parent.x - gridNumberIn.itemAt(i).tabPere[j].x,
+                                                              root.y+gridNumberIn.itemAt(i).y+5 - gridNumberIn.itemAt(i).tabPere[j].parent.y - gridNumberIn.itemAt(i).tabPere[j].y)
+                }
+            }
+        }
+
+        for(var i=0;i<listNumberOut.count;i++)
+        {
+            if(gridNumberOut.itemAt(i)!==null)
+            {
+                gridNumberOut.itemAt(i).pereBouge(root.x,root.y)
+            }
+        }
+
         for(var i=0;i<listSortie.count;i++)
         {
             if(gridSortie.itemAt(i)!==null)
@@ -184,7 +243,6 @@ Item {
     }
 
     Rectangle {
-
         id: rectangle //655e5e
         color: "#655e5e"
         border.color: _couleurInfoBloc
@@ -216,6 +274,42 @@ Item {
         id:gridEntree
         model:listEntree
         EntreeBloc
+        {
+            x:_x
+            y:_y
+            couleur:_color
+        }
+    }
+
+    ListModel
+    {
+        id:listNumberIn
+        //ListElement{ _x:2 ; _y:75; _indice:0;_color:"#8ec1ff" }
+    }
+
+    Repeater
+    {
+        id:gridNumberIn
+        model:listNumberIn
+        NumberEntreeBloc
+        {
+            x:_x
+            y:_y
+            couleur:_color
+        }
+    }
+
+    ListModel
+    {
+        id:listNumberOut
+        //ListElement{ _x:188 ; _y:75; _indice:0;_color:"#8ec1ff" }
+    }
+
+    Repeater
+    {
+        id:gridNumberOut
+        model:listNumberOut
+        NumberSortieBloc
         {
             x:_x
             y:_y
@@ -382,6 +476,11 @@ Item {
         case 18: //Bloc AND
         {
             component = Qt.createComponent("../ComposantBloc/TypeAction/BlocAND.qml");
+            break;
+        }
+        case 19: //Bloc setValue
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocSetValue.qml");
             break;
         }
         }

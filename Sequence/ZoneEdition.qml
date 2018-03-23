@@ -26,12 +26,10 @@ Item {
 
     function clearAll()
     {
-
         listAction.clear()
         seq.clearAll()
         table1.gestionTable.clearAll()
         table1.clear()
-
     }
 
     function reorganiserBloc()
@@ -255,6 +253,14 @@ Item {
                 gridAction.itemAt(listAction.count-1).listTimeOut = param0;
                 break;
             }
+            case 19:
+            {
+                listAction.append({_x:xBloc,_y:yBloc, _title:"SetValue",_indice:listAction.count,_type:typeBloc})
+                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1);
+                gridAction.itemAt(listAction.count-1).listPere = listPere;
+                gridAction.itemAt(listAction.count-1).listFils = listFils;
+                break;
+            }
             }
         }
     }
@@ -344,13 +350,20 @@ Item {
                     {
                         if(root.ctrlPressed)
                         {
-                            console.log(wheel.angleDelta.y,flickable.scale)
                             if(wheel.angleDelta.y<0 && flickable.scale + wheel.angleDelta.y/25  > 0.1)
                             {
                                 flickable.scale += wheel.angleDelta.y/25
                             }else if(wheel.angleDelta.y>0 && flickable.scale + wheel.angleDelta.y/25  < 2)
                             {
                                 flickable.scale += wheel.angleDelta.y/25
+                            }
+
+                            if(wheel.angleDelta.y==-120 && flickable.scale + wheel.angleDelta.y/500  > 0.1)
+                            {
+                                flickable.scale += wheel.angleDelta.y/500
+                            }else if(wheel.angleDelta.y==120 && flickable.scale + wheel.angleDelta.y/500  < 2)
+                            {
+                                flickable.scale += wheel.angleDelta.y/500
                             }
                         }else
                         {
@@ -389,7 +402,7 @@ Item {
                                     flickable.interactive = false
                                     obj2 = obj.childAt(mouse.x-obj.x,mouse.y-obj.y)
 
-                                    if(obj2.objectName==="Sortie")
+                                    if(obj2.objectName==="Sortie" || obj2.objectName === "NumberOut")
                                     {
                                         sortieCourante = obj2
                                     }
@@ -435,11 +448,10 @@ Item {
                             {
                                 if(obj.objectName==="BlocAction")
                                 {
-
                                     obj2 = obj.childAt(mouse.x-obj.x,mouse.y-obj.y)
                                     if(obj2!==null)
                                     {
-                                        if(obj2.objectName==="Entree")
+                                        if(obj2.objectName === "Entree" && sortieCourante.objectName === "Sortie")
                                         {
                                             sortieCourante.repaint((obj.x+obj2.x+5)-sortieCourante.parent.x-sortieCourante.x,
                                                                    (obj.y+obj2.y+5)-sortieCourante.parent.y-sortieCourante.y)
@@ -451,6 +463,16 @@ Item {
                                             {
                                                 rect1.survolActif.couleur = "yellow"
                                             }
+                                        }else if(obj2.objectName === "NumberIn" && sortieCourante.objectName === "NumberOut")
+                                        {
+
+                                            sortieCourante.repaint((obj.x+obj2.x+5)-sortieCourante.parent.x-sortieCourante.x,
+                                                                   (obj.y+obj2.y+5)-sortieCourante.parent.y-sortieCourante.y)
+
+                                            sortieCourante.addLiaison(obj2);
+                                            sortieCourante.parent.bloc.ajouterNumberOut(obj2.parent.bloc)
+                                            obj2.tabPere.push(sortieCourante)
+                                            obj2.parent.bloc.ajouterNumberIn(sortieCourante.parent.bloc)
                                         }else
                                         {
                                             sortieCourante.repaint(5,5)
@@ -657,6 +679,9 @@ Item {
                         }else if(nomActionToAdd === "AND")
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:18})
+                        }else if(nomActionToAdd === "SetValue")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:19})
                         }
                     }
                 }
@@ -707,6 +732,37 @@ Item {
                             {
                                 actionSelected.push(indice)
                                 _couleurInfoBloc="#0B0B3B"
+                            }
+                        }
+                        onXChange:
+                        {
+                            if(_couleurInfoBloc==="#0B0B3B")
+                            {
+                                for(var i=0;i<actionSelected.length;i++)
+                                {
+                                    if(actionSelected[i]!==indice)
+                                    {
+                                        gridAction.itemAt(actionSelected[i]).inhibeMoveXY = true
+                                        gridAction.itemAt(actionSelected[i]).x += value
+                                        gridAction.itemAt(actionSelected[i]).inhibeMoveXY = false
+                                    }
+                                }
+                            }
+                        }
+                        onYChange:
+                        {
+                            if(_couleurInfoBloc==="#0B0B3B")
+                            {
+                                for(var i=0;i<actionSelected.length;i++)
+                                {
+                                    if(actionSelected[i]!==indice)
+                                    {
+                                        gridAction.itemAt(actionSelected[i]).inhibeMoveXY = true
+                                        gridAction.itemAt(actionSelected[i]).y += value
+                                        gridAction.itemAt(actionSelected[i]).inhibeMoveXY = false
+
+                                    }
+                                }
                             }
                         }
                     }

@@ -75,6 +75,7 @@ Item {
         listAutre.append({_nom:"Séquence",              _color:"grey", _index:1})
         listAutre.append({_nom:"Départ",                _color:"grey", _index:2})
         listAutre.append({_nom:"Attente temps",         _color:"grey", _index:3})
+        listAutre.append({_nom:"SetValue",              _color:"grey", _index:4})
 
     }
 
@@ -146,9 +147,11 @@ Item {
         style: TabViewStyle {
             frameOverlap: 1
             tab: Rectangle {
-                color: styleData.selected ? "dimgrey" :"#323232"
+                color:  "dimgrey"
+                border.width: 1
+                border.color: styleData.selected ? "blue":"black"
 
-                implicitWidth: Math.max(text.width + 4, 80)
+                implicitWidth: text.width + 30
                 implicitHeight: 35
                 radius: 2
                 Text {
