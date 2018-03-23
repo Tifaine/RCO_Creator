@@ -13,6 +13,7 @@
 #include "Action/actionservo.h"
 #include "Action/actionsetvaleur.h"
 #include "Action/actiondepart.h"
+#include "Action/actioncourbe.h"
 #include "gestionTable/gestiontable.h"
 #include "Action/gestion/gestionservo.h"
 #include "Action/gestion/gestiondynamixel.h"
@@ -59,6 +60,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<BlocAND>("blocAND", 1, 0, "BlocAnd");
     qmlRegisterType<GestionSortie>("gestSortie", 1, 0, "GestSortie");
     qmlRegisterType<GestionTable>("gestTable", 1, 0, "GestTable");
+    qmlRegisterType<ActionCourbe>("actionCourbe", 1, 0, "Courbe");
 
     QQmlApplicationEngine engine;
 

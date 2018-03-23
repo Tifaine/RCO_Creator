@@ -245,6 +245,9 @@ int Sequence::ouvrirFichier(QString fileName)
                 }else if(type == "actionSetValeur")
                 {
                     _type =  typeSetValeur;
+                }else if(type == "actionCourbe")
+                {
+                    _type =  typeCourbe;
                 }
             }
             if(elem->Attribute("numero"))
@@ -462,6 +465,30 @@ int Sequence::ouvrirFichier(QString fileName)
                         {
                             param1 = QString::fromStdString(elemBis->Attribute("value"));
                         }
+                        break;
+                    case typeCourbe:
+                        if(elemBis->Attribute("vitesse"))
+                        {
+                            param0 = QString::fromStdString(elemBis->Attribute("vitesse"));
+                        }
+                        if(elemBis->Attribute("rayon"))
+                        {
+                            param1 = QString::fromStdString(elemBis->Attribute("rayon"));
+                        }
+                        if(elemBis->Attribute("angle"))
+                        {
+                            param2 = QString::fromStdString(elemBis->Attribute("angle"));
+                        }
+                        if(elemBis->Attribute("precision"))
+                        {
+                            param3 = QString::fromStdString(elemBis->Attribute("precision"));
+                        }
+                        if(elemBis->Attribute("sens"))
+                        {
+                            param5 = QString::fromStdString(elemBis->Attribute("sens"));
+                        }
+                        param7 = QString::number(timeOut);
+                        param8 = listTimeout;
                         break;
 
 

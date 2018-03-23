@@ -65,6 +65,7 @@ Item {
         case 15://Retour position
         case 16://Retour GPIO
         case 18://Bloc AND
+        case 20://Bloc Courbe
         {
             listEntree.clear();
             listEntree.append({_x:2,_y:30,_indice:0,_color:"yellow"})
@@ -483,6 +484,12 @@ Item {
             component = Qt.createComponent("../ComposantBloc/TypeAction/BlocSetValue.qml");
             break;
         }
+        case 20://Bloc courbe
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocCourbe.qml");
+            break;
+        }
+
         }
         if(type!==-1)
         {

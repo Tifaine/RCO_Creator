@@ -28,6 +28,7 @@
 #define typeRetourGPIO          17
 #define typeAND                 18
 #define typeSetValeur           19
+#define typeCourbe              20
 
 //define typeServo 9
 
