@@ -6,16 +6,15 @@ import actionCourbe 1.0
 Item {
     id:root
     width: 120
-    height: 335
+    height: 350
 
     signal modifTaille(int taille)
     property var fils:courbe
-
-    property int taille:335
+    property int taille:350
 
     Component.onCompleted:
     {
-        modifTaille(335)
+        modifTaille(350)
     }
 
     function setParam(vitesse, angle, rayon, precision, sens, timeOut)
@@ -24,16 +23,8 @@ Item {
         teAngle.text = angle
         teRayon.text = rayon
         tePrecision.text = precision
-
         teTimeOut.text = timeOut
-
-        if(sens === "0")
-        {
-            switchSens.checked = false
-        }else
-        {
-            switchSens.checked = true
-        }
+        cbSens.setIndice(sens)
     }
 
     Courbe
@@ -216,20 +207,34 @@ Item {
         visible: true
     }
 
-    Switch {
-        id: switchSens
-        text: checked===true? "Arrière":"Avant"
-        anchors.top: tfPrecision.bottom
+    ListModel
+    {
+        id:listSens
+        ListElement{ nom:"Avant gauche"  }
+        ListElement{ nom:"Avant droit"  }
+        ListElement{ nom:"Arrière gauche"  }
+        ListElement{ nom:"Arrière droit"  }
+    }
+
+
+    CustomComboBox
+    {
+        id: cbSens
+        height: 30
+        anchors.top: textSens.bottom
         anchors.topMargin: 5
         anchors.right: parent.right
         anchors.rightMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 5
-        onClicked:
+        _model: listSens
+        onCustomCurrentIndexChanged:
         {
-            courbe.sens = checked
+            //setValeur.idValeur = indice+1
+            courbe.sens = indice
         }
     }
+
 
     Text {
         id: textTimeOut
@@ -240,7 +245,7 @@ Item {
         anchors.rightMargin: 5
         anchors.left: parent.left
         anchors.topMargin: 5
-        anchors.top: switchSens.bottom
+        anchors.top: cbSens.bottom
         anchors.right: parent.right
         anchors.leftMargin: 5
         font.pixelSize: 12
@@ -270,5 +275,20 @@ Item {
         anchors.right: parent.right
         anchors.leftMargin: 5
         visible: true
+    }
+
+    Text {
+        id: textSens
+        x: -3
+        y: 0
+        text: qsTr("sens : ")
+        anchors.left: parent.left
+        anchors.leftMargin: 5
+        font.pixelSize: 12
+        anchors.right: parent.right
+        anchors.topMargin: 5
+        anchors.top: tfPrecision.bottom
+        anchors.rightMargin: 5
+        font.bold: true
     }
 }

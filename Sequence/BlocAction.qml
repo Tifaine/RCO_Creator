@@ -48,7 +48,7 @@ Item {
         case 7: //Sequence
         case 12://attente temps
         case 19://SetValue
-        case 17://GPIO
+        case 16://GPIO
         {
             listEntree.clear();
             listEntree.append({_x:2,_y:30,_indice:0,_color:"yellow"})
@@ -63,7 +63,7 @@ Item {
         case 13://Retour déplacement
         case 14://Retour orientation
         case 15://Retour position
-        case 16://Retour GPIO
+        case 17://Retour GPIO
         case 18://Bloc AND
         case 20://Bloc Courbe
         {
@@ -466,12 +466,12 @@ Item {
         }
         case 16: //GPIO
         {
-            //component = Qt.createComponent("../ComposantBloc/TypeAction/BlocAttenteTemps.qml");
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocGPIO.qml");
             break;
         }
         case 17: //retour GPIO
         {
-            //component = Qt.createComponent("../ComposantBloc/TypeAction/BlocAttenteTemps.qml");
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocAttenteGPIO.qml");
             break;
         }
         case 18: //Bloc AND

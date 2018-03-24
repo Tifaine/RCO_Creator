@@ -45,12 +45,12 @@ void ActionCourbe::setPrecision(int value)
     precision = value;
 }
 
-bool ActionCourbe::getSens() const
+int ActionCourbe::getSens() const
 {
     return sens;
 }
 
-void ActionCourbe::setSens(bool value)
+void ActionCourbe::setSens(int value)
 {
     sens = value;
 }

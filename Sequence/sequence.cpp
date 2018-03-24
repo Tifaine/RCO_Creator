@@ -200,13 +200,13 @@ int Sequence::ouvrirFichier(QString fileName)
                 if(type=="actionDepart")
                 {
                     _type = typeEntree;
-                }else if(type == "actionDeplacement")
+                }else if(type == "actionMoteur")
                 {
-
+                    _type = typeMoteur;
                 }else if(type == "actionDyna")
                 {
                     _type = typeDyna;
-                }else if(type == "actionGpio")
+                }else if(type == "actionGPIO")
                 {
                     _type = typeGPIO;
                 }else if(type == "actionMetier")
@@ -224,9 +224,9 @@ int Sequence::ouvrirFichier(QString fileName)
                 }else if(type == "actionRetourDyna")
                 {
                     _type = typeAttenteDyna;
-                }else if(type == "actionRetourGpio")
+                }else if(type == "retourGPIO")
                 {
-
+                    _type = typeRetourGPIO;
                 }else if(type == "actionRetourPosition")
                 {
                     _type = typeRetourPosition;
@@ -321,6 +321,14 @@ int Sequence::ouvrirFichier(QString fileName)
                     case typeCapteur:
                         break;
                     case typeMoteur:
+                        if(elemBis->Attribute("id"))
+                        {
+                            param0 = QString::fromStdString(elemBis->Attribute("id"));
+                        }
+                        if(elemBis->Attribute("value"))
+                        {
+                            param1 = QString::fromStdString(elemBis->Attribute("value"));
+                        }
                         break;
                     case typeAutre:
                         break;
@@ -387,6 +395,14 @@ int Sequence::ouvrirFichier(QString fileName)
                         //genererAction(xBloc, yBloc, _type, listPere, listFils,0,0,0,0,0,0);
                         break;
                     case typeGPIO:
+                        if(elemBis->Attribute("id"))
+                        {
+                            param0 = QString::fromStdString(elemBis->Attribute("id"));
+                        }
+                        if(elemBis->Attribute("value"))
+                        {
+                            param1 = QString::fromStdString(elemBis->Attribute("value"));
+                        }
                         break;
 
                     case typeAttenteServo:
@@ -451,6 +467,16 @@ int Sequence::ouvrirFichier(QString fileName)
                         //genererAction(xBloc, yBloc, typeRetourPosition, listPere, listFils,QString::number(coordX),QString::number(coordY),QString::number(precision),listTimeout,QString::number(timeout),0);
                         break;
                     case typeRetourGPIO:
+                        if(elemBis->Attribute("id"))
+                        {
+                            param0 = QString::fromStdString(elemBis->Attribute("id"));
+                        }
+                        if(elemBis->Attribute("value"))
+                        {
+                            param1 = QString::fromStdString(elemBis->Attribute("value"));
+                        }
+                        param3 = listTimeout;
+                        param2 = QString::number(timeOut);
                         break;
                     case typeAND:
                         param0 = listTimeout;

@@ -32,6 +32,14 @@ Item {
         table1.clear()
     }
 
+    function copierBloc()
+    {
+        for(var i = 0; i<actionSelected.length; i++)
+        {
+            console.log(gridAction.itemAt(actionSelected[i]).type,gridAction.itemAt(actionSelected[i]).bloc)
+        }
+    }
+
     function reorganiserBloc()
     {
 
@@ -148,6 +156,9 @@ Item {
             case 3: //Moteur
             {
                 listAction.append({_x:xBloc,_y:yBloc, _title:"Moteur",_indice:listAction.count,_type:typeBloc})
+                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1);
+                gridAction.itemAt(listAction.count-1).listPere = listPere;
+                gridAction.itemAt(listAction.count-1).listFils = listFils;
                 break;
             }
             case 4: //Autre
@@ -236,12 +247,19 @@ Item {
             }
             case 16: //GPIO
             {
-                //listAction.append({_x:xBloc,_y:yBloc, _title:"GPIO,_indice:listAction.count,_type:typeBloc})
+                listAction.append({_x:xBloc,_y:yBloc, _title:"GPIO",_indice:listAction.count,_type:typeBloc})
+                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1);
+                gridAction.itemAt(listAction.count-1).listPere = listPere;
+                gridAction.itemAt(listAction.count-1).listFils = listFils;
                 break;
             }
             case 17: //retour GPIO
             {
-                //listAction.append({_x:xBloc,_y:yBloc, _title:"retour GPIO,_indice:listAction.count,_type:typeBloc})
+                listAction.append({_x:xBloc,_y:yBloc, _title:"retour GPIO",_indice:listAction.count,_type:typeBloc})
+                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2);
+                gridAction.itemAt(listAction.count-1).listPere = listPere;
+                gridAction.itemAt(listAction.count-1).listFils = listFils;
+                gridAction.itemAt(listAction.count-1).listTimeOut = param3;
                 break;
             }
             case 18: //Bloc AND
@@ -640,7 +658,7 @@ Item {
                         }else if(nomActionToAdd === "Capteur")
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:2})
-                        }else if(nomActionToAdd === "Déplacement")
+                        }else if(nomActionToAdd === "Moteur")
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:3})
                         }else if(nomActionToAdd === "Métier")
@@ -680,7 +698,7 @@ Item {
                         }else if(nomActionToAdd === "GPIO")
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:16})
-                        }else if(nomActionToAdd === "retour GPIO")
+                        }else if(nomActionToAdd === "Retour GPIO")
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:17})
                         }else if(nomActionToAdd === "AND")

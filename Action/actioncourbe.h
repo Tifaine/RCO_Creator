@@ -10,7 +10,7 @@ class ActionCourbe : public Action
     Q_PROPERTY(int rayon READ getRayon WRITE setRayon NOTIFY rayonChanged)
     Q_PROPERTY(int angle READ getAngle WRITE setAngle NOTIFY angleChanged)
     Q_PROPERTY(int precision READ getPrecision WRITE setPrecision NOTIFY precisionChanged)
-    Q_PROPERTY(bool sens READ getSens WRITE setSens NOTIFY sensChanged)
+    Q_PROPERTY(int sens READ getSens WRITE setSens NOTIFY sensChanged)
 public:
     ActionCourbe();
 
@@ -26,8 +26,8 @@ public:
     int getPrecision() const;
     void setPrecision(int value);
 
-    bool getSens() const;
-    void setSens(bool value);
+    int getSens() const;
+    void setSens(int value);
 
     void saveXML(QXmlStreamWriter *xmlWriter);
     void saveXML(TiXmlElement * root, int indice);
@@ -44,7 +44,7 @@ private:
     int rayon = 0;
     int angle = 0;
     int precision = 0;
-    bool sens = false;
+    int sens = 0;
 };
 
 #endif // ACTIONCOURBE_H

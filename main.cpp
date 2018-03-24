@@ -7,6 +7,7 @@
 #include "Action/actioncapteur.h"
 #include "Action/actiondynamixel.h"
 #include "Action/actionmoteur.h"
+#include "Action/actiongpio.h"
 #include "Action/actionorientation.h"
 #include "Action/actionposition.h"
 #include "Action/actionsequence.h"
@@ -25,6 +26,7 @@
 #include "Action/attente/retourposition.h"
 #include "Action/attente/retourorientation.h"
 #include "Action/attente/blocand.h"
+#include "Action/attente/retourgpio.h"
 #include "Sequence/gestionmqtt.h"
 
 #include "libXML/xmlmanager.h"
@@ -38,7 +40,6 @@ int main(int argc, char *argv[])
     XMLManager xmlManage;
     GestionSequence gestSequence;
     gestionMQTT gestMQTT;
-    //xmlManage.setNomXmlFile("Pouet.xml");
 
     qmlRegisterType<connector>("connector", 1, 0, "Liaison");
     qmlRegisterType<Sequence>("sequence", 1, 0, "Sequence");
@@ -61,6 +62,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<GestionSortie>("gestSortie", 1, 0, "GestSortie");
     qmlRegisterType<GestionTable>("gestTable", 1, 0, "GestTable");
     qmlRegisterType<ActionCourbe>("actionCourbe", 1, 0, "Courbe");
+    qmlRegisterType<RetourGPIO>("retourGPIO", 1, 0, "RetourGPIO");
+    qmlRegisterType<ActionGPIO>("actionGPIO", 1, 0, "ActionGPIO");
 
     QQmlApplicationEngine engine;
 

@@ -36,5 +36,7 @@
         <file>ComposantBloc/NumberSortieBloc.qml</file>
         <file>ComposantBloc/TypeAction/BlocSetValue.qml</file>
         <file>ComposantBloc/TypeAction/BlocCourbe.qml</file>
+        <file>ComposantBloc/TypeAction/BlocGPIO.qml</file>
+        <file>ComposantBloc/TypeAction/BlocAttenteGPIO.qml</file>
     </qresource>
 </RCC>
