@@ -40,6 +40,13 @@ Item {
             listSortie.append({_x:188,_y:30,_indice:0,_color:"yellow"})
             break;
 
+        case 23: //Depart fin
+        {
+            listEntree.clear();
+            listSortie.clear();
+            listEntree.append({_x:2,_y:30,_indice:0,_color:"yellow"})
+            break;
+        }
         case 0: //Servomoteur
         case 1: //Dynamixel
         case 2: //Capteur
@@ -501,6 +508,11 @@ Item {
             component = Qt.createComponent("../ComposantBloc/TypeAction/BlocDeplacement.qml");
             break;
         }
+        case 23://Bloc Fin
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocFin.qml");
+            break;
+        }
 
         }
         if(type!==-1)
@@ -534,7 +546,7 @@ Item {
             }else
             {
                 sprite.anchors.fill = rectangle;
-                if(type !== 9)sprite.modifTaille.connect(modifTaille)
+                if(type !== 9 && type !==23)sprite.modifTaille.connect(modifTaille)
                 modifTaille(sprite.taille)
                 bloc = sprite.fils
 

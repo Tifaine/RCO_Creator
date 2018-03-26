@@ -40,5 +40,6 @@
         <file>ComposantBloc/TypeAction/BlocAttenteGPIO.qml</file>
         <file>ComposantBloc/TypeAction/BlocAttenteBlocage.qml</file>
         <file>ComposantBloc/TypeAction/BlocDeplacement.qml</file>
+        <file>ComposantBloc/TypeAction/BlocFin.qml</file>
     </qresource>
 </RCC>

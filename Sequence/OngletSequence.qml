@@ -81,6 +81,7 @@ Item {
         listAutre.append({_nom:"Attente temps",         _color:"grey", _index:3})
         listAutre.append({_nom:"SetValue",              _color:"grey", _index:4})
         listAutre.append({_nom:"Attente Blocage",       _color:"grey", _index:5})
+        listAutre.append({_nom:"Fin",                   _color:"grey", _index:6})
 
     }
 

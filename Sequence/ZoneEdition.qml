@@ -306,6 +306,13 @@ Item {
                 gridAction.itemAt(listAction.count-1).listTimeOut = param2;
                 break;
             }
+            case 23:
+            {
+                listAction.append({_x:xBloc,_y:yBloc, _title:"Fin",_indice:listAction.count,_type:typeBloc})
+                gridAction.itemAt(listAction.count-1).listPere = listPere;
+                gridAction.itemAt(listAction.count-1).listFils = listFils;
+                break;
+            }
             }
         }
     }
@@ -736,6 +743,9 @@ Item {
                         }else if(nomActionToAdd === "Deplacement")
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:22})
+                        }else if(nomActionToAdd === "Fin")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:23})
                         }
                     }
                 }

@@ -15,6 +15,7 @@
 #include "Action/actionservo.h"
 #include "Action/actionsetvaleur.h"
 #include "Action/actiondepart.h"
+#include "Action/actionfin.h"
 #include "Action/actioncourbe.h"
 #include "gestionTable/gestiontable.h"
 #include "Action/gestion/gestionservo.h"
@@ -30,7 +31,6 @@
 #include "Action/attente/blocand.h"
 #include "Action/attente/retourgpio.h"
 #include "Sequence/gestionmqtt.h"
-
 #include "libXML/xmlmanager.h"
 
 int main(int argc, char *argv[])
@@ -56,6 +56,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<ActionSequence>("actionSequence", 1, 0, "Sequence");
     qmlRegisterType<ActionServo>("actionServo", 1, 0, "Servo");
     qmlRegisterType<ActionDepart>("actionDepart", 1, 0, "Depart");
+    qmlRegisterType<ActionFin>("actionFin", 1, 0, "Fin");
     qmlRegisterType<AttenteServo>("attenteServo", 1, 0, "AttenteServo");
     qmlRegisterType<AttenteDyna>("attenteDyna", 1, 0, "AttenteDyna");
     qmlRegisterType<AttenteTemps>("attenteTemps", 1, 0, "AttenteTemps");
@@ -68,9 +69,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<RetourGPIO>("retourGPIO", 1, 0, "RetourGPIO");
     qmlRegisterType<ActionGPIO>("actionGPIO", 1, 0, "ActionGPIO");
     qmlRegisterType<AttenteBlocage>("attenteBlocage", 1, 0, "AttenteBlocage");
-
     QQmlApplicationEngine engine;
-
     engine.rootContext()->setContextProperty("gestServo", &serv);
     engine.rootContext()->setContextProperty("gestDyna", &dyna);
     engine.rootContext()->setContextProperty("gestionXML", &xmlManage);
@@ -79,6 +78,5 @@ int main(int argc, char *argv[])
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;
-
     return app.exec();
 }

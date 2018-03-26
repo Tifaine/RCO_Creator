@@ -254,6 +254,9 @@ int Sequence::ouvrirFichier(QString fileName)
                 }else if(type == "actionDeplacement")
                 {
                     _type =  typeDeplacement;
+                }else if(type == "actionFin")
+                {
+                    _type =  typeFin;
                 }
             }
             if(elem->Attribute("numero"))

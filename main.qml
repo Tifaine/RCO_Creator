@@ -34,7 +34,7 @@ ApplicationWindow {
     FileDialog {
         id: fileDialogOuvrir
         title: "Ouvrir ..."
-        nameFilters: [ "Fichier XML (*.xml )"]
+        nameFilters: [ "Fichier XML (*.xml )" ]
         selectMultiple: false
         selectFolder: false
         onAccepted: {
