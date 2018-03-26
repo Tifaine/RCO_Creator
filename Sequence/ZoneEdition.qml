@@ -300,10 +300,10 @@ Item {
             case 22:
             {
                 listAction.append({_x:xBloc,_y:yBloc, _title:"Deplacement",_indice:listAction.count,_type:typeBloc})
-                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2);
+                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2,param3);
                 gridAction.itemAt(listAction.count-1).listPere = listPere;
                 gridAction.itemAt(listAction.count-1).listFils = listFils;
-                gridAction.itemAt(listAction.count-1).listTimeOut = param2;
+                gridAction.itemAt(listAction.count-1).listTimeOut = param4;
                 break;
             }
             case 23:

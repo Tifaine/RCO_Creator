@@ -510,8 +510,12 @@ int Sequence::ouvrirFichier(QString fileName)
                         {
                             param1 = QString::fromStdString(elemBis->Attribute("value"));
                         }
-                        param2 = QString::number(timeOut);
-                        param3 = listTimeout;
+                        if(elemBis->Attribute("vitesse"))
+                        {
+                            param2 = QString::fromStdString(elemBis->Attribute("vitesse"));
+                        }
+                        param3 = QString::number(timeOut);
+                        param4 = listTimeout;
                         break;
                     case typeCourbe:
                         if(elemBis->Attribute("vitesse"))

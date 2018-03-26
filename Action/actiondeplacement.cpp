@@ -25,11 +25,22 @@ void ActionDeplacement::setValueValeur(int value)
     valueValeur = value;
 }
 
+int ActionDeplacement::getVitesse() const
+{
+    return vitesse;
+}
+
+void ActionDeplacement::setVitesse(int value)
+{
+    vitesse = value;
+}
+
 void ActionDeplacement::saveXML(QXmlStreamWriter* xmlWriter)
 {
     xmlWriter->writeStartElement("actionDeplacement");
     xmlWriter->writeTextElement("id",QString::number(getIdValeur(),'f',0));
     xmlWriter->writeTextElement("value",QString::number(getValueValeur(),'f',0));
+    xmlWriter->writeTextElement("vitesse",QString::number(getVitesse(),'f',0));
     xmlWriter->writeEndElement();
 }
 
@@ -45,6 +56,7 @@ void ActionDeplacement::saveXML(TiXmlElement * root, int indice)
         root->LinkEndChild( param );
         param->SetAttribute("id", QString::number(getIdValeur(),'f',0).toStdString().c_str());
         param->SetAttribute("value", QString::number(getValueValeur(),'f',0).toStdString().c_str());
+        param->SetAttribute("vitesse", QString::number(getVitesse(),'f',0).toStdString().c_str());
         break;
     }
 }

@@ -5,19 +5,20 @@ import actionDeplacement 1.0
 Item {
     id:root
     width: 116
-    height: 142
+    height: 202
 
     property var fils:depl
-    property int taille:142
+    property int taille:202
     signal modifTaille(int taille)
 
-    function setParam(id,value,timeOut)
+    function setParam(id,value,vitesse ,timeOut)
     {
         if(id>0 && id <3)
         {
             cbCapteur.setIndice(id-1)
             teCapteur.text = value
             teTimeout.text = timeOut
+            teVitesse.text = vitesse
         }
     }
 
@@ -107,7 +108,7 @@ Item {
         anchors.right: parent.right
         anchors.left: parent.left
         font.pixelSize: 12
-        anchors.top: tfCapteur.bottom
+        anchors.top: tfVitesse.bottom
         anchors.topMargin: 5
         font.bold: true
         anchors.leftMargin: 5
@@ -126,7 +127,7 @@ Item {
             id: teTimeout
             height: 30
             color: "#ffffff"
-            text: qsTr("0")
+            text: qsTr("5000")
             verticalAlignment: Text.AlignVCenter
             anchors.leftMargin: 10
             anchors.fill: parent
@@ -138,6 +139,51 @@ Item {
         anchors.right: parent.right
         anchors.left: parent.left
         anchors.top: textTimeOut.bottom
+        anchors.topMargin: 5
+        anchors.leftMargin: 5
+    }
+
+    Text {
+        id: textVitesse
+        x: 2
+        y: 0
+        text: qsTr("Vitesse :")
+        anchors.rightMargin: 5
+        visible: true
+        anchors.right: parent.right
+        anchors.left: parent.left
+        font.pixelSize: 12
+        anchors.top: tfCapteur.bottom
+        anchors.topMargin: 5
+        font.bold: true
+        anchors.leftMargin: 5
+    }
+
+    Rectangle {
+        id: tfVitesse
+        x: -7
+        y: 5
+        height: 30
+        color: "#4a4545"
+        radius: 7
+        anchors.rightMargin: 5
+        visible: true
+        TextEdit {
+            id: teVitesse
+            height: 30
+            color: "#ffffff"
+            text: qsTr("0")
+            verticalAlignment: Text.AlignVCenter
+            anchors.leftMargin: 10
+            anchors.fill: parent
+            onTextChanged:
+            {
+                depl.vitesse = text
+            }
+        }
+        anchors.right: parent.right
+        anchors.left: parent.left
+        anchors.top: textVitesse.bottom
         anchors.topMargin: 5
         anchors.leftMargin: 5
     }
