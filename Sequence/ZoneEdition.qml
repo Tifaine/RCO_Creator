@@ -297,6 +297,15 @@ Item {
                 gridAction.itemAt(listAction.count-1).listTimeOut = param1;
                 break;
             }
+            case 22:
+            {
+                listAction.append({_x:xBloc,_y:yBloc, _title:"Deplacement",_indice:listAction.count,_type:typeBloc})
+                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2);
+                gridAction.itemAt(listAction.count-1).listPere = listPere;
+                gridAction.itemAt(listAction.count-1).listFils = listFils;
+                gridAction.itemAt(listAction.count-1).listTimeOut = param2;
+                break;
+            }
             }
         }
     }
@@ -724,6 +733,9 @@ Item {
                         }else if(nomActionToAdd === "Attente Blocage")
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:21})
+                        }else if(nomActionToAdd === "Deplacement")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:22})
                         }
                     }
                 }

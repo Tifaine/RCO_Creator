@@ -67,6 +67,7 @@ Item {
         case 18://Bloc AND
         case 20://Bloc Courbe
         case 21://Bloc AttenteBlocage
+        case 22://Bloc Deplacement
         {
             listEntree.clear();
             listEntree.append({_x:2,_y:30,_indice:0,_color:"yellow"})
@@ -493,6 +494,11 @@ Item {
         case 21://Bloc attenteBlocage
         {
             component = Qt.createComponent("../ComposantBloc/TypeAction/BlocAttenteBlocage.qml");
+            break;
+        }
+        case 22://Bloc deplacement
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocDeplacement.qml");
             break;
         }
 

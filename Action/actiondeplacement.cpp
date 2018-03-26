@@ -1,44 +1,44 @@
-#include "actionsetvaleur.h"
+#include "actiondeplacement.h"
 
-ActionSetValeur::ActionSetValeur()
+ActionDeplacement::ActionDeplacement()
 {
 
 }
 
-int ActionSetValeur::getIdValeur() const
+int ActionDeplacement::getIdValeur() const
 {
     return idValeur;
 }
 
-void ActionSetValeur::setIdValeur(int value)
+void ActionDeplacement::setIdValeur(int value)
 {
     idValeur = value;
 }
 
-int ActionSetValeur::getValueValeur() const
+int ActionDeplacement::getValueValeur() const
 {
     return valueValeur;
 }
 
-void ActionSetValeur::setValueValeur(int value)
+void ActionDeplacement::setValueValeur(int value)
 {
     valueValeur = value;
 }
 
-void ActionSetValeur::saveXML(QXmlStreamWriter* xmlWriter)
+void ActionDeplacement::saveXML(QXmlStreamWriter* xmlWriter)
 {
-    xmlWriter->writeStartElement("actionValeur");
+    xmlWriter->writeStartElement("actionDeplacement");
     xmlWriter->writeTextElement("id",QString::number(getIdValeur(),'f',0));
     xmlWriter->writeTextElement("value",QString::number(getValueValeur(),'f',0));
     xmlWriter->writeEndElement();
 }
 
-void ActionSetValeur::saveXML(TiXmlElement * root, int indice)
+void ActionDeplacement::saveXML(TiXmlElement * root, int indice)
 {
     switch(indice)
     {
     case 1:
-        root->SetAttribute("type", "actionValeur");
+        root->SetAttribute("type", "actionDeplacement");
         break;
     case 2:
         TiXmlElement * param = new TiXmlElement( "parametres" );

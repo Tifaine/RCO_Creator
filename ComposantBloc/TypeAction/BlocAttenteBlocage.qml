@@ -19,7 +19,6 @@ Item {
     {
         root.taille = _taille
         modifTaille(taille);
-
     }
     Component.onCompleted:
     {

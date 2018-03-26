@@ -18,6 +18,7 @@
 #define typeSequence            7
 #define typeEntree              9
 #define typeGPIO                16
+#define typeDeplacement         22
 
 #define typeAttenteServo        10
 #define typeAttenteDyna         11

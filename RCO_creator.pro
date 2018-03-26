@@ -43,7 +43,8 @@ SOURCES += main.cpp \
     Action/attente/blocand.cpp \
     Action/actionsetvaleur.cpp \
     Action/actioncourbe.cpp \
-    Action/attente/attenteblocage.cpp
+    Action/attente/attenteblocage.cpp \
+    Action/actiondeplacement.cpp
 
 RESOURCES += qml.qrc
 
@@ -113,5 +114,6 @@ HEADERS += \
     Action/attente/blocand.h \
     Action/actionsetvaleur.h \
     Action/actioncourbe.h \
-    Action/attente/attenteblocage.h
+    Action/attente/attenteblocage.h \
+    Action/actiondeplacement.h
 

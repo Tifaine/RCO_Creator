@@ -8,6 +8,7 @@
 #include "Action/actiondynamixel.h"
 #include "Action/actionmoteur.h"
 #include "Action/actiongpio.h"
+#include "Action/actiondeplacement.h"
 #include "Action/actionorientation.h"
 #include "Action/actionposition.h"
 #include "Action/actionsequence.h"
@@ -50,6 +51,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<ActionMoteur>("actionMoteur", 1, 0, "Moteur");
     qmlRegisterType<ActionSetValeur>("actionSetValeur", 1, 0, "SetValeur");
     qmlRegisterType<ActionOrientation>("actionOrientation", 1, 0, "Orientation");
+    qmlRegisterType<ActionDeplacement>("actionDeplacement", 1, 0, "Deplacement");
     qmlRegisterType<ActionPosition>("actionPos", 1, 0, "Pos");
     qmlRegisterType<ActionSequence>("actionSequence", 1, 0, "Sequence");
     qmlRegisterType<ActionServo>("actionServo", 1, 0, "Servo");

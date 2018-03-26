@@ -57,7 +57,7 @@ void ActionCourbe::setSens(int value)
 
 void ActionCourbe::saveXML(QXmlStreamWriter* xmlWriter)
 {
-    xmlWriter->writeStartElement("actionCourbe");
+    xmlWriter->writeStartElement("actionArc");
     xmlWriter->writeTextElement("vitesse",QString::number(vitesse,'f',0));
     xmlWriter->writeTextElement("rayon",QString::number(rayon,'f',0));
     xmlWriter->writeTextElement("angle",QString::number(angle,'f',0));
@@ -72,11 +72,12 @@ void ActionCourbe::saveXML(TiXmlElement * root, int indice)
     switch(indice)
     {
     case 1:
-        root->SetAttribute("type", "actionCourbe");
+        root->SetAttribute("type", "actionArc");
         break;
     case 2:
         TiXmlElement * param = new TiXmlElement( "parametres" );
         root->LinkEndChild( param );
+        //
         param->SetAttribute("vitesse", QString::number(vitesse,'f',0).toStdString().c_str());
         param->SetAttribute("rayon", QString::number(rayon,'f',0).toStdString().c_str());
         param->SetAttribute("angle", QString::number(angle,'f',0).toStdString().c_str());

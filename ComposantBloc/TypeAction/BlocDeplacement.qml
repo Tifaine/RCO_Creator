@@ -1,30 +1,33 @@
 import QtQuick 2.0
 import "../../Composant"
-import actionSetValeur 1.0
+import actionDeplacement 1.0
+
 Item {
     id:root
     width: 116
-    height: 84
+    height: 142
 
-    property var fils:setValeur
-    property int taille:84
+    property var fils:depl
+    property int taille:142
     signal modifTaille(int taille)
 
-    function setParam(id,value)
+    function setParam(id,value,timeOut)
     {
-        if(id>0 && id <6)
+        if(id>0 && id <3)
         {
             cbCapteur.setIndice(id-1)
             teCapteur.text = value
+            teTimeout.text = timeOut
         }
     }
 
-
-    SetValeur{
-        id:setValeur;
+    Deplacement
+    {
+        id:depl;
     }
 
-    Text {
+    Text
+    {
         id: textCapteur
         text: qsTr("Paramètres :")
         anchors.top: parent.top
@@ -42,11 +45,8 @@ Item {
     ListModel
     {
         id:listCap
-        ListElement{ nom:"X robot"  }
-        ListElement{ nom:"Y robot"  }
-        ListElement{ nom:"Orientation"  }
-        ListElement{ nom:"Vitesse linéaire"  }
-        ListElement{ nom:"Vitesse angulaire"  }
+        ListElement{ nom:"Avancer de"  }
+        ListElement{ nom:"Tourner de"  }
     }
 
     CustomComboBox
@@ -62,7 +62,7 @@ Item {
         _model: listCap
         onCustomCurrentIndexChanged:
         {
-            setValeur.idValeur = indice+1
+            depl.idValeur = indice+1
         }
     }
 
@@ -92,8 +92,53 @@ Item {
             onTextChanged:
             {
                 // dyna.idDyna = text
-                setValeur.valueValeur = text
+                depl.valueValeur = text
             }
         }
+    }
+
+    Text {
+        id: textTimeOut
+        x: -5
+        y: -1
+        text: qsTr("Timeout :")
+        anchors.rightMargin: 5
+        visible: true
+        anchors.right: parent.right
+        anchors.left: parent.left
+        font.pixelSize: 12
+        anchors.top: tfCapteur.bottom
+        anchors.topMargin: 5
+        font.bold: true
+        anchors.leftMargin: 5
+    }
+
+    Rectangle {
+        id: tfTimeOut
+        x: -8
+        y: 0
+        height: 30
+        color: "#4a4545"
+        radius: 7
+        anchors.rightMargin: 5
+        visible: true
+        TextEdit {
+            id: teTimeout
+            height: 30
+            color: "#ffffff"
+            text: qsTr("0")
+            verticalAlignment: Text.AlignVCenter
+            anchors.leftMargin: 10
+            anchors.fill: parent
+            onTextChanged:
+            {
+                depl.timeOut = text
+            }
+        }
+        anchors.right: parent.right
+        anchors.left: parent.left
+        anchors.top: textTimeOut.bottom
+        anchors.topMargin: 5
+        anchors.leftMargin: 5
     }
 }
