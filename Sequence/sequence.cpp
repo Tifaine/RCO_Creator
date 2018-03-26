@@ -248,6 +248,9 @@ int Sequence::ouvrirFichier(QString fileName)
                 }else if(type == "actionCourbe")
                 {
                     _type =  typeCourbe;
+                }else if(type == "actionAttenteBlocage")
+                {
+                    _type =  typeAttenteBlocage;
                 }
             }
             if(elem->Attribute("numero"))
@@ -515,6 +518,12 @@ int Sequence::ouvrirFichier(QString fileName)
                         }
                         param7 = QString::number(timeOut);
                         param8 = listTimeout;
+                        break;
+
+                    case typeAttenteBlocage:
+
+                        param0 = QString::number(timeOut);
+                        param1 = listTimeout;
                         break;
 
 

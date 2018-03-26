@@ -42,7 +42,8 @@ SOURCES += main.cpp \
     MQTT/QMqttClient.cpp \
     Action/attente/blocand.cpp \
     Action/actionsetvaleur.cpp \
-    Action/actioncourbe.cpp
+    Action/actioncourbe.cpp \
+    Action/attente/attenteblocage.cpp
 
 RESOURCES += qml.qrc
 
@@ -111,5 +112,6 @@ HEADERS += \
     MQTT/mqtt4qt_global.h \
     Action/attente/blocand.h \
     Action/actionsetvaleur.h \
-    Action/actioncourbe.h
+    Action/actioncourbe.h \
+    Action/attente/attenteblocage.h
 

@@ -29,6 +29,7 @@
 #define typeAND                 18
 #define typeSetValeur           19
 #define typeCourbe              20
+#define typeAttenteBlocage      21
 
 //define typeServo 9
 

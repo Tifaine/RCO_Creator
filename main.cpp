@@ -25,6 +25,7 @@
 #include "Action/attente/attentetemps.h"
 #include "Action/attente/retourposition.h"
 #include "Action/attente/retourorientation.h"
+#include "Action/attente/attenteblocage.h"
 #include "Action/attente/blocand.h"
 #include "Action/attente/retourgpio.h"
 #include "Sequence/gestionmqtt.h"
@@ -64,6 +65,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<ActionCourbe>("actionCourbe", 1, 0, "Courbe");
     qmlRegisterType<RetourGPIO>("retourGPIO", 1, 0, "RetourGPIO");
     qmlRegisterType<ActionGPIO>("actionGPIO", 1, 0, "ActionGPIO");
+    qmlRegisterType<AttenteBlocage>("attenteBlocage", 1, 0, "AttenteBlocage");
 
     QQmlApplicationEngine engine;
 

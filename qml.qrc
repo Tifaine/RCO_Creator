@@ -38,5 +38,6 @@
         <file>ComposantBloc/TypeAction/BlocCourbe.qml</file>
         <file>ComposantBloc/TypeAction/BlocGPIO.qml</file>
         <file>ComposantBloc/TypeAction/BlocAttenteGPIO.qml</file>
+        <file>ComposantBloc/TypeAction/BlocAttenteBlocage.qml</file>
     </qresource>
 </RCC>

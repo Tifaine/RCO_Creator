@@ -61,7 +61,6 @@ Item {
         listAutre.clear();
 
         listServo.append({_nom:"Servomoteur",                   _color:"grey", _index:0})
-        //listServo.append({_nom:"Attente servo",                 _color:"grey", _index:1})
 
         listDyna.append({_nom:"Dynamixel",                      _color:"grey", _index:0})
         listDyna.append({_nom:"Attente dyna",                   _color:"grey", _index:1})
@@ -71,13 +70,9 @@ Item {
         listDeplacement.append({_nom:"Déplacement",             _color:"grey", _index:2})
         listDeplacement.append({_nom:"Courbe",                  _color:"grey", _index:3})
         listDeplacement.append({_nom:"Moteur",                  _color:"grey", _index:4})
-        //listDeplacement.append({_nom:"Retour déplacement",      _color:"grey", _index:3})
-        //listDeplacement.append({_nom:"Retour orientation",      _color:"grey", _index:4})
-        //listDeplacement.append({_nom:"Retour position",         _color:"grey", _index:5})
 
         listCapteur.append({_nom:"GPIO",                _color:"grey", _index:0})
         listCapteur.append({_nom:"Retour GPIO",         _color:"grey", _index:1})
-        /*listCapteur.append({_nom:"Capteur",             _color:"grey", _index:0})*/
 
 
         listAutre.append({_nom:"AND",                   _color:"grey", _index:0})
@@ -85,6 +80,7 @@ Item {
         listAutre.append({_nom:"Départ",                _color:"grey", _index:2})
         listAutre.append({_nom:"Attente temps",         _color:"grey", _index:3})
         listAutre.append({_nom:"SetValue",              _color:"grey", _index:4})
+        listAutre.append({_nom:"Attente Blocage",       _color:"grey", _index:5})
 
     }
 

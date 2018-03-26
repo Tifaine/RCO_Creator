@@ -280,12 +280,23 @@ Item {
                 break;
             }
             case 20:
+            {
                 listAction.append({_x:xBloc,_y:yBloc, _title:"Courbe",_indice:listAction.count,_type:typeBloc})
                 gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2,param3,param4,param7);
                 gridAction.itemAt(listAction.count-1).listPere = listPere;
                 gridAction.itemAt(listAction.count-1).listFils = listFils;
                 gridAction.itemAt(listAction.count-1).listTimeOut = param8;
                 break;
+            }
+            case 21:
+            {
+                listAction.append({_x:xBloc,_y:yBloc, _title:"Attente Blocage",_indice:listAction.count,_type:typeBloc})
+                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0);
+                gridAction.itemAt(listAction.count-1).listPere = listPere;
+                gridAction.itemAt(listAction.count-1).listFils = listFils;
+                gridAction.itemAt(listAction.count-1).listTimeOut = param1;
+                break;
+            }
             }
         }
     }
@@ -710,6 +721,9 @@ Item {
                         }else if(nomActionToAdd === "Courbe")
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:20})
+                        }else if(nomActionToAdd === "Attente Blocage")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:21})
                         }
                     }
                 }
