@@ -3,6 +3,13 @@
 #include <QQmlContext>
 #include "Composant/connector.h"
 #include "Sequence/sequence.h"
+
+#include "gestionTable/gestiontable.h"
+#include "Action/gestion/gestionservo.h"
+#include "Action/gestion/gestiondynamixel.h"
+#include "Action/gestion/gestionsortie.h"
+#include "Action/gestion/gestionsequence.h"
+
 #include "Action/actionautre.h"
 #include "Action/actioncapteur.h"
 #include "Action/actiondynamixel.h"
@@ -17,11 +24,6 @@
 #include "Action/actiondepart.h"
 #include "Action/actionfin.h"
 #include "Action/actioncourbe.h"
-#include "gestionTable/gestiontable.h"
-#include "Action/gestion/gestionservo.h"
-#include "Action/gestion/gestiondynamixel.h"
-#include "Action/gestion/gestionsortie.h"
-#include "Action/gestion/gestionsequence.h"
 #include "Action/attente/attenteservo.h"
 #include "Action/attente/attentedyna.h"
 #include "Action/attente/attentetemps.h"
@@ -30,6 +32,8 @@
 #include "Action/attente/attenteblocage.h"
 #include "Action/attente/blocand.h"
 #include "Action/attente/retourgpio.h"
+
+
 #include "Sequence/gestionmqtt.h"
 #include "libXML/xmlmanager.h"
 

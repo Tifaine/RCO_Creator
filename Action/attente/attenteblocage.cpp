@@ -5,20 +5,20 @@ AttenteBlocage::AttenteBlocage()
 
 }
 
-int AttenteBlocage::getTemps() const
+int AttenteBlocage::getSensibilite() const
 {
-    return temps;
+    return sensibilite;
 }
 
-void AttenteBlocage::setTemps(int value)
+void AttenteBlocage::setSensibilite(int value)
 {
-    temps = value;
+    sensibilite = value;
 }
 
 void AttenteBlocage::saveXML(QXmlStreamWriter *xmlWriter)
 {
     xmlWriter->writeStartElement("actionAttenteBlocage");
-    xmlWriter->writeTextElement("valueAttente",QString::number(getTemps(),'f',0));
+    xmlWriter->writeTextElement("sensibilite",QString::number(getSensibilite(),'f',0));
     xmlWriter->writeEndElement();
 }
 
@@ -32,6 +32,7 @@ void AttenteBlocage::saveXML(TiXmlElement * root, int indice)
     case 2:
         TiXmlElement * param = new TiXmlElement( "parametres" );
         root->LinkEndChild( param );
+        param->SetAttribute("sensibilite", QString::number(getSensibilite(),'f',0).toStdString().c_str());
         break;
     }
 }

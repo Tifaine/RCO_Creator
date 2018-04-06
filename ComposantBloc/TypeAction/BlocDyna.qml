@@ -12,7 +12,7 @@ Item {
     signal modifTaille(int taille)
     property var fils:dyna
 
-    property int taille:70
+    property int taille:182
     function tailleChange(_taille)
     {
         root.taille = _taille
@@ -105,8 +105,9 @@ Item {
 
     Component.onCompleted:
     {
-        root.state = "ferme"
-        tailleChange(70)
+        root.state = "ouvert"
+
+        tailleChange(182)
         listDyna.clear()
         for(var i = 0; i< gestDyna.getNbDyna();i++)
         {
@@ -427,7 +428,11 @@ Item {
                     tfVitesseEnable = true
                     tailleChange(root.height+tfVitesse.height+5)
                 }
-                dyna.vitesseDyna = tfVitesse.text
+                if(tfVitesse.text !== null && tfVitesse.text !== undefined)
+                {
+                    dyna.vitesseDyna = tfVitesse.text
+                }
+
             }else
             {
                 if(tfVitesse.visible===true)
@@ -476,7 +481,7 @@ Item {
         x: -267
         width: 15
         height: 15
-        text: qsTr("v")
+        text: qsTr("^")
         anchors.right: parent.right
         anchors.rightMargin: 5
         anchors.top: parent.top

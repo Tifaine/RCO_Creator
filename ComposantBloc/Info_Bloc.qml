@@ -7,6 +7,7 @@ Item {
     property int typeBloc:-1
     width: 116
     height: 220
+    z:1
     property string _couleur:"#655e5e"
     Component.onCompleted:
     {

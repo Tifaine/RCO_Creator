@@ -66,9 +66,11 @@ ApplicationWindow {
         anchors.topMargin: 0
         onSaveAs: fileDialog.open();
         onOpen: fileDialogOuvrir.open();
+        onToggleTable:ongletSequence.toggleTable();
         onUpload:
         {
-            ongletSequence.saveAs("file:///tmp/temp.xml")
+            ongletSequence.exportXML()
+            //ongletSequence.saveAs("file:///tmp/temp.xml")
             gestMQTT.upload();
         }
     }

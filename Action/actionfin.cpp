@@ -2,7 +2,7 @@
 
 ActionFin::ActionFin()
 {
-
+    setType(typeFin);
 }
 
 void ActionFin::saveXML(QXmlStreamWriter* xmlWriter)

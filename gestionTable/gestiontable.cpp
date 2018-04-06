@@ -75,11 +75,10 @@ void GestionTable::actionChanged(Action* actChanged, QString param, Action* newV
 }
 
 void GestionTable::gestionTable()
-{
+{   
     QList<Action*> listPerePosition, listFils;
-
+    listLienAction.clear();
     listPerePosition.append(listAction.at(0));
-
     while(listPerePosition.size()>0)
     {
         for(int i = 0; i < listPerePosition.at(0)->getListFils().size();i++)
@@ -114,9 +113,7 @@ void GestionTable::gestionTable()
         }
         listPerePosition.removeFirst();
     }
-
     emit finTraitementTable();
-
 }
 
 int GestionTable::getNbLien()

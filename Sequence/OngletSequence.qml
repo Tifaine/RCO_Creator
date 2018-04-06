@@ -85,10 +85,19 @@ Item {
 
     }
 
+    function toggleTable()
+    {
+        repeaterOnglet.itemAt(bar.currentIndex).children[0].toggleTable();
+    }
+
     function ouvrir(nomFichier)
     {
         repeaterOnglet.itemAt(bar.currentIndex).children[0].ouvrirFile(nomFichier)
         fichierLoad = nomFichier;
+    }
+    function exportXML()
+    {
+        repeaterOnglet.itemAt(0).children[0].exportXML();
     }
 
     function saveAs(nomFichier)

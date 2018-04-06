@@ -12,38 +12,46 @@ GestionServo::GestionServo(QObject *parent)
     connect(watcher,SIGNAL(fileChanged(QString)),this,SLOT(listFichierServo()));
 }
 
-
 void GestionServo::listFichierServo()
 {
     listServo.clear();
-    fichierServo->open(QIODevice::ReadOnly);
-    QXmlStreamReader xmlReader(fichierServo);
-    xmlReader.readNextStartElement();
-    while(!xmlReader.atEnd())
+    TiXmlDocument doc("servo.xml");
+    if(!doc.LoadFile())
     {
-        xmlReader.readNextStartElement();
-        if(xmlReader.name().compare((QString)"Servo")==0)
-        {
 
-        }
-        if(xmlReader.name().compare((QString)"nom")==0)
+    }
+    TiXmlElement* root = doc.FirstChildElement();
+    std::string elemNameRoot = root->Value();
+    if(elemNameRoot == "typeXml")
+    {
+
+    }
+    root = root->NextSiblingElement();
+    for(TiXmlElement* elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement())
+    {
+        std::string elemName = elem->Value();
+        if(elemName == "Servo")
         {
             listServo.append(new Servo);
-            listServo.last()->setNom(xmlReader.readElementText());
-        }
-        if(xmlReader.name().compare((QString)"id")==0)
-        {
-            listServo.last()->setId(xmlReader.readElementText().toInt());
-        }
-        if(xmlReader.name().compare((QString)"NomVal")==0)
-        {
-
-            listServo.last()->ajouterValeur("",0);
-            listServo.last()->listNom.append(xmlReader.readElementText());
-        }
-        if(xmlReader.name().compare((QString)"val")==0)
-        {
-            listServo.last()->listValue.append(xmlReader.readElementText().toInt());
+            for(TiXmlElement* elemBis = elem->FirstChildElement(); elemBis != NULL; elemBis = elemBis->NextSiblingElement())
+            {
+                std::string elemBisName = elemBis->Value();
+                if(elemBisName == "nom")
+                {
+                    listServo.last()->setNom(elemBis->GetText());
+                }else if(elemBisName == "id")
+                {
+                    QString id = elemBis->GetText();
+                    listServo.last()->setId(id.toInt());
+                }else if(elemBisName == "NomVal")
+                {
+                    listServo.last()->listNom.append(elemBis->GetText());
+                }else if(elemBisName == "val")
+                {
+                    QString val = elemBis->GetText();
+                    listServo.last()->listValue.append(val.toInt());
+                }
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ Item {
     property int indice
     property int type
     property string _couleurInfoBloc : "#655e5e"
-
+    property string _couleurTypeBloc : "#4f4a4a"
     property var listSortie_ : gridSortie
     property var listEntree_ : gridEntree
     property var bloc : null
@@ -27,6 +27,7 @@ Item {
     objectName: "BlocAction"
     width: 200
     height: 92
+    z:1
 
     Component.onCompleted:
     {
@@ -47,13 +48,15 @@ Item {
             listEntree.append({_x:2,_y:30,_indice:0,_color:"yellow"})
             break;
         }
+        case 12://attente temps
+            _couleurTypeBloc = "#FF358B"
         case 0: //Servomoteur
         case 1: //Dynamixel
         case 2: //Capteur
         case 3: //Moteur
         case 4: //Autre
         case 7: //Sequence
-        case 12://attente temps
+
         case 19://SetValue
         case 16://GPIO
         {
@@ -76,6 +79,7 @@ Item {
         case 21://Bloc AttenteBlocage
         case 22://Bloc Deplacement
         {
+            _couleurTypeBloc = "#FF358B"
             listEntree.clear();
             listEntree.append({_x:2,_y:30,_indice:0,_color:"yellow"})
             listSortie.clear();
@@ -361,11 +365,11 @@ Item {
         anchors.rightMargin: 13
         anchors.left: parent.left
         anchors.leftMargin: 13
-
     }
+
     Rectangle {
         id: rectangle4
-        color: "#4f4a4a"
+        color: _couleurTypeBloc
         z:-1
         radius: 5
         anchors.right: parent.right

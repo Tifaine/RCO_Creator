@@ -24,6 +24,16 @@ Item {
         seq.enregistrerSous(nomFichier)
     }
 
+    function exportXML()
+    {
+        seq.exportXML();
+    }
+
+    function toggleTable()
+    {
+        table1.visible = !table1.visible;
+    }
+
     function clearAll()
     {
         listAction.clear()
@@ -86,19 +96,24 @@ Item {
             {
                 if(gridAction.itemAt(i).listPere !== null && gridAction.itemAt(i).listFils !== null )
                 {
+
                     var stringList = gridAction.itemAt(i).listFils.split(';')
                     var sortieCourante = gridAction.itemAt(i).listSortie_.itemAt(0)
-                    for(var j=0;j<stringList.length-1;j++)
+                    if(sortieCourante!==null)
                     {
-                        var obj2 = gridAction.itemAt(parseInt(stringList[j])).listEntree_.itemAt(0)
-                        sortieCourante.repaint((obj2.parent.x+obj2.x+5)-sortieCourante.parent.x-sortieCourante.x,
-                                               (obj2.parent.y+obj2.y+5)-sortieCourante.parent.y-sortieCourante.y)
-                        sortieCourante.addLiaison(obj2);
-                        sortieCourante.parent.bloc.ajouterFils(sortieCourante.indice,obj2.parent.bloc)
-                        obj2.tabPere.push(sortieCourante)
-                        obj2.parent.bloc.ajouterPere(0,sortieCourante.parent.bloc)
+                        for(var j=0;j<stringList.length-1;j++)
+                        {
+                            var obj2 = gridAction.itemAt(parseInt(stringList[j])).listEntree_.itemAt(0)
+
+                            sortieCourante.repaint((obj2.parent.x+obj2.x+5)-sortieCourante.parent.x-sortieCourante.x,
+                                                   (obj2.parent.y+obj2.y+5)-sortieCourante.parent.y-sortieCourante.y)
+                            sortieCourante.addLiaison(obj2);
+                            sortieCourante.parent.bloc.ajouterFils(sortieCourante.indice,obj2.parent.bloc)
+                            obj2.tabPere.push(sortieCourante)
+                            obj2.parent.bloc.ajouterPere(0,sortieCourante.parent.bloc)
+                        }
+                        stringList = gridAction.itemAt(i).listPere.split(';')
                     }
-                    stringList = gridAction.itemAt(i).listPere.split(';')
                 }
 
                 if(gridAction.itemAt(i).listTimeOut !== null)
@@ -291,7 +306,7 @@ Item {
             case 21:
             {
                 listAction.append({_x:xBloc,_y:yBloc, _title:"Attente Blocage",_indice:listAction.count,_type:typeBloc})
-                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0);
+                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param2);
                 gridAction.itemAt(listAction.count-1).listPere = listPere;
                 gridAction.itemAt(listAction.count-1).listFils = listFils;
                 gridAction.itemAt(listAction.count-1).listTimeOut = param1;
@@ -330,28 +345,14 @@ Item {
         {
             flickable.contentX = action.getXBloc() - (flickable.visibleArea.widthRatio*flickable.contentWidth)/2
             flickable.contentY = action.getYBloc() - (flickable.visibleArea.heightRatio*flickable.contentHeight)/2
-            panneauPos.afficherPosition(action)
         }
-    }
-
-    PanneauPosition
-    {
-        id:panneauPos
-        z:1
-        height: table1.itemTable.height
-        width:root.width-table1.itemTable.width
-        anchors.left: parent.left
-        anchors.leftMargin: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 0
-        seq:seq
     }
 
     Rectangle
     {
         id:rect
         color:"#323232"
-        anchors.bottom: panneauPos.top
+        anchors.bottom: parent.bottom
         anchors.right: parent.right
         anchors.left: parent.left
         anchors.top: parent.top
@@ -515,6 +516,7 @@ Item {
                                             {
                                                 rect1.survolActif.couleur = "yellow"
                                             }
+                                            table1.updateTable()
                                         }else if(obj2.objectName === "NumberIn" && sortieCourante.objectName === "NumberOut")
                                         {
 

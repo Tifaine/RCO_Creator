@@ -6,6 +6,7 @@ Item {
     property string couleur
     property string couleurSelected:"#151b70"
     property int indice:-1
+    z:-2
     objectName: "Sortie"
     height:12
     width:12
@@ -34,7 +35,7 @@ Item {
             id:liaison
             antialiasing: true
             _color:"yellow"
-            z:  -1
+            z:  -5
             x1: _x1
             y1: _y1
             x2: _x2

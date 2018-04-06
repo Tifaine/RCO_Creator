@@ -6,19 +6,21 @@
 class AttenteBlocage : public Action
 {
     Q_OBJECT
-    Q_PROPERTY(int temps READ getTemps WRITE setTemps NOTIFY tempsChanged)
+    //Add sensibilité
+    Q_PROPERTY(int sensibilite READ getSensibilite WRITE setSensibilite NOTIFY sensibiliteChanged)
+
 public:
     AttenteBlocage();
     void saveXML(QXmlStreamWriter *xmlWriter);
     void saveXML(TiXmlElement * root, int indice);
-    int getTemps() const;
-    void setTemps(int value);
+    int getSensibilite() const;
+    void setSensibilite(int value);
 
 signals:
-    void tempsChanged();
+    void sensibiliteChanged();
 
 private:
-    int temps = 1000;
+    int sensibilite = 10;
 };
 
 #endif // ATTENTEBLOCAGE_H

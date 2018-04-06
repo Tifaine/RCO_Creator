@@ -6,6 +6,7 @@ Item {
     objectName: "Entree"
     height:10
     width:10
+    z:-2
     property var tabPere:[]
     Rectangle
     {

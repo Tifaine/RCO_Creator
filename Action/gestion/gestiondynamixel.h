@@ -4,13 +4,14 @@
 #include <QObject>
 #include "dynamixel.h"
 #include <QFileSystemWatcher>
+#include "../../libXML/tinystr.h"
+#include "../../libXML/tinyxml.h"
 
 class GestionDynamixel : public QObject
 {
     Q_OBJECT
 public:
     explicit GestionDynamixel(QObject *parent = nullptr);
-
 signals:
 
 public slots:
@@ -25,6 +26,7 @@ public slots:
     int getIdDyna(int indice);
     QString getNomVitesse(int indiceDyna, int indiceVitesse);
     int getValVitesse(int indiceDyna, int indiceVitesse);
+
 private:
     QList<Dynamixel*> listDyna;
     QFile* fichierDyna;

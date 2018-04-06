@@ -2,9 +2,10 @@
 #define GESTIONSERVO_H
 
 #include <QObject>
-#include <QtXml>
 #include "servo.h"
 #include <QFileSystemWatcher>
+#include "../../libXML/tinystr.h"
+#include "../../libXML/tinyxml.h"
 
 class GestionServo : public QObject
 {

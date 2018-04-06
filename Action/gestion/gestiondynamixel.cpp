@@ -16,39 +16,56 @@ GestionDynamixel::GestionDynamixel(QObject *parent) : QObject(parent)
 void GestionDynamixel::listFichierDyna()
 {
     listDyna.clear();
-    fichierDyna->open(QIODevice::ReadOnly);
-    QXmlStreamReader xmlReader(fichierDyna);
-    xmlReader.readNextStartElement();
-    while(!xmlReader.atEnd())
+    TiXmlDocument doc("dyna.xml");
+    if(!doc.LoadFile())
     {
-        xmlReader.readNextStartElement();
 
-        if(xmlReader.name().compare((QString)"nom")==0)
+    }
+    TiXmlElement* root = doc.FirstChildElement();
+    std::string elemNameRoot = root->Value();
+    if(elemNameRoot == "typeXml")
+    {
+
+    }
+    root = root->NextSiblingElement();
+
+    for(TiXmlElement* elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement())
+    {
+
+        std::string elemName = elem->Value();
+        if(elemName == "Dyna")
         {
             listDyna.append(new Dynamixel);
-            listDyna.last()->setNom(xmlReader.readElementText());
-        }else
-        if(xmlReader.name().compare((QString)"id")==0)
-        {
-            listDyna.last()->setId(xmlReader.readElementText().toInt());
-        }else
-        if(xmlReader.name().compare((QString)"NomVal")==0)
-        {
-            listDyna.last()->listNom.append(xmlReader.readElementText());
-        }else
-        if(xmlReader.name().compare((QString)"val")==0)
-        {
-            listDyna.last()->listValue.append(xmlReader.readElementText().toInt());
-        }else
-        if(xmlReader.name().compare((QString)"nomVitesse")==0)
-        {
-            listDyna.last()->listNomVitesse.append(xmlReader.readElementText());
-        }else
-        if(xmlReader.name().compare((QString)"vitesse")==0)
-        {
-            listDyna.last()->listValueVitesse.append(xmlReader.readElementText().toInt());
+            for(TiXmlElement* elemBis = elem->FirstChildElement(); elemBis != NULL; elemBis = elemBis->NextSiblingElement())
+            {
+                std::string elemBisName = elemBis->Value();
+                if(elemBisName == "nom")
+                {
+                    listDyna.last()->setNom(elemBis->GetText());
+                }else if(elemBisName == "id")
+                {
+                    QString id = elemBis->GetText();
+                    listDyna.last()->setId(id.toInt());
+                }else if(elemBisName == "NomVal")
+                {
+                    listDyna.last()->listNom.append(elemBis->GetText());
+                }else if(elemBisName == "val")
+                {
+                    QString val = elemBis->GetText();
+                    listDyna.last()->listValue.append(val.toInt());
+                }else if(elemBisName == "nomVitesse")
+                {
+                    listDyna.last()->listNomVitesse.append(elemBis->GetText());
+                }else if(elemBisName == "vitesse")
+                {
+                    QString vitesse = elemBis->GetText();
+                    listDyna.last()->listValueVitesse.append(vitesse.toInt());
+                }
+            }
         }
+
     }
+
 }
 
 void GestionDynamixel::mustDelete()
@@ -58,7 +75,7 @@ void GestionDynamixel::mustDelete()
 
 int GestionDynamixel::getNbDyna()
 {
-   return listDyna.size();
+    return listDyna.size();
 }
 
 QString GestionDynamixel::getNomDyna(int indice)
