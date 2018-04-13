@@ -33,6 +33,7 @@ void AttenteTemps::saveXML(TiXmlElement * root, int indice)
         TiXmlElement * param = new TiXmlElement( "parametres" );
         root->LinkEndChild( param );
         param->SetAttribute("temps", QString::number(getTemps(),'f',0).toStdString().c_str());
+        qDebug()<<"Temps : "<<getTemps();
         break;
     }
 }

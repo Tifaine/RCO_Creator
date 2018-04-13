@@ -141,10 +141,12 @@ void Sequence::exportXML()
     msg = new TiXmlElement( "version" );
     msg->LinkEndChild( new TiXmlText( "3.1" ));
     root->LinkEndChild( msg );
+    int indice = 0;
     for(int i=0;i<listAction.size();i++)
     {
         if(listAction.at(i)->getType() != typeSequence)
         {
+            indice++;
             TiXmlElement * action = new TiXmlElement( "Action" );
             root->LinkEndChild( action );
             listAction.at(i)->saveXML(action,1);
@@ -184,18 +186,22 @@ void Sequence::exportXML()
                 }
             }
 
-            for(int j=0;j<listAction.at(i)->getListPere().size();j++)
+            if(listAction.at(i)->getType() != typeEntree)
             {
-                QString listPere;
-                listPere.clear();
-                for(int k=0;k<listAction.at(i)->getListPere().at(j)->size();k++)
+                for(int j=0;j<listAction.at(i)->getListPere().size();j++)
                 {
-                    listPere.append(QString::number(listAction.indexOf(listAction.at(i)->getListPere().at(j)->at(k))));
-                    listPere.append(";");
+                    QString listPere;
+                    listPere.clear();
+                    for(int k=0;k<listAction.at(i)->getListPere().at(j)->size();k++)
+                    {
+                        listPere.append(QString::number(listAction.indexOf(listAction.at(i)->getListPere().at(j)->at(k))));
+                        listPere.append(";");
+                    }
+                    TiXmlElement * posBloc = new TiXmlElement( "pere" );
+                    action->LinkEndChild( posBloc );
+                    posBloc->SetAttribute("liste", listPere.toStdString().c_str());
                 }
-                TiXmlElement * posBloc = new TiXmlElement( "pere" );
-                action->LinkEndChild( posBloc );
-                posBloc->SetAttribute("liste", listPere.toStdString().c_str());
+
             }
 
             QString listNumberIn;
@@ -211,7 +217,8 @@ void Sequence::exportXML()
             QList<Action*> listAct;
             ActionSequence* temp = (ActionSequence*)listAction.at(i);
             ouvrirSequence(temp->getNomSequence(),&listAct);
-            enregistrerSequence(root,&listAct,i+listAction.size(),i,&listAction,0);
+            enregistrerSequence(root,&listAct,indice+listAction.size(),i,&listAction,0);
+            indice+=listAct.size();
 
         }
     }
@@ -234,7 +241,6 @@ void Sequence::enregistrerSequence(TiXmlElement * root, QList<Action*>* listActi
                 action->SetAttribute("numero", indice+i);
             }else
             {
-                qDebug()<<indiceDebut<<" "<<delta;
                 action->SetAttribute("numero", indiceDebut+delta);
             }
 
@@ -310,19 +316,19 @@ void Sequence::enregistrerSequence(TiXmlElement * root, QList<Action*>* listActi
                 }
             }else
             {
-                for(int j=0;j<listRef->at(indiceDebut)->getListPere().size();j++)
-                {
-                    QString listPere;
-                    listPere.clear();
-                    for(int k=0;k<listRef->at(indiceDebut)->getListPere().at(j)->size();k++)
-                    {
-                        listPere.append(QString::number(listRef->indexOf(listRef->at(indiceDebut)->getListPere().at(j)->at(k))));
-                        listPere.append(";");
-                    }
-                    TiXmlElement * posBloc = new TiXmlElement( "pere" );
-                    action->LinkEndChild( posBloc );
-                    posBloc->SetAttribute("liste", listPere.toStdString().c_str());
-                }
+//                for(int j=0;j<listRef->at(indiceDebut)->getListPere().size();j++)
+//                {
+//                    QString listPere;
+//                    listPere.clear();
+//                    for(int k=0;k<listRef->at(indiceDebut)->getListPere().at(j)->size();k++)
+//                    {
+//                        listPere.append(QString::number(listRef->indexOf(listRef->at(indiceDebut)->getListPere().at(j)->at(k))));
+//                        listPere.append(";");
+//                    }
+//                    TiXmlElement * posBloc = new TiXmlElement( "pere" );
+//                    action->LinkEndChild( posBloc );
+//                    posBloc->SetAttribute("liste", listPere.toStdString().c_str());
+//                }
             }
 
             listActionSequence->at(i)->saveXML(action,2);
@@ -464,7 +470,7 @@ int Sequence::ouvrirSequence(QString sequenceName, QList<Action*>* listAction)
                 {
                     listAction->append(new ActionCourbe);
                     _type =  typeCourbe;
-                }else if(type == "actionAttenteBlocage")
+                }else if(type == "actionRetourBlocage")
                 {
                     listAction->append(new AttenteBlocage);
                     _type =  typeAttenteBlocage;
@@ -569,7 +575,7 @@ int Sequence::ouvrirSequence(QString sequenceName, QList<Action*>* listAction)
                 }else if(type == "actionArc")
                 {
                     _type =  typeCourbe;
-                }else if(type == "actionAttenteBlocage")
+                }else if(type == "actionRetourBlocage")
                 {
                     _type =  typeAttenteBlocage;
                 }else if(type == "actionDeplacement")
@@ -731,7 +737,7 @@ int Sequence::ouvrirSequence(QString sequenceName, QList<Action*>* listAction)
                         if(elemBis->Attribute("sens"))
                         {
                             param5 = QString::fromStdString(elemBis->Attribute("sens"));
-                            if(param5.compare("0")==1)
+                            if(param5.compare("0")==0)
                             {
                                 temp->setSens(false);
                             }else
@@ -815,17 +821,34 @@ int Sequence::ouvrirSequence(QString sequenceName, QList<Action*>* listAction)
                         {
                             param1 = QString::fromStdString(elemBis->Attribute("angle"));
                             temp->setValueDyna(param1.toInt());
+                            temp->setType(param5.toInt());
                         }
+                        if(elemBis->Attribute("load"))
+                        {
+                            param1 = QString::fromStdString(elemBis->Attribute("load"));
+                            temp->setValueDyna(param1.toInt());
+                            temp->setType(param5.toInt());
+                        }
+                        if(elemBis->Attribute("angle"))
+                        {
+                            param1 = QString::fromStdString(elemBis->Attribute("angle"));
 
+                        }
+                        if(elemBis->Attribute("type"))
+                        {
+                            param5 = QString::fromStdString(elemBis->Attribute("type"));
+                        }
                         break;
                     }
                     case typeAttenteTemps:
                     {
                         AttenteTemps* temp = (AttenteTemps*)listAction->at(indice);
-                        if(elemBis->Attribute("valueAttente"))
+
+                        if(elemBis->Attribute("temps"))
                         {
-                            param0 = QString::fromStdString(elemBis->Attribute("valueAttente"));
+                            param0 = QString::fromStdString(elemBis->Attribute("temps"));
                             temp->setTemps(param0.toInt());
+                            qDebug()<<"Ouverture : "<<temp->getTemps();
                         }
 
                         break;
@@ -1088,7 +1111,7 @@ int Sequence::ouvrirFichier(QString fileName)
                 }else if(type == "actionArc")
                 {
                     _type =  typeCourbe;
-                }else if(type == "actionAttenteBlocage")
+                }else if(type == "actionRetourBlocage")
                 {
                     _type =  typeAttenteBlocage;
                 }else if(type == "actionDeplacement")
@@ -1266,6 +1289,12 @@ int Sequence::ouvrirFichier(QString fileName)
                         if(elemBis->Attribute("angle"))
                         {
                             param1 = QString::fromStdString(elemBis->Attribute("angle"));
+                            param5 = "0";
+                        }
+                        if(elemBis->Attribute("load"))
+                        {
+                            param1 = QString::fromStdString(elemBis->Attribute("load"));
+                            param5 = "1";
                         }
 
                         param3 = listTimeout;

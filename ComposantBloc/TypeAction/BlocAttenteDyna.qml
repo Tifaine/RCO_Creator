@@ -6,14 +6,23 @@ import attenteDyna 1.0
 Item {
     id:root
     width: 116
-    height: 175
+    height: 225
     property bool tfValueEnable:false
     signal modifTaille(int taille)
-    property int taille:70
+    property int taille:225
     property var fils:attente
-    function setParam(id, value, nom, timeOut)
+    function setParam(id, value, nom, timeOut,type)
     {
-        var size = 70
+
+        var size = 225
+        if(type === "1")
+        {
+            switchType.checked = true;
+
+        }else
+        {
+            switchType.checked = false;
+        }
 
         var idFound = false
         for(var i = 0; i< gestDyna.getNbDyna();i++)
@@ -32,14 +41,14 @@ Item {
             teId.text = id
             attente.nomDyna = "custom"
             tfId.visible = true;
-            textValue.anchors.top = tfId.bottom
+            textValue.anchors.top = switchType.bottom
 
             tfValueEnable = true
             cbValue.setIndice(listValue.count-1)
             tfVal.text = value
             attente.valueDyna = value
             tfValue.visible = false
-            size = 100
+            size = 125
 
         }else
         {
@@ -77,8 +86,8 @@ Item {
 
     Component.onCompleted:
     {
-        root.state = "ferme"
-        tailleChange(70)
+        root.state = "ouvert"
+        tailleChange(225)
         listDyna.clear();
         for(var i = 0; i< gestDyna.getNbDyna();i++)
         {
@@ -89,7 +98,7 @@ Item {
         if(listDyna.count>0)
         {
             tfId.visible = false;
-            textValue.anchors.top = cbId.bottom
+            textValue.anchors.top = switchType.bottom
             listValue.clear()
             for(var i = 0; i< gestDyna.getNbAction(0);i++)
             {
@@ -159,7 +168,7 @@ Item {
                 if(tfId.visible===false)
                 {
                     tfId.visible = true;
-                    textValue.anchors.top = tfId.bottom
+                    textValue.anchors.top = switchType.bottom
                     tailleChange(root.height+tfId.height+5)
                 }
 
@@ -171,7 +180,7 @@ Item {
                 if(tfId.visible===true)
                 {
                     tfId.visible = false;
-                    textValue.anchors.top = cbId.bottom
+                    textValue.anchors.top = switchType.bottom
                     tailleChange(root.height-tfId.height-5)
                 }
                 attente.idDyna =gestDyna.getIdDyna(indice);
@@ -247,7 +256,7 @@ Item {
         text: qsTr("Value :")
         anchors.left: parent.left
         anchors.leftMargin: 5
-        anchors.top: cbId.bottom
+        anchors.top: switchType.bottom
         anchors.topMargin: 5
         font.bold: true
         font.pixelSize: 12
@@ -404,12 +413,27 @@ Item {
                 {
                     tfValue.visible = true
                 }
-                var tailleToSend = 175
+                var tailleToSend = 225
                 if(tfValueEnable===true)tailleToSend+=tfValue.height+5
                 if(tfId.visible===true)tailleToSend+=tfId.height+5;
                 tailleChange(tailleToSend)
                 nbClic = 0;
             }
+        }
+    }
+
+    Switch {
+        id: switchType
+        text: switchType.checked?"Charge":"Value"
+        anchors.right: parent.right
+        anchors.rightMargin: 5
+        anchors.left: parent.left
+        anchors.leftMargin: 5
+        anchors.top: cbId.bottom
+        anchors.topMargin: 5
+        onClicked:
+        {
+            attente.type = checked
         }
     }
 

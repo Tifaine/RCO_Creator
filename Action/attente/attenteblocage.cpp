@@ -17,7 +17,7 @@ void AttenteBlocage::setSensibilite(int value)
 
 void AttenteBlocage::saveXML(QXmlStreamWriter *xmlWriter)
 {
-    xmlWriter->writeStartElement("actionAttenteBlocage");
+    xmlWriter->writeStartElement("actionRetourBlocage");
     xmlWriter->writeTextElement("sensibilite",QString::number(getSensibilite(),'f',0));
     xmlWriter->writeEndElement();
 }
@@ -27,7 +27,7 @@ void AttenteBlocage::saveXML(TiXmlElement * root, int indice)
     switch(indice)
     {
     case 1:
-        root->SetAttribute("type", "actionAttenteBlocage");
+        root->SetAttribute("type", "actionRetourBlocage");
         break;
     case 2:
         TiXmlElement * param = new TiXmlElement( "parametres" );

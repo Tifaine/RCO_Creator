@@ -99,10 +99,10 @@ Item {
         y: -5
         width: 30
         source: "file::/../image/svg/folder.svg"
-        anchors.left: imageSaveAs1.right
+        anchors.right: imageUpload.left
         anchors.bottomMargin: 10
         anchors.bottom: parent.bottom
-        anchors.leftMargin: 25
+        anchors.rightMargin: 25
         anchors.top: parent.top
         anchors.topMargin: 10
         Rectangle
@@ -132,7 +132,7 @@ Item {
         y: -5
         width: 30
         source: "file::/../image/svg/table_icon.svg"
-        anchors.left: imageLoad.right
+        anchors.left: imageSaveAs1.right
         anchors.bottomMargin: 10
         anchors.bottom: parent.bottom
         anchors.leftMargin: 25

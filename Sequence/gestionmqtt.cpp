@@ -55,7 +55,7 @@ void gestionMQTT::pause()
 
 void gestionMQTT::stop()
 {
-    client = new QMqttClient(QString("RCO_Creator"),QHostAddress("192.168.43.135"),1883);
+    client = new QMqttClient(QString("RCO_Creator"),QHostAddress("192.168.43.229"),1883);
     client->connect();
 
     client->publish(QString("eave/setInfos/robot0/"),"SET_ACTION_STATUS 2");

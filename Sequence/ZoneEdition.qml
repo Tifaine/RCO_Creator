@@ -42,13 +42,7 @@ Item {
         table1.clear()
     }
 
-    function copierBloc()
-    {
-        for(var i = 0; i<actionSelected.length; i++)
-        {
-            console.log(gridAction.itemAt(actionSelected[i]).type,gridAction.itemAt(actionSelected[i]).bloc)
-        }
-    }
+
 
     function reorganiserBloc()
     {
@@ -223,7 +217,7 @@ Item {
             {
                 listAction.append({_x:xBloc,_y:yBloc, _title:"Retour dyna",_indice:listAction.count,_type:typeBloc})
 
-                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2,param4);
+                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2,param4,param5);
                 gridAction.itemAt(listAction.count-1).listPere = listPere;
                 gridAction.itemAt(listAction.count-1).listFils = listFils;
                 gridAction.itemAt(listAction.count-1).listTimeOut = param3;
@@ -826,7 +820,6 @@ Item {
                                         gridAction.itemAt(actionSelected[i]).inhibeMoveXY = true
                                         gridAction.itemAt(actionSelected[i]).y += value
                                         gridAction.itemAt(actionSelected[i]).inhibeMoveXY = false
-
                                     }
                                 }
                             }
@@ -835,5 +828,22 @@ Item {
                 }
             }
         }
+    }
+
+    function copierBloc()
+    {
+        for(var i = 0; i<actionSelected.length; i++)
+        {
+            listAction.append({_x:(gridAction.itemAt(actionSelected[i]).x+20),_y:(gridAction.itemAt(actionSelected[i]).y+50), _title:gridAction.itemAt(actionSelected[i]).title,_indice:listAction.count,_type:gridAction.itemAt(actionSelected[i]).type})
+        }
+        var nbActionToCopy = actionSelected.length;
+        clearSelection()
+        for(i = 0; i<nbActionToCopy;i++)
+        {
+            actionSelected.push(listAction.count-i-1)
+            gridAction.itemAt(actionSelected[i])._couleurInfoBloc="#0B0B3B"
+
+        }
+
     }
 }
