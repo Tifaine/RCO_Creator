@@ -15,6 +15,28 @@ void Sequence::supprimerAction(Action * toBeDeleted)
     listAction.removeAt(listAction.indexOf(toBeDeleted));
 }
 
+void Sequence::mirror()
+{
+    for(int i=0;i<listAction.size();i++)
+    {
+        if(listAction.at(i)->getType()==typePosition)
+        {
+            ActionPosition* temp = (ActionPosition*)listAction.at(i);
+            temp->setXRobot(-1*temp->getXRobot());
+        }else if(listAction.at(i)->getType()==typeOrientation)
+        {
+            ActionOrientation* temp = (ActionOrientation*)listAction.at(i);
+            if(temp->getAngle()>=0)
+            {
+                temp->setAngle(180.- temp->getAngle());
+            }else
+            {
+                temp->setAngle(-180. + temp->getAngle());
+            }
+        }
+    }
+}
+
 void Sequence::clearAll()
 {
     listAction.clear();
@@ -38,8 +60,6 @@ void Sequence::enregistrerSous(QString filename)
     }
     filename = filename+".xml";
     filename = filename.right(filename.size()-7);
-
-
     TiXmlDocument doc;
     TiXmlElement* msg;
     TiXmlDeclaration* decl = new TiXmlDeclaration( "1.0", "UTF-8", "" );
@@ -86,8 +106,6 @@ void Sequence::enregistrerSous(QString filename)
                 TiXmlElement * posBloc = new TiXmlElement( "timeout" );
                 action->LinkEndChild( posBloc );
                 posBloc->SetAttribute("liste", listFils.toStdString().c_str());
-
-
             }else
             {
                 TiXmlElement * posBloc = new TiXmlElement( "fils" );
@@ -141,7 +159,7 @@ void Sequence::exportXML()
     msg = new TiXmlElement( "version" );
     msg->LinkEndChild( new TiXmlText( "3.1" ));
     root->LinkEndChild( msg );
-    int indice = 0;
+    indice = 0;
     for(int i=0;i<listAction.size();i++)
     {
         if(listAction.at(i)->getType() != typeSequence)
@@ -335,11 +353,17 @@ void Sequence::enregistrerSequence(TiXmlElement * root, QList<Action*>* listActi
         }else
         {
 
+           /* QList<Action*> listAct;
+            ActionSequence* temp = (ActionSequence*)listAction.at(i);
+            ouvrirSequence(temp->getNomSequence(),&listAct);
+            enregistrerSequence(root,&listAct,indice+listAction.size(),i,&listAction,0);
+            indice+=listAct.size();*/
+
             QList<Action*> listAct;
             ActionSequence* temp = (ActionSequence*)listActionSequence->at(i);
             ouvrirSequence(temp->getNomSequence(),&listAct);
-
             enregistrerSequence(root,&listAct,i+listActionSequence->size()+indiceDebut,i,listActionSequence,i);
+            indice+=listActionSequence->size();
         }
     }
 }
@@ -975,7 +999,13 @@ int Sequence::ouvrirSequence(QString sequenceName, QList<Action*>* listAction)
                         if(elemBis->Attribute("sens"))
                         {
                             param5 = QString::fromStdString(elemBis->Attribute("sens"));
-                            temp->setSens(param5.toInt());
+                            if(param5.compare("0")==0)
+                            {
+                                temp->setSens(false);
+                            }else
+                            {
+                                temp->setSens(true);
+                            }
                         }
                         break;
                     }
@@ -1039,8 +1069,6 @@ int Sequence::ouvrirFichier(QString fileName)
     {
         return -1;
     }
-
-
 
     for(TiXmlElement* elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement())
     {

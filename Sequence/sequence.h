@@ -46,7 +46,7 @@ public slots:
     void supprimerAction(Action * toBeDeleted);
     void enregistrerSous(QString filename);
     void clearAll();
-    void enregistrerSequence(TiXmlElement * root, QList<Action*>* listActionSequence, int indice, int indiceDebut, QList<Action *> *listRef, int delta);
+    void enregistrerSequence(TiXmlElement * root, QList<Action*>* listActionSequence, int indiceSeq, int indiceDebut, QList<Action *> *listRef, int delta);
     void exportXML();
 
     void test();
@@ -58,8 +58,11 @@ public slots:
     int getIndice(Action* act);
 
     int getNbAction();
+
+    void mirror();
 private:
     QList<Action*> listAction;
+    int indice;
 };
 
 #endif // SEQUENCE_H

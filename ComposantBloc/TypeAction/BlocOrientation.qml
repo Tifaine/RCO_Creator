@@ -52,6 +52,11 @@ Item {
     {
         id:orientation
         angle: tfAngle.text
+
+        onAngleChanged:
+        {
+            tfAngle.text = angle
+        }
     }
 
     Rectangle {

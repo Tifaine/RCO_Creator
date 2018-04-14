@@ -88,6 +88,7 @@ Item {
         {
             switchSens.checked = true
         }
+        pos.sens = switchSens.checked
 
         tfPrecision.text = precision
         tfTimeOut.text = timeout

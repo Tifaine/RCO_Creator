@@ -67,6 +67,7 @@ ApplicationWindow {
         onSaveAs: fileDialog.open();
         onOpen: fileDialogOuvrir.open();
         onToggleTable:ongletSequence.toggleTable();
+        onMirror: ongletSequence.mirror()
         onUpload:
         {
             ongletSequence.exportXML()

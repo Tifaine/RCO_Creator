@@ -42,6 +42,11 @@ Item {
         table1.clear()
     }
 
+    function mirror()
+    {
+        seq.mirror();
+    }
+
 
 
     function reorganiserBloc()

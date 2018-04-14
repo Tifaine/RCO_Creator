@@ -20,6 +20,7 @@ int ActionOrientation::getAngle() const
 void ActionOrientation::setAngle(int value)
 {
     angle = value;
+    angleChanged();
 }
 
 int ActionOrientation::getPrecision() const

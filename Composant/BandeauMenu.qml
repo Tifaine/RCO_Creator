@@ -9,6 +9,7 @@ Item {
     signal open();
     signal upload();
     signal toggleTable();
+    signal mirror();
     Rectangle
     {
         anchors.fill: parent
@@ -155,6 +156,38 @@ Item {
                 onEntered: parent.color="#404040"
                 onExited: parent.color="transparent"
                 onClicked: toggleTable()
+            }
+        }
+    }
+
+    Image {
+        id: imageMirror
+
+        width: 30
+        source: "file::/../image/svg/mirror.svg"
+        anchors.left: imageToggleTable.right
+        anchors.bottomMargin: 10
+        anchors.bottom: parent.bottom
+        anchors.leftMargin: 25
+        anchors.top: parent.top
+        anchors.topMargin: 10
+        Rectangle
+        {
+            z:-1
+            anchors.fill: parent
+            anchors.leftMargin: -7
+            anchors.rightMargin: -7
+            anchors.bottomMargin: -7
+            anchors.topMargin: -7
+            color:"transparent"
+            radius: 3
+            MouseArea
+            {
+                hoverEnabled: true
+                anchors.fill: parent
+                onEntered: parent.color="#404040"
+                onExited: parent.color="transparent"
+                onClicked: mirror();
             }
         }
     }

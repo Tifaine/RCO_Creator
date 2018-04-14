@@ -90,6 +90,11 @@ Item {
         repeaterOnglet.itemAt(bar.currentIndex).children[0].toggleTable();
     }
 
+    function mirror()
+    {
+        repeaterOnglet.itemAt(bar.currentIndex).children[0].mirror();
+    }
+
     function ouvrir(nomFichier)
     {
         repeaterOnglet.itemAt(bar.currentIndex).children[0].ouvrirFile(nomFichier)
