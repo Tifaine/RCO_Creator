@@ -237,9 +237,10 @@ Item {
     MouseArea
     {
         id:mouseArea3
-        anchors.rightMargin: 8
-        anchors.leftMargin: 8
         anchors.fill: parent
+        anchors.leftMargin: 25
+        anchors.rightMargin: 25
+
         drag.target: parent;
         propagateComposedEvents:true
         hoverEnabled: true

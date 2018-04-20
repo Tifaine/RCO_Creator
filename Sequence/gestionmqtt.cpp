@@ -24,10 +24,11 @@ void gestionMQTT::upload()
 
 
 
-        client->publish(QString("eave/setXmlScenario/robot0/"),s.toLocal8Bit());
-
+        //client->publish(QString("eave/setXmlScenario/robot0/"),s.toLocal8Bit());
+        system("mosquitto_pub -h 192.168.43.229 -t eave/setXmlScenario/robot0/ -f /tmp/temp.xml");
         QThread::msleep(50);
-        client->publish(QString("eave/setInfos/robot0/"),"SET_ACTION_STATUS 3");
+        system("mosquitto_pub -h 192.168.43.229 -t eave/setInfos/robot0/ -m \"SET_ACTION_STATUS 3\"");
+        //->publish(QString("eave/setInfos/robot0/"),"SET_ACTION_STATUS 3");
         //client->disconnect();
     }
 }
@@ -58,7 +59,7 @@ void gestionMQTT::stop()
     client = new QMqttClient(QString("RCO_Creator"),QHostAddress("192.168.43.229"),1883);
     client->connect();
 
-    client->publish(QString("eave/setInfos/robot0/"),"SET_ACTION_STATUS 2");
+    client->publish(QString("eave/setInfos/robot0/"),"SET_ARU");
 
     client->disconnect();
 }

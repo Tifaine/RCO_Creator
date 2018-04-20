@@ -1,6 +1,9 @@
 import QtQuick 2.4
 import gestTable 1.0
 import connector 1.0
+//280 diametre
+// 1800 = 280 mm
+//3000 = 280
 
 Item {
     id: item1
@@ -229,11 +232,23 @@ Item {
                 verticalAlignment: Text.AlignVCenter
 
             }
+            Image
+            {
+                id:imageRobot
+                z:10
+                x:(rectPoint.width/2) - width/2
+                y:(rectPoint.height/2) - height/2
+                width:imageTable.width * 280/3000
+                height:imageTable.height * 280/2000
+                visible: false
+                source: "file::/../image/robot.png"
+            }
 
             MouseArea {
                 id: mouseArea2
                 anchors.fill: parent
                 hoverEnabled: true
+                property bool isAffich:false
                 drag {
                     target: rectPoint
                     axis: Drag.XAndYAxis
@@ -246,6 +261,18 @@ Item {
                     positionClicked(gestTable.getAction(indice))
                 }
                 onReleased: clicking = false
+                onClicked:
+                {
+                    if(isAffich === true)
+                    {
+                        isAffich = false
+
+                    }else
+                    {
+                        isAffich = true
+                    }
+                    imageRobot.visible = isAffich
+                }
             }
         }
     }
@@ -282,6 +309,7 @@ Item {
                 axis: Drag.XAxis
             }
             cursorShape: containsMouse ? Qt.SizeFDiagCursor : Qt.ArrowCursor
+
         }
     }
 }

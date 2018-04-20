@@ -4,14 +4,15 @@ Item {
     property string couleur
     property int indice
     objectName: "Entree"
-    height:10
-    width:10
-    z:-2
+    height:20
+    width:20
+    z:15
     property var tabPere:[]
     Rectangle
     {
         radius: 5
         anchors.fill: parent
+        anchors.margins: 5
         color:couleur
     }
 

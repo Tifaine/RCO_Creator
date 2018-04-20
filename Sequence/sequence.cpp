@@ -164,7 +164,7 @@ void Sequence::exportXML()
     {
         if(listAction.at(i)->getType() != typeSequence)
         {
-            indice++;
+           // indice++;
             TiXmlElement * action = new TiXmlElement( "Action" );
             root->LinkEndChild( action );
             listAction.at(i)->saveXML(action,1);
@@ -231,21 +231,20 @@ void Sequence::exportXML()
             listAction.at(i)->saveXML(action,2);
         }else
         {
-
             QList<Action*> listAct;
             ActionSequence* temp = (ActionSequence*)listAction.at(i);
             ouvrirSequence(temp->getNomSequence(),&listAct);
-            enregistrerSequence(root,&listAct,indice+listAction.size(),i,&listAction,0);
-            indice+=listAct.size();
+            indice++;
+            enregistrerSequence(root,&listAct,indice,i,&listAction,0);
+
 
         }
     }
     doc.SaveFile( filename.toStdString().c_str() );
 }
 
-void Sequence::enregistrerSequence(TiXmlElement * root, QList<Action*>* listActionSequence, int indice, int indiceDebut, QList<Action*>* listRef,int delta)
+void Sequence::enregistrerSequence(TiXmlElement * root, QList<Action*>* listActionSequence, int indiceSeq, int indiceDebut, QList<Action*>* listRef,int delta)
 {
-
     for(int i=0;i<listActionSequence->size();i++)
     {
         if(listActionSequence->at(i)->getType() != typeSequence)
@@ -256,10 +255,11 @@ void Sequence::enregistrerSequence(TiXmlElement * root, QList<Action*>* listActi
             if(i!=0)
             {
 
-                action->SetAttribute("numero", indice+i);
+                action->SetAttribute("numero", indiceSeq*1000+i);
             }else
             {
-                action->SetAttribute("numero", indiceDebut+delta);
+                qDebug()<<indice<<" "<<indiceDebut;
+                action->SetAttribute("numero", indiceDebut+ (delta)*1000);
             }
 
             if(listActionSequence->at(i)->getTimeOut()!=-1)
@@ -275,7 +275,7 @@ void Sequence::enregistrerSequence(TiXmlElement * root, QList<Action*>* listActi
                     listFils.clear();
                     for(int k=0;k<listActionSequence->at(i)->getListFils().at(j)->size();k++)
                     {
-                        listFils.append(QString::number(listActionSequence->indexOf(listActionSequence->at(i)->getListFils().at(j)->at(k))+indice));
+                        listFils.append(QString::number(listActionSequence->indexOf(listActionSequence->at(i)->getListFils().at(j)->at(k))+indiceSeq*1000));
                         listFils.append(";");
                     }
 
@@ -299,7 +299,7 @@ void Sequence::enregistrerSequence(TiXmlElement * root, QList<Action*>* listActi
                     listFils.clear();
                     for(int k=0;k<listRef->at(indiceDebut)->getListFils().at(j)->size();k++)
                     {
-                        listFils.append(QString::number(listRef->indexOf(listRef->at(indiceDebut)->getListFils().at(j)->at(k))+delta));
+                        listFils.append(QString::number(listRef->indexOf(listRef->at(indiceDebut)->getListFils().at(j)->at(k))+(delta)*1000));
                         listFils.append(";");
                     }
                     if(j == listRef->at(indiceDebut)->getListFils().size() -1 && j != 0)
@@ -356,14 +356,15 @@ void Sequence::enregistrerSequence(TiXmlElement * root, QList<Action*>* listActi
            /* QList<Action*> listAct;
             ActionSequence* temp = (ActionSequence*)listAction.at(i);
             ouvrirSequence(temp->getNomSequence(),&listAct);
-            enregistrerSequence(root,&listAct,indice+listAction.size(),i,&listAction,0);
-            indice+=listAct.size();*/
+            indice++;
+            enregistrerSequence(root,&listAct,indice,i,&listAction,0);*/
 
             QList<Action*> listAct;
             ActionSequence* temp = (ActionSequence*)listActionSequence->at(i);
             ouvrirSequence(temp->getNomSequence(),&listAct);
-            enregistrerSequence(root,&listAct,i+listActionSequence->size()+indiceDebut,i,listActionSequence,i);
-            indice+=listActionSequence->size();
+            indice++;
+            enregistrerSequence(root,&listAct,indice,i,listActionSequence,indiceSeq);
+
         }
     }
 }

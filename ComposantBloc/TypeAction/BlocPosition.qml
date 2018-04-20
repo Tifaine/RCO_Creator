@@ -15,6 +15,27 @@ Item {
         root.taille = _taille
         modifTaille(taille);
     }
+    onStateChanged:
+    {
+        if(state==="ouvert")
+        {
+            if(cbVitesse.indice===3)
+            {
+
+                tfVitesseEnable = true
+                tfVitesse.visible = true;
+                textAcc.anchors.top = tfVitesse.bottom
+                tailleChange(root.height+tfVitesse.height+5)
+
+                cbVitesse.setIndice(2);
+                cbVitesse.setIndice(3);
+
+            }
+        }else
+        {
+            tfVitesse.visible = false
+        }
+    }
 
     function setParam(posX, posY, vitesse, acc, dec, sens, precision, timeout)
     {
@@ -36,7 +57,7 @@ Item {
             cbVitesse.setIndice(3);
             tfVitesseEnable = true
             pos.vitesse = true
-            tfVitesse.visible = true
+            tfVitesse.visible = false
             tfVit.text = vitesse
             break;
         }
@@ -92,8 +113,6 @@ Item {
 
         tfPrecision.text = precision
         tfTimeOut.text = timeout
-
-        tailleChange(60)
     }
 
     property bool tfVitesseEnable:false
@@ -101,8 +120,28 @@ Item {
     property bool tfDecEnable:false
     Component.onCompleted:
     {
-        root.state = "ferme"
-        tailleChange(60)
+        root.state = "ouvert"
+        if(cbAcc.indice === 3)
+        {
+            tfAcc.visible = true
+        }
+
+        if(cbDec.indice === 3)
+        {
+            tfDec.visible = true
+        }
+
+        if(cbVitesse.indice === 3)
+        {
+            tfVit.visible = true
+        }
+
+        var tailleToSend = 395
+        if(tfVitesseEnable===true)tailleToSend+=tfVitesse.height+5
+        if(tfAccEnable===true)tailleToSend+=tfAcc.height+5
+        if(tfDecEnable===true)tailleToSend+=tfDec.height+5;
+        tailleChange(tailleToSend)
+
     }
 
     Pos
@@ -215,15 +254,16 @@ Item {
                 if(tfVitesse.visible===false)
                 {
                     tfVitesseEnable = true
-                    tfVitesse.visible = true;
                     textAcc.anchors.top = tfVitesse.bottom
                     tailleChange(root.height+tfVitesse.height+5)
+
+                    tfVitesse.visible = true;
+
                 }
             }else
             {
                 if(tfVitesse.visible===true)
                 {
-
                     tfVitesseEnable = false
                     tfVitesse.visible = false;
                     textAcc.anchors.top = cbVitesse.bottom
@@ -246,6 +286,7 @@ Item {
                 break;
             }
         }
+
     }
 
     Rectangle
@@ -469,7 +510,8 @@ Item {
 
     Switch {
         id: switchSens
-        text: qsTr("Marche avant")
+        text:checked?"Marche arriere":"Marche avant"
+
         font.bold: true
         anchors.left: parent.left
         anchors.leftMargin: 5

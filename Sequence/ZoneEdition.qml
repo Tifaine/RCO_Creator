@@ -791,11 +791,23 @@ Item {
                                 console.log("je suis nuuuuuul")
                             }
                         }
+                        property bool findIt:false
                         onClick:
                         {
                             if(root.ctrlPressed)
                             {
-                                actionSelected.push(indice)
+                                findIt=false
+                                for(var i = 0; i<actionSelected.length; i++)
+                                {
+                                    if(actionSelected[i]===indice)
+                                    {
+                                        findIt=true;
+                                    }
+                                }
+                                if(findIt===false)
+                                {
+                                    actionSelected.push(indice)
+                                }
                                 _couleurInfoBloc="#0B0B3B"
                             }
                         }

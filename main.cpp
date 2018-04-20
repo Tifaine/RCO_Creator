@@ -33,7 +33,6 @@
 #include "Action/attente/blocand.h"
 #include "Action/attente/retourgpio.h"
 
-
 #include "Sequence/gestionmqtt.h"
 #include "libXML/xmlmanager.h"
 
