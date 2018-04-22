@@ -36,30 +36,34 @@ void gestionMQTT::upload()
 
 void gestionMQTT::play()
 {
-    client = new QMqttClient(QString("RCO_Creator"),QHostAddress("192.168.43.229"),1883);
-    client->connect();
+    // client = new QMqttClient(QString("RCO_Creator"),QHostAddress("192.168.43.229"),1883);
+    //client->connect();
 
-    client->publish(QString("eave/setInfos/robot0/"),"SET_ACTION_STATUS 0");
+    //client->publish(QString("eave/setInfos/robot0/"),"SET_ACTION_STATUS 0");
 
-    client->disconnect();
+    // client->disconnect();
+    system("mosquitto_pub -h 192.168.43.229 -t eave/setInfos/robot0/ -m \"SET_ACTION_STATUS 0\"");
 }
 
 void gestionMQTT::pause()
 {
-    client = new QMqttClient(QString("RCO_Creator"),QHostAddress("192.168.43.229"),1883);
-    client->connect();
+    //    client = new QMqttClient(QString("RCO_Creator"),QHostAddress("192.168.43.229"),1883);
+    //    client->connect();
 
-    client->publish(QString("eave/setInfos/robot0/"),"SET_ACTION_STATUS 1");
+    //    client->publish(QString("eave/setInfos/robot0/"),"SET_ACTION_STATUS 1");
 
-    client->disconnect();
+    //    client->disconnect();
+
+    system("mosquitto_pub -h 192.168.43.229 -t eave/setInfos/robot0/ -m \"SET_ACTION_STATUS 1\"");
 }
 
 void gestionMQTT::stop()
 {
-    client = new QMqttClient(QString("RCO_Creator"),QHostAddress("192.168.43.229"),1883);
-    client->connect();
+    //    client = new QMqttClient(QString("RCO_Creator"),QHostAddress("192.168.43.229"),1883);
+    //    client->connect();
 
-    client->publish(QString("eave/setInfos/robot0/"),"SET_ARU");
+    //    client->publish(QString("eave/setInfos/robot0/"),"SET_ARU");
 
-    client->disconnect();
+    //    client->disconnect();
+    system("mosquitto_pub -h 192.168.43.229 -t eave/setInfos/robot0/ -m \"SET_ARU\"");
 }
