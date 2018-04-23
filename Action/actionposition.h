@@ -14,6 +14,8 @@ class ActionPosition : public Action
     Q_PROPERTY(int acceleration READ getAcceleration WRITE setAcceleration NOTIFY accelerationChanged)
     Q_PROPERTY(int deceleration READ getDeceleration WRITE setDeceleration NOTIFY decelerationChanged)
     Q_PROPERTY(int precision READ getPrecision WRITE setPrecision NOTIFY precisionChanged)
+    Q_PROPERTY(int detection READ getDetection WRITE setDetection NOTIFY detectionChanged)
+    Q_PROPERTY(int stabilisation READ getStabilisation WRITE setStabilisation NOTIFY stabilisationChanged)
     Q_PROPERTY(bool sens READ getSens WRITE setSens NOTIFY sensChanged)
 public:
     ActionPosition();
@@ -35,6 +37,12 @@ public:
 
     void setPrecision(int value);
 
+    int getDetection() const;
+    void setDetection(int value);
+
+    int getStabilisation() const;
+    void setStabilisation(int value);
+
 signals:
     void xRobotChanged();
     void YRobotChanged();
@@ -43,6 +51,8 @@ signals:
     void decelerationChanged();
     void sensChanged();
     void precisionChanged();
+    void detectionChanged();
+    void stabilisationChanged();
 
 public slots:
 
@@ -63,7 +73,9 @@ private:
     int acceleration = 0;
     int deceleration = 0;
     int precision = 50;
+    int stabilisation = -1;
     bool sens = false;
+    int detection = -1;
 };
 
 #endif // ACTIONPOSITION_H

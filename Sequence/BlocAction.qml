@@ -24,6 +24,7 @@ Item {
     property var listPere:null;
     property var listFils:null;
     property var listTimeOut:null;
+    property var listDetect:null;
     objectName: "BlocAction"
     width: 200
     height: 92
@@ -66,7 +67,6 @@ Item {
             listSortie.append({_x:188,_y:30,_indice:0,_color:"yellow"})
             break;
         }
-        case 5: //Position
         case 6: //Orientation
         case 10://attente servo
         case 11://attente dyna
@@ -85,6 +85,17 @@ Item {
             listSortie.clear();
             listSortie.append({_x:188,_y:30,_indice:0,_color:"yellow"})
             listSortie.append({_x:188,_y:50,_indice:1,_color:"yellow"})
+            break;
+        }
+        case 5: //Position
+        {
+            _couleurTypeBloc = "#FF358B"
+            listEntree.clear();
+            listEntree.append({_x:2,_y:30,_indice:0,_color:"yellow"})
+            listSortie.clear();
+            listSortie.append({_x:188,_y:30,_indice:0,_color:"yellow"})
+            listSortie.append({_x:188,_y:50,_indice:1,_color:"orange"})
+            listSortie.append({_x:188,_y:70,_indice:2,_color:"yellow"})
             break;
         }
 
@@ -126,8 +137,8 @@ Item {
                 for(var j=0;j<gridNumberIn.itemAt(i).tabPere.length;j++)
                 {
                     gridNumberIn.itemAt(i).tabPere[j].filsBouge(gridNumberIn.itemAt(i),
-                                                              root.x+gridNumberIn.itemAt(i).x+5 - gridNumberIn.itemAt(i).tabPere[j].parent.x - gridNumberIn.itemAt(i).tabPere[j].x,
-                                                              root.y+gridNumberIn.itemAt(i).y+5 - gridNumberIn.itemAt(i).tabPere[j].parent.y - gridNumberIn.itemAt(i).tabPere[j].y)
+                                                                root.x+gridNumberIn.itemAt(i).x+5 - gridNumberIn.itemAt(i).tabPere[j].parent.x - gridNumberIn.itemAt(i).tabPere[j].x,
+                                                                root.y+gridNumberIn.itemAt(i).y+5 - gridNumberIn.itemAt(i).tabPere[j].parent.y - gridNumberIn.itemAt(i).tabPere[j].y)
                 }
             }
         }
@@ -180,8 +191,8 @@ Item {
                 for(var j=0;j<gridNumberIn.itemAt(i).tabPere.length;j++)
                 {
                     gridNumberIn.itemAt(i).tabPere[j].filsBouge(gridNumberIn.itemAt(i),
-                                                              root.x+gridNumberIn.itemAt(i).x+5 - gridNumberIn.itemAt(i).tabPere[j].parent.x - gridNumberIn.itemAt(i).tabPere[j].x,
-                                                              root.y+gridNumberIn.itemAt(i).y+5 - gridNumberIn.itemAt(i).tabPere[j].parent.y - gridNumberIn.itemAt(i).tabPere[j].y)
+                                                                root.x+gridNumberIn.itemAt(i).x+5 - gridNumberIn.itemAt(i).tabPere[j].parent.x - gridNumberIn.itemAt(i).tabPere[j].x,
+                                                                root.y+gridNumberIn.itemAt(i).y+5 - gridNumberIn.itemAt(i).tabPere[j].parent.y - gridNumberIn.itemAt(i).tabPere[j].y)
                 }
             }
         }

@@ -11,6 +11,26 @@ void ActionPosition::getInfo()
     qDebug()<<xRobot<<" "<<yRobot;
 }
 
+int ActionPosition::getStabilisation() const
+{
+    return stabilisation;
+}
+
+void ActionPosition::setStabilisation(int value)
+{
+    stabilisation = value;
+}
+
+int ActionPosition::getDetection() const
+{
+    return detection;
+}
+
+void ActionPosition::setDetection(int value)
+{
+    detection = value;
+}
+
 int ActionPosition::getPrecision() const
 {
     return precision;
@@ -94,7 +114,6 @@ void ActionPosition::saveXML(QXmlStreamWriter* xmlWriter)
     xmlWriter->writeTextElement("acc",QString::number(acceleration,'f',0));
     xmlWriter->writeTextElement("dec",QString::number(deceleration,'f',0));
     xmlWriter->writeTextElement("sens",QString::number(sens,'f',0));
-
     xmlWriter->writeEndElement();
 }
 
@@ -115,6 +134,8 @@ void ActionPosition::saveXML(TiXmlElement * root, int indice)
         param->SetAttribute("dec", QString::number(deceleration,'f',0).toStdString().c_str());
         param->SetAttribute("sens", QString::number(sens,'f',0).toStdString().c_str());
         param->SetAttribute("precision", QString::number(precision,'f',0).toStdString().c_str());
+        param->SetAttribute("detect", QString::number(detection,'f',0).toStdString().c_str());
+        param->SetAttribute("stabilisation", QString::number(stabilisation,'f',0).toStdString().c_str());
         break;
     }
 }

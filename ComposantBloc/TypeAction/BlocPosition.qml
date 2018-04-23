@@ -6,7 +6,7 @@ import "../../Composant"
 Item {
     id: root
     width: 180
-    height: 395
+    height: 510
     signal modifTaille(int taille)
     property int taille:70
     property var fils:pos
@@ -21,7 +21,6 @@ Item {
         {
             if(cbVitesse.indice===3)
             {
-
                 tfVitesseEnable = true
                 tfVitesse.visible = true;
                 textAcc.anchors.top = tfVitesse.bottom
@@ -29,7 +28,6 @@ Item {
 
                 cbVitesse.setIndice(2);
                 cbVitesse.setIndice(3);
-
             }
         }else
         {
@@ -37,10 +35,12 @@ Item {
         }
     }
 
-    function setParam(posX, posY, vitesse, acc, dec, sens, precision, timeout)
+    function setParam(posX, posY, vitesse, acc, dec, sens, precision, timeout, detection, stabilisation)
     {
         tfX.text = posX;
-        tfY.text = posY
+        tfY.text = posY;
+        if(stabilisation==="")stabilisation = -1
+        tfStab.text = stabilisation
 
         switch(vitesse)
         {
@@ -101,6 +101,23 @@ Item {
             tfDecel.text = dec;
             break;
         }
+        switch(detection)
+        {
+        case "-1":
+            cbDetect.setIndice(0)
+            break;
+        case "1":
+            cbDetect.setIndice(1)
+            break;
+        case "2":
+            cbDetect.setIndice(2)
+            break;
+        case "3":
+            cbDetect.setIndice(3)
+            break;
+        default:
+            cbDetect.setIndice(0)
+        }
 
         if(sens === "0")
         {
@@ -112,6 +129,7 @@ Item {
         pos.sens = switchSens.checked
 
         tfPrecision.text = precision
+
         tfTimeOut.text = timeout
     }
 
@@ -136,7 +154,7 @@ Item {
             tfVit.visible = true
         }
 
-        var tailleToSend = 395
+        var tailleToSend = 510
         if(tfVitesseEnable===true)tailleToSend+=tfVitesse.height+5
         if(tfAccEnable===true)tailleToSend+=tfAcc.height+5
         if(tfDecEnable===true)tailleToSend+=tfDec.height+5;
@@ -562,8 +580,7 @@ Item {
                 {
                     tfVit.visible = true
                 }
-
-                var tailleToSend = 395
+                var tailleToSend = 510
                 if(tfVitesseEnable===true)tailleToSend+=tfVitesse.height+5
                 if(tfAccEnable===true)tailleToSend+=tfAcc.height+5
                 if(tfDecEnable===true)tailleToSend+=tfDec.height+5;
@@ -618,7 +635,7 @@ Item {
         y: 1
         text: qsTr("TimeOut :")
         anchors.left: parent.left
-        anchors.top: tfPreci.bottom
+        anchors.top: cbDetect.bottom
         anchors.topMargin: 5
         font.bold: true
         font.pixelSize: 12
@@ -649,6 +666,91 @@ Item {
         anchors.topMargin: 5
         anchors.rightMargin: 5
         anchors.leftMargin: 5
+    }
+
+    Text {
+        id: textDetect
+        x: 4
+        y: 8
+        text: qsTr("Detect :")
+        anchors.topMargin: 5
+        font.pixelSize: 12
+        font.bold: true
+        anchors.top: tfStabilisation.bottom
+        anchors.leftMargin: 5
+        anchors.left: parent.left
+    }
+
+    CustomComboBox {
+        id: cbDetect
+        x: 9
+        y: -2
+        height: 30
+        anchors.topMargin: 5
+        anchors.right: parent.right
+        anchors.top: textDetect.bottom
+        _model: [ "Aucune", "Contact ", "Proche ", "Loin "  ]
+        anchors.leftMargin: 5
+        anchors.left: parent.left
+        anchors.rightMargin: 5
+        onCustomCurrentIndexChanged:
+        {
+
+            switch(indice)
+            {
+            case 0:
+                pos.detection = -1;
+                break;
+            case 1:
+                pos.detection = 1;
+                break;
+            case 2:
+                pos.detection = 2;
+                break;
+            case 3:
+                pos.detection = 3;
+                break;
+            }
+        }
+    }
+
+    Text {
+        id: textStabilisation
+        x: 4
+        y: 8
+        text: qsTr("Stabilisation :")
+        anchors.topMargin: 5
+        font.pixelSize: 12
+        font.bold: true
+        anchors.top: tfPreci.bottom
+        anchors.leftMargin: 5
+        anchors.left: parent.left
+    }
+
+    Rectangle {
+        id: tfStabilisation
+        x: 1
+        y: 5
+        height: 30
+        color: "#4a4545"
+        radius: 7
+        anchors.topMargin: 5
+        TextEdit {
+            id: tfStab
+            height: 30
+            color: "#ffffff"
+            text: qsTr("-1")
+            anchors.fill: parent
+            anchors.leftMargin: 10
+            verticalAlignment: Text.AlignVCenter
+            onTextChanged: pos.stabilisation = text
+        }
+        anchors.right: parent.right
+        anchors.top: textStabilisation.bottom
+        anchors.leftMargin: 5
+        anchors.left: parent.left
+        visible: true
+        anchors.rightMargin: 5
     }
 
     states: [
@@ -760,6 +862,26 @@ Item {
 
             PropertyChanges {
                 target: tfTimeout
+                visible: false
+            }
+
+            PropertyChanges {
+                target: textStabilisation
+                visible: false
+            }
+
+            PropertyChanges {
+                target: tfStabilisation
+                visible: false
+            }
+
+            PropertyChanges {
+                target: textDetect
+                visible: false
+            }
+
+            PropertyChanges {
+                target: cbDetect
                 visible: false
             }
         }

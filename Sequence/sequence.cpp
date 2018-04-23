@@ -106,6 +106,11 @@ void Sequence::enregistrerSous(QString filename)
                 TiXmlElement * posBloc = new TiXmlElement( "timeout" );
                 action->LinkEndChild( posBloc );
                 posBloc->SetAttribute("liste", listFils.toStdString().c_str());
+            }else if(j == listAction.at(i)->getListFils().size() -2 && j != 0)
+            {
+                TiXmlElement * posBloc = new TiXmlElement( "detect" );
+                action->LinkEndChild( posBloc );
+                posBloc->SetAttribute("liste", listFils.toStdString().c_str());
             }else
             {
                 TiXmlElement * posBloc = new TiXmlElement( "fils" );
@@ -196,6 +201,11 @@ void Sequence::exportXML()
                     posBloc->SetAttribute("liste", listFils.toStdString().c_str());
 
 
+                }else if(j == listAction.at(i)->getListFils().size() -2 && j != 0)
+                {
+                    TiXmlElement * posBloc = new TiXmlElement( "detect" );
+                    action->LinkEndChild( posBloc );
+                    posBloc->SetAttribute("liste", listFils.toStdString().c_str());
                 }else
                 {
                     TiXmlElement * posBloc = new TiXmlElement( "fils" );
@@ -282,6 +292,11 @@ void Sequence::enregistrerSequence(TiXmlElement * root, QList<Action*>* listActi
                     if(j == listActionSequence->at(i)->getListFils().size() -1 && j != 0)
                     {
                         TiXmlElement * posBloc = new TiXmlElement( "timeout" );
+                        action->LinkEndChild( posBloc );
+                        posBloc->SetAttribute("liste", listFils.toStdString().c_str());
+                    }else if(j == listAction.at(i)->getListFils().size() -2 && j != 0)
+                    {
+                        TiXmlElement * posBloc = new TiXmlElement( "detect" );
                         action->LinkEndChild( posBloc );
                         posBloc->SetAttribute("liste", listFils.toStdString().c_str());
                     }else
@@ -375,7 +390,7 @@ int Sequence::ouvrirSequence(QString sequenceName, QList<Action*>* listAction)
     int xBloc = -1;
     int yBloc = -1;
     int timeOut = -1;
-    QString listPere, listFils, listTimeout, param0, param1, param2, param3, param4, param5, param6, param7,param8;
+    QString listPere, listFils, listTimeout, listDetect, param0, param1, param2, param3, param4, param5, param6, param7,param8,param11;
     int rc = 0;
     if(sequenceName.left(4)=="file")
     {
@@ -657,7 +672,19 @@ int Sequence::ouvrirSequence(QString sequenceName, QList<Action*>* listAction)
                         listAction->at(indice)->ajouterListFils();
                         for(int i=0;i<temp.size()-1;i++)
                         {
-                            listAction->at(indice)->ajouterFils(1,listAction->at(temp.at(i).toInt()));
+                            listAction->at(indice)->ajouterFils(listAction->at(indice)->getListFils().size()-1,listAction->at(temp.at(i).toInt()));
+                        }
+                    }
+                }else if(elemNameBis == "detect")
+                {
+                    if(elemBis->Attribute("liste"))
+                    {
+                        listDetect = QString::fromStdString(elemBis->Attribute("liste"));
+                        QStringList temp = listDetect.split(";");
+                        listAction->at(indice)->ajouterListFils();
+                        for(int i=0;i<temp.size()-1;i++)
+                        {
+                            listAction->at(indice)->ajouterFils(listAction->at(indice)->getListFils().size()-1,listAction->at(temp.at(i).toInt()));
                         }
                     }
                 }else if(elemNameBis == "parametres")
@@ -759,6 +786,11 @@ int Sequence::ouvrirSequence(QString sequenceName, QList<Action*>* listAction)
                             param4 = QString::fromStdString(elemBis->Attribute("dec"));
                             temp->setDeceleration(param4.toInt());
                         }
+                        if(elemBis->Attribute("detect"))
+                        {
+                            param6 = QString::fromStdString(elemBis->Attribute("detect"));
+                            temp->setDeceleration(param6.toInt());
+                        }
                         if(elemBis->Attribute("sens"))
                         {
                             param5 = QString::fromStdString(elemBis->Attribute("sens"));
@@ -774,6 +806,11 @@ int Sequence::ouvrirSequence(QString sequenceName, QList<Action*>* listAction)
                         {
                             param6 = QString::fromStdString(elemBis->Attribute("precision"));
                             temp->setPrecision(param6.toInt());
+                        }
+                        if(elemBis->Attribute("stabilisation"))
+                        {
+                            param11 = QString::fromStdString(elemBis->Attribute("stabilisation"));
+                            temp->setStabilisation(param11.toInt());
                         }
 
                         break;
@@ -1038,7 +1075,7 @@ int Sequence::ouvrirFichier(QString fileName)
     int xBloc = -1;
     int yBloc = -1;
     int timeOut = -1;
-    QString listPere, listFils, listTimeout, param0, param1, param2, param3, param4, param5, param6, param7,param8;
+    QString listPere, listFils, listTimeout, listDetect, param0, param1, param2, param3, param4, param5, param6, param7,param8, param9, param10, param11;
     int rc = 0;
     if(fileName.left(4)=="file")
     {
@@ -1182,6 +1219,12 @@ int Sequence::ouvrirFichier(QString fileName)
                     {
                         listTimeout = QString::fromStdString(elemBis->Attribute("liste"));
                     }
+                }else if(elemNameBis == "detect")
+                {
+                    if(elemBis->Attribute("liste"))
+                    {
+                        listDetect = QString::fromStdString(elemBis->Attribute("liste"));
+                    }
                 }else if(elemNameBis == "parametres")
                 {
                     switch(_type)
@@ -1263,8 +1306,17 @@ int Sequence::ouvrirFichier(QString fileName)
                         {
                             param6 = QString::fromStdString(elemBis->Attribute("precision"));
                         }
+                        if(elemBis->Attribute("detect"))
+                        {
+                            param10 = QString::fromStdString(elemBis->Attribute("detect"));
+                        }
+                        if(elemBis->Attribute("stabilisation"))
+                        {
+                            param11 = QString::fromStdString(elemBis->Attribute("stabilisation"));
+                        }
                         param7 = QString::number(timeOut);
                         param8 = listTimeout;
+                        param9 = listDetect;
 
                         break;
                     case typeOrientation:
@@ -1463,7 +1515,7 @@ int Sequence::ouvrirFichier(QString fileName)
                     }
                 }
             }
-            genererAction(xBloc, yBloc, _type, listPere, listFils,param0,param1,param2,param3,param4,param5,param6,param7,param8);
+            genererAction(xBloc, yBloc, _type, listPere, listFils,param0,param1,param2,param3,param4,param5,param6,param7,param8,param9,param10,param11);
         }
     }
 

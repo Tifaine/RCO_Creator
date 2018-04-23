@@ -111,14 +111,32 @@ Item {
                             obj2.tabPere.push(sortieCourante)
                             obj2.parent.bloc.ajouterPere(0,sortieCourante.parent.bloc)
                         }
-                        stringList = gridAction.itemAt(i).listPere.split(';')
+
                     }
                 }
 
+
+                if(gridAction.itemAt(i).listDetect !== null)
+                {
+                    var stringList3 = gridAction.itemAt(i).listDetect.split(';')
+
+                    var sortieCourante3 = gridAction.itemAt(i).listSortie_.itemAt(gridAction.itemAt(i).listSortie_.count-2)
+                    for(var k=0;k<stringList3.length-1;k++)
+                    {
+                        var obj3 = gridAction.itemAt(parseInt(stringList3[k])).listEntree_.itemAt(0)
+                        sortieCourante3.repaint((obj3.parent.x+obj3.x+5)-sortieCourante3.parent.x-sortieCourante3.x,
+                                                (obj3.parent.y+obj3.y+5)-sortieCourante3.parent.y-sortieCourante3.y)
+                        sortieCourante3.addLiaison(obj3);
+                        sortieCourante3.parent.bloc.ajouterFils(sortieCourante3.indice,obj3.parent.bloc)
+                        obj3.tabPere.push(sortieCourante3)
+                        obj3.parent.bloc.ajouterPere(0,sortieCourante3.parent.bloc)
+                    }
+                }
                 if(gridAction.itemAt(i).listTimeOut !== null)
                 {
                     var stringList2 = gridAction.itemAt(i).listTimeOut.split(';')
-                    var sortieCourante2 = gridAction.itemAt(i).listSortie_.itemAt(1)
+
+                    var sortieCourante2 = gridAction.itemAt(i).listSortie_.itemAt(gridAction.itemAt(i).listSortie_.count-1)
                     for(var k=0;k<stringList2.length-1;k++)
                     {
                         var obj3 = gridAction.itemAt(parseInt(stringList2[k])).listEntree_.itemAt(0)
@@ -129,10 +147,11 @@ Item {
                         obj3.tabPere.push(sortieCourante2)
                         obj3.parent.bloc.ajouterPere(0,sortieCourante2.parent.bloc)
                     }
-                    stringList = gridAction.itemAt(i).listPere.split(';')
                 }
-                //console.log("Liste Pere : "+gridAction.itemAt(i).listPere+" Liste Fils : "+gridAction.itemAt(i).listFils)
             }
+
+
+
 
             table1.updateTable()
         }
@@ -183,10 +202,11 @@ Item {
             case 5: //Position
             {
                 listAction.append({_x:xBloc,_y:yBloc, _title:"Position",_indice:listAction.count,_type:typeBloc})
-                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2,param3,param4,param5,param6,param7);
+                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2,param3,param4,param5,param6,param7,param10,param11);
                 gridAction.itemAt(listAction.count-1).listPere = listPere;
                 gridAction.itemAt(listAction.count-1).listFils = listFils;
                 gridAction.itemAt(listAction.count-1).listTimeOut = param8;
+                gridAction.itemAt(listAction.count-1).listDetect = param9;
                 break;
             }
             case 6: //Orientation
