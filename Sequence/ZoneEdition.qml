@@ -576,6 +576,14 @@ Item {
                         {
                             sortieCourante.repaint(mouse.x-sortieCourante.parent.x-sortieCourante.x
                                                    , mouse.y-sortieCourante.parent.y-sortieCourante.y)
+
+                            if(mouse.x > flickable.contentX+root.width)
+                            {
+                                flickable.contentX = mouse.x - root.width + 50
+                            }else if(mouse.x < flickable.contentX && mouse.x > 0)
+                            {
+                                flickable.contentX = mouse.x - 50
+                            }
                         }
 
                         if(rect1.survolActif!==null)
@@ -600,12 +608,21 @@ Item {
                             }
                         }
                     }
+
                     onMouseYChanged:
                     {
                         if(sortieCourante!==null)
                         {
                             sortieCourante.repaint(mouse.x-sortieCourante.parent.x-sortieCourante.x
                                                    , mouse.y-sortieCourante.parent.y-sortieCourante.y)
+
+                            if(mouse.y > flickable.contentY+root.height)
+                            {
+                                flickable.contentY = mouse.y - root.height + 50
+                            }else if(mouse.y < flickable.contentY && mouse.y > 0)
+                            {
+                                flickable.contentY = mouse.y - 50
+                            }
                         }
                         if(rect1.survolActif!==null)
                         {
@@ -842,9 +859,13 @@ Item {
                                         gridAction.itemAt(actionSelected[i]).inhibeMoveXY = true
                                         gridAction.itemAt(actionSelected[i]).x += value
                                         gridAction.itemAt(actionSelected[i]).inhibeMoveXY = false
+                                    }else
+                                    {
+
                                     }
                                 }
                             }
+
                         }
                         onYChange:
                         {
