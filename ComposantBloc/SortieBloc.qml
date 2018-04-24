@@ -68,8 +68,8 @@ Item {
     {
         for(var i=0;i<tabFils.length;i++)
         {
-            listLien.setProperty(i,"_x2",5+(tabFils[i].parent.x+tabFils[i].x)-xPere-root.x)
-            listLien.setProperty(i,"_y2",5+(tabFils[i].parent.y+tabFils[i].y)-yPere-root.y)
+            listLien.setProperty(i,"_x2",10+(tabFils[i].parent.x+tabFils[i].x)-xPere-root.x)
+            listLien.setProperty(i,"_y2",10+(tabFils[i].parent.y+tabFils[i].y)-yPere-root.y)
         }
     }
 

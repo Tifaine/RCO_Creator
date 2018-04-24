@@ -124,8 +124,8 @@ Item {
                 for(var j=0;j<gridEntree.itemAt(i).tabPere.length;j++)
                 {
                     gridEntree.itemAt(i).tabPere[j].filsBouge(gridEntree.itemAt(i),
-                                                              root.x+gridEntree.itemAt(i).x+5 - gridEntree.itemAt(i).tabPere[j].parent.x - gridEntree.itemAt(i).tabPere[j].x,
-                                                              root.y+gridEntree.itemAt(i).y+5 - gridEntree.itemAt(i).tabPere[j].parent.y - gridEntree.itemAt(i).tabPere[j].y)
+                                                              root.x+gridEntree.itemAt(i).x+10 - gridEntree.itemAt(i).tabPere[j].parent.x - gridEntree.itemAt(i).tabPere[j].x,
+                                                              root.y+gridEntree.itemAt(i).y+10 - gridEntree.itemAt(i).tabPere[j].parent.y - gridEntree.itemAt(i).tabPere[j].y)
                 }
             }
         }
@@ -137,8 +137,8 @@ Item {
                 for(var j=0;j<gridNumberIn.itemAt(i).tabPere.length;j++)
                 {
                     gridNumberIn.itemAt(i).tabPere[j].filsBouge(gridNumberIn.itemAt(i),
-                                                                root.x+gridNumberIn.itemAt(i).x+5 - gridNumberIn.itemAt(i).tabPere[j].parent.x - gridNumberIn.itemAt(i).tabPere[j].x,
-                                                                root.y+gridNumberIn.itemAt(i).y+5 - gridNumberIn.itemAt(i).tabPere[j].parent.y - gridNumberIn.itemAt(i).tabPere[j].y)
+                                                                root.x+gridNumberIn.itemAt(i).x+10 - gridNumberIn.itemAt(i).tabPere[j].parent.x - gridNumberIn.itemAt(i).tabPere[j].x,
+                                                                root.y+gridNumberIn.itemAt(i).y+10 - gridNumberIn.itemAt(i).tabPere[j].parent.y - gridNumberIn.itemAt(i).tabPere[j].y)
                 }
             }
         }
@@ -178,8 +178,8 @@ Item {
                 for(var j=0;j<gridEntree.itemAt(i).tabPere.length;j++)
                 {
                     gridEntree.itemAt(i).tabPere[j].filsBouge(gridEntree.itemAt(i),
-                                                              root.x+gridEntree.itemAt(i).x+5 - gridEntree.itemAt(i).tabPere[j].parent.x - gridEntree.itemAt(i).tabPere[j].x,
-                                                              root.y+gridEntree.itemAt(i).y+5 - gridEntree.itemAt(i).tabPere[j].parent.y - gridEntree.itemAt(i).tabPere[j].y)
+                                                              root.x+gridEntree.itemAt(i).x+10 - gridEntree.itemAt(i).tabPere[j].parent.x - gridEntree.itemAt(i).tabPere[j].x,
+                                                              root.y+gridEntree.itemAt(i).y+10 - gridEntree.itemAt(i).tabPere[j].parent.y - gridEntree.itemAt(i).tabPere[j].y)
                 }
             }
         }
@@ -191,8 +191,8 @@ Item {
                 for(var j=0;j<gridNumberIn.itemAt(i).tabPere.length;j++)
                 {
                     gridNumberIn.itemAt(i).tabPere[j].filsBouge(gridNumberIn.itemAt(i),
-                                                                root.x+gridNumberIn.itemAt(i).x+5 - gridNumberIn.itemAt(i).tabPere[j].parent.x - gridNumberIn.itemAt(i).tabPere[j].x,
-                                                                root.y+gridNumberIn.itemAt(i).y+5 - gridNumberIn.itemAt(i).tabPere[j].parent.y - gridNumberIn.itemAt(i).tabPere[j].y)
+                                                                root.x+gridNumberIn.itemAt(i).x+10 - gridNumberIn.itemAt(i).tabPere[j].parent.x - gridNumberIn.itemAt(i).tabPere[j].x,
+                                                                root.y+gridNumberIn.itemAt(i).y+10 - gridNumberIn.itemAt(i).tabPere[j].parent.y - gridNumberIn.itemAt(i).tabPere[j].y)
                 }
             }
         }

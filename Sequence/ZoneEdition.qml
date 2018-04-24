@@ -104,8 +104,8 @@ Item {
                         {
                             var obj2 = gridAction.itemAt(parseInt(stringList[j])).listEntree_.itemAt(0)
 
-                            sortieCourante.repaint((obj2.parent.x+obj2.x+5)-sortieCourante.parent.x-sortieCourante.x,
-                                                   (obj2.parent.y+obj2.y+5)-sortieCourante.parent.y-sortieCourante.y)
+                            sortieCourante.repaint((obj2.parent.x+obj2.x+10)-sortieCourante.parent.x-sortieCourante.x,
+                                                   (obj2.parent.y+obj2.y+10)-sortieCourante.parent.y-sortieCourante.y)
                             sortieCourante.addLiaison(obj2);
                             sortieCourante.parent.bloc.ajouterFils(sortieCourante.indice,obj2.parent.bloc)
                             obj2.tabPere.push(sortieCourante)
@@ -124,8 +124,8 @@ Item {
                     for(var k=0;k<stringList3.length-1;k++)
                     {
                         var obj3 = gridAction.itemAt(parseInt(stringList3[k])).listEntree_.itemAt(0)
-                        sortieCourante3.repaint((obj3.parent.x+obj3.x+5)-sortieCourante3.parent.x-sortieCourante3.x,
-                                                (obj3.parent.y+obj3.y+5)-sortieCourante3.parent.y-sortieCourante3.y)
+                        sortieCourante3.repaint((obj3.parent.x+obj3.x+10)-sortieCourante3.parent.x-sortieCourante3.x,
+                                                (obj3.parent.y+obj3.y+10)-sortieCourante3.parent.y-sortieCourante3.y)
                         sortieCourante3.addLiaison(obj3);
                         sortieCourante3.parent.bloc.ajouterFils(sortieCourante3.indice,obj3.parent.bloc)
                         obj3.tabPere.push(sortieCourante3)
@@ -140,8 +140,8 @@ Item {
                     for(var k=0;k<stringList2.length-1;k++)
                     {
                         var obj3 = gridAction.itemAt(parseInt(stringList2[k])).listEntree_.itemAt(0)
-                        sortieCourante2.repaint((obj3.parent.x+obj3.x+5)-sortieCourante2.parent.x-sortieCourante2.x,
-                                                (obj3.parent.y+obj3.y+5)-sortieCourante2.parent.y-sortieCourante2.y)
+                        sortieCourante2.repaint((obj3.parent.x+obj3.x+10)-sortieCourante2.parent.x-sortieCourante2.x,
+                                                (obj3.parent.y+obj3.y+10)-sortieCourante2.parent.y-sortieCourante2.y)
                         sortieCourante2.addLiaison(obj3);
                         sortieCourante2.parent.bloc.ajouterFils(sortieCourante2.indice,obj3.parent.bloc)
                         obj3.tabPere.push(sortieCourante2)
@@ -525,8 +525,8 @@ Item {
                                     {
                                         if(obj2.objectName === "Entree" && sortieCourante.objectName === "Sortie")
                                         {
-                                            sortieCourante.repaint((obj.x+obj2.x+5)-sortieCourante.parent.x-sortieCourante.x,
-                                                                   (obj.y+obj2.y+5)-sortieCourante.parent.y-sortieCourante.y)
+                                            sortieCourante.repaint((obj.x+obj2.x+10)-sortieCourante.parent.x-sortieCourante.x,
+                                                                   (obj.y+obj2.y+10)-sortieCourante.parent.y-sortieCourante.y)
                                             sortieCourante.addLiaison(obj2);
                                             sortieCourante.parent.bloc.ajouterFils(sortieCourante.indice,obj2.parent.bloc)
                                             obj2.tabPere.push(sortieCourante)
@@ -539,8 +539,8 @@ Item {
                                         }else if(obj2.objectName === "NumberIn" && sortieCourante.objectName === "NumberOut")
                                         {
 
-                                            sortieCourante.repaint((obj.x+obj2.x+5)-sortieCourante.parent.x-sortieCourante.x,
-                                                                   (obj.y+obj2.y+5)-sortieCourante.parent.y-sortieCourante.y)
+                                            sortieCourante.repaint((obj.x+obj2.x+10)-sortieCourante.parent.x-sortieCourante.x,
+                                                                   (obj.y+obj2.y+10)-sortieCourante.parent.y-sortieCourante.y)
 
                                             sortieCourante.addLiaison(obj2);
                                             sortieCourante.parent.bloc.ajouterNumberOut(obj2.parent.bloc)
@@ -548,21 +548,21 @@ Item {
                                             obj2.parent.bloc.ajouterNumberIn(sortieCourante.parent.bloc)
                                         }else
                                         {
-                                            sortieCourante.repaint(5,5)
+                                            sortieCourante.repaint(10,10)
                                             sortieCourante=null
                                         }
                                     }else
                                     {
                                         if(sortieCourante!==null)
                                         {
-                                            sortieCourante.repaint(5,5)
+                                            sortieCourante.repaint(10,10)
                                         }
                                     }
                                 }else
                                 {
                                     if(sortieCourante!==null)
                                     {
-                                        sortieCourante.repaint(5,5)
+                                        sortieCourante.repaint(10,10)
                                     }
                                 }
                                 sortieCourante=null
@@ -577,10 +577,10 @@ Item {
                             sortieCourante.repaint(mouse.x-sortieCourante.parent.x-sortieCourante.x
                                                    , mouse.y-sortieCourante.parent.y-sortieCourante.y)
 
-                            if(mouse.x > flickable.contentX+root.width)
+                            if(mouse.x > flickable.contentX+root.width-20 )
                             {
                                 flickable.contentX = mouse.x - root.width + 50
-                            }else if(mouse.x < flickable.contentX && mouse.x > 0)
+                            }else if(mouse.x < flickable.contentX && flickable.contentX > 0)
                             {
                                 flickable.contentX = mouse.x - 50
                             }
@@ -616,7 +616,7 @@ Item {
                             sortieCourante.repaint(mouse.x-sortieCourante.parent.x-sortieCourante.x
                                                    , mouse.y-sortieCourante.parent.y-sortieCourante.y)
 
-                            if(mouse.y > flickable.contentY+root.height)
+                            if(mouse.y > flickable.contentY+root.height-20)
                             {
                                 flickable.contentY = mouse.y - root.height + 50
                             }else if(mouse.y < flickable.contentY && mouse.y > 0)
