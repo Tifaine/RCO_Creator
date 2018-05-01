@@ -24,6 +24,7 @@
 #include "Action/actiondepart.h"
 #include "Action/actionfin.h"
 #include "Action/actioncourbe.h"
+#include "Action/actionsetvariable.h"
 #include "Action/attente/attenteservo.h"
 #include "Action/attente/attentedyna.h"
 #include "Action/attente/attentetemps.h"
@@ -32,6 +33,7 @@
 #include "Action/attente/attenteblocage.h"
 #include "Action/attente/blocand.h"
 #include "Action/attente/retourgpio.h"
+#include "Action/attente/retourvariable.h"
 
 #include "Sequence/gestionmqtt.h"
 #include "libXML/xmlmanager.h"
@@ -55,6 +57,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<ActionSetValeur>("actionSetValeur", 1, 0, "SetValeur");
     qmlRegisterType<ActionOrientation>("actionOrientation", 1, 0, "Orientation");
     qmlRegisterType<ActionDeplacement>("actionDeplacement", 1, 0, "Deplacement");
+    qmlRegisterType<actionSetVariable>("actionSetVariable", 1, 0, "SetVariable");
     qmlRegisterType<ActionPosition>("actionPos", 1, 0, "Pos");
     qmlRegisterType<ActionSequence>("actionSequence", 1, 0, "Sequence");
     qmlRegisterType<ActionServo>("actionServo", 1, 0, "Servo");
@@ -71,7 +74,9 @@ int main(int argc, char *argv[])
     qmlRegisterType<ActionCourbe>("actionCourbe", 1, 0, "Courbe");
     qmlRegisterType<RetourGPIO>("retourGPIO", 1, 0, "RetourGPIO");
     qmlRegisterType<ActionGPIO>("actionGPIO", 1, 0, "ActionGPIO");
-    qmlRegisterType<AttenteBlocage>("attenteBlocage", 1, 0, "AttenteBlocage");
+    qmlRegisterType<AttenteBlocage>("attenteBlocage", 1, 0, "AttenteBlocage");    
+    qmlRegisterType<RetourVariable>("retourVariable", 1, 0, "RetourVar");
+
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("gestServo", &serv);
     engine.rootContext()->setContextProperty("gestDyna", &dyna);

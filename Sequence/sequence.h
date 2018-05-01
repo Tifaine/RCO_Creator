@@ -19,6 +19,7 @@
 #include "Action/actiondepart.h"
 #include "Action/actionfin.h"
 #include "Action/actioncourbe.h"
+#include "Action/actionsetvariable.h"
 #include "Action/attente/attenteservo.h"
 #include "Action/attente/attentedyna.h"
 #include "Action/attente/attentetemps.h"
@@ -27,6 +28,7 @@
 #include "Action/attente/attenteblocage.h"
 #include "Action/attente/blocand.h"
 #include "Action/attente/retourgpio.h"
+#include "Action/attente/retourvariable.h"
 
 #include "../libXML/tinystr.h"
 #include "../libXML/tinyxml.h"

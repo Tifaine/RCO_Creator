@@ -45,7 +45,9 @@ SOURCES += main.cpp \
     Action/actioncourbe.cpp \
     Action/attente/attenteblocage.cpp \
     Action/actiondeplacement.cpp \
-    Action/actionfin.cpp
+    Action/actionfin.cpp \
+    Action/actionsetvariable.cpp \
+    Action/attente/retourvariable.cpp
 
 RESOURCES += qml.qrc
 
@@ -117,5 +119,7 @@ HEADERS += \
     Action/actioncourbe.h \
     Action/attente/attenteblocage.h \
     Action/actiondeplacement.h \
-    Action/actionfin.h
+    Action/actionfin.h \
+    Action/actionsetvariable.h \
+    Action/attente/retourvariable.h
 

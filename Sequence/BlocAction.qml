@@ -60,6 +60,7 @@ Item {
 
         case 19://SetValue
         case 16://GPIO
+        case 24:
         {
             listEntree.clear();
             listEntree.append({_x:2,_y:30,_indice:0,_color:"yellow"})
@@ -78,6 +79,7 @@ Item {
         case 20://Bloc Courbe
         case 21://Bloc AttenteBlocage
         case 22://Bloc Deplacement
+        case 25:
         {
             _couleurTypeBloc = "#FF358B"
             listEntree.clear();
@@ -527,6 +529,16 @@ Item {
         case 23://Bloc Fin
         {
             component = Qt.createComponent("../ComposantBloc/TypeAction/BlocFin.qml");
+            break;
+        }
+        case 24://Bloc SetVariable
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocSetVariable.qml");
+            break;
+        }
+        case 25://Bloc GetVariable
+        {
+            component = Qt.createComponent("../ComposantBloc/TypeAction/BlocGetVariable.qml");
             break;
         }
 

@@ -347,6 +347,23 @@ Item {
                 gridAction.itemAt(listAction.count-1).listFils = listFils;
                 break;
             }
+            case 24:
+            {
+                listAction.append({_x:xBloc,_y:yBloc, _title:"SetVariable",_indice:listAction.count,_type:typeBloc})
+                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param3,param4);
+                gridAction.itemAt(listAction.count-1).listPere = listPere;
+                gridAction.itemAt(listAction.count-1).listFils = listFils;
+                 break;
+            }
+            case 25:
+            {
+                listAction.append({_x:xBloc,_y:yBloc, _title:"Retour Variable",_indice:listAction.count,_type:typeBloc})
+                gridAction.itemAt(listAction.count-1).bloc.parent.setParam(param0,param1,param2,param3,param7);
+                gridAction.itemAt(listAction.count-1).listPere = listPere;
+                gridAction.itemAt(listAction.count-1).listFils = listFils;
+                gridAction.itemAt(listAction.count-1).listTimeOut = param8;
+                 break;
+            }
             }
         }
     }
@@ -784,6 +801,12 @@ Item {
                         }else if(nomActionToAdd === "Fin")
                         {
                             listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:23})
+                        }else if(nomActionToAdd === "SetVariable")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:24})
+                        }else if(nomActionToAdd === "Retour Variable")
+                        {
+                            listAction.append({_x:drag.x,_y:drag.y, _title:nomActionToAdd,_indice:listAction.count,_type:25})
                         }
                     }
                 }

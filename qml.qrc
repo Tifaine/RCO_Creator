@@ -41,5 +41,7 @@
         <file>ComposantBloc/TypeAction/BlocAttenteBlocage.qml</file>
         <file>ComposantBloc/TypeAction/BlocDeplacement.qml</file>
         <file>ComposantBloc/TypeAction/BlocFin.qml</file>
+        <file>ComposantBloc/TypeAction/BlocSetVariable.qml</file>
+        <file>ComposantBloc/TypeAction/BlocGetVariable.qml</file>
     </qresource>
 </RCC>

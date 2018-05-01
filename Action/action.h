@@ -32,6 +32,8 @@
 #define typeCourbe              20
 #define typeAttenteBlocage      21
 #define typeFin                 23
+#define typeSetVariable         24
+#define typeGetVariable         25
 
 //define typeServo 9
 
@@ -63,6 +65,9 @@ public:
     QList<Action *> getListNumberOut() const;
 
     QList<Action *> getListNumberIn() const;
+
+    QString getNameDetect() const;
+    void setNameDetect(const QString &value);
 
 signals:
     void xBlocChanged();
@@ -111,7 +116,8 @@ private:
     int type = -1;
     int xBloc;
     int yBloc;
-    int timeOut = -1;
+    int timeOut = -2;
+    QString nameDetect;
 
 };
 

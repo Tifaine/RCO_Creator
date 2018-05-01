@@ -47,6 +47,8 @@ Item {
         ListElement{ nom:"Orientation"  }
         ListElement{ nom:"Vitesse linéaire"  }
         ListElement{ nom:"Vitesse angulaire"  }
+        ListElement{ nom:"Désactiver détection"  }
+        ListElement{ nom:"Activer lidar"  }
     }
 
     CustomComboBox

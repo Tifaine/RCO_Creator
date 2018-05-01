@@ -103,7 +103,7 @@ Item {
         }
         switch(detection)
         {
-        case "-1":
+        case "0":
             cbDetect.setIndice(0)
             break;
         case "1":
@@ -699,7 +699,7 @@ Item {
             switch(indice)
             {
             case 0:
-                pos.detection = -1;
+                pos.detection = 0;
                 break;
             case 1:
                 pos.detection = 1;

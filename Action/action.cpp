@@ -163,6 +163,16 @@ Action* Action::getPere(int indicePere)
     return listPere.at(0)->at(indicePere);
 }
 
+QString Action::getNameDetect() const
+{
+    return nameDetect;
+}
+
+void Action::setNameDetect(const QString &value)
+{
+    nameDetect = value;
+}
+
 QList<Action *> Action::getListNumberIn() const
 {
     return listNumberIn;
