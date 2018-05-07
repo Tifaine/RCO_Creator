@@ -69,6 +69,9 @@ public:
     QString getNameDetect() const;
     void setNameDetect(const QString &value);
 
+    bool getIsParcourue() const;
+    void setIsParcourue(bool value);
+
 signals:
     void xBlocChanged();
     void yBlocChanged();
@@ -118,6 +121,8 @@ private:
     int yBloc;
     int timeOut = -2;
     QString nameDetect;
+
+    bool isParcourue = false;
 
 };
 

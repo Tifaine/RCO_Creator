@@ -26,13 +26,13 @@ void AttenteDyna::saveXML(TiXmlElement * root, int indice)
         root->LinkEndChild( param );
         param->SetAttribute("nom", getNomDyna().toStdString().c_str());
         param->SetAttribute("id", QString::number(getIdDyna(),'f',0).toStdString().c_str());
-        if(type)
-        {
-            param->SetAttribute("load", QString::number(getValueDyna(),'f',0).toStdString().c_str());
-        }else
-        {
+       // if(type)
+        //{
+         //   param->SetAttribute("load", QString::number(getValueDyna(),'f',0).toStdString().c_str());
+        //}else
+       // {
             param->SetAttribute("angle", QString::number(getValueDyna(),'f',0).toStdString().c_str());
-        }
+        //}
 
         break;
     }

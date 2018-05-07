@@ -17,6 +17,8 @@ public:
 public slots:
     void upload();
     void play();
+    void uploadBlack();
+    void playBlack();
     void pause();
     void stop();
 private:

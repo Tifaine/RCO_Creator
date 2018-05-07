@@ -27,7 +27,7 @@ void RetourGPIO::setValueGPIO(int value)
 
 void RetourGPIO::saveXML(QXmlStreamWriter* xmlWriter)
 {
-    xmlWriter->writeStartElement("retourGPIO");
+    xmlWriter->writeStartElement("actionRetourGpio");
     xmlWriter->writeTextElement("id",QString::number(getIdGPIO(),'f',0));
     xmlWriter->writeTextElement("value",QString::number(getValueGPIO(),'f',0));
     xmlWriter->writeEndElement();
@@ -38,12 +38,12 @@ void RetourGPIO::saveXML(TiXmlElement * root, int indice)
     switch(indice)
     {
     case 1:
-        root->SetAttribute("type", "retourGPIO");
+        root->SetAttribute("type", "actionRetourGpio");
         break;
     case 2:
         TiXmlElement * param = new TiXmlElement( "parametres" );
         root->LinkEndChild( param );
-        param->SetAttribute("id", QString::number(getIdGPIO(),'f',0).toStdString().c_str());
+        param->SetAttribute("pin", QString::number(getIdGPIO(),'f',0).toStdString().c_str());
         param->SetAttribute("value", QString::number(getValueGPIO(),'f',0).toStdString().c_str());
         break;
     }

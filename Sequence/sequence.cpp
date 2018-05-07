@@ -242,8 +242,6 @@ void Sequence::exportXML()
             ouvrirSequence(temp->getNomSequence(),&listAct);
             indice++;
             enregistrerSequence(root,&listAct,indice,i,&listAction,0);
-
-
         }
     }
     doc.SaveFile( filename.toStdString().c_str() );
@@ -331,7 +329,7 @@ void Sequence::enregistrerSequence(TiXmlElement * root, QList<Action*>* listActi
                     listPere.clear();
                     for(int k=0;k<listActionSequence->at(i)->getListPere().at(j)->size();k++)
                     {
-                        listPere.append(QString::number(listActionSequence->indexOf(listActionSequence->at(i)->getListPere().at(j)->at(k))));
+                        listPere.append(QString::number(listActionSequence->indexOf(listActionSequence->at(i)->getListPere().at(j)->at(k))+indiceSeq*1000));
                         listPere.append(";");
                     }
                     TiXmlElement * posBloc = new TiXmlElement( "pere" );
@@ -469,7 +467,7 @@ int Sequence::ouvrirSequence(QString sequenceName, QList<Action*>* listAction)
                 {
                     listAction->append(new AttenteDyna);
                     _type = typeAttenteDyna;
-                }else if(type == "retourGPIO")
+                }else if(type == "actionRetourGpio")
                 {
                     listAction->append(new RetourGPIO);
                     _type = typeRetourGPIO;
@@ -589,7 +587,7 @@ int Sequence::ouvrirSequence(QString sequenceName, QList<Action*>* listAction)
                 }else if(type == "actionRetourDyna")
                 {
                     _type = typeAttenteDyna;
-                }else if(type == "retourGPIO")
+                }else if(type == "actionRetourGpio")
                 {
                     _type = typeRetourGPIO;
                 }else if(type == "actionRetourPosition")
@@ -678,7 +676,7 @@ int Sequence::ouvrirSequence(QString sequenceName, QList<Action*>* listAction)
 
                         for(int i=0;i<temp.size()-1;i++)
                         {
-                            listAction->at(indice)->ajouterFils(0,listAction->at(temp.at(i).toInt()));
+                            listAction->at(indice)->ajouterFils(listAction->at(indice)->getListFils().size()-1,listAction->at(temp.at(i).toInt()));
                         }
                     }
                 }else if(elemNameBis == "detect")
@@ -795,7 +793,7 @@ int Sequence::ouvrirSequence(QString sequenceName, QList<Action*>* listAction)
                         if(elemBis->Attribute("detect"))
                         {
                             param6 = QString::fromStdString(elemBis->Attribute("detect"));
-                            temp->setDeceleration(param6.toInt());
+                            temp->setDetection(param6.toInt());
                         }
                         if(elemBis->Attribute("detectList"))
                         {
@@ -867,9 +865,9 @@ int Sequence::ouvrirSequence(QString sequenceName, QList<Action*>* listAction)
                     case typeGPIO:
                     {
                         ActionGPIO* temp = (ActionGPIO*)listAction->at(indice);
-                        if(elemBis->Attribute("id"))
+                        if(elemBis->Attribute("pin"))
                         {
-                            param0 = QString::fromStdString(elemBis->Attribute("id"));
+                            param0 = QString::fromStdString(elemBis->Attribute("pin"));
                             temp->setIdGPIO(param0.toInt());
                         }
                         if(elemBis->Attribute("value"))
@@ -926,7 +924,6 @@ int Sequence::ouvrirSequence(QString sequenceName, QList<Action*>* listAction)
                         {
                             param0 = QString::fromStdString(elemBis->Attribute("temps"));
                             temp->setTemps(param0.toInt());
-                            qDebug()<<"Ouverture : "<<temp->getTemps();
                         }
 
                         break;
@@ -976,9 +973,9 @@ int Sequence::ouvrirSequence(QString sequenceName, QList<Action*>* listAction)
                     case typeRetourGPIO:
                     {
                         RetourGPIO* temp = (RetourGPIO*)listAction->at(indice);
-                        if(elemBis->Attribute("id"))
+                        if(elemBis->Attribute("pin"))
                         {
-                            param0 = QString::fromStdString(elemBis->Attribute("id"));
+                            param0 = QString::fromStdString(elemBis->Attribute("pin"));
                             temp->setIdGPIO(param0.toInt());
                         }
                         if(elemBis->Attribute("value"))
@@ -1247,7 +1244,7 @@ int Sequence::ouvrirFichier(QString fileName)
                 }else if(type == "actionRetourDyna")
                 {
                     _type = typeAttenteDyna;
-                }else if(type == "retourGPIO")
+                }else if(type == "actionRetourGpio")
                 {
                     _type = typeRetourGPIO;
                 }else if(type == "actionRetourPosition")
@@ -1444,9 +1441,9 @@ int Sequence::ouvrirFichier(QString fileName)
                         //genererAction(xBloc, yBloc, _type, listPere, listFils,0,0,0,0,0,0);
                         break;
                     case typeGPIO:
-                        if(elemBis->Attribute("id"))
+                        if(elemBis->Attribute("pin"))
                         {
-                            param0 = QString::fromStdString(elemBis->Attribute("id"));
+                            param0 = QString::fromStdString(elemBis->Attribute("pin"));
                         }
                         if(elemBis->Attribute("value"))
                         {
@@ -1522,9 +1519,9 @@ int Sequence::ouvrirFichier(QString fileName)
                         //genererAction(xBloc, yBloc, typeRetourPosition, listPere, listFils,QString::number(coordX),QString::number(coordY),QString::number(precision),listTimeout,QString::number(timeout),0);
                         break;
                     case typeRetourGPIO:
-                        if(elemBis->Attribute("id"))
+                        if(elemBis->Attribute("pin"))
                         {
-                            param0 = QString::fromStdString(elemBis->Attribute("id"));
+                            param0 = QString::fromStdString(elemBis->Attribute("pin"));
                         }
                         if(elemBis->Attribute("value"))
                         {
@@ -1596,6 +1593,7 @@ int Sequence::ouvrirFichier(QString fileName)
                         if(elemBis->Attribute("sensibilite"))
                         {
                             param2 = QString::fromStdString(elemBis->Attribute("sensibilite"));
+
                         }
                         param0 = QString::number(timeOut);
                         param1 = listTimeout;

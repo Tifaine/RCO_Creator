@@ -163,6 +163,16 @@ Action* Action::getPere(int indicePere)
     return listPere.at(0)->at(indicePere);
 }
 
+bool Action::getIsParcourue() const
+{
+    return isParcourue;
+}
+
+void Action::setIsParcourue(bool value)
+{
+    isParcourue = value;
+}
+
 QString Action::getNameDetect() const
 {
     return nameDetect;

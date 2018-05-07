@@ -13,6 +13,7 @@ Item {
     function setParam(timeOut, sensibilite)
     {
         tfTimeout.text = timeOut
+        tfSensibilite.text = sensibilite
     }
 
     function tailleChange(_taille)

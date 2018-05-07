@@ -8,6 +8,7 @@ Item {
     signal save();
     signal open();
     signal upload();
+    signal uploadBlack();
     signal toggleTable();
     signal mirror();
     Rectangle
@@ -260,7 +261,7 @@ Item {
     }
 
     Image {
-        id: imagePlay
+        id: imagePlayBlack
         x: 981
         width: 20
         anchors.right: imagePause.left
@@ -287,6 +288,40 @@ Item {
                 anchors.fill: parent
                 onEntered: parent.color="#404040"
                 onExited: parent.color="transparent"
+                onClicked: gestMQTT.playBlack();
+            }
+        }
+
+    }
+
+    Image {
+        id: imagePlay
+        x: 981
+        width: 20
+        anchors.right: imagePlayBlack.left
+        anchors.rightMargin: 25
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 15
+        anchors.top: parent.top
+        anchors.topMargin: 15
+        source: "file::/../image/svg/play-button.svg"
+
+        Rectangle
+        {
+            z:-1
+            anchors.fill: parent
+            anchors.leftMargin: -7
+            anchors.rightMargin: -7
+            anchors.bottomMargin: -7
+            anchors.topMargin: -7
+            color:"pink"
+            radius: 3
+            MouseArea
+            {
+                hoverEnabled: true
+                anchors.fill: parent
+                onEntered: parent.color="#eb26fb"
+                onExited: parent.color="pink"
                 onClicked: gestMQTT.play();
             }
         }
@@ -344,14 +379,48 @@ Item {
         anchors.rightMargin: 25
         anchors.bottom: parent.bottom
         Rectangle {
-            color: "#00000000"
+            color: "pink"
+            radius: 3
+            MouseArea {
+                hoverEnabled: true
+                anchors.fill: parent
+                onEntered: parent.color="#eb26fb"
+                onExited: parent.color="pink"
+                onClicked: upload();
+            }
+            anchors.rightMargin: -7
+            anchors.leftMargin: -7
+            anchors.topMargin: -7
+            anchors.fill: parent
+            z: -1
+            anchors.bottomMargin: -7
+        }
+        anchors.right: imageUploadBlack.left
+        source: "file::/../image/svg/send.svg"
+        anchors.topMargin: 15
+        anchors.bottomMargin: 15
+        anchors.top: parent.top
+    }
+
+    Image {
+        id: imageUploadBlack
+        x: 971
+        y: -7
+        width: 20
+        anchors.rightMargin: 25
+        anchors.bottom: parent.bottom
+        Rectangle {
+            color: "transparent"
             radius: 3
             MouseArea {
                 hoverEnabled: true
                 anchors.fill: parent
                 onEntered: parent.color="#404040"
                 onExited: parent.color="transparent"
-                onClicked: upload();
+                onClicked:
+                {
+                    uploadBlack();
+                }
             }
             anchors.rightMargin: -7
             anchors.leftMargin: -7
@@ -366,5 +435,4 @@ Item {
         anchors.bottomMargin: 15
         anchors.top: parent.top
     }
-
 }

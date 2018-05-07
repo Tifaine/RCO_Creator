@@ -78,14 +78,25 @@ void GestionTable::gestionTable()
 {   
     QList<Action*> listPerePosition, listFils;
     listLienAction.clear();
+    for(int i=0;i<listAction.size();i++)
+    {
+        listAction.at(i)->setIsParcourue(false);
+    }
     listPerePosition.append(listAction.at(0));
+
+
+
     while(listPerePosition.size()>0)
     {
         for(int i = 0; i < listPerePosition.at(0)->getListFils().size();i++)
         {
             for(int j=0; j<listPerePosition.at(0)->getListFils().at(i)->size();j++)
             {
-                listFils.append(listPerePosition.first()->getListFils().at(i)->at(j));
+                if(listPerePosition.first()->getListFils().at(i)->at(j)->getIsParcourue()==false)
+                {
+                    listFils.append(listPerePosition.first()->getListFils().at(i)->at(j));
+                    listPerePosition.first()->getListFils().at(i)->at(j)->setIsParcourue(true);
+                }
             }
 
         }

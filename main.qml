@@ -74,5 +74,11 @@ ApplicationWindow {
             //ongletSequence.saveAs("file:///tmp/temp.xml")
             gestMQTT.upload();
         }
+        onUploadBlack:
+        {
+            ongletSequence.exportXML()
+            //ongletSequence.saveAs("file:///tmp/temp.xml")
+            gestMQTT.uploadBlack();
+        }
     }
 }

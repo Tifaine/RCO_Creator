@@ -44,13 +44,13 @@ Item {
             cbValue.setIndice(listValue.count-1)
             tfVal.text = value
             dyna.ValueDyna = value
-            tfValue.visible = false
+            tfValue.visible = true
 
             tfVitesseEnable = true;
             cbVitess.setIndice(listVitesse.count - 1)
             teVitesse.text = vitesse
             dyna.vitesseDyna = vitesse
-            tfVitesse.visible = false
+            tfVitesse.visible = true
 
             tailleChange(100)
         }else
@@ -71,7 +71,7 @@ Item {
                 cbValue.setIndice(listValue.count-1)
                 tfVal.text = value
                 dyna.ValueDyna = value
-                tfValue.visible = false
+                tfValue.visible = true
             }
 
             var vitesseFound = false
@@ -90,11 +90,9 @@ Item {
                 cbVitess.setIndice(listVitesse.count - 1)
                 teVitesse.text = vitesse
                 dyna.vitesseDyna = vitesse
-                tfVitesse.visible = false
+                tfVitesse.visible = true
             }
         }
-
-
     }
 
 

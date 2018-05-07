@@ -56,6 +56,10 @@ Item {
         ListElement{ nom:"Fernande"  }
         ListElement{ nom:"Gaston"  }
         ListElement{ nom:"HADRIEEEEEEENNE"  }
+        ListElement{ nom:"Lidar arriere gauche"  }
+        ListElement{ nom:"Lidar arriere droite"  }
+        ListElement{ nom:"Lidar avant gauche"  }
+        ListElement{ nom:"Lidar avant droite"}
     }
     CustomComboBox
     {

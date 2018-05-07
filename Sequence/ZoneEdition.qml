@@ -400,7 +400,7 @@ Item {
             contentWidth: 20000; contentHeight: 20000
 
             contentX: 0
-            contentY:0
+            contentY:10000
             scale: echelle
             ScrollBar.vertical: ScrollBar {
                 parent: flickable.parent
@@ -719,7 +719,7 @@ Item {
                 {
                     id:listAction
 
-                    ListElement{ _x:50 ; _y:250; _title:"Debut"; _indice:0; _type:9 }
+                    ListElement{ _x:50 ; _y:10250; _title:"Debut"; _indice:0; _type:9 }
 
                 }
 

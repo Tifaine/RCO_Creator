@@ -24,6 +24,13 @@ Item {
     ListModel
     {
         id:listGPIO
+        ListElement{ nom:"0"  }
+        ListElement{ nom:"1"  }
+        ListElement{ nom:"2"  }
+        ListElement{ nom:"3"  }
+        ListElement{ nom:"4"  }
+        ListElement{ nom:"5"  }
+        ListElement{ nom:"6"  }
         ListElement{ nom:"Jack"  }
     }
 
