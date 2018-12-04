@@ -12,7 +12,7 @@ Item {
 
     function setParam(id,value)
     {
-        if(id>0 && id <11)
+        if(id>0 )
         {
             cbCapteur.setIndice(id-1)
             teCapteur.text = value
@@ -51,7 +51,10 @@ Item {
         ListElement{ nom:"Desactiver detection"  }
         ListElement{ nom:"Etat lidar"  }
         ListElement{ nom:"Reset temps"  }
-        ListElement{ nom:"Pause asserv"  }
+        ListElement{ nom:"Pause asserv"  }  //10
+        ListElement{ nom:"Reset ARU"  }     //11
+        ListElement{ nom:"Valide detect"  } //12
+        ListElement{ nom:"Reset codeur"  }  //13
     }
 
     CustomComboBox

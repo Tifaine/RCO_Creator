@@ -57,7 +57,7 @@ Item {
             cbVitesse.setIndice(3);
             tfVitesseEnable = true
             pos.vitesse = true
-            tfVitesse.visible = false
+            tfVitesse.visible = true
             tfVit.text = vitesse
             break;
         }
@@ -97,7 +97,7 @@ Item {
             cbDec.setIndice(3);
             tfDecEnable = true
             pos.deceleration = dec
-            tfDec.visible = false
+            tfDec.visible = true
             tfDecel.text = dec;
             break;
         }
@@ -304,6 +304,7 @@ Item {
                 break;
             }
         }
+        Component.onCompleted: cbVitesse.setIndice(2)
 
     }
 
@@ -718,7 +719,7 @@ Item {
         id: textStabilisation
         x: 4
         y: 8
-        text: qsTr("Stabilisation :")
+        text: qsTr("distanceFreinage :")
         anchors.topMargin: 5
         font.pixelSize: 12
         font.bold: true

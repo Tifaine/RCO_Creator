@@ -48,18 +48,22 @@ Item {
         id:listVariable
         ListElement{ nom:"Checkpoints"  }
         ListElement{ nom:"Score"  }
-        ListElement{ nom:"André"  }
-        ListElement{ nom:"Bernadette"  }
-        ListElement{ nom:"Carlos"  }
-        ListElement{ nom:"Daniella"  }
+        ListElement{ nom:"Cube dans chatte"  }
+        ListElement{ nom:"Attente autre robot"  }
+        ListElement{ nom:"Cube bloqué"  }
+        ListElement{ nom:"Daniella"  }//5
         ListElement{ nom:"Eddy"  }
         ListElement{ nom:"Fernande"  }
         ListElement{ nom:"Gaston"  }
-        ListElement{ nom:"HADRIEEEEEEENNE"  }
+        ListElement{ nom:"HADRIEEEEEEENNE"  }//9
         ListElement{ nom:"Lidar arriere gauche"  }
         ListElement{ nom:"Lidar arriere droite"  }
         ListElement{ nom:"Lidar avant gauche"  }
-        ListElement{ nom:"Lidar avant droite"}
+        ListElement{ nom:"Lidar avant droite"}//13
+        ListElement{ nom:"X robot"  }
+        ListElement{ nom:"Y robot"  }
+        ListElement{ nom:"Orientation robot"}//16
+
     }
     CustomComboBox
     {

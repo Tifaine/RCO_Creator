@@ -64,10 +64,6 @@ QML_DESIGNER_IMPORT_PATH =
 DEFINES += QT_DEPRECATED_WARNINGS
 DEFINES += MQTT4QT_LIBRARY
 
-LIBS += -lmosquittopp
-
-LIBS += -L/usr/local/lib -lmosquitto
-
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
 # You can also select to disable deprecated APIs only up to a certain version of Qt.

@@ -515,7 +515,7 @@ int Sequence::ouvrirSequence(QString sequenceName, QList<Action*>* listAction)
                 {
                     listAction->append(new actionSetVariable);
                     _type =  typeSetVariable;
-                }else if(type == "retourVar")
+                }else if(type == "actionRetourVar")
                 {
                     listAction->append(new RetourVariable);
                     _type =  typeGetVariable;
@@ -623,7 +623,7 @@ int Sequence::ouvrirSequence(QString sequenceName, QList<Action*>* listAction)
                 }else if(type == "actionVar")
                 {
                     _type =  typeSetVariable;
-                }else if(type == "retourVar")
+                }else if(type == "actionRetourVar")
                 {
                     _type =  typeGetVariable;
                 }
@@ -821,9 +821,9 @@ int Sequence::ouvrirSequence(QString sequenceName, QList<Action*>* listAction)
                             param6 = QString::fromStdString(elemBis->Attribute("precision"));
                             temp->setPrecision(param6.toInt());
                         }
-                        if(elemBis->Attribute("stabilisation"))
+                        if(elemBis->Attribute("distanceFreinage"))
                         {
-                            param11 = QString::fromStdString(elemBis->Attribute("stabilisation"));
+                            param11 = QString::fromStdString(elemBis->Attribute("distanceFreinage"));
                             temp->setStabilisation(param11.toInt());
                         }
 
@@ -1282,7 +1282,7 @@ int Sequence::ouvrirFichier(QString fileName)
                 {
                     _type =  typeSetVariable;
                 }
-                else if(type == "retourVar")
+                else if(type == "actionRetourVar")
                 {
                     _type =  typeGetVariable;
                 }

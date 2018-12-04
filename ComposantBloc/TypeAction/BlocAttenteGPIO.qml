@@ -25,14 +25,14 @@ Item {
     ListModel
     {
         id:listGPIO
-        ListElement{ nom:"Avant gauche Noir"  }
+        ListElement{ nom:"Avant gauche (inverse Rose)"  }
         ListElement{ nom:"1"  }
         ListElement{ nom:"Jack rose"  }
-        ListElement{ nom:"Avant droit Noir"  }
-        ListElement{ nom:"Switch avant dernier noir"  }
-        ListElement{ nom:"Switch cube milieu Noir"  }
+        ListElement{ nom:"Avant droit Noir / Sécu rose"  }
+        ListElement{ nom:"Switch sécu noir / couleur rose"  }
+        ListElement{ nom:"Switch cube milieu"  } //5
         ListElement{ nom:"Switch couleur noir"  }
-        ListElement{ nom:"Jack noir"  }
+        ListElement{ nom:"Jack noir / Avant droit rose"  }//7
     }
 
     Text {

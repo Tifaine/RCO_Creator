@@ -136,7 +136,7 @@ void ActionPosition::saveXML(TiXmlElement * root, int indice)
         param->SetAttribute("precision", QString::number(precision,'f',0).toStdString().c_str());
         param->SetAttribute("detect", QString::number(detection,'f',0).toStdString().c_str());
         param->SetAttribute("detectList", getNameDetect().toStdString().c_str());
-        param->SetAttribute("stabilisation", QString::number(stabilisation,'f',0).toStdString().c_str());
+        param->SetAttribute("distanceFreinage", QString::number(stabilisation,'f',0).toStdString().c_str());
         break;
     }
 }

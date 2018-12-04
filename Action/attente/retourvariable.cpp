@@ -15,7 +15,7 @@ void RetourVariable::saveXML(TiXmlElement * root, int indice)
     switch(indice)
     {
     case 1:
-        root->SetAttribute("type", "retourVar");
+        root->SetAttribute("type", "actionRetourVar");
         break;
     case 2:
         TiXmlElement * param = new TiXmlElement( "parametres" );

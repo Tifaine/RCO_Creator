@@ -44,8 +44,8 @@ Item {
     }
     Component.onCompleted:
     {
-        root.state = "ferme"
-        tailleChange(60)
+        root.state = "ouvert"
+        tailleChange(360)
     }
 
     Orientation
@@ -285,6 +285,7 @@ Item {
                 break;
             }
         }
+        Component.onCompleted: cbVitesse.setIndice(2)
     }
 
     Rectangle
@@ -387,6 +388,7 @@ Item {
                 if(cbVitesse.indice === 3)
                 {
                     tfVit.visible = true
+
                 }
 
 

@@ -22,7 +22,6 @@ public slots:
     void pause();
     void stop();
 private:
-    QMqttClient* client;
 
 };
 

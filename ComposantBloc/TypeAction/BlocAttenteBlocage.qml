@@ -38,7 +38,7 @@ Item {
         id: tfTimeout
         height: 30
         color: "#ffffff"
-        text: qsTr("500")
+        text: qsTr("5000")
         anchors.rightMargin: 5
         visible: true
         anchors.right: parent.right

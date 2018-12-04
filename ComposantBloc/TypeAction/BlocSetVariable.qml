@@ -47,9 +47,9 @@ Item {
         id:listVariable
         ListElement{ nom:"Checkpoints"  }
         ListElement{ nom:"Score"  }
-        ListElement{ nom:"André"  }
-        ListElement{ nom:"Bernadette"  }
-        ListElement{ nom:"Carlos"  }
+        ListElement{ nom:"Cube dans chatte"  }
+        ListElement{ nom:"Attente autre robot"  }
+        ListElement{ nom:"Cube bloqué"  }
         ListElement{ nom:"Daniella"  }
         ListElement{ nom:"Eddy"  }
         ListElement{ nom:"Fernande"  }
